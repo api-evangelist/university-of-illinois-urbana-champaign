@@ -1,0 +1,58 @@
+---
+name: University of Illinois Urbana-Champaign
+description: University of Illinois Urbana-Champaign public developer/API footprint review for APIs.json cataloging.
+url: https://raw.githubusercontent.com/api-evangelist/university-of-illinois-urbana-champaign/refs/heads/main/review.yml
+created: '2026-06-03'
+modified: '2026-06-03'
+reviews:
+  - date: '2026-06-03'
+    rating: 4
+    summary: >-
+      UIUC has a strong, genuinely public developer footprint. The Course Explorer CISAPI
+      (schedule + catalog) is documented and serves data with no authentication, verified
+      live returning XML. The open-source Rokwire platform behind the official Illinois
+      app exposes documented Core and Gateway building-block APIs (Swagger UIs live) with
+      Apache 2.0 source on the rokwire GitHub org (30 repos). The IDEALS institutional
+      repository OAI-PMH endpoint responds to verb=Identify. No fabricated endpoints:
+      api.rokwire.illinois.edu root and /docs/ both 404 so were not cataloged. LinkedIn
+      returns 999 (anti-bot) but is the canonical school URL.
+    endpoints:
+      - url: https://courses.illinois.edu/cisdocs/
+        status: 200
+        note: CISAPI Course Information Suite documentation home.
+      - url: https://courses.illinois.edu/cisdocs/api
+        status: 200
+        note: CISAPI API reference (Schedule, Catalog, GenEd, Term, Subjects modules).
+      - url: https://courses.illinois.edu/cisapp/explorer/schedule/2026/spring.xml
+        status: 200
+        note: Live public Course Explorer schedule data, XML, no auth required.
+      - url: https://courses.illinois.edu/cisapp/explorer/catalog/2026/spring.xml
+        status: 200
+        note: Live public Course Explorer catalog data, XML.
+      - url: https://api.rokwire.illinois.edu/core/doc/ui/
+        status: 200
+        note: Rokwire Core Building Block Swagger UI.
+      - url: https://api.rokwire.illinois.edu/gateway/doc/ui/
+        status: 200
+        note: Rokwire Gateway Building Block Swagger UI.
+      - url: https://api.rokwire.illinois.edu/illinois/
+        status: 200
+        note: Rokwire-hosted Illinois app web entry point.
+      - url: https://api.rokwire.illinois.edu/docs/
+        status: 404
+        note: Referenced in search results but does not resolve; not cataloged.
+      - url: https://www.ideals.illinois.edu/oai-pmh?verb=Identify
+        status: 200
+        note: IDEALS institutional repository OAI-PMH data provider.
+      - url: https://github.com/rokwire
+        status: 200
+        note: Open-source Rokwire platform GitHub org, 30 repositories.
+      - url: https://github.com/illinois
+        status: 200
+        note: Illinois open-source GitHub organization.
+      - url: https://status.illinois.edu/
+        status: 200
+        note: Campus technology services status page.
+      - url: https://www.linkedin.com/school/university-of-illinois-at-urbana-champaign/
+        status: 999
+        note: LinkedIn anti-bot block; canonical school page URL.

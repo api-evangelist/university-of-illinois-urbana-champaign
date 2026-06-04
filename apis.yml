@@ -1,0 +1,102 @@
+---
+aid: university-of-illinois-urbana-champaign
+name: University of Illinois Urbana-Champaign
+description: >-
+  The University of Illinois Urbana-Champaign (UIUC) is a public land-grant research
+  university and the flagship campus of the University of Illinois System, ranked #40
+  in the QS World University Rankings 2025. Its public developer footprint includes the
+  Course Information Suite (CISAPI) Course Explorer API, which exposes class schedule and
+  course catalog data without authentication, and the open-source Rokwire platform that
+  powers the official Illinois mobile app via a set of building-block APIs (Core,
+  Gateway, Content, Notifications, Surveys, and more) published under an Apache 2.0
+  license. The University Library exposes institutional repository metadata through the
+  IDEALS OAI-PMH endpoint.
+type: Index
+position: Consumer
+access: 3rd-Party
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/university-of-illinois-urbana-champaign/refs/heads/main/apis.yml
+tags:
+  - Education
+  - Higher Education
+  - University
+  - Open Data
+  - Courses
+  - Library
+  - United States
+created: '2026-06-03'
+modified: '2026-06-03'
+specificationVersion: '0.19'
+apis:
+  - aid: university-of-illinois-urbana-champaign:cisapi-course-explorer
+    name: Course Explorer (CISAPI)
+    description: >-
+      The Course Information Suite API (CISAPI) is a collection of RESTful resources that
+      expose Class Schedule and Course Catalog data. It includes Schedule, Catalog,
+      GenEd, Term, and Subjects modules. The public Course Explorer API requires no
+      authentication; data is available as XML.
+    humanURL: https://courses.illinois.edu/cisdocs/
+    baseURL: https://courses.illinois.edu/cisapp/explorer
+    tags: [ Courses, Catalog, Schedule, Open Data, Education ]
+    properties:
+      - type: Documentation
+        url: https://courses.illinois.edu/cisdocs/api
+  - aid: university-of-illinois-urbana-champaign:rokwire-core
+    name: Rokwire Core Building Block
+    description: >-
+      Core Building Block of the open-source Rokwire platform behind the official
+      Illinois mobile app, handling users, accounts, profiles, organizations, and
+      authentication/authorization. Source code is published under Apache 2.0.
+    humanURL: https://api.rokwire.illinois.edu/core/doc/ui/
+    tags: [ Authentication, Identity, Mobile, Open Source ]
+    properties:
+      - type: Documentation
+        url: https://api.rokwire.illinois.edu/core/doc/ui/
+      - type: GitHub
+        url: https://github.com/rokwire/core-building-block
+  - aid: university-of-illinois-urbana-champaign:rokwire-gateway
+    name: Rokwire Gateway Building Block
+    description: >-
+      Gateway Building Block of the Rokwire platform, providing access to external
+      university systems and data streams for the Illinois mobile app ecosystem.
+    humanURL: https://api.rokwire.illinois.edu/gateway/doc/ui/
+    tags: [ Gateway, Integration, Mobile, Open Source ]
+    properties:
+      - type: Documentation
+        url: https://api.rokwire.illinois.edu/gateway/doc/ui/
+      - type: GitHub
+        url: https://github.com/rokwire/gateway-building-block
+  - aid: university-of-illinois-urbana-champaign:ideals-oai-pmh
+    name: IDEALS OAI-PMH
+    description: >-
+      The University of Illinois institutional repository (IDEALS) exposes Dublin Core
+      metadata records through a standards-based OAI-PMH data provider endpoint for
+      harvesting by external discovery and aggregation services.
+    humanURL: https://guides.library.illinois.edu/ideals
+    baseURL: https://www.ideals.illinois.edu/oai-pmh
+    tags: [ Library, Repository, OAI-PMH, Metadata, Open Data ]
+    properties:
+      - type: Documentation
+        url: https://guides.library.illinois.edu/ideals/what_is_the_oai_pmh_data_provider_url_for_ideals
+common:
+  - type: Website
+    url: https://illinois.edu/
+  - type: GitHub
+    url: https://github.com/rokwire
+  - type: SourceCode
+    url: https://github.com/illinois
+  - type: LinkedIn
+    url: https://www.linkedin.com/school/university-of-illinois-at-urbana-champaign/
+  - type: Status
+    url: https://status.illinois.edu/
+  - type: Plans
+    url: plans/university-of-illinois-urbana-champaign-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/university-of-illinois-urbana-champaign-rate-limits.yml
+  - type: FinOps
+    url: finops/university-of-illinois-urbana-champaign-finops.yml
+  - type: Review
+    url: review.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
