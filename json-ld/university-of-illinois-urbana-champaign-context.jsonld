@@ -1,0 +1,60 @@
+{
+  "@context": {
+    "schema": "https://schema.org/",
+    "uiuc": "https://illinois.edu/vocab#",
+    "@vocab": "https://illinois.edu/vocab#",
+    "name": "schema:name",
+    "url": "schema:url",
+    "description": "schema:description",
+    "Institution": {
+      "@id": "schema:CollegeOrUniversity"
+    },
+    "Organization": {
+      "@id": "uiuc:Organization",
+      "@context": {
+        "id": "@id",
+        "name": "schema:name",
+        "type": "uiuc:organizationType"
+      }
+    },
+    "Account": {
+      "@id": "uiuc:Account",
+      "@context": {
+        "id": "@id",
+        "username": "uiuc:username",
+        "profile": "uiuc:profile",
+        "verified": "uiuc:verified"
+      }
+    },
+    "Profile": {
+      "@id": "schema:Person",
+      "@context": {
+        "first_name": "schema:givenName",
+        "last_name": "schema:familyName",
+        "email": "schema:email",
+        "phone": "schema:telephone",
+        "photo_url": "schema:image",
+        "website": "schema:url"
+      }
+    },
+    "Building": {
+      "@id": "schema:Place",
+      "@context": {
+        "ID": "@id",
+        "Name": "schema:name",
+        "ShortName": "schema:alternateName",
+        "FullAddress": "schema:address",
+        "Address1": "schema:streetAddress",
+        "City": "schema:addressLocality",
+        "State": "schema:addressRegion",
+        "ZipCode": "schema:postalCode",
+        "ImageURL": "schema:image",
+        "Latitude": "schema:latitude",
+        "Longitude": "schema:longitude"
+      }
+    }
+  },
+  "@type": "Institution",
+  "name": "University of Illinois Urbana-Champaign",
+  "url": "https://illinois.edu/"
+}

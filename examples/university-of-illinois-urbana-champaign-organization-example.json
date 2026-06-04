@@ -1,0 +1,9 @@
+{
+  "id": "0a2eff20-e2cd-11eb-af68-60f81db5ecc0",
+  "name": "University of Illinois",
+  "type": "large",
+  "config": {
+    "id": "1a2eff20-e2cd-11eb-af68-60f81db5ecc1",
+    "domains": ["illinois.edu"]
+  }
+}

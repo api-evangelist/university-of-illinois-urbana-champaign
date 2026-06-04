@@ -1,0 +1,46 @@
+formats:
+  - oas3
+rules:
+  uiuc-info-title:
+    description: API must declare an info.title.
+    severity: error
+    given: $.info
+    then:
+      field: title
+      function: truthy
+  uiuc-info-version:
+    description: API must declare an info.version (Rokwire building blocks are semver-tagged).
+    severity: error
+    given: $.info
+    then:
+      field: version
+      function: truthy
+  uiuc-server-rokwire-host:
+    description: Servers should point at the api.rokwire.illinois.edu host as observed in the Rokwire specs.
+    severity: warn
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: "^https://api\\.rokwire\\.illinois\\.edu/"
+  uiuc-operation-tags:
+    description: Every operation should carry at least one tag (Services, Admin, BBs, TPS, System, Client).
+    severity: warn
+    given: $.paths[*][get,post,put,delete,patch]
+    then:
+      field: tags
+      function: truthy
+  uiuc-operation-summary:
+    description: Operations should provide a human-readable summary.
+    severity: warn
+    given: $.paths[*][get,post,put,delete,patch]
+    then:
+      field: summary
+      function: truthy
+  uiuc-schema-object-type:
+    description: Component schemas should declare a type.
+    severity: warn
+    given: $.components.schemas[*]
+    then:
+      field: type
+      function: truthy

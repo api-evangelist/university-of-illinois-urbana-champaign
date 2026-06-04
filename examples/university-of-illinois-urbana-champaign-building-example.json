@@ -1,0 +1,29 @@
+{
+  "ID": "0012",
+  "Number": "0012",
+  "Name": "Henry Administration Building",
+  "ShortName": "Henry",
+  "FullAddress": "506 S Wright St, Urbana, IL 61801",
+  "Address1": "506 S Wright St",
+  "Address2": "",
+  "City": "Urbana",
+  "State": "IL",
+  "ZipCode": "61801",
+  "MailCode": "100",
+  "ImageURL": "https://example.illinois.edu/buildings/0012.jpg",
+  "Latitude": 40.108656,
+  "Longitude": -88.227425,
+  "Floors": ["1", "2", "3"],
+  "Entrances": [
+    {
+      "ID": "0012-E1",
+      "Name": "Main Entrance",
+      "ADACompliant": true,
+      "Available": true,
+      "ImageURL": "https://example.illinois.edu/entrances/0012-E1.jpg",
+      "Latitude": 40.10867,
+      "Longitude": -88.2274
+    }
+  ],
+  "Features": []
+}

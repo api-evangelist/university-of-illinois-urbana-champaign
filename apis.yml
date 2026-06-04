@@ -54,6 +54,8 @@ apis:
         url: https://api.rokwire.illinois.edu/core/doc/ui/
       - type: GitHub
         url: https://github.com/rokwire/core-building-block
+      - type: OpenAPI
+        url: openapi/university-of-illinois-urbana-champaign-rokwire-core.yaml
   - aid: university-of-illinois-urbana-champaign:rokwire-gateway
     name: Rokwire Gateway Building Block
     description: >-
@@ -66,6 +68,8 @@ apis:
         url: https://api.rokwire.illinois.edu/gateway/doc/ui/
       - type: GitHub
         url: https://github.com/rokwire/gateway-building-block
+      - type: OpenAPI
+        url: openapi/university-of-illinois-urbana-champaign-rokwire-gateway.yaml
   - aid: university-of-illinois-urbana-champaign:ideals-oai-pmh
     name: IDEALS OAI-PMH
     description: >-

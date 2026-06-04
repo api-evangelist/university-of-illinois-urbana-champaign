@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.rokwire.illinois.edu/core/schemas/account.json",
+  "title": "Account",
+  "description": "A user account in the Rokwire Core Building Block API.",
+  "type": "object",
+  "required": ["id"],
+  "properties": {
+    "id": { "type": "string", "readOnly": true, "description": "Unique identifier of the account." },
+    "username": { "type": "string", "description": "Account username." },
+    "profile": { "$ref": "#/$defs/Profile" },
+    "preferences": { "type": ["object", "null"] },
+    "system_configs": { "type": ["object", "null"] },
+    "anonymous": { "type": "boolean" },
+    "verified": { "type": "boolean" },
+    "system": { "type": "boolean" },
+    "external_ids": { "type": ["object", "null"] }
+  },
+  "$defs": {
+    "Profile": {
+      "type": "object",
+      "required": ["id"],
+      "properties": {
+        "id": { "type": "string", "readOnly": true },
+        "photo_url": { "type": "string" },
+        "pronunciation_url": { "type": "string" },
+        "pronouns": { "type": "string" },
+        "first_name": { "type": "string" },
+        "last_name": { "type": "string" },
+        "email": { "type": ["string", "null"] },
+        "phone": { "type": ["string", "null"] },
+        "birth_year": { "type": ["integer", "null"] },
+        "address": { "type": ["string", "null"] },
+        "address2": { "type": ["string", "null"] },
+        "po_box": { "type": ["string", "null"] },
+        "city": { "type": ["string", "null"] },
+        "zip_code": { "type": ["string", "null"] },
+        "state": { "type": ["string", "null"] },
+        "country": { "type": ["string", "null"] },
+        "website": { "type": "string" }
+      }
+    }
+  }
+}

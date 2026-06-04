@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://api.rokwire.illinois.edu/core/structures/organization.json",
+  "name": "Organization",
+  "type": "object",
+  "properties": {
+    "id": { "type": "string" },
+    "name": { "type": "string" },
+    "type": { "type": "string" },
+    "config": { "type": "object" }
+  },
+  "required": ["id", "name", "type"]
+}

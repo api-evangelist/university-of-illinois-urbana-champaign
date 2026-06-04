@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.rokwire.illinois.edu/core/schemas/organization.json",
+  "title": "Organization",
+  "description": "An organization within the Rokwire Core Building Block API.",
+  "type": "object",
+  "required": ["id", "name", "type"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "readOnly": true,
+      "description": "Unique identifier of the organization."
+    },
+    "name": {
+      "type": "string",
+      "description": "Human-readable name of the organization."
+    },
+    "type": {
+      "type": "string",
+      "enum": ["micro", "small", "medium", "large", "huge"],
+      "description": "Size classification of the organization."
+    },
+    "config": {
+      "type": "object",
+      "description": "Organization configuration object."
+    }
+  }
+}

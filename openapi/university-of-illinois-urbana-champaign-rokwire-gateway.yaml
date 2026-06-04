@@ -1,0 +1,3713 @@
+openapi: 3.0.3
+info:
+  title: Rokwire Gateway Building Block API
+  description: Gateway Building Block API Documentation
+  version: 2.21.1
+servers:
+- url: https://api.rokwire.illinois.edu/gateway
+tags:
+- name: Client
+  description: Client applications APIs.
+- name: Admin
+  description: Clients administration applications APIs.
+- name: BBs
+  description: Building Block APIs.
+- name: TPS
+  description: Third-Party Service APIs.
+- name: System
+  description: Third-Party Service APIs.
+- name: Default
+  description: Default APIs.
+paths:
+  /version:
+    get:
+      tags:
+      - Default
+      summary: Get version
+      description: |
+        Gets current version of this service
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: v1.0.0
+        "500":
+          description: Internal error
+  /api/examples/{id}:
+    get:
+      tags:
+      - Client
+      summary: Gets example
+      description: |
+        Gets example record
+
+        **Auth:** Requires valid user token with `get_examples` permission
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        description: ID of example to retrieve
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Example'
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal error
+  /api/wayfinidng/buildng:
+    get:
+      tags:
+      - Client
+      summary: Gets building information
+      description: |
+        Gets building information by id
+
+        **Auth:** Requires valid first-party service account token with `get_building` permission
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: query
+        description: Building id
+        required: true
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: adaOnly
+        in: query
+        description: Prioritize ADA accessible entrances in the response
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: boolean
+      - name: lat
+        in: query
+        description: lattidue of the user's location
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: number
+      - name: long
+        in: query
+        description: longitude of the user's location
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: number
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Building'
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal error
+  /api/wayfinding/buildings:
+    get:
+      tags:
+      - Client
+      summary: Gets all campus buildings
+      description: |
+        Gets all campus buildings with coordinates, entrances, floors and features
+
+        **Auth:** Requires valid first-party service account token with `get_building` permission
+      security:
+      - bearerAuth: []
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Building'
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal error
+  /api/wayfinding/floorplan:
+    get:
+      tags:
+      - Client
+      summary: Returns the markup required to display the requested floor plan.
+      description: |
+        Returns the markup and data structures needed to display an svg of the request floor plan.
+
+        **Auth:** Requires valid first-party service account token with `get_building` permission
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: bldgid
+        in: query
+        description: The building id for the selected building
+        required: true
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: floor
+        in: query
+        description: Identifier of the floor to retrieve.
+        required: true
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: markers
+        in: query
+        description: If omitted, the value is set to "on". Indicates the initial state
+          of all the marker on the floor plan. Values are "on" or "off".
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: number
+      - name: highlites
+        in: query
+        description: If omitted, the values is set to "on". Indicates the initial
+          state of all the highlites on the flloor plan. Values are "on" or "off".
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: number
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FloorPlan'
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal error
+  /api/wayfinding/searchbuildings:
+    get:
+      tags:
+      - Client
+      summary: Returns a list of buildings matching the requested name
+      description: "Returns every building in the campus buildings list that contains
+        the name parameter in the building name property. \nThe response is a map
+        where keys are building names and values are building objects.\n\n**Verbosity
+        Levels:**\n- **v=1 or omitted**: Returns CompactBuilding objects (default)\n-
+        **v=2**: Returns full Building objects with complete details\n\n**Auth:**
+        Requires valid first-party service account token with `get_building` permission\n"
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: name
+        in: query
+        description: String to search for in the building name (case-insensitive)
+        required: true
+        style: form
+        explode: false
+        schema:
+          type: string
+          example: Illini
+      - name: v
+        in: query
+        description: Verbosity level. Set to 1 or omit for compact buildings, set
+          to 2 for full building details
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          enum:
+          - "1"
+          - "2"
+          default: "1"
+          example: "1"
+      responses:
+        "200":
+          description: Success - Returns a map of building names to building objects
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchBuildingsResponse'
+              example:
+                Illini Union:
+                  ID: illini_union
+                  Name: Illini Union
+                  Number: "1401"
+                  FullAddress: 1401 W Green St, Urbana, IL 61801
+                  ImageURL: https://example.com/illini_union.jpg
+                  ShortName: Union
+                  Latitude: 40.1095
+                  Longitude: -88.2272
+        "400":
+          description: Bad request - Missing or invalid name parameter
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: invalid
+                  type:
+                    type: string
+                    example: query_param
+                  args:
+                    type: array
+                    items:
+                      type: string
+                    example:
+                    - name
+        "401":
+          description: Unauthorized - Invalid or missing authentication token
+        "404":
+          description: Not found - No buildings match the search criteria
+        "500":
+          description: Internal server error
+  /api/termsessions/listcurrent:
+    get:
+      tags:
+      - Client
+      summary: Returns a list of current term sessions
+      description: |
+        Based on the current date, returns 4 term sessions for campus. If the current month is between 6 and 12, the current fall term is assumed and returned with the upcomign spring semester, the last summer semster and the previous spring semester. If the current month is less than 6, returns the current spring semester, the upcoming summer and fall semesters and the previous fall semester.
+
+        **Auth:** Requires valid first-party service account token with `get_building` permission
+      security:
+      - bearerAuth: []
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TermSession'
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal error
+  /api/laundry/rooms:
+    get:
+      tags:
+      - Client
+      summary: Get list of all campus laundry rooms
+      description: |
+        Returns a list of all laundry rooms available on campus with their basic information including ID, name, status, and location details.
+
+        **Auth:** Requires valid first-party service account token with appropriate permissions
+      security:
+      - bearerAuth: []
+      responses:
+        "200":
+          description: Success - Returns organization with list of laundry rooms
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organization'
+              example:
+                SchoolName: University of Illinois at Urbana-Champaign
+                LaundryRooms:
+                - ID: 1
+                  Name: Illini Tower Laundry
+                  Status: active
+                  Location:
+                    Latitude: 40.1095
+                    Longitude: -88.2272
+                    Floor: 1
+                - ID: 2
+                  Name: Bromley Hall Laundry
+                  Status: active
+                  Location:
+                    Latitude: 40.11
+                    Longitude: -88.228
+                    Floor: 2
+        "401":
+          description: Unauthorized - Invalid or missing authentication token
+        "404":
+          description: Not found - No laundry rooms available
+        "500":
+          description: Internal server error
+  /api/laundry/room:
+    get:
+      tags:
+      - Client
+      summary: Get detailed information about a specific laundry room
+      description: "Returns detailed information about a specific laundry room including
+        the number of washers and dryers, \na list of all appliances (machines) in
+        the room with their current status, and location details.\n\n**Auth:** Requires
+        valid first-party service account token with appropriate permissions\n"
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: query
+        description: The unique identifier of the laundry room
+        required: true
+        style: form
+        explode: false
+        schema:
+          type: string
+          example: "1"
+      responses:
+        "200":
+          description: Success - Returns detailed laundry room information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoomDetail'
+              example:
+                NumWashers: 8
+                NumDryers: 6
+                RoomName: Illini Tower Laundry
+                CampusName: University of Illinois at Urbana-Champaign
+                Location:
+                  Latitude: 40.1095
+                  Longitude: -88.2272
+                  Floor: 1
+                Appliances:
+                - ID: washer_001
+                  Status: available
+                  ApplianceType: washer
+                  AverageCycleTime: 45
+                  TimeRemaining: null
+                  Label: Washer 1
+                - ID: dryer_001
+                  Status: in_use
+                  ApplianceType: dryer
+                  AverageCycleTime: 60
+                  TimeRemaining: 15
+                  Label: Dryer 1
+                - ID: washer_002
+                  Status: maintenance
+                  ApplianceType: washer
+                  AverageCycleTime: 45
+                  TimeRemaining: null
+                  Label: Washer 2
+        "400":
+          description: Bad request - Missing or invalid room ID parameter
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: missing
+                  type:
+                    type: string
+                    example: query_param
+                  args:
+                    type: array
+                    items:
+                      type: string
+                    example:
+                    - id
+        "401":
+          description: Unauthorized - Invalid or missing authentication token
+        "404":
+          description: Not found - Laundry room with specified ID not found
+        "500":
+          description: Internal server error
+  /api/laundry/initrequest:
+    get:
+      tags:
+      - Client
+      summary: Initialize a service request for a laundry machine
+      description: "Returns the problem codes and pending service request status for
+        a specific laundry machine. \nThis endpoint is used to initialize a service
+        request by providing the available problem codes \nand checking if there's
+        already an open issue for the machine.\n\n**Auth:** Requires valid first-party
+        service account token with appropriate permissions\n"
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: machineid
+        in: query
+        description: The unique service tag ID of the laundry machine
+        required: true
+        style: form
+        explode: false
+        schema:
+          type: string
+          example: washer_001
+      responses:
+        "200":
+          description: Success - Returns machine request details and available problem
+            codes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MachineRequestDetail'
+              example:
+                MachineID: washer_001
+                Message: Machine is available for service requests
+                OpenIssue: false
+                ProblemCodes:
+                - not_spinning
+                - not_draining
+                - leaking
+                - not_starting
+                - error_code
+                - other
+                MachineType: washer
+        "400":
+          description: Bad request - Missing or invalid machine ID parameter
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: missing
+                  type:
+                    type: string
+                    example: query_param
+                  args:
+                    type: array
+                    items:
+                      type: string
+                    example:
+                    - machineid
+        "401":
+          description: Unauthorized - Invalid or missing authentication token
+        "404":
+          description: Not found - Machine with specified ID not found
+        "500":
+          description: Internal server error
+  /api/laundry/requestservice:
+    post:
+      tags:
+      - Client
+      summary: Submit a service request for a laundry machine
+      description: "Submits a service request for a specific laundry machine. This
+        endpoint requires detailed information \nabout the problem and contact information
+        for the person submitting the request.\n\n**Required Fields:** machineid,
+        problemcode, firstname, lastname, email\n**Optional Fields:** comments, phone\n\n**Auth:**
+        Requires valid first-party service account token with appropriate permissions\n"
+      security:
+      - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceSubmission'
+            example:
+              machineid: washer_001
+              problemcode: not_spinning
+              comments: Machine makes noise but doesn't spin
+              firstname: John
+              lastname: Doe
+              phone: 555-123-4567
+              email: john.doe@example.com
+      responses:
+        "200":
+          description: Success - Service request submitted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceRequestResult'
+              example:
+                Message: Service request submitted successfully
+                RequestNumber: SR-2024-001234
+                Status: submitted
+        "400":
+          description: Bad request - Missing required fields or invalid data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: missing
+                  type:
+                    type: string
+                    example: request_body
+                  args:
+                    type: array
+                    items:
+                      type: string
+                    example:
+                    - machineid
+                    - problemcode
+        "401":
+          description: Unauthorized - Invalid or missing authentication token
+        "404":
+          description: Not found - Machine with specified ID not found
+        "500":
+          description: Internal server error
+  /api/person/contactinfo:
+    get:
+      tags:
+      - Client
+      summary: Get contact information for a person
+      description: "Returns comprehensive contact information for a person including
+        name, permanent and mailing addresses, \nphone numbers, and emergency contact
+        information.\n\n**Authentication:** Requires both RokwireAuth and ExternalAuth
+        tokens\n**Mode Parameter:** \n- \"0\" (default): Standard contact information\n-
+        \"1\": Enhanced contact information (for specific UINs)\n\n**Auth:** Requires
+        valid first-party service account token and external authorization token\n"
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: query
+        description: User ID (UIN) of the person
+        required: true
+        style: form
+        explode: false
+        schema:
+          type: string
+          example: "123456789"
+      - name: mode
+        in: query
+        description: Mode for contact information retrieval (0=standard, 1=enhanced)
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          enum:
+          - "0"
+          - "1"
+          default: "0"
+          example: "0"
+      responses:
+        "200":
+          description: Success - Returns person's contact information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Person'
+              example:
+                uin: "123456789"
+                FirstName: John
+                LastName: Doe
+                PreferredName: Johnny
+                MailingAddress:
+                  Type: MA
+                  Street1: 123 Main St
+                  City: Urbana
+                  StateAbbr: IL
+                  StateName: Illinois
+                  ZipCode: "61801"
+                  County: Champaign
+                  Phone:
+                    AreaCode: "217"
+                    Number: 333-1234
+                PermAddress:
+                  Type: PR
+                  Street1: 456 Oak Ave
+                  City: Chicago
+                  StateAbbr: IL
+                  StateName: Illinois
+                  ZipCode: "60601"
+                  County: Cook
+                  Phone:
+                    AreaCode: "312"
+                    Number: 555-6789
+                EmergencyContacts:
+                - Priority: "1"
+                  RelationShip:
+                    Code: PAR
+                    Name: Parent
+                  FirstName: Jane
+                  LastName: Doe
+                  Address:
+                    Type: PR
+                    Street1: 456 Oak Ave
+                    City: Chicago
+                    StateAbbr: IL
+                    StateName: Illinois
+                    ZipCode: "60601"
+                    County: Cook
+                    Phone:
+                      AreaCode: "312"
+                      Number: 555-6789
+        "400":
+          description: Bad request - Missing required parameters or invalid external
+            token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: missing
+                  type:
+                    type: string
+                    example: header
+                  args:
+                    type: array
+                    items:
+                      type: string
+                    example:
+                    - external auth token
+        "401":
+          description: Unauthorized - Invalid or missing authentication token
+        "403":
+          description: Forbidden - Insufficient permissions or invalid external token
+        "404":
+          description: Not found - Person with specified UIN not found
+        "500":
+          description: Internal server error
+  /api/person/giescourses:
+    get:
+      tags:
+      - Client
+      summary: Get registered courses for GIES students
+      description: "Returns a list of registered courses for GIES (Gies College of
+        Business) students. \nThis endpoint provides course information including
+        term, subject, number, section, \ntitle, and instructor details.\n\n**Authentication:**
+        Requires both RokwireAuth and ExternalAuth tokens\n**Note:** This endpoint
+        is specifically for GIES students and may return different \ncourse information
+        compared to the general student courses endpoint.\n\n**Auth:** Requires valid
+        first-party service account token and external authorization token\n"
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: query
+        description: User ID (UIN) of the GIES student
+        required: true
+        style: form
+        explode: false
+        schema:
+          type: string
+          example: "123456789"
+      responses:
+        "200":
+          description: Success - Returns list of GIES courses
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GiesCourse'
+              example:
+              - term: 2024-FA
+                subject: BADM
+                number: "310"
+                section: A
+                title: Principles of Marketing
+                instructor: Dr. Smith
+              - term: 2024-FA
+                subject: BADM
+                number: "320"
+                section: B
+                title: Business Statistics
+                instructor: Dr. Johnson
+              - term: 2024-FA
+                subject: FIN
+                number: "300"
+                section: C
+                title: Financial Management
+                instructor: Dr. Williams
+        "400":
+          description: Bad request - Missing required parameters or invalid external
+            token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: invalid
+                  type:
+                    type: string
+                    example: query_param
+                  args:
+                    type: array
+                    items:
+                      type: string
+                    example:
+                    - id
+        "401":
+          description: Unauthorized - Invalid or missing authentication token
+        "403":
+          description: Forbidden - Insufficient permissions or invalid external token
+        "404":
+          description: Not found - Student with specified UIN not found or no courses
+            available
+        "500":
+          description: Internal server error
+  /api/person/studentcourses:
+    get:
+      tags:
+      - Client
+      summary: Get registered courses for a student
+      description: "Returns a comprehensive list of registered courses for a student
+        including detailed course information, \nsection details, meeting times, locations,
+        and building information. This endpoint provides the most \ncomplete course
+        data compared to other course endpoints.\n\n**Authentication:** Requires both
+        RokwireAuth and ExternalAuth tokens\n**Location Enhancement:** Automatically
+        enriches course data with building location information\n**ADA Support:**
+        Optional ADA-only building filtering for accessibility considerations\n\n**Auth:**
+        Requires valid first-party service account token and external authorization
+        token\n"
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: query
+        description: User ID (UIN) of the student
+        required: true
+        style: form
+        explode: false
+        schema:
+          type: string
+          example: "123456789"
+      - name: termid
+        in: query
+        description: Term ID for the academic term (e.g., "120258" for Fall 2025).
+          If not provided, defaults to the current term.
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          example: "120258"
+      - name: lat
+        in: query
+        description: Latitude coordinate for location-based building information (optional)
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: number
+          format: float
+          example: 40.1095
+      - name: long
+        in: query
+        description: Longitude coordinate for location-based building information
+          (optional)
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: number
+          format: float
+          example: -88.2272
+      - name: adaOnly
+        in: query
+        description: Filter buildings to show only ADA-compliant entrances (optional)
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: boolean
+          default: false
+          example: false
+      responses:
+        "200":
+          description: Success - Returns list of student courses with building information
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Course'
+              example:
+              - coursetitle: Introduction to Computer Science
+                courseshortname: CS 101
+                coursenumber: CS 101
+                instructionmethod: In Person
+                coursesection:
+                  days: MWF
+                  meeting_dates_or_range: Aug 26 - Dec 13
+                  room: "1001"
+                  buildingname: Siebel Center for Computer Science
+                  buildingid: siebel
+                  instructiontype: Lecture
+                  instructor: Dr. Smith
+                  start_time: "09:00"
+                  endtime: "09:50"
+                  building:
+                    ID: siebel
+                    Name: Siebel Center for Computer Science
+                    Number: "201"
+                    FullAddress: 201 N Goodwin Ave, Urbana, IL 61801
+                    Address1: 201 N Goodwin Ave
+                    Address2: ""
+                    City: Urbana
+                    State: IL
+                    ZipCode: "61801"
+                    ImageURL: https://example.com/siebel.jpg
+                    MailCode: MC-258
+                    Latitude: 40.1135
+                    Longitude: -88.2244
+                    Floors:
+                    - "1"
+                    - "2"
+                    - "3"
+                    - "4"
+                    Entrances:
+                    - ID: 9bd26229-f95e-4b83-bcd3-34ee91f75b5b
+                      Name: Main Entrance
+                      ADACompliant: true
+                      Available: true
+                      ImageURL: https://example.com/entrance1.jpg
+                      Latitude: 40.1135
+                      Longitude: -88.2244
+                    - ID: entrance2
+                      Name: Side Entrance
+                      ADACompliant: false
+                      Available: true
+                      ImageURL: https://example.com/entrance2.jpg
+                      Latitude: 40.1136
+                      Longitude: -88.2245
+                    Features:
+                    - Key: ADA_ENTRANCE
+                      Value:
+                        Name: ADA Entrance
+                        Floors:
+                        - "01"
+                    - Key: RR-ALLGENDER
+                      Value:
+                        Name: All Gender Restroom
+                        Floors:
+                        - "02"
+                  courseReferenceNumber: "12345"
+                  course_section: A
+              - coursetitle: Calculus I
+                courseshortname: MATH 221
+                coursenumber: MATH 221
+                instructionmethod: In Person
+                coursesection:
+                  days: TR
+                  meeting_dates_or_range: Aug 26 - Dec 13
+                  room: "314"
+                  buildingname: Altgeld Hall
+                  buildingid: altgeld
+                  instructiontype: Lecture
+                  instructor: Dr. Johnson
+                  start_time: "14:00"
+                  endtime: "15:20"
+                  building:
+                    ID: altgeld
+                    Name: Altgeld Hall
+                    Number: "1409"
+                    FullAddress: 1409 W Green St, Urbana, IL 61801
+                    Address1: 1409 W Green St
+                    Address2: ""
+                    City: Urbana
+                    State: IL
+                    ZipCode: "61801"
+                    ImageURL: https://example.com/altgeld.jpg
+                    MailCode: MC-382
+                    Latitude: 40.1095
+                    Longitude: -88.2272
+                    Floors:
+                    - "1"
+                    - "2"
+                    - "3"
+                    Entrances:
+                    - ID: 9bd26229-f95e-4b83-bcd3-34ee91f75b5b
+                      Name: Main Entrance
+                      ADACompliant: true
+                      Available: true
+                      ImageURL: https://example.com/entrance1.jpg
+                      Latitude: 40.1135
+                      Longitude: -88.2244
+                    - ID: entrance2
+                      Name: Side Entrance
+                      ADACompliant: false
+                      Available: true
+                      ImageURL: https://example.com/entrance2.jpg
+                      Latitude: 40.1136
+                      Longitude: -88.2245
+                    Features:
+                    - Key: ADA_ENTRANCE
+                      Value:
+                        Name: ADA Entrance
+                        Floors:
+                        - "01"
+                    - Key: RR-ALLGENDER
+                      Value:
+                        Name: All Gender Restroom
+                        Floors:
+                        - "02"
+                  courseReferenceNumber: "67890"
+                  course_section: B
+        "400":
+          description: Bad request - Missing required parameters or invalid external
+            token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: missing
+                  type:
+                    type: string
+                    example: query_param
+                  args:
+                    type: array
+                    items:
+                      type: string
+                    example:
+                    - id
+                    - termid
+        "401":
+          description: Unauthorized - Invalid or missing authentication token
+        "403":
+          description: Forbidden - Insufficient permissions or invalid external token
+        "404":
+          description: Not found - Student with specified UIN not found or no courses
+            available for the term
+        "500":
+          description: Internal server error
+  /api/admin/examples:
+    post:
+      tags:
+      - Admin
+      summary: Create example
+      description: |
+        Creates new example record
+
+        **Auth:** Requires valid admin token with `update_examples` or `all_examples`  permission
+      security:
+      - bearerAuth: []
+      requestBody:
+        description: New example content
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Example'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Example'
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal error
+  /api/admin/examples/{id}:
+    get:
+      tags:
+      - Admin
+      summary: Gets example
+      description: |
+        Gets example record
+
+        **Auth:** Requires valid admin token with one of the following permissions:
+        - `get_examples`
+        - `update_examples`
+        - `delete_examples`
+        - `all_examples`
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        description: ID of example to retrieve
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Example'
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal error
+    put:
+      tags:
+      - Admin
+      summary: Update example
+      description: |
+        Updates example record
+
+        **Auth:** Requires valid admin token with `update_examples` or `all_examples`  permission
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        description: ID of example to update
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        description: New example content
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Example'
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Success
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal error
+    delete:
+      tags:
+      - Admin
+      summary: Delete example
+      description: |
+        Deletes example record
+
+        **Auth:** Requires valid admin token with `delete_examples` or `all_examples` permission
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        description: ID of example to delete
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Success
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal error
+  /api/admin/configs:
+    get:
+      tags:
+      - Admin
+      summary: Get configs
+      description: |
+        Get existing configs by search parameters
+
+        **Auth:** Requires valid admin token with one of the following permissions:
+        - `get_configs_gateway`
+        - `update_configs_gateway`
+        - `delete_configs_gateway`
+        - `all_configs_gateway`
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: type
+        in: query
+        description: config type
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Config'
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal error
+    post:
+      tags:
+      - Admin
+      summary: Create config
+      description: |
+        Creates a new config
+
+        **Auth:** Requires valid admin token with one of the following permissions:
+        - `update_configs_gateway`
+        - `all_configs_gateway`
+      security:
+      - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Config'
+            examples:
+              system:
+                summary: System-wide config
+                value:
+                  type: config_type
+                  all_apps: true
+                  all_orgs: true
+                  system: true
+                  data:
+                    example_env: example
+              org_admin:
+                summary: Organization-wide config
+                value:
+                  type: config_type
+                  all_apps: true
+                  all_orgs: false
+                  system: false
+                  data:
+                    example_env: example
+              app_org_specific:
+                summary: Application organization specific config
+                value:
+                  type: config_type
+                  all_apps: false
+                  all_orgs: false
+                  system: false
+                  data:
+                    example_env: example
+        required: true
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Config'
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal error
+  /api/admin/configs/{id}:
+    get:
+      tags:
+      - Admin
+      summary: Get config
+      description: |
+        Gets config record
+
+        **Auth:** Requires valid admin token with one of the following permissions:
+        - `get_configs_gateway`
+        - `update_configs_gateway`
+        - `delete_configs_gateway`
+        - `all_configs_gateway`
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        description: ID of config to retrieve
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Config'
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal error
+    put:
+      tags:
+      - Admin
+      summary: Update config
+      description: |
+        Updates existing config record
+
+        **Auth:** Requires valid admin token with one of the following permissions:
+        - `update_configs_gateway`
+        - `all_configs_gateway`
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        description: ID of config to update
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        description: New config content
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Config'
+            examples:
+              system:
+                summary: System-wide config
+                value:
+                  type: config_type
+                  all_apps: true
+                  all_orgs: true
+                  system: true
+                  data:
+                    example_env: example
+              org_admin:
+                summary: Organization-wide config
+                value:
+                  type: config_type
+                  all_apps: true
+                  all_orgs: false
+                  system: false
+                  data:
+                    example_env: example
+              app_org_specific:
+                summary: Application organization specific config
+                value:
+                  type: config_type
+                  all_apps: false
+                  all_orgs: false
+                  system: false
+                  data:
+                    example_env: example
+        required: true
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Success
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal error
+    delete:
+      tags:
+      - Admin
+      summary: Delete config
+      description: |
+        Deletes config record
+
+        **Auth:** Requires valid admin token with one of the following permissions:
+        - `delete_configs_gateway`
+        - `all_configs_gateway`
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        description: ID of config to delete
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Success
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal error
+  /api/admin/webtools-blacklist:
+    put:
+      tags:
+      - Admin
+      summary: Add webtools blacklist data
+      description: |
+        Add webtools blacklist data
+
+        **Auth:** Requires valid admin token and "webtools_blacklist" permission
+      security:
+      - bearerAuth: []
+      deprecated: true
+      requestBody:
+        description: list of the ids that needs to be blacklisted
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/_admin_req_add-webtools-blacklist'
+      responses:
+        "200":
+          description: Success
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal error
+    get:
+      tags:
+      - Admin
+      summary: Get all webtools blacklist item
+      description: |
+        Get all webtools blacklist items
+
+         **Auth:** Requires valid admin token and "webtools_blacklist" permission
+      security:
+      - bearerAuth: []
+      deprecated: true
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BlacklistItems'
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal error
+    delete:
+      tags:
+      - Admin
+      summary: Delete webtools blacklist item
+      description: |
+        Deletes webtools blacklist items.
+
+        **Auth:** Requires valid admin token and "webtools_blacklist" permission
+      security:
+      - bearerAuth: []
+      deprecated: true
+      parameters:
+      - name: source_ids
+        in: query
+        description: A comma-separated list of ids
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: calendar_ids
+        in: query
+        description: A comma-separated list of ids
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: originating_calendar_ids
+        in: query
+        description: A comma-separated list of ids
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Success
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal error
+  /api/admin/events/webtools-blacklist:
+    put:
+      tags:
+      - Admin
+      summary: Add webtools blacklist data
+      description: |
+        Add webtools blacklist data
+
+        **Auth:** Requires valid admin token and `all_events` permission
+      security:
+      - bearerAuth: []
+      requestBody:
+        description: list of the ids that needs to be blacklisted
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/_admin_req_add-webtools-blacklist'
+      responses:
+        "200":
+          description: Success
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal error
+    get:
+      tags:
+      - Admin
+      summary: Get all webtools blacklist item
+      description: |
+        Get all webtools blacklist items
+
+         **Auth:** Requires valid admin token and `all_events` permission
+      security:
+      - bearerAuth: []
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BlacklistItems'
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal error
+    delete:
+      tags:
+      - Admin
+      summary: Delete webtools blacklist item
+      description: |
+        Deletes webtools blacklist items.
+
+        **Auth:** Requires valid admin token and `all_events` permission
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: source_ids
+        in: query
+        description: A comma-separated list of ids
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: calendar_ids
+        in: query
+        description: A comma-separated list of ids
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: originating_calendar_ids
+        in: query
+        description: A comma-separated list of ids
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Success
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal error
+  /api/admin/events/summary:
+    get:
+      tags:
+      - Admin
+      summary: Get events summary
+      description: |
+        Get events summary
+
+         **Auth:** Requires valid admin token and `all_events` permission
+      security:
+      - bearerAuth: []
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SummaryEvents'
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal error
+  /api/admin/events/load:
+    get:
+      tags:
+      - Admin
+      summary: Load events
+      description: |
+        Get existing events by search parameters
+
+         **Auth:** Requires valid admin token and `all_events` permission
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: status
+        in: query
+        description: status - `valid` / `ignored`
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: source
+        in: query
+        description: source - `webtools-direct` / `events-tps-api`
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: data-source-event-id
+        in: query
+        description: data source event id of the event
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: calendar-id
+        in: query
+        description: calendar id of the event
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: originating-calendar-id
+        in: query
+        description: originating calendar id of the event
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LegacyEventItem'
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal error
+  /api/bbs/examples/{id}:
+    get:
+      tags:
+      - BBs
+      summary: Gets example
+      description: |
+        Gets example record
+
+        **Auth:** Requires valid first-party service account token with `get_examples` permission
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        description: ID of example to retrieve
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Example'
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal error
+  /api/bbs/appointments/units:
+    get:
+      tags:
+      - BBs
+      summary: Gets the list of units (calendars) for a provider id
+      description: "Gets the list of units (calendars) for a provider id\n\n**Auth:**
+        Requires valid first-party service account token with `get_external_appointments`
+        permission \n Requires the External-Authorization header containing the oidc
+        access token from the campus provider\n"
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: external_id
+        in: query
+        description: External system id of person making the request
+        required: true
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: provider_id
+        in: query
+        description: Rokwire provider id of the organization tracking/providing appointment
+          data
+        required: true
+        style: form
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppointmentUnit'
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal error
+  /api/bbs/appointments/people:
+    get:
+      tags:
+      - BBs
+      summary: Gets People with Calendars
+      description: |
+        Gets a list of people with calendars inside of a unit
+
+        **Auth:** Requires valid first-party service account token with `get_external_appointments` permission
+         Requires the External-Authorization header containing the oidc access token from the campus provider
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: external_id
+        in: query
+        description: External system id of person making the request
+        required: true
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: provider_id
+        in: query
+        description: Rokwire provider id of the organization tracking/providing appointment
+          data
+        required: true
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: unit_id
+        in: query
+        description: External id identifying the unit the calendar entries belong
+          to
+        required: true
+        style: form
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppointmentPerson'
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal error
+  /api/bbs/appointments/slots:
+    get:
+      tags:
+      - BBs
+      summary: Gets available time slots on a calendar
+      description: |
+        Gets a list of available time slots between two dates on a unit calendar
+
+        **Auth:** Requires valid first-party service account token with `get_external_appointments` permission
+        Requires the External-Authorization header containing the oidc access token from the campus provider
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: external_id
+        in: query
+        description: External system id of person making the request
+        required: true
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: provider_id
+        in: query
+        description: Rokwire provider id of the organization tracking/providing appointment
+          data
+        required: true
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: unit_id
+        in: query
+        description: External id identifying the unit the calendar entries belong
+          to
+        required: true
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: person_id
+        in: query
+        description: External id identifying the advisor the calendar entry belongs
+          to
+        required: true
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: start_time
+        in: query
+        description: The first date to look for available slots (yyyy-mm-dd). Required
+          if end_time is provided.
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: end_time
+        in: query
+        description: The last date to look for available slots (yyyy-mm-dd) Required
+          if start_time is provided
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeSlot'
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal error
+  /api/bbs/appointments/questions:
+    get:
+      tags:
+      - BBs
+      summary: Gets the questions to ask when making an appointment
+      description: |
+        Gets a list of the questions to ask when a user requests an appointment for a particular time slot.
+
+        **Auth:** Requires valid first-party service account token with `get_external_appointments` permission
+        Requires the External-Authorization header containing the oidc access token from the campus provider
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: external_id
+        in: query
+        description: External system id of person making the request
+        required: true
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: provider_id
+        in: query
+        description: Rokwire provider id of the organization tracking/providing appointment
+          data
+        required: true
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: unit_id
+        in: query
+        description: External id identifying the unit the calendar entries belong
+          to
+        required: true
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: person_id
+        in: query
+        description: External id identifying the advisor the calendar entry belongs
+          to
+        required: true
+        style: form
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Question'
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal error
+  /api/bbs/appointments/qands:
+    get:
+      tags:
+      - BBs
+      summary: Gets available time slots on a calendar
+      description: |
+        Gets a list of available time slots between two dates on a unit calendar
+
+        **Auth:** Requires valid first-party service account token with `get_external_appointments` permission
+        Requires the External-Authorization header containing the oidc access token from the campus provider
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: external_id
+        in: query
+        description: External system id of person making the request
+        required: true
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: provider_id
+        in: query
+        description: Rokwire provider id of the organization tracking/providing appointment
+          data
+        required: true
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: unit_id
+        in: query
+        description: External id identifying the unit the calendar entries belong
+          to
+        required: true
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: person_id
+        in: query
+        description: External id identifying the advisor the calendar entry belongs
+          to
+        required: true
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: start_time
+        in: query
+        description: The first date to look for available slots (yyyy-mm-dd). Required
+          if end_time is provided.
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: end_time
+        in: query
+        description: The last date to look for available slots (yyyy-mm-dd) Required
+          if start_time is provided
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppointmentOptions'
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal error
+  /api/bbs/appointments/:
+    post:
+      tags:
+      - BBs
+      summary: Creates an appointment in the specified provider system and returns
+        the appointment data to the client
+      description: "Posts an appointment request to the specified provider calendar.
+        Returns the appointment data back to the client. \n\n**Auth:** Requires valid
+        first-party service account token with `update_external_appointments` permission\nRequires
+        the External-Authorization header containing the oidc access token from the
+        campus provider\n"
+      security:
+      - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AppointmentPost'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BuildingBlockAppointment'
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal error
+    put:
+      tags:
+      - BBs
+      summary: updates an appointment in the specified provider system and returns
+        the appointment data to the client
+      description: |
+        Updates an appointment in the specified provider system and returns the appointment data to the clients.
+        For an upate, the source_id field in the request body is required.
+
+        **Auth:** Requires valid first-party service account token with `update_external_appointments` permission
+        Requires the External-Authorization header containing the oidc access token from the campus provider
+      security:
+      - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AppointmentPost'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BuildingBlockAppointment'
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal error
+  /api/bbs/appointments/{id}:
+    delete:
+      tags:
+      - BBs
+      summary: Deletes an appointment in the specified provider system.
+      description: |
+        Deletes an appointment request in the specified provider calendar.
+
+        **Auth:** Requires valid first-party service account token with `update_external_appointments` permission
+        Requires the External-Authorization header containing the oidc access token from the campus provider
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        description: source id of the appointment
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: external_id
+        in: query
+        description: Users UIN
+        required: true
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: provider_id
+        in: query
+        description: Rokwire provider id of the organization tracking/providing appointment
+          data
+        required: true
+        style: form
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Success
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal error
+  /api/bbs/events:
+    get:
+      tags:
+      - BBs
+      summary: Gets all legacy events
+      description: "Gets all legacy events \n"
+      security:
+      - bearerAuth: []
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LegacyEvent'
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal error
+  /api/tps/examples/{id}:
+    get:
+      tags:
+      - TPS
+      summary: Gets example
+      description: |
+        Gets example record
+
+        **Auth:** Requires valid third-party service account token with `get_examples` permission
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        description: ID of example to retrieve
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Example'
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal error
+  /api/tps/events:
+    post:
+      tags:
+      - TPS
+      summary: Create events
+      description: |
+        Creates new events
+
+        **Auth:** Requires valid tps token with `manage_legacy_events` permission
+      security:
+      - bearerAuth: []
+      requestBody:
+        description: New events content
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/_tps_req_create-event'
+      responses:
+        "200":
+          description: Success
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal error
+    delete:
+      tags:
+      - TPS
+      summary: Delete events
+      description: |
+        Deletes all events created by the calling account. If the "ids" param is passed them it deletes only the provided events.
+
+        **Auth:** Requires valid tps token with `manage_legacy_events` permission
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: ids
+        in: query
+        description: A comma-separated list of ids
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Success
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal error
+  /api/system/examples/{id}:
+    get:
+      tags:
+      - System
+      summary: Gets example
+      description: |
+        Gets example record
+
+        **Auth:** Requires valid admin token with `get_examples` permission
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        description: ID of example to retrieve
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Example'
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal error
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    Address:
+      type: object
+      required:
+      - Type
+      - Street1
+      - City
+      - StateAbbr
+      - StateName
+      - ZipCode
+      - County
+      - Phone
+      properties:
+        Type:
+          type: string
+          enum:
+          - MA
+          - PR
+          readOnly: true
+        Street1:
+          type: string
+          readOnly: true
+        City:
+          type: string
+          readOnly: true
+        StateAbbr:
+          type: string
+          readOnly: true
+        StateName:
+          type: string
+          readOnly: true
+        ZipCode:
+          type: string
+          readOnly: true
+        County:
+          type: string
+          readOnly: true
+        Phone:
+          $ref: '#/components/schemas/PhoneNumber'
+    Appliance:
+      type: object
+      required:
+      - ID
+      - Status
+      - ApplianceType
+      - AverageCycleTime
+      - Label
+      properties:
+        ID:
+          type: string
+          readOnly: true
+        Status:
+          type: string
+          readOnly: true
+        ApplianceType:
+          type: string
+          readOnly: true
+        AverageCycleTime:
+          type: integer
+          readOnly: true
+        TimeRemaining:
+          type: integer
+          nullable: true
+          readOnly: true
+        Label:
+          type: string
+          readOnly: true
+    AppointmentHost:
+      type: object
+      required:
+      - first_name
+      - last_name
+      properties:
+        first_name:
+          type: string
+          readOnly: true
+        last_name:
+          type: string
+          readOnly: true
+    AppointmentOptions:
+      type: object
+      required:
+      - time_slots
+      - questions
+      properties:
+        time_slots:
+          type: array
+          items:
+            $ref: '#/components/schemas/TimeSlot'
+          readOnly: true
+        questions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Question'
+          readOnly: true
+    AppointmentPerson:
+      type: object
+      required:
+      - id
+      - provider_id
+      - unit_id
+      - next_available
+      - name
+      - notes
+      - image_url
+      properties:
+        id:
+          type: string
+          readOnly: true
+        provider_id:
+          type: integer
+          readOnly: true
+        unit_id:
+          type: integer
+          readOnly: true
+        next_available:
+          type: string
+        name:
+          type: string
+        notes:
+          type: string
+        image_url:
+          type: string
+    AppointmentPost:
+      type: object
+      required:
+      - provider_id
+      - unit_id
+      - person_id
+      - type
+      - start_time
+      - end_time
+      - user_external_ids
+      - slot_id
+      - answers
+      properties:
+        provider_id:
+          type: string
+          readOnly: true
+        unit_id:
+          type: string
+          readOnly: true
+        person_id:
+          type: string
+          readOnly: true
+        type:
+          type: string
+          readOnly: true
+        start_time:
+          type: string
+          readOnly: true
+        end_time:
+          type: string
+          readOnly: true
+        user_external_ids:
+          $ref: '#/components/schemas/ExternalUserID'
+          readOnly: true
+        slot_id:
+          type: string
+          readOnly: true
+        source_id:
+          type: string
+          readOnly: true
+        answers:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuestionAnswer'
+          readOnly: true
+    AppointmentUnit:
+      type: object
+      required:
+      - id
+      - provider_id
+      - name
+      - location
+      - hours_of_operation
+      - details
+      - next_available
+      - image_url
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        provider_id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          readOnly: true
+        location:
+          type: string
+        hours_of_operation:
+          type: string
+        details:
+          type: string
+        next_available:
+          type: string
+        image_url:
+          type: string
+    BlacklistItems:
+      type: object
+      properties:
+        name:
+          type: string
+        data:
+          type: array
+          items:
+            type: string
+    Building:
+      type: object
+      required:
+      - ID
+      - Number
+      - Name
+      - FullAddress
+      - Address1
+      - Address2
+      - City
+      - State
+      - ZipCode
+      - ImageURL
+      - MailCode
+      - Entrances
+      - Latitude
+      - Longitude
+      - Floors
+      - Features
+      properties:
+        ID:
+          type: string
+          readOnly: true
+        Name:
+          type: string
+          readOnly: true
+        Number:
+          type: string
+          readOnly: true
+        FullAddress:
+          type: string
+          readOnly: true
+        Address1:
+          type: string
+        Address2:
+          type: string
+          readOnly: true
+        City:
+          type: string
+          readOnly: true
+        State:
+          type: string
+          readOnly: true
+        ZipCode:
+          type: string
+          readOnly: true
+        ImageURL:
+          type: string
+          readOnly: true
+        MailCode:
+          type: string
+          readOnly: true
+        Latitude:
+          type: number
+          readOnly: true
+        Longitude:
+          type: number
+          readOnly: true
+        Entrances:
+          type: array
+          items:
+            $ref: '#/components/schemas/Entrance'
+          readOnly: true
+        Floors:
+          type: array
+          items:
+            type: string
+          readOnly: true
+        Features:
+          type: array
+          items:
+            $ref: '#/components/schemas/BuildingFeatureLocation'
+          readOnly: true
+        ShortName:
+          type: string
+          readOnly: true
+    BuildingBlockAppointment:
+      type: object
+      required:
+      - provider_id
+      - unit_id
+      - person_id
+      - type
+      - start_time
+      - end_time
+      - user_external_ids
+      - source_id
+      - host
+      properties:
+        provider_id:
+          type: string
+          readOnly: true
+        unit_id:
+          type: string
+          readOnly: true
+        person_id:
+          type: string
+          readOnly: true
+        type:
+          type: string
+          readOnly: true
+        start_time:
+          type: string
+          readOnly: true
+        end_time:
+          type: string
+          readOnly: true
+        user_external_ids:
+          $ref: '#/components/schemas/ExternalUserID'
+          readOnly: true
+        source_id:
+          type: string
+          readOnly: true
+        host:
+          $ref: '#/components/schemas/AppointmentHost'
+    BuildingFeature:
+      type: object
+      required:
+      - ID
+      - BuildingID
+      - EQIndicator
+      - Name
+      - FoundOnFloor
+      - FoundInRoom
+      - IsADA
+      - IsExternal
+      - Comments
+      - Latitude
+      - Longitude
+      properties:
+        ID:
+          type: string
+          readOnly: true
+        BuildingID:
+          type: string
+          readOnly: true
+        EQIndicator:
+          type: string
+          readOnly: true
+        Name:
+          type: string
+          readOnly: true
+        FoundOnFloor:
+          type: string
+          readOnly: true
+        FoundInRoom:
+          type: string
+          readOnly: true
+        IsADA:
+          type: boolean
+          readOnly: true
+        IsExternal:
+          type: boolean
+        Comments:
+          type: string
+          readOnly: true
+        Latitude:
+          type: number
+          readOnly: true
+        Longitude:
+          type: number
+          readOnly: true
+    BuildingFeatureLocation:
+      type: object
+      required:
+      - Key
+      - Value
+      properties:
+        Key:
+          type: string
+          readOnly: true
+        Value:
+          $ref: '#/components/schemas/FeatureMapEntry'
+    CodeDescType:
+      type: object
+      required:
+      - Code
+      - Name
+      properties:
+        Code:
+          type: string
+          readOnly: true
+        Name:
+          type: string
+          readOnly: true
+    CompactBuilding:
+      type: object
+      required:
+      - ID
+      - Number
+      - Name
+      - FullAddress
+      - ImageURL
+      - Latitude
+      - Longitude
+      - ShortName
+      properties:
+        ID:
+          type: string
+          readOnly: true
+        Name:
+          type: string
+          readOnly: true
+        Number:
+          type: string
+          readOnly: true
+        FullAddress:
+          type: string
+          readOnly: true
+        ImageURL:
+          type: string
+          readOnly: true
+        Latitude:
+          type: number
+          readOnly: true
+        Longitude:
+          type: number
+          readOnly: true
+        Features:
+          type: array
+          items:
+            $ref: '#/components/schemas/BuildingFeatureLocation'
+          readOnly: true
+        ShortName:
+          type: string
+          readOnly: true
+    Config:
+      required:
+      - id
+      - type
+      - app_id
+      - org_id
+      - system
+      - data
+      - date_created
+      - date_updated
+      type: object
+      properties:
+        id:
+          readOnly: true
+          type: string
+        type:
+          type: string
+        app_id:
+          readOnly: true
+          type: string
+        org_id:
+          readOnly: true
+          type: string
+        system:
+          type: boolean
+        data:
+          anyOf:
+          - $ref: '#/components/schemas/EnvConfigData'
+        date_created:
+          readOnly: true
+          type: string
+        date_updated:
+          readOnly: true
+          type: string
+          nullable: true
+    ContactLegacy:
+      type: object
+      properties:
+        contactName:
+          type: string
+        contactEmail:
+          type: string
+        contactPhone:
+          type: string
+    Course:
+      type: object
+      required:
+      - coursetitle
+      - courseshortname
+      - coursenumber
+      - instructionmethod
+      - coursesection
+      properties:
+        coursetitle:
+          type: string
+          readOnly: true
+        courseshortname:
+          type: string
+          readOnly: true
+        coursenumber:
+          type: string
+          readOnly: true
+        instructionmethod:
+          type: string
+          readOnly: true
+        coursesection:
+          $ref: '#/components/schemas/CourseSection'
+    CourseSection:
+      type: object
+      required:
+      - days
+      - meeting_dates_or_range
+      - room
+      - buildingname
+      - buildingid
+      - instructiontype
+      - instructor
+      - start_time
+      - endtime
+      - building
+      - courseReferenceNumber
+      - course_section
+      properties:
+        days:
+          type: string
+          readOnly: true
+        meeting_dates_or_range:
+          type: string
+          readOnly: true
+        room:
+          type: string
+          readOnly: true
+        buildingname:
+          type: string
+          readOnly: true
+        buildingid:
+          type: string
+          readOnly: true
+        instructiontype:
+          type: string
+          readOnly: true
+        instructor:
+          type: string
+          readOnly: true
+        start_time:
+          type: string
+          readOnly: true
+        endtime:
+          type: string
+          readOnly: true
+        building:
+          $ref: '#/components/schemas/Building'
+        courseReferenceNumber:
+          type: string
+          readOnly: true
+        course_section:
+          type: string
+          readOnly: true
+    EmergencyContact:
+      type: object
+      required:
+      - Priority
+      - RelationShip
+      - FirstName
+      - LastName
+      - Address
+      properties:
+        Priority:
+          type: string
+          readOnly: true
+        RelationShip:
+          $ref: '#/components/schemas/CodeDescType'
+        FirstName:
+          type: string
+          readOnly: true
+        LastName:
+          type: string
+          readOnly: true
+        Address:
+          $ref: '#/components/schemas/Address'
+    Entrance:
+      type: object
+      required:
+      - ID
+      - Name
+      - ADACompliant
+      - Available
+      - ImageURL
+      - Latitude
+      - Longitude
+      properties:
+        ID:
+          type: string
+          readOnly: true
+        Name:
+          type: string
+          readOnly: true
+        ADACopmliant:
+          type: boolean
+          readOnly: true
+        Available:
+          type: boolean
+        ImageUrl:
+          type: string
+          readOnly: true
+        Latitude:
+          type: number
+          readOnly: true
+        Longitude:
+          type: number
+          readOnly: true
+    EnvConfigData:
+      type: object
+      required:
+      - example_env
+      properties:
+        example_env:
+          type: string
+    Example:
+      type: object
+      required:
+      - id
+      - app_id
+      - org_id
+      - data
+      - date_created
+      properties:
+        id:
+          type: string
+          readOnly: true
+        org_id:
+          type: string
+          readOnly: true
+        app_id:
+          type: string
+          readOnly: true
+        data:
+          type: string
+        date_created:
+          type: string
+          readOnly: true
+        date_updated:
+          type: string
+          nullable: true
+          readOnly: true
+    ExternalUserID:
+      type: object
+      required:
+      - uin
+      properties:
+        uin:
+          type: string
+          readOnly: true
+    FeatureMapEntry:
+      type: object
+      required:
+      - Name
+      - Floors
+      properties:
+        Name:
+          type: string
+          readOnly: true
+        Floors:
+          type: array
+          items:
+            type: string
+          readOnly: true
+    FloorPlan:
+      type: object
+      required:
+      - BuildingNumber
+      - BuildingFloor
+      - SVGEncoding
+      - SVG
+      - Markers
+      - Highlites
+      properties:
+        BuildingNumber:
+          type: string
+          readOnly: true
+        BuildingFloor:
+          type: string
+          readOnly: true
+        SVGEncoding:
+          type: string
+          readOnly: true
+        SVG:
+          type: string
+        Markers:
+          type: array
+          items:
+            $ref: '#/components/schemas/FloorPlanMarker'
+          readOnly: true
+        Features:
+          type: array
+          items:
+            $ref: '#/components/schemas/FloorPlanHighlite'
+          readOnly: true
+    FloorPlanHighlite:
+      type: object
+      required:
+      - RenderID
+      - Label
+      - Color
+      - Display
+      properties:
+        RenderID:
+          type: string
+          readOnly: true
+        Label:
+          type: string
+          readOnly: true
+        Color:
+          type: string
+          readOnly: true
+        Display:
+          type: string
+    FloorPlanMarker:
+      type: object
+      required:
+      - RenderID
+      - Label
+      - Description
+      - Display
+      - Icon
+      properties:
+        RenderID:
+          type: string
+          readOnly: true
+        Label:
+          type: string
+          readOnly: true
+        Description:
+          type: string
+          readOnly: true
+        Display:
+          type: string
+        Icon:
+          type: string
+          readOnly: true
+    GiesCourse:
+      type: object
+      required:
+      - term
+      - subject
+      - number
+      - section
+      - title
+      - instructor
+      properties:
+        term:
+          type: string
+          readOnly: true
+        subject:
+          type: string
+          readOnly: true
+        number:
+          type: string
+          readOnly: true
+        section:
+          type: string
+          readOnly: true
+        title:
+          type: string
+          readOnly: true
+        instructor:
+          type: string
+          readOnly: true
+    LaundryDetails:
+      type: object
+      required:
+      - Latitude
+      - Longitude
+      - Floor
+      properties:
+        Latitude:
+          type: number
+          format: float
+          readOnly: true
+        Longitude:
+          type: number
+          format: float
+          readOnly: true
+        Floor:
+          type: integer
+          readOnly: true
+    LaundryRoom:
+      type: object
+      required:
+      - ID
+      - Name
+      - Status
+      properties:
+        ID:
+          type: integer
+          readOnly: true
+        Name:
+          type: string
+          readOnly: true
+        Status:
+          type: string
+          readOnly: true
+        Location:
+          $ref: '#/components/schemas/LaundryDetails'
+    LegacyEvent:
+      type: object
+      required:
+      - all_day
+      - calendar_id
+      - category
+      - subcategory
+      - created_by
+      - long_description
+      - data_modified
+      - data_source_event_id
+      - date_created
+      - end_date
+      - event_id
+      - ical_url
+      - id
+      - is_event_free
+      - is_virtual
+      - originating_calendar_id
+      - originating_calendar_name
+      - outlook_url
+      - is_super_event
+      - recurring_flag
+      - source_id
+      - sponsor
+      - start_date
+      - title
+      - title_url
+      - registration_url
+      - cost
+      properties:
+        all_day:
+          type: boolean
+        calendar_id:
+          type: string
+        category:
+          type: string
+        subcategory:
+          type: string
+        created_by:
+          type: string
+        long_description:
+          type: string
+        data_modified:
+          type: string
+        data_source_event_id:
+          type: string
+        date_created:
+          type: string
+        end_date:
+          type: string
+        event_id:
+          type: string
+        ical_url:
+          type: string
+        id:
+          type: string
+        image_url:
+          type: string
+          nullable: true
+        is_event_free:
+          type: boolean
+        is_virtual:
+          type: boolean
+        originating_calendar_id:
+          type: string
+        originating_calendar_name:
+          type: string
+        outlook_url:
+          type: string
+        recurrence_id:
+          type: integer
+          nullable: true
+        is_super_event:
+          type: boolean
+        recurring_flag:
+          type: boolean
+        source_id:
+          type: string
+        sponsor:
+          type: string
+        start_date:
+          type: string
+        title:
+          type: string
+        title_url:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+          nullable: true
+        target_audience:
+          type: array
+          items:
+            type: string
+          nullable: true
+        registration_url:
+          type: string
+        cost:
+          type: string
+    LegacyEventItem:
+      type: object
+      required:
+      - source
+      - status
+      - legacy_event
+      properties:
+        source:
+          type: string
+        status:
+          $ref: '#/components/schemas/LegacyEventStatus'
+        legacy_event:
+          $ref: '#/components/schemas/LegacyEvent'
+    LegacyEventStatus:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        reason_ignored:
+          type: string
+          nullable: true
+    LocationLegacy:
+      type: object
+      properties:
+        description:
+          type: string
+        latitude:
+          type: number
+        longitude:
+          type: number
+    MachineRequestDetail:
+      type: object
+      required:
+      - MachineID
+      - Message
+      - OpenIssue
+      - ProblemCodes
+      - MachineType
+      properties:
+        MachineID:
+          type: string
+          readOnly: true
+        Message:
+          type: string
+          readOnly: true
+        OpenIssue:
+          type: boolean
+          readOnly: true
+        ProblemCodes:
+          type: array
+          items:
+            type: string
+          readOnly: true
+        MachineType:
+          type: string
+          readOnly: true
+    Organization:
+      type: object
+      required:
+      - SchoolName
+      - LaundryRooms
+      properties:
+        SchoolName:
+          type: string
+          readOnly: true
+        LaundryRooms:
+          type: array
+          items:
+            $ref: '#/components/schemas/LaundryRoom'
+          readOnly: true
+    OriginatingCalendarItem:
+      type: object
+      properties:
+        count:
+          type: integer
+        id:
+          type: string
+        name:
+          type: string
+    Person:
+      type: object
+      required:
+      - uin
+      - FirstName
+      - LastName
+      - PreferredName
+      - MailingAddress
+      - PermAddress
+      - EmergencyContacts
+      properties:
+        uin:
+          type: string
+          readOnly: true
+        FirstName:
+          type: string
+          readOnly: true
+        LastName:
+          type: string
+          readOnly: true
+        PreferredName:
+          type: string
+          readOnly: true
+        MailingAddress:
+          $ref: '#/components/schemas/Address'
+        PermAddress:
+          $ref: '#/components/schemas/Address'
+        EmergencyContacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmergencyContact'
+          readOnly: true
+    PhoneNumber:
+      type: object
+      required:
+      - AreaCode
+      - Number
+      properties:
+        AreaCode:
+          type: string
+          readOnly: true
+        Number:
+          type: string
+          readOnly: true
+    Question:
+      type: object
+      required:
+      - id
+      - provider_id
+      - required
+      - type
+      - select_values
+      - question
+      properties:
+        id:
+          type: string
+          readOnly: true
+        provider_id:
+          type: integer
+          readOnly: true
+        required:
+          type: boolean
+          readOnly: true
+        type:
+          type: string
+          readOnly: true
+        select_values:
+          type: array
+          items:
+            type: string
+          readOnly: true
+        question:
+          type: string
+          readOnly: true
+    QuestionAnswer:
+      type: object
+      required:
+      - question_id
+      - values
+      properties:
+        question_id:
+          type: string
+          readOnly: true
+        values:
+          type: array
+          items:
+            type: string
+          readOnly: true
+    RoomDetail:
+      type: object
+      required:
+      - NumWashers
+      - NumDryers
+      - Appliances
+      - RoomName
+      - CampusName
+      properties:
+        NumWashers:
+          type: integer
+          readOnly: true
+        NumDryers:
+          type: integer
+          readOnly: true
+        Appliances:
+          type: array
+          items:
+            $ref: '#/components/schemas/Appliance'
+          readOnly: true
+        RoomName:
+          type: string
+          readOnly: true
+        CampusName:
+          type: string
+          readOnly: true
+        Location:
+          $ref: '#/components/schemas/LaundryDetails'
+    SearchBuildingsResponse:
+      type: object
+      additionalProperties:
+        oneOf:
+        - $ref: '#/components/schemas/CompactBuilding'
+        - $ref: '#/components/schemas/Building'
+      description: "A map where keys are building names and values are either CompactBuilding
+        objects (when v=1 or omitted) \nor Building objects (when v=2) \n"
+    ServiceRequestResult:
+      type: object
+      required:
+      - Message
+      - RequestNumber
+      - Status
+      properties:
+        Message:
+          type: string
+          readOnly: true
+        RequestNumber:
+          type: string
+          readOnly: true
+        Status:
+          type: string
+          readOnly: true
+    ServiceSubmission:
+      type: object
+      required:
+      - machineid
+      - problemcode
+      - firstname
+      - lastname
+      - email
+      properties:
+        machineid:
+          type: string
+          description: The unique service tag ID of the laundry machine
+        problemcode:
+          type: string
+          description: The problem code describing the issue with the machine
+        comments:
+          type: string
+          nullable: true
+          description: Additional comments about the problem (optional)
+        firstname:
+          type: string
+          description: First name of the person submitting the request
+        lastname:
+          type: string
+          description: Last name of the person submitting the request
+        phone:
+          type: string
+          nullable: true
+          description: Phone number of the person submitting the request (optional)
+        email:
+          type: string
+          format: email
+          description: Email address of the person submitting the request
+    SubEvents:
+      type: object
+      properties:
+        id:
+          type: string
+        isFeatured:
+          type: boolean
+        track:
+          type: string
+    SummaryEvents:
+      type: object
+      properties:
+        all_events_count:
+          type: integer
+        valid_events_count:
+          type: integer
+        ignored_events_count:
+          type: integer
+        total_originating_calendars:
+          type: integer
+        valid:
+          items:
+            $ref: '#/components/schemas/ValidIgnored'
+        ignored:
+          items:
+            $ref: '#/components/schemas/ValidIgnored'
+        blacklists:
+          type: array
+          items:
+            $ref: '#/components/schemas/BlacklistItems'
+    successteam:
+      type: object
+      required:
+      - primary_care_providers
+      - academic_advisors
+      properties:
+        primary_care_providers:
+          type: array
+          items:
+            $ref: '#/components/schemas/successteamMember'
+          readOnly: true
+        academic_advisors:
+          type: array
+          items:
+            $ref: '#/components/schemas/successteamMember'
+          readOnly: true
+    successteamMember:
+      type: object
+      required:
+      - last_name
+      - email
+      - image
+      - department
+      - first_name
+      - title
+      - external_link
+      - external_link_text
+      - team_member_id
+      properties:
+        last_name:
+          type: string
+          readOnly: true
+        email:
+          type: string
+          readOnly: true
+        image:
+          type: string
+          readOnly: true
+        department:
+          type: string
+          readOnly: true
+        title:
+          type: string
+          readOnly: true
+        external_link:
+          type: string
+          readOnly: true
+        external_link_text:
+          type: string
+          readOnly: true
+        first_name:
+          type: string
+          readOnly: true
+        team_member_id:
+          type: string
+          readOnly: true
+    TermSession:
+      type: object
+      required:
+      - term
+      - termid
+      - is_current
+      properties:
+        term:
+          type: string
+          readOnly: true
+        termid:
+          type: string
+          readOnly: true
+        is_current:
+          type: boolean
+          readOnly: true
+    TimeSlot:
+      type: object
+      required:
+      - id
+      - provider_id
+      - unit_id
+      - person_id
+      - start_time
+      - end_time
+      - capacity
+      - filled
+      - details
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        provider_id:
+          type: integer
+          readOnly: true
+        unit_id:
+          type: integer
+          readOnly: true
+        person_id:
+          type: integer
+        start_time:
+          type: string
+        end_time:
+          type: string
+        capacity:
+          type: integer
+        filled:
+          type: integer
+        details:
+          type: object
+    TPsSource:
+      type: object
+      properties:
+        count:
+          type: integer
+    ValidIgnored:
+      type: object
+      properties:
+        webtools_source:
+          items:
+            $ref: '#/components/schemas/WebtoolsSource'
+        tps_api:
+          items:
+            $ref: '#/components/schemas/TPsSource'
+    WebtoolsSource:
+      type: object
+      properties:
+        count:
+          type: integer
+        originating_calendar:
+          type: array
+          items:
+            $ref: '#/components/schemas/OriginatingCalendarItem'
+    _admin_req_update-configs:
+      required:
+      - type
+      - all_apps
+      - all_orgs
+      - system
+      - data
+      type: object
+      properties:
+        type:
+          type: string
+        all_apps:
+          writeOnly: true
+          type: boolean
+        all_orgs:
+          writeOnly: true
+          type: boolean
+        system:
+          type: boolean
+        data:
+          anyOf:
+          - $ref: '#/components/schemas/EnvConfigData'
+    _admin_req_add-webtools-blacklist:
+      type: object
+      properties:
+        data_source_ids:
+          type: array
+          nullable: true
+          items:
+            type: string
+        data_calendar_ids:
+          type: array
+          nullable: true
+          items:
+            type: string
+        data_originating_calendar_ids:
+          type: array
+          nullable: true
+          items:
+            type: string
+    _tps_req_create-event:
+      type: object
+      properties:
+        all_day:
+          type: boolean
+        category:
+          type: string
+        subcategory:
+          type: string
+        cost:
+          type: string
+        created_by:
+          type: string
+        date_modified:
+          type: string
+        start_date:
+          type: string
+        end_date:
+          type: string
+        image_url:
+          type: string
+          nullable: true
+        registration_url:
+          type: string
+        is_virtual:
+          type: boolean
+        long_description:
+          type: string
+        recurrence_id:
+          type: integer
+        recurring_flag:
+          type: boolean
+        sponsor:
+          type: string
+        registration_label:
+          type: string
+        title:
+          type: string
+        title_url:
+          type: string
+        contacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/_tps_req_create-event-contact'
+        tags:
+          type: array
+          items:
+            type: string
+        target_audience:
+          type: array
+          items:
+            type: string
+        location:
+          $ref: '#/components/schemas/_tps_req_create-event-location'
+    _tps_req_create-event-contact:
+      type: object
+      properties:
+        contact_name:
+          type: string
+        contact_email:
+          type: string
+        contact_phone:
+          type: string
+    _tps_req_create-event-location:
+      type: object
+      properties:
+        description:
+          type: string
+        latitude:
+          type: number
+        longitude:
+          type: number
+        floor:
+          type: integer
+        address:
+          type: string
+        building:
+          type: string
+        room:
+          type: string

@@ -1,0 +1,51 @@
+vocabulary:
+  name: University of Illinois Urbana-Champaign API Vocabulary
+  description: >-
+    Controlled vocabulary of terms observed across the public University of Illinois
+    Urbana-Champaign APIs, primarily the Rokwire platform Core and Gateway building
+    blocks that power the official Illinois mobile app, plus the Course Explorer
+    (CISAPI) and IDEALS OAI-PMH catalog entries.
+  version: 1.0.0
+  terms:
+    - term: Building Block
+      definition: A modular, independently deployable service in the open-source Rokwire platform (e.g. Core, Gateway, Content, Notifications).
+      tags: [rokwire, architecture]
+    - term: Core Building Block
+      definition: The Rokwire service handling users, accounts, profiles, organizations, applications, and authentication/authorization.
+      tags: [rokwire, core, identity]
+    - term: Gateway Building Block
+      definition: The Rokwire service providing access to external university systems and data streams, including wayfinding and building data.
+      tags: [rokwire, gateway, integration]
+    - term: Account
+      definition: A user account record in the Core building block, including profile, preferences, and authentication types.
+      tags: [core, identity]
+    - term: Profile
+      definition: Personal information associated with an account, such as name, pronouns, contact details, and photo.
+      tags: [core, identity]
+    - term: Organization
+      definition: A tenant entity in the Core building block, classified by size (micro, small, medium, large, huge).
+      tags: [core, tenant]
+    - term: Application
+      definition: A client application registered with the Core building block, optionally multi-tenant and admin-enabled.
+      tags: [core, application]
+    - term: Building
+      definition: A campus building exposed by the Gateway wayfinding endpoints, with address, geolocation, entrances, floors, and features.
+      tags: [gateway, wayfinding, facilities]
+    - term: Entrance
+      definition: A point of access to a campus building, with ADA-compliance and geolocation attributes.
+      tags: [gateway, wayfinding, accessibility]
+    - term: Appliance
+      definition: A campus laundry or similar appliance reported by the Gateway, with status, type, and cycle timing.
+      tags: [gateway, facilities]
+    - term: Course Explorer
+      definition: The public Course Information Suite API (CISAPI) exposing class schedule and course catalog data as XML without authentication.
+      tags: [cisapi, courses, catalog]
+    - term: GenEd
+      definition: General education requirements and the courses that fulfill them within the Course Explorer catalog.
+      tags: [cisapi, catalog]
+    - term: OAI-PMH
+      definition: Open Archives Initiative Protocol for Metadata Harvesting, used by IDEALS to expose Dublin Core repository metadata.
+      tags: [ideals, library, metadata]
+    - term: IDEALS
+      definition: The Illinois Digital Environment for Access to Learning and Scholarship, the university institutional repository.
+      tags: [ideals, library, repository]
