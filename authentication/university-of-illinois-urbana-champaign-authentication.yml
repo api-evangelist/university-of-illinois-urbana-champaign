@@ -1,0 +1,14 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/university-of-illinois-urbana-champaign-rokwire-core.yaml, openapi/university-of-illinois-urbana-champaign-rokwire-gateway.yaml
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  sources:
+  - openapi/university-of-illinois-urbana-champaign-rokwire-core.yaml
+  - openapi/university-of-illinois-urbana-champaign-rokwire-gateway.yaml

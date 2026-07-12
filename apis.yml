@@ -83,6 +83,10 @@ apis:
       - type: Documentation
         url: https://guides.library.illinois.edu/ideals/what_is_the_oai_pmh_data_provider_url_for_ideals
 common:
+  - type: DomainSecurity
+    url: security/university-of-illinois-urbana-champaign-domain-security.yml
+  - type: Authentication
+    url: authentication/university-of-illinois-urbana-champaign-authentication.yml
   - type: Website
     url: https://illinois.edu/
   - type: GitHub
@@ -101,6 +105,8 @@ common:
     url: finops/university-of-illinois-urbana-champaign-finops.yml
   - type: Review
     url: review.yml
+  - url: https://news.illinois.edu/feed/
+    type: Blog
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
