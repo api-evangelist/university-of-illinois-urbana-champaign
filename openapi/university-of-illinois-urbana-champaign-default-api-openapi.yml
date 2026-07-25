@@ -1,0 +1,35 @@
+openapi: 3.0.3
+info:
+  title: Rokwire Core Building Block Admin Default API
+  description: Core Building Block API Documentation
+  version: 1.62.0
+servers:
+- url: https://api.rokwire.illinois.edu/core
+tags:
+- name: Default
+  description: Default APIs.
+paths:
+  /version:
+    get:
+      tags:
+      - Default
+      summary: Get version
+      description: 'Gets current version of this service
+
+        '
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: v1.0.0
+        '500':
+          description: Internal error
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

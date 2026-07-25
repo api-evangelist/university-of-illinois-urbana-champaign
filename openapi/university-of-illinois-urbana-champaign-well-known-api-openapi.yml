@@ -1,0 +1,40 @@
+openapi: 3.0.3
+info:
+  title: Rokwire Core Building Block Admin .well Known API
+  description: Core Building Block API Documentation
+  version: 1.62.0
+servers:
+- url: https://api.rokwire.illinois.edu/core
+tags:
+- name: .well Known
+paths:
+  /.well-known/openid-configuration:
+    get:
+      summary: OpenID Connect Discovery
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OIDCDiscovery'
+      tags:
+      - .well Known
+components:
+  schemas:
+    OIDCDiscovery:
+      required:
+      - issuer
+      - jwks_uri
+      type: object
+      description: OpenID Connect Discovery Metadata
+      properties:
+        issuer:
+          type: string
+        jwks_uri:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

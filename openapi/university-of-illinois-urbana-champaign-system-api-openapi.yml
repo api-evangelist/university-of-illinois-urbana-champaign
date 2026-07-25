@@ -1,0 +1,1932 @@
+openapi: 3.0.3
+info:
+  title: Rokwire Core Building Block Admin System API
+  description: Core Building Block API Documentation
+  version: 1.62.0
+servers:
+- url: https://api.rokwire.illinois.edu/core
+tags:
+- name: System
+  description: System APIs.
+paths:
+  /system/auth/app-org-token:
+    get:
+      tags:
+      - System
+      summary: App org token
+      description: 'Retrieve a system token for the specified application and organization
+
+
+        **Auth:** Requires system access token
+
+        '
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: app_id
+        in: query
+        description: The application ID of the token to return
+        required: true
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: org_id
+        in: query
+        description: The organization ID of the token to return
+        required: true
+        style: form
+        explode: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdminToken'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal error
+  /system/organizations/{id}:
+    get:
+      tags:
+      - System
+      summary: Get organization by ID
+      description: 'Gets organization by ID
+
+
+        **Auth:** Requires system access token with `get_organizations`, `update_organizations`, or `all_organizations` permission
+
+        '
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        description: ID of the organization
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organization'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+        '500':
+          description: Internal error
+    put:
+      tags:
+      - System
+      summary: Update organization by ID
+      description: 'Updates organization by ID
+
+
+        **Auth:** Requires system access token with `update_organizations` or `all_organizations` permission
+
+        '
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        description: ID of the organization that needs to be updated
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        description: update one organization
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Organization'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Success
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal error
+  /system/organizations:
+    get:
+      tags:
+      - System
+      summary: Get organizations
+      description: 'Gets organizations
+
+
+        **Auth:** Requires system access token with `get_organizations`, `update_organizations`, or `all_organizations` permission
+
+        '
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Organization'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal error
+    post:
+      tags:
+      - System
+      summary: Create organization
+      description: 'Creates organization
+
+
+        **Auth:** Requires system access token with `update_organizations` or `all_organizations` permission
+
+        '
+      security:
+      - bearerAuth: []
+      requestBody:
+        description: creates one organization
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Organization'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Success
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal error
+  /system/service-regs:
+    get:
+      tags:
+      - System
+      summary: Get service registrations
+      description: 'Returns service registration records
+
+
+        **Auth:** Requires system access token with `get_service-regs`, `update_service-regs`, `delete_service-regs`, or `all_service-regs` permission
+
+        '
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: ids
+        in: query
+        description: A comma-separated list of service IDs to return registrations for
+        required: true
+        style: form
+        explode: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ServiceReg'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal error
+    post:
+      tags:
+      - System
+      summary: Register service
+      description: "Creates a new service registration\n\nThe \"service_id\" of the registration must not match an existing registration  \n\n**Auth:** Requires system access token with `update_service-regs` or `all_service-regs` permission\n"
+      security:
+      - bearerAuth: []
+      requestBody:
+        description: service registration record to be added
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceReg'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Success
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal error
+    put:
+      tags:
+      - System
+      summary: Update service registration
+      description: 'Update an existing service registration
+
+
+        The "service_id" of the registration must match an existing registration
+
+
+        **Auth:** Requires system access token with `update_service-regs` or `all_service-regs` permission
+
+        '
+      security:
+      - bearerAuth: []
+      requestBody:
+        description: Service registration record update to be applied
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceReg'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Success
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal error
+    delete:
+      tags:
+      - System
+      summary: Deregister service
+      description: 'Deletes an existing service registration record
+
+
+        **Auth:** Requires system access token with `delete_service-regs` or `all_service-regs` permission
+
+        '
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: query
+        description: The service ID of the registration to delete
+        required: true
+        style: form
+        explode: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Success
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal error
+  /system/service-accounts/{id}:
+    get:
+      tags:
+      - System
+      summary: Get service account instance
+      description: 'Get service account instance by account ID, app ID, and org ID
+
+
+        **Auth:** Requires system access token with `get_service-accounts`, `update_service-accounts`, `delete_service-accounts`, or `all_service-accounts` permission
+
+        '
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        description: ID of the service account
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: app_id
+        in: query
+        description: Application ID of the service account instance
+        required: true
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: org_id
+        in: query
+        description: Organization ID of the service account instance
+        required: true
+        style: form
+        explode: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAccount'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal error
+    put:
+      tags:
+      - System
+      summary: Update service account instance
+      description: 'Updates a service account instance
+
+
+        **Auth:** Requires system access token with `update_service-accounts` or `all_service-accounts` permission
+
+        '
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        description: ID of the service account instance
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: app_id
+        in: query
+        description: Application ID of the service account instance
+        required: true
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: org_id
+        in: query
+        description: Organization ID of the service account instance
+        required: true
+        style: form
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        description: 'Service account
+
+          '
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/_system_req_update_service-account'
+            examples:
+              update_account:
+                summary: Update service account
+                value:
+                  name: updated_name
+                  permissions:
+                  - permission1
+                  - new_permission1
+                  scopes:
+                  - core:resource.value:get
+                  - core:resource.value2.get
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAccount'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal error
+    delete:
+      tags:
+      - System
+      summary: Deregister service account instance
+      description: 'Removes a service account instance
+
+
+        **Auth:** Requires system access token with `delete_service-accounts` or `all_service-accounts` permission
+
+        '
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        description: ID of the service account instance to delete
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: app_id
+        in: query
+        description: Application ID of the service account instance
+        required: true
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: org_id
+        in: query
+        description: Organization ID of the service account instance
+        required: true
+        style: form
+        explode: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal error
+  /system/service-accounts:
+    get:
+      tags:
+      - System
+      summary: Get service accounts
+      description: 'Get list of all service accounts matching a search
+
+
+        **Auth:** Requires system access token with `get_service-accounts`, `update_service-accounts`, `delete_service-accounts`, or `all_service-accounts` permission
+
+        '
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: account_id
+        in: query
+        description: Service account ID to search for
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: name
+        in: query
+        description: Service account name to search for
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: app_id
+        in: query
+        description: Service account app ID to search for
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: org_id
+        in: query
+        description: Service account org ID to search for
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: permissions
+        in: query
+        description: A comma-separated list of service account permissions to search for
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: scopes
+        in: query
+        description: A comma-separated list of service account scopes to search for
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ServiceAccount'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal error
+    post:
+      tags:
+      - System
+      summary: Register service account
+      description: 'Creates a new service account
+
+
+        **Auth:** Requires system access token with `update_service-accounts` or `all_service-accounts` permission
+
+        '
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: app_id
+        in: query
+        description: Service account app ID to copy from
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: org_id
+        in: query
+        description: Service account org ID to copy from
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        description: 'Service account
+
+          '
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceAccount'
+            examples:
+              initial_creds:
+                summary: Register new account with initial credentials
+                value:
+                  name: test_account
+                  app_id: '9766'
+                  org_id: 0a2eff20-e2cd-11eb-af68-60f81db5ecc0
+                  permissions:
+                  - permission1
+                  - permission2
+                  scopes:
+                  - core:resource.value:get
+                  - core:resource.value2.get
+                  first_party: true
+                  creds:
+                  - name: initial_token
+                    type: static_token
+                  - name: initial_signature
+                    type: signature
+                    params:
+                      key_pem: public_key_pem
+              no_initial_creds:
+                summary: Register new account without initial credentials
+                value:
+                  name: test_account
+                  app_id: '9766'
+                  org_id: 0a2eff20-e2cd-11eb-af68-60f81db5ecc0
+                  permissions:
+                  - permission1
+                  - permission2
+                  scopes:
+                  - core:resource.value:get
+                  - core:resource.value2.get
+                  first_party: true
+              copy_from:
+                summary: Register new account instance by copying from existing account instance
+                value:
+                  account_id: 12345678-e2cd-11eb-af68-60f81db5ecc0
+                  app_id: '9766'
+                  org_id: 0a2eff20-e2cd-11eb-af68-60f81db5ecc0
+                  permissions:
+                  - permission1
+                  - permission2
+                  scopes:
+                  - core:resource.value:get
+                  - core:resource.value2.get
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAccount'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal error
+    delete:
+      tags:
+      - System
+      summary: Delete service accounts
+      description: 'Delete service accounts matching an account ID
+
+
+        **Auth:** Requires system access token with `delete_service-accounts` or `all_service-accounts` permission
+
+        '
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: account_id
+        in: query
+        description: Service account ID to delete
+        required: true
+        style: form
+        explode: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal error
+  /system/service-accounts/{id}/creds:
+    post:
+      tags:
+      - System
+      summary: Add service account credential
+      description: 'Adds a new credential to an existing service account
+
+
+        **Auth:** Requires system access token with `update_service-accounts` or `all_service-accounts` permission
+
+        '
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        description: ID of the service account to add new credential
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        description: 'Service account credentials
+
+          '
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceAccountCredential'
+            examples:
+              static_token:
+                summary: Add static token credential
+                value:
+                  name: token_cred
+                  type: static_token
+              signature:
+                summary: Add signature credential
+                value:
+                  name: signature_cred
+                  type: signature
+                  params:
+                    key_pem: public_key_pem
+                    alg: PS256
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAccountCredential'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal error
+    delete:
+      tags:
+      - System
+      summary: Remove service account credential
+      description: 'Removes a credential from an existing service account
+
+
+        **Auth:** Requires system access token with `delete_service-accounts` or `all_service-accounts` permission
+
+        '
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        description: ID of the service account to remove credential
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: cred_id
+        in: query
+        description: id of the credential to be removed
+        required: true
+        style: form
+        explode: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal error
+  /system/applications/{id}:
+    get:
+      tags:
+      - System
+      summary: Get application by ID
+      description: 'Gets application by provided ID
+
+
+        **Auth:** Requires system access token with `get_applications` or `all_applications` permission
+
+        '
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        description: ID of the application
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+        '500':
+          description: Internal error
+    put:
+      tags:
+      - System
+      summary: Update application by ID
+      description: 'Updates application by provided ID
+
+
+        **Auth:** Requires system access token with `update_applications` or `all_applications` permission
+
+        '
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        description: ID of the application
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        description: updates one application
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Application'
+        required: true
+      responses:
+        '200':
+          description: successful operation
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Success
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+        '500':
+          description: Internal error
+  /system/applications:
+    get:
+      tags:
+      - System
+      summary: Get applications
+      description: 'Gets applications
+
+
+        **Auth:** Requires system access token with `get_applications`, `udpate_applications`, or `all_applications` permission
+
+        '
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Application'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal error
+    post:
+      tags:
+      - System
+      summary: Create application
+      description: 'Creates application
+
+
+        **Auth:** Requires system access token with `update_applications` or `all_applications` permission
+
+        '
+      security:
+      - bearerAuth: []
+      requestBody:
+        description: creates one application
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Application'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Success
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal error
+  /system/permissions:
+    post:
+      tags:
+      - System
+      summary: Create permission
+      description: 'Creates permission
+
+
+        **Auth:** Requires system access token with `update_permissions` or `all_permissions` permission
+
+        '
+      security:
+      - bearerAuth: []
+      requestBody:
+        description: Permission
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Permission'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Success
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal error
+    put:
+      tags:
+      - System
+      summary: Updates permission
+      description: 'Updates permission
+
+
+        **Auth:** Requires system access token with `update_permissions` or `all_permissions` permission
+
+        '
+      security:
+      - bearerAuth: []
+      requestBody:
+        description: Permission
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Permission'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Success
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal error
+  /system/api-keys:
+    get:
+      tags:
+      - System
+      summary: Get API key
+      description: 'Returns API key records for given ID or app ID
+
+
+        **Auth:** Requires system access token with `get_api-keys`, `update_api-keys`, `delete_api-keys`, or `all_api-keys` permission
+
+        '
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: query
+        description: The ID of the API key to return. Required if `app_id` is not provided.
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: app_id
+        in: query
+        description: The app ID of the API keys to return. Required if `id` is not provided.
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/APIKey'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal error
+    post:
+      tags:
+      - System
+      summary: Create API key
+      description: 'Creates a new API key record
+
+
+        **Auth:** Requires system access token with `update_api-keys` or `all_api-keys` permission
+
+        '
+      security:
+      - bearerAuth: []
+      requestBody:
+        description: API key record to be added
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/APIKey'
+            example:
+              app_id: string
+              key: string
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Success
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal error
+    put:
+      tags:
+      - System
+      summary: Update API key
+      description: 'Update an existing API key record
+
+
+        Must include the "id" field to identify which key is to be udpated
+
+
+        **Auth:** Requires system access token with `update_api-keys` or `all_api-keys` permission
+
+        '
+      security:
+      - bearerAuth: []
+      requestBody:
+        description: API key record update to be applied
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/APIKey'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Success
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal error
+    delete:
+      tags:
+      - System
+      summary: Delete API key
+      description: 'Deletes an existing API key record
+
+
+        **Auth:** Requires system access token with `delete_api-keys` or `all_api-keys` permission
+
+        '
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: query
+        description: The ID of the API key to delete
+        required: true
+        style: form
+        explode: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Success
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal error
+  /system/auth-types:
+    get:
+      tags:
+      - System
+      summary: Get auth types
+      description: 'Gets auth types
+
+
+        **Auth:** Requires system access token with `get_auth-types`, `update_auth-types`, or `all_auth-types` permission
+
+        '
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AuthType'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal error
+    post:
+      tags:
+      - System
+      summary: Create auth type
+      description: 'Creates auth type
+
+
+        **Auth:** Requires system access token with `update_auth-types` or `all_auth-types` permission
+
+        '
+      security:
+      - bearerAuth: []
+      requestBody:
+        description: creates one auth-type
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthType'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Success
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal error
+  /system/auth-types/{id}:
+    put:
+      tags:
+      - System
+      summary: Update auth type by ID
+      description: 'Updates auth type with the provided ID
+
+
+        **Auth:** Requires system access token with `update_auth-types` or `all_auth-types` permission
+
+        '
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        description: ID of the auth type that needs to be updated
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: update one auth type
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthType'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+                items:
+                  $ref: '#/components/schemas/AuthType'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal error
+  /system/app-orgs/{id}:
+    get:
+      tags:
+      - System
+      summary: Get app-org
+      description: 'Get app-org by ID
+
+
+        **Auth:** Requires system access token with `get_app_orgs` or `all_app_orgs` permission
+
+        '
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        description: ID of the app-org to retrieve
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationOrganization'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal error
+    put:
+      tags:
+      - System
+      summary: Update app-org by ID
+      description: 'Updates app-org by ID
+
+
+        **Auth:** Requires system access token with `update_app_orgs` or `all_app_orgs` permission
+
+        '
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        description: ID of the app-org that needs to be updated
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        description: update one app-org
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationOrganization'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Success
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal error
+  /system/app-orgs:
+    get:
+      tags:
+      - System
+      summary: Get app-orgs
+      description: 'Get all app-orgs matching query
+
+
+        **Auth:** Requires system access token with `get_app_orgs` or `all_app_orgs` permission
+
+        '
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: app_id
+        in: query
+        description: Application ID to search for
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+      - name: org_id
+        in: query
+        description: Organization ID to search for
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ApplicationOrganization'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal error
+    post:
+      tags:
+      - System
+      summary: Create app-org
+      description: 'Create app-org
+
+
+        **Auth:** Requires system access token with `update_app_orgs` or `all_app_orgs` permission
+
+        '
+      security:
+      - bearerAuth: []
+      requestBody:
+        description: New app-org
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationOrganization'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Success
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal error
+  /api/system/examples/{id}:
+    get:
+      tags:
+      - System
+      summary: Gets example
+      description: 'Gets example record
+
+
+        **Auth:** Requires valid admin token with `get_examples` permission
+
+        '
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        description: ID of example to retrieve
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Example'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal error
+components:
+  schemas:
+    ApplicationType:
+      required:
+      - id
+      - identifier
+      type: object
+      properties:
+        id:
+          readOnly: true
+          type: string
+        identifier:
+          type: string
+        name:
+          type: string
+        versions:
+          type: array
+          items:
+            type: string
+    AuthType:
+      required:
+      - id
+      - code
+      - description
+      - is_external
+      - is_anonymous
+      - use_credentials
+      - ignore_mfa
+      type: object
+      properties:
+        id:
+          readOnly: true
+          type: string
+        code:
+          type: string
+          description: username or email or phone or illinois_oidc etc
+        description:
+          type: string
+        is_external:
+          type: boolean
+          description: says if the users source is external - identity providers
+        is_anonymous:
+          type: boolean
+          description: says if the auth type results in anonymous users
+        use_credentials:
+          type: boolean
+          description: says if the auth type uses credentials
+        ignore_mfa:
+          type: boolean
+          description: says if login using this auth type may bypass account MFA
+        params:
+          type: object
+          additionalProperties: true
+    InactiveExpirePolicy:
+      type: object
+      required:
+      - active
+      - inactivity_period
+      properties:
+        active:
+          type: boolean
+        inactivity_period:
+          type: integer
+    RefreshGracePeriodPolicy:
+      type: object
+      required:
+      - active
+      - grace_period
+      properties:
+        active:
+          type: boolean
+        grace_period:
+          type: integer
+    Example:
+      type: object
+      required:
+      - id
+      - app_id
+      - org_id
+      - data
+      - date_created
+      properties:
+        id:
+          type: string
+          readOnly: true
+        org_id:
+          type: string
+          readOnly: true
+        app_id:
+          type: string
+          readOnly: true
+        data:
+          type: string
+        date_created:
+          type: string
+          readOnly: true
+        date_updated:
+          type: string
+          nullable: true
+          readOnly: true
+    Organization:
+      required:
+      - id
+      - name
+      - type
+      type: object
+      properties:
+        id:
+          readOnly: true
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+          - micro
+          - small
+          - medium
+          - large
+          - huge
+        config:
+          $ref: '#/components/schemas/OrganizationConfig'
+    AdminToken:
+      required:
+      - token
+      type: object
+      properties:
+        token:
+          type: string
+    SupportedAuthTypes:
+      type: object
+      properties:
+        app_type_id:
+          type: string
+        supported_auth_types:
+          type: array
+          items:
+            $ref: '#/components/schemas/SupportedAuthType'
+    APIKey:
+      required:
+      - app_id
+      - key
+      type: object
+      description: API key record
+      properties:
+        id:
+          type: string
+        app_id:
+          type: string
+        key:
+          type: string
+    YearlyExpirePolicy:
+      type: object
+      required:
+      - active
+      - day
+      - month
+      - hour
+      - min
+      properties:
+        active:
+          type: boolean
+        day:
+          type: integer
+        month:
+          type: integer
+        hour:
+          type: integer
+        min:
+          type: integer
+    ServiceScope:
+      required:
+      - scope
+      - required
+      type: object
+      properties:
+        scope:
+          type: string
+        required:
+          type: boolean
+        explanation:
+          description: Explanation displayed to users for why this scope is requested/required
+          type: string
+    IdentityProviderSettings:
+      required:
+      - identity_provider_id
+      - user_identifier_field
+      type: object
+      properties:
+        identity_provider_id:
+          type: string
+        user_identifier_field:
+          type: string
+        external_id_fields:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+        first_name_field:
+          type: string
+        middle_name_field:
+          type: string
+        last_name_field:
+          type: string
+        email_field:
+          type: string
+        ferpa_field:
+          type: string
+        roles_field:
+          type: string
+        groups_field:
+          type: string
+        user_specific_fields:
+          type: array
+          items:
+            type: string
+          nullable: true
+        roles:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+        groups:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+        always_sync_profile:
+          type: boolean
+        identity_bb_base_url:
+          type: string
+        identity_bb_profile_fields:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+        admin_app_access_roles:
+          type: array
+          items:
+            type: string
+    Permission:
+      required:
+      - id
+      - name
+      type: object
+      properties:
+        id:
+          readOnly: true
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        service_id:
+          type: string
+        assigners:
+          type: array
+          items:
+            type: string
+        date_created:
+          type: string
+        date_updated:
+          type: string
+    SupportedAuthType:
+      type: object
+      properties:
+        auth_type_id:
+          type: string
+        params:
+          type: object
+          additionalProperties: true
+          nullable: true
+    PubKey:
+      required:
+      - key_pem
+      - alg
+      type: object
+      properties:
+        key_pem:
+          type: string
+        alg:
+          type: string
+    ServiceAccountCredential:
+      required:
+      - name
+      - type
+      type: object
+      properties:
+        id:
+          readOnly: true
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+          - static_token
+          - signature
+        params:
+          type: object
+          nullable: true
+        date_created:
+          readOnly: true
+          type: string
+    _system_req_update_service-account:
+      type: object
+      properties:
+        name:
+          type: string
+        permissions:
+          nullable: true
+          type: array
+          items:
+            type: string
+        scopes:
+          nullable: true
+          type: array
+          items:
+            type: string
+    ApplicationOrganization:
+      required:
+      - id
+      - app_id
+      - org_id
+      type: object
+      nullable: true
+      properties:
+        id:
+          readOnly: true
+          type: string
+        app_id:
+          type: string
+        org_id:
+          type: string
+        services_ids:
+          type: array
+          nullable: true
+          items:
+            type: string
+        identity_provider_settings:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/IdentityProviderSettings'
+        supported_auth_types:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/SupportedAuthTypes'
+        logins_session_settings:
+          $ref: '#/components/schemas/LoginSessionSettings'
+    OrganizationConfig:
+      required:
+      - id
+      - domains
+      type: object
+      properties:
+        id:
+          readOnly: true
+          type: string
+          description: organization config id
+        domains:
+          type: array
+          description: organization domains
+          items:
+            type: string
+    ServiceAccount:
+      required:
+      - app_id
+      - org_id
+      type: object
+      properties:
+        account_id:
+          type: string
+        name:
+          type: string
+        app_id:
+          type: string
+        org_id:
+          type: string
+        permissions:
+          nullable: true
+          type: array
+          items:
+            type: string
+        scopes:
+          nullable: true
+          type: array
+          items:
+            type: string
+        first_party:
+          type: boolean
+        creds:
+          type: array
+          items:
+            $ref: '#/components/schemas/ServiceAccountCredential'
+    LoginSessionSettings:
+      type: object
+      properties:
+        max_concurrent_sessions:
+          type: integer
+        inactivity_expire_policy:
+          $ref: '#/components/schemas/InactiveExpirePolicy'
+        time_since_login_expire_policy:
+          $ref: '#/components/schemas/TSLExpirePolicy'
+        yearly_expire_policy:
+          $ref: '#/components/schemas/YearlyExpirePolicy'
+        refresh_grace_period_policy:
+          $ref: '#/components/schemas/RefreshGracePeriodPolicy'
+    TSLExpirePolicy:
+      type: object
+      required:
+      - active
+      - time_since_login_period
+      properties:
+        active:
+          type: boolean
+        time_since_login_period:
+          type: integer
+    ServiceReg:
+      required:
+      - service_id
+      - host
+      - name
+      - description
+      - first_party
+      type: object
+      description: Full service registration record
+      properties:
+        service_id:
+          type: string
+        service_account_id:
+          type: string
+        host:
+          type: string
+        pub_key:
+          $ref: '#/components/schemas/PubKey'
+        name:
+          type: string
+        description:
+          type: string
+        info_url:
+          type: string
+        logo_url:
+          type: string
+        scopes:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/ServiceScope'
+        first_party:
+          type: boolean
+    Application:
+      required:
+      - id
+      - name
+      - multi_tenant
+      - admin
+      - code
+      type: object
+      properties:
+        id:
+          readOnly: true
+          type: string
+        name:
+          type: string
+        multi_tenant:
+          type: boolean
+        admin:
+          type: boolean
+        code:
+          type: string
+        types:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApplicationType'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

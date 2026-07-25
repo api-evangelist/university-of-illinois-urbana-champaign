@@ -1,0 +1,30 @@
+openapi: 3.0.3
+info:
+  title: Rokwire Core Building Block Admin Enc API
+  description: Core Building Block API Documentation
+  version: 1.62.0
+servers:
+- url: https://api.rokwire.illinois.edu/core
+tags:
+- name: Enc
+  description: APIs consumed by the Encryption building block.
+paths:
+  /enc/test:
+    get:
+      tags:
+      - Enc
+      summary: Test API..
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Echooo
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
