@@ -1,0 +1,36 @@
+{
+  "provider": "university-of-illinois-urbana-champaign",
+  "sources": [
+    "university-of-illinois-urbana-champaign-admin-api-openapi.yml",
+    "university-of-illinois-urbana-champaign-bbs-api-openapi.yml",
+    "university-of-illinois-urbana-champaign-client-api-openapi.yml",
+    "university-of-illinois-urbana-champaign-default-api-openapi.yml",
+    "university-of-illinois-urbana-champaign-enc-api-openapi.yml",
+    "university-of-illinois-urbana-champaign-services-api-openapi.yml",
+    "university-of-illinois-urbana-champaign-system-api-openapi.yml",
+    "university-of-illinois-urbana-champaign-third-party-services-api-openapi.yml",
+    "university-of-illinois-urbana-champaign-tps-api-openapi.yml",
+    "university-of-illinois-urbana-champaign-ui-api-openapi.yml",
+    "university-of-illinois-urbana-champaign-version-api-openapi.yml",
+    "university-of-illinois-urbana-champaign-well-known-api-openapi.yml"
+  ],
+  "outputs": [
+    "university-of-illinois-urbana-champaign-admin-api-openapi.yml",
+    "university-of-illinois-urbana-champaign-bbs-api-openapi.yml",
+    "university-of-illinois-urbana-champaign-client-api-openapi.yml",
+    "university-of-illinois-urbana-champaign-default-api-openapi.yml",
+    "university-of-illinois-urbana-champaign-enc-api-openapi.yml",
+    "university-of-illinois-urbana-champaign-services-api-openapi.yml",
+    "university-of-illinois-urbana-champaign-system-api-openapi.yml",
+    "university-of-illinois-urbana-champaign-third-party-services-api-openapi.yml",
+    "university-of-illinois-urbana-champaign-tps-api-openapi.yml",
+    "university-of-illinois-urbana-champaign-ui-api-openapi.yml",
+    "university-of-illinois-urbana-champaign-version-api-openapi.yml",
+    "university-of-illinois-urbana-champaign-well-known-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
