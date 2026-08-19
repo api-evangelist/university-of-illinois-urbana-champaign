@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Rokwire Core Building Block Admin UI API",
+    "version": "1.62.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "UI",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Display HTML password reset page",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/ui/credential/reset",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Credential ID"
+              },
+              {
+                "name": "code",
+                "value": "",
+                "type": "query",
+                "description": "Reset code"
+              }
+            ]
+          },
+          "docs": "Serves an HTML page with password reset form\n"
+        },
+        {
+          "info": {
+            "name": "Validate verification code",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/ui/credential/verify",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Credential ID"
+              },
+              {
+                "name": "code",
+                "value": "",
+                "type": "query",
+                "description": "Verification code"
+              }
+            ]
+          },
+          "docs": "Validates verification code to verify account ownership and displays result in an HTML page\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

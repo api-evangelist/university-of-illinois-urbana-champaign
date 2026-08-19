@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Rokwire Core Building Block Admin Version API",
+    "version": "1.62.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Version",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get service version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/version"
+          },
+          "docs": "Get service version"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

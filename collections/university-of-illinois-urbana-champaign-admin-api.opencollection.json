@@ -1,0 +1,1676 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Rokwire Core Building Block Admin API",
+    "version": "1.62.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Admin",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Login",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/admin/auth/login",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Login using credentials to retrieve access token, refresh token, and user data\n\n**Auth:** Requires API key\n"
+        },
+        {
+          "info": {
+            "name": "MFA",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/admin/auth/mfa",
+            "params": [
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Login state"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Verify multi-factor authentication credentials to complete login\n\n**Auth:** Requires API key\n"
+        },
+        {
+          "info": {
+            "name": "Refresh",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/admin/auth/refresh",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Refresh access token using a refresh token\n\n**Auth:** Requires API key\n"
+        },
+        {
+          "info": {
+            "name": "Get SSO login url",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/admin/auth/login-url",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieve a pre-formatted SSO login URL\n\n**Auth:** Requires API key\n"
+        },
+        {
+          "info": {
+            "name": "MFA",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/admin/auth/verify-mfa",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Verify multi-factor authentication credentials to complete MFA registration\n\n**Auth:** Requires admin access token\n"
+        },
+        {
+          "info": {
+            "name": "App token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/admin/auth/app-token",
+            "params": [
+              {
+                "name": "app_id",
+                "value": "",
+                "type": "query",
+                "description": "The application ID of the token to return"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve an admin token for the specified application\n\n**Auth:** Requires admin access token\n"
+        },
+        {
+          "info": {
+            "name": "Get user account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/admin/account",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get the user account\n\n**Auth:** Requires admin access token\n"
+        },
+        {
+          "info": {
+            "name": "Get account MFA types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/admin/account/mfa",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get MFA types set up for an account\n\n**Auth:** Requires admin access token\n"
+        },
+        {
+          "info": {
+            "name": "Enroll in MFA type",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/admin/account/mfa",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "MFA type"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Add MFA type to an account\n\n**Auth:** Requires user auth token\n"
+        },
+        {
+          "info": {
+            "name": "Remove MFA type",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.rokwire.illinois.edu/core/admin/account/mfa",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "MFA type"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Remove MFA type from an account\n\n**Auth:** Requires user auth token\n"
+        },
+        {
+          "info": {
+            "name": "Update account username",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.rokwire.illinois.edu/core/admin/account/username",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update the username associated with the user's account\n\n**Auth:** Requires user access token\n"
+        },
+        {
+          "info": {
+            "name": "Gets default admin app config",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/admin/app-configs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the default admin app config for the highest version that is equal to or less than the provided version\n\n**Auth:** Requires a valid API Key for access.\n"
+        },
+        {
+          "info": {
+            "name": "Gets organization-specific admin app configs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/admin/app-configs/organization",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns the admin app config for the highest version that is equal to or less than the provided version for the currently authenticated organization\n\n**Auth:** Requires admin auth token\n"
+        },
+        {
+          "info": {
+            "name": "Finds application accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/admin/application/accounts",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of accounts to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The index of the first account to return"
+              },
+              {
+                "name": "account-id",
+                "value": "",
+                "type": "query",
+                "description": "The account ID"
+              },
+              {
+                "name": "firstname",
+                "value": "",
+                "type": "query",
+                "description": "The account profile first name"
+              },
+              {
+                "name": "lastname",
+                "value": "",
+                "type": "query",
+                "description": "The account profile last name"
+              },
+              {
+                "name": "auth-type",
+                "value": "",
+                "type": "query",
+                "description": "The auth type"
+              },
+              {
+                "name": "auth-type-identifier",
+                "value": "",
+                "type": "query",
+                "description": "The authentication type identifier"
+              },
+              {
+                "name": "has-permissions",
+                "value": "",
+                "type": "query",
+                "description": "Account has permissions (permissions, roles, or groups) filter"
+              },
+              {
+                "name": "permissions",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of permission names"
+              },
+              {
+                "name": "role-ids",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of role IDs"
+              },
+              {
+                "name": "user-role",
+                "value": "",
+                "type": "query",
+                "description": "The user role"
+              },
+              {
+                "name": "group-ids",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of group IDs"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Finds accounts for the specified application\n\n**Auth:** Requires admin access token with `get_accounts`, `update_accounts`, or `all_accounts` permission\n"
+        },
+        {
+          "info": {
+            "name": "Create admin accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/admin/application/accounts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new admin account\n\n**Auth:** Requires admin access token with `create_accounts` or `all_accounts` permission\n"
+        },
+        {
+          "info": {
+            "name": "Update admin account",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.rokwire.illinois.edu/core/admin/application/accounts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing admin account\n\n**Auth:** Requires admin access token with `update_accounts` or `all_accounts` permission\n"
+        },
+        {
+          "info": {
+            "name": "Create accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/admin/v2/application/accounts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create accounts\n\n**Auth:** Requires admin access token with `create_accounts` or `all_accounts` permission\n"
+        },
+        {
+          "info": {
+            "name": "Finds application account devices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/admin/application/accounts/:id/devices",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The account ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Finds devices for the specified account and application\n\n**Auth:** Requires admin access token with `get_account-devices` permission\n"
+        },
+        {
+          "info": {
+            "name": "Delete an account session",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.rokwire.illinois.edu/core/admin/application/accounts/:account_id/login-sessions/:session_id",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path",
+                "description": "The sessionID of the login session to delete"
+              },
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The accountID of the login session to delete"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete an account session for specific application\n\n**Auth:** Requires admin access token with `delete_login-sessions` or `all_login-sessions` permission\n"
+        },
+        {
+          "info": {
+            "name": "Grant account permissions",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.rokwire.illinois.edu/core/admin/application/accounts/:id/permissions",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The account ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Grant account permissions\n\n**Auth:** Requires admin access token with `update_account-permissions`, `update_accounts`, or `all_accounts` permission\n"
+        },
+        {
+          "info": {
+            "name": "Delete permissions from account",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.rokwire.illinois.edu/core/admin/application/accounts/:id/permissions",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The account ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deletes an existing permissions from account\n\n**Auth:** Requires admin access token with `update_account-permissions`, `update_accounts`, or `all_accounts` permission\n"
+        },
+        {
+          "info": {
+            "name": "Grant account roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.rokwire.illinois.edu/core/admin/application/accounts/:id/roles",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The account ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Grant account roles\n\n**Auth:** Requires admin access token with `update_account-auth-roles`, `update_accounts`, or `all_accounts` permission\n"
+        },
+        {
+          "info": {
+            "name": "Delete roles from account",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.rokwire.illinois.edu/core/admin/application/accounts/:id/roles",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The account ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deletes an existing roles from account\n\n**Auth:** Requires admin access token with `update_account-auth-roles`, `update_accounts`, or `all_accounts` permission\n"
+        },
+        {
+          "info": {
+            "name": "Get system configs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/admin/application/accounts/:id/system-configs",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The account ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns account system configs\n\n**Auth:** Requires admin access token with `get_account-system-configs` or `all_account-system-configs` permission\n"
+        },
+        {
+          "info": {
+            "name": "Update account system configs",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.rokwire.illinois.edu/core/admin/application/accounts/:id/system-configs",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The account ID"
+              },
+              {
+                "name": "create-anonymous",
+                "value": "",
+                "type": "query",
+                "description": "Create anonymous account if account with ID cannot be found. Default is `false`"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates account system configs\n\n**Auth:** Requires admin access token with `update_account-system-configs` or `all_account-system-configs` permission\n"
+        },
+        {
+          "info": {
+            "name": "Update account verified flag",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.rokwire.illinois.edu/core/admin/application/accounts/:id/verified",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The account ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update the verified flag associated with the specified user's account\n\n**Auth:** Requires admin access token with `update_account-verified` permission\n"
+        },
+        {
+          "info": {
+            "name": "Reads app configs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/admin/application/configs",
+            "params": [
+              {
+                "name": "app_type_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "org_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "If version is provided, the app config for the highest version that is equal to or less than this value will be returned as the only item in the list.\nOtherwise it will return a list of all app config versions for the given app_type_id. If org_id is provided, the configs for that organization will\nbe returned, otherwise the default configs will be returned.\n\n**Auth:** Requires admin access token with `get_app-configs`, `update_app-configs`, `delete_app-configs`, or `all_app-configs` permission\n"
+        },
+        {
+          "info": {
+            "name": "Creates app configs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/admin/application/configs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a new app config\n\n**Auth:** Requires admin access token with `update_app-configs` or `all_app-configs` permission\n"
+        },
+        {
+          "info": {
+            "name": "Reads app configs by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/admin/application/configs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "app config id to read"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get app configs for the provided ID\n\n**Auth:** Requires admin access token with `get_app-configs`, `update_app-configs`, `delete_app-configs`, or `all_app-configs` permission\n"
+        },
+        {
+          "info": {
+            "name": "Updates app config by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.rokwire.illinois.edu/core/admin/application/configs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates app config with the provided ID\n\n**Auth:** Requires admin access token with `update_app-configs` or `all_app-configs` permission\n"
+        },
+        {
+          "info": {
+            "name": "Deletes app config by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.rokwire.illinois.edu/core/admin/application/configs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deletes app config with the provided ID\n\n**Auth:** Requires admin access token with `delete_app-configs` or `all_app-configs` permission\n"
+        },
+        {
+          "info": {
+            "name": "Finds user accounts matching provided filter",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/admin/application/filter/accounts",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of accounts to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The index of the first account to return"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "**Auth:** Requires admin access token with `get_filter-accounts` permission\n"
+        },
+        {
+          "info": {
+            "name": "Finds the count of user accounts matching filter",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/admin/application/filter/accounts/count",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "**Auth:** Requires service access token with `get_filter-accounts-count` permission\n"
+        },
+        {
+          "info": {
+            "name": "Get application sessions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/admin/application/login-sessions",
+            "params": [
+              {
+                "name": "identifier",
+                "value": "",
+                "type": "query",
+                "description": "identifier"
+              },
+              {
+                "name": "account-auth-type-identifier",
+                "value": "",
+                "type": "query",
+                "description": "account auth type identifier"
+              },
+              {
+                "name": "app-type-id",
+                "value": "",
+                "type": "query",
+                "description": "app type id"
+              },
+              {
+                "name": "app-type-identifier",
+                "value": "",
+                "type": "query",
+                "description": "app type identifier"
+              },
+              {
+                "name": "anonymous",
+                "value": "",
+                "type": "query",
+                "description": "anonymous"
+              },
+              {
+                "name": "device-id",
+                "value": "",
+                "type": "query",
+                "description": "device id"
+              },
+              {
+                "name": "ip-address",
+                "value": "",
+                "type": "query",
+                "description": "ip address"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get application sessions\n\n**Auth:** Requires admin access token with `get_login-sessions`, `update_login-sessions`, `delete_login-sessions`, or `all_login-sessions` permission\n"
+        },
+        {
+          "info": {
+            "name": "Get application groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/admin/application/groups",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Gets application groups\n    \n**Auth:** Requires admin access token with at least one of the following permissions:\n- `get_auth-groups`\n- `update_auth-groups`\n- `delete_auth-groups`\n- `all_auth-groups`\n- `update_account-auth-groups`\n- `create_accounts`\n- `update_accounts`\n- `all_accounts`\n"
+        },
+        {
+          "info": {
+            "name": "Create application group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/admin/application/groups",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create application group\n\n **Auth:** Requires admin access token with `update_auth-groups` or `all_auth-groups` permission\n - bearerAuth: []\n"
+        },
+        {
+          "info": {
+            "name": "Update application group",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.rokwire.illinois.edu/core/admin/application/groups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The group ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates an existing application group\n\n**Auth:** Requires admin access token with `update_auth-groups` or `all_auth-groups` permission\n"
+        },
+        {
+          "info": {
+            "name": "Delete application group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.rokwire.illinois.edu/core/admin/application/groups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The group ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deletes an existing application group\n\n**Auth:** Requires admin access token with `delete_auth-groups` or `all_auth-groups` permission\n"
+        },
+        {
+          "info": {
+            "name": "Add accounts to a group",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.rokwire.illinois.edu/core/admin/application/groups/:id/accounts",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The group ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Add accounts \n\n**Auth:** Requires admin access token with `update_account-auth-groups`, `update_accounts`, or `all_accounts` permission\n"
+        },
+        {
+          "info": {
+            "name": "Delete accounts from group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.rokwire.illinois.edu/core/admin/application/groups/:id/accounts",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The group ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deletes an existing accounts from group\n\n**Auth:** Requires admin access token with `update_account-auth-groups`, `update_accounts`, or `all_accounts` permission\n"
+        },
+        {
+          "info": {
+            "name": "Get application permissions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/admin/application/permissions",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get application permissions\n\n**Auth:** Requires admin access token with at least one of the following permissions:\n- `get_permissions`\n- `update_account-permissions`\n- `create_accounts`\n- `update_accounts`\n- `all_accounts`\n"
+        },
+        {
+          "info": {
+            "name": "Get application roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/admin/application/roles",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Gets application roles\n\n**Auth:** Requires admin access token with at least one of the following permissions: \n- `get_auth-roles`\n- `update_auth-roles`\n- `delete_auth-roles`\n- `all_auth-roles`\n- `update_account-auth-roles`\n- `create_accounts`\n- `update_accounts`\n- `all_accounts`\n"
+        },
+        {
+          "info": {
+            "name": "Create application role",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/admin/application/roles",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates application role\n\n**Auth:** Requires admin access token with `update_auth-roles` or `all_auth-roles` permission\n"
+        },
+        {
+          "info": {
+            "name": "Update application role",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.rokwire.illinois.edu/core/admin/application/roles/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The role ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update application role\n\n**Auth:** Requires admin access token with `update_auth-roles` or `all_auth-roles` permission\n"
+        },
+        {
+          "info": {
+            "name": "Delete application role",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.rokwire.illinois.edu/core/admin/application/roles/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The role ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete application role\n\n**Auth:** Requires admin access token with `delete_auth-roles` or `all_auth-roles` permission\n"
+        },
+        {
+          "info": {
+            "name": "Grant permissions to role",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.rokwire.illinois.edu/core/admin/application/roles/:id/permissions",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The role ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Grant permissions to role\n\n**Auth:** Requires admin access token with `update_auth-roles` or `all_auth-roles` permission\n"
+        },
+        {
+          "info": {
+            "name": "Get applications for an organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/admin/organization/applications",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Gets applications for an organization\n\n**Auth:** Requires admin access token\n"
+        },
+        {
+          "info": {
+            "name": "Get configs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/admin/configs",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "config type"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get existing configs by search parameters\n\n**Auth:** Requires admin access token with `get_configs_core`, `update_configs_core`, `delete_configs_core`, or `all_configs_core` permission:\n"
+        },
+        {
+          "info": {
+            "name": "Create config",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/admin/configs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a new config\n\n**Auth:** Requires admin access token with `update_configs_core` or `all_configs_core` permission\n"
+        },
+        {
+          "info": {
+            "name": "Get config",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/admin/configs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of config to retrieve"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get an existing config\n\n**Auth:** Requires admin access token with `get_configs_core`, `update_configs_core`, `delete_configs_core`, or `all_configs_core` permission\n"
+        },
+        {
+          "info": {
+            "name": "Update config",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.rokwire.illinois.edu/core/admin/configs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of config to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates an existing config\n\n**Auth:** Requires admin access token with `update_configs_core` or `all_configs_core` permission\n"
+        },
+        {
+          "info": {
+            "name": "Delete config",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.rokwire.illinois.edu/core/admin/configs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of config to delete"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deletes a config\n\n**Auth:** Requires admin access token with `delete_configs_core` or `all_configs_core` permission\n"
+        },
+        {
+          "info": {
+            "name": "Create example",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/api/admin/examples",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates new example record\n\n**Auth:** Requires valid admin token with `update_examples` or `all_examples`  permission\n"
+        },
+        {
+          "info": {
+            "name": "Gets example",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/api/admin/examples/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of example to retrieve"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Gets example record\n\n**Auth:** Requires valid admin token with one of the following permissions:\n- `get_examples`\n- `update_examples`\n- `delete_examples`\n- `all_examples`\n"
+        },
+        {
+          "info": {
+            "name": "Update example",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.rokwire.illinois.edu/core/api/admin/examples/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of example to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates example record\n\n**Auth:** Requires valid admin token with `update_examples` or `all_examples`  permission\n"
+        },
+        {
+          "info": {
+            "name": "Delete example",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.rokwire.illinois.edu/core/api/admin/examples/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of example to delete"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deletes example record\n\n**Auth:** Requires valid admin token with `delete_examples` or `all_examples` permission\n"
+        },
+        {
+          "info": {
+            "name": "Get configs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/api/admin/configs",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "config type"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get existing configs by search parameters\n\n**Auth:** Requires valid admin token with one of the following permissions:\n- `get_configs_gateway`\n- `update_configs_gateway`\n- `delete_configs_gateway`\n- `all_configs_gateway`\n"
+        },
+        {
+          "info": {
+            "name": "Create config",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/api/admin/configs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a new config\n\n**Auth:** Requires valid admin token with one of the following permissions:\n- `update_configs_gateway`\n- `all_configs_gateway`\n"
+        },
+        {
+          "info": {
+            "name": "Get config",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/api/admin/configs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of config to retrieve"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Gets config record\n\n**Auth:** Requires valid admin token with one of the following permissions:\n- `get_configs_gateway`\n- `update_configs_gateway`\n- `delete_configs_gateway`\n- `all_configs_gateway`\n"
+        },
+        {
+          "info": {
+            "name": "Update config",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.rokwire.illinois.edu/core/api/admin/configs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of config to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates existing config record\n\n**Auth:** Requires valid admin token with one of the following permissions:\n- `update_configs_gateway`\n- `all_configs_gateway`\n"
+        },
+        {
+          "info": {
+            "name": "Delete config",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.rokwire.illinois.edu/core/api/admin/configs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of config to delete"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deletes config record\n\n**Auth:** Requires valid admin token with one of the following permissions:\n- `delete_configs_gateway`\n- `all_configs_gateway`\n"
+        },
+        {
+          "info": {
+            "name": "Get all webtools blacklist item",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/api/admin/webtools-blacklist",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get all webtools blacklist items\n\n **Auth:** Requires valid admin token and \"webtools_blacklist\" permission\n"
+        },
+        {
+          "info": {
+            "name": "Add webtools blacklist data",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.rokwire.illinois.edu/core/api/admin/webtools-blacklist",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Add webtools blacklist data\n\n**Auth:** Requires valid admin token and \"webtools_blacklist\" permission\n"
+        },
+        {
+          "info": {
+            "name": "Delete webtools blacklist item",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.rokwire.illinois.edu/core/api/admin/webtools-blacklist",
+            "params": [
+              {
+                "name": "source_ids",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of ids"
+              },
+              {
+                "name": "calendar_ids",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of ids"
+              },
+              {
+                "name": "originating_calendar_ids",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of ids"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deletes webtools blacklist items.\n\n**Auth:** Requires valid admin token and \"webtools_blacklist\" permission\n"
+        },
+        {
+          "info": {
+            "name": "Get all webtools blacklist item",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/api/admin/events/webtools-blacklist",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get all webtools blacklist items\n\n **Auth:** Requires valid admin token and `all_events` permission\n"
+        },
+        {
+          "info": {
+            "name": "Add webtools blacklist data",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.rokwire.illinois.edu/core/api/admin/events/webtools-blacklist",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Add webtools blacklist data\n\n**Auth:** Requires valid admin token and `all_events` permission\n"
+        },
+        {
+          "info": {
+            "name": "Delete webtools blacklist item",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.rokwire.illinois.edu/core/api/admin/events/webtools-blacklist",
+            "params": [
+              {
+                "name": "source_ids",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of ids"
+              },
+              {
+                "name": "calendar_ids",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of ids"
+              },
+              {
+                "name": "originating_calendar_ids",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of ids"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deletes webtools blacklist items.\n\n**Auth:** Requires valid admin token and `all_events` permission\n"
+        },
+        {
+          "info": {
+            "name": "Get events summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/api/admin/events/summary",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get events summary\n\n **Auth:** Requires valid admin token and `all_events` permission\n"
+        },
+        {
+          "info": {
+            "name": "Load events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/api/admin/events/load",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "status - `valid` / `ignored`"
+              },
+              {
+                "name": "source",
+                "value": "",
+                "type": "query",
+                "description": "source - `webtools-direct` / `events-tps-api`"
+              },
+              {
+                "name": "data-source-event-id",
+                "value": "",
+                "type": "query",
+                "description": "data source event id of the event"
+              },
+              {
+                "name": "calendar-id",
+                "value": "",
+                "type": "query",
+                "description": "calendar id of the event"
+              },
+              {
+                "name": "originating-calendar-id",
+                "value": "",
+                "type": "query",
+                "description": "originating calendar id of the event"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get existing events by search parameters\n\n **Auth:** Requires valid admin token and `all_events` permission\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

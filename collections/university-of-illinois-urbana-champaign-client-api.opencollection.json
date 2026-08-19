@@ -1,0 +1,361 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Rokwire Core Building Block Admin Client API",
+    "version": "1.62.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Client",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Gets example",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/api/examples/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of example to retrieve"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Gets example record\n\n**Auth:** Requires valid user token with `get_examples` permission\n"
+        },
+        {
+          "info": {
+            "name": "Gets building information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/api/wayfinidng/buildng",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Building id"
+              },
+              {
+                "name": "adaOnly",
+                "value": "",
+                "type": "query",
+                "description": "Prioritize ADA accessible entrances in the response"
+              },
+              {
+                "name": "lat",
+                "value": "",
+                "type": "query",
+                "description": "lattidue of the user's location"
+              },
+              {
+                "name": "long",
+                "value": "",
+                "type": "query",
+                "description": "longitude of the user's location"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Gets building information by id\n\n**Auth:** Requires valid first-party service account token with `get_building` permission\n"
+        },
+        {
+          "info": {
+            "name": "Gets all campus buildings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/api/wayfinding/buildings",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Gets all campus buildings with coordinates, entrances, floors and features\n\n**Auth:** Requires valid first-party service account token with `get_building` permission\n"
+        },
+        {
+          "info": {
+            "name": "Returns the markup required to display the requested floor plan.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/api/wayfinding/floorplan",
+            "params": [
+              {
+                "name": "bldgid",
+                "value": "",
+                "type": "query",
+                "description": "The building id for the selected building"
+              },
+              {
+                "name": "floor",
+                "value": "",
+                "type": "query",
+                "description": "Identifier of the floor to retrieve."
+              },
+              {
+                "name": "markers",
+                "value": "",
+                "type": "query",
+                "description": "If omitted, the value is set to \"on\". Indicates the initial state of all the marker on the floor plan. Values are \"on\" or \"off\"."
+              },
+              {
+                "name": "highlites",
+                "value": "",
+                "type": "query",
+                "description": "If omitted, the values is set to \"on\". Indicates the initial state of all the highlites on the flloor plan. Values are \"on\" or \"off\"."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns the markup and data structures needed to display an svg of the request floor plan.\n\n**Auth:** Requires valid first-party service account token with `get_building` permission\n"
+        },
+        {
+          "info": {
+            "name": "Returns a list of buildings matching the requested name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/api/wayfinding/searchbuildings",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "String to search for in the building name (case-insensitive)"
+              },
+              {
+                "name": "v",
+                "value": "",
+                "type": "query",
+                "description": "Verbosity level. Set to 1 or omit for compact buildings, set to 2 for full building details"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns every building in the campus buildings list that contains the name parameter in the building name property. \nThe response is a map where keys are building names and values are building objects.\n\n**Verbosity Levels:**\n- **v=1 or omitted**: Returns CompactBuilding objects (default)\n- **v=2**: Returns full Building objects with complete details\n\n**Auth:** Requires valid first-party service account token with `get_building` permission\n"
+        },
+        {
+          "info": {
+            "name": "Returns a list of current term sessions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/api/termsessions/listcurrent",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Based on the current date, returns 4 term sessions for campus. If the current month is between 6 and 12, the current fall term is assumed and returned with the upcomign spring semester, the last summer semster and the previous spring semester. If the current month is less than 6, returns the current spring semester, the upcoming summer and fall semesters and the previous fall semester.\n\n**Auth:** Requires valid first-party service account token with `get_building` permission\n"
+        },
+        {
+          "info": {
+            "name": "Get list of all campus laundry rooms",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/api/laundry/rooms",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of all laundry rooms available on campus with their basic information including ID, name, status, and location details.\n\n**Auth:** Requires valid first-party service account token with appropriate permissions\n"
+        },
+        {
+          "info": {
+            "name": "Get detailed information about a specific laundry room",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/api/laundry/room",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier of the laundry room"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns detailed information about a specific laundry room including the number of washers and dryers, \na list of all appliances (machines) in the room with their current status, and location details.\n\n**Auth:** Requires valid first-party service account token with appropriate permissions\n"
+        },
+        {
+          "info": {
+            "name": "Initialize a service request for a laundry machine",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/api/laundry/initrequest",
+            "params": [
+              {
+                "name": "machineid",
+                "value": "",
+                "type": "query",
+                "description": "The unique service tag ID of the laundry machine"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns the problem codes and pending service request status for a specific laundry machine. \nThis endpoint is used to initialize a service request by providing the available problem codes \nand checking if there's already an open issue for the machine.\n\n**Auth:** Requires valid first-party service account token with appropriate permissions\n"
+        },
+        {
+          "info": {
+            "name": "Submit a service request for a laundry machine",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/api/laundry/requestservice",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Submits a service request for a specific laundry machine. This endpoint requires detailed information \nabout the problem and contact information for the person submitting the request.\n\n**Required Fields:** machineid, problemcode, firstname, lastname, email\n**Optional Fields:** comments, phone\n\n**Auth:** Requires valid first-party service account token with appropriate permissions\n"
+        },
+        {
+          "info": {
+            "name": "Get contact information for a person",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/api/person/contactinfo",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "User ID (UIN) of the person"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Mode for contact information retrieval (0=standard, 1=enhanced)"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns comprehensive contact information for a person including name, permanent and mailing addresses, \nphone numbers, and emergency contact information.\n\n**Authentication:** Requires both RokwireAuth and ExternalAuth tokens\n**Mode Parameter:** \n- \"0\" (default): Standard contact information\n- \"1\": Enhanced contact information (for specific UINs)\n\n**Auth:** Requires valid first-party service account token and external authorization token\n"
+        },
+        {
+          "info": {
+            "name": "Get registered courses for GIES students",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/api/person/giescourses",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "User ID (UIN) of the GIES student"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of registered courses for GIES (Gies College of Business) students. \nThis endpoint provides course information including term, subject, number, section, \ntitle, and instructor details.\n\n**Authentication:** Requires both RokwireAuth and ExternalAuth tokens\n**Note:** This endpoint is specifically for GIES students and may return different \ncourse information compared to the general student courses endpoint.\n\n**Auth:** Requires valid first-party service account token and external aut"
+        },
+        {
+          "info": {
+            "name": "Get registered courses for a student",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/api/person/studentcourses",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "User ID (UIN) of the student"
+              },
+              {
+                "name": "termid",
+                "value": "",
+                "type": "query",
+                "description": "Term ID for the academic term (e.g., \"120258\" for Fall 2025). If not provided, defaults to the current term."
+              },
+              {
+                "name": "lat",
+                "value": "",
+                "type": "query",
+                "description": "Latitude coordinate for location-based building information (optional)"
+              },
+              {
+                "name": "long",
+                "value": "",
+                "type": "query",
+                "description": "Longitude coordinate for location-based building information (optional)"
+              },
+              {
+                "name": "adaOnly",
+                "value": "",
+                "type": "query",
+                "description": "Filter buildings to show only ADA-compliant entrances (optional)"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a comprehensive list of registered courses for a student including detailed course information, \nsection details, meeting times, locations, and building information. This endpoint provides the most \ncomplete course data compared to other course endpoints.\n\n**Authentication:** Requires both RokwireAuth and ExternalAuth tokens\n**Location Enhancement:** Automatically enriches course data with building location information\n**ADA Support:** Optional ADA-only building filtering for accessibili"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

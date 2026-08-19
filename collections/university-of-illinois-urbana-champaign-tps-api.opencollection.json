@@ -1,0 +1,83 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Rokwire Core Building Block Admin TPS API",
+    "version": "1.62.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "TPS",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Gets example",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/api/tps/examples/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of example to retrieve"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Gets example record\n\n**Auth:** Requires valid third-party service account token with `get_examples` permission\n"
+        },
+        {
+          "info": {
+            "name": "Create events",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/api/tps/events",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates new events\n\n**Auth:** Requires valid tps token with `manage_legacy_events` permission\n"
+        },
+        {
+          "info": {
+            "name": "Delete events",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.rokwire.illinois.edu/core/api/tps/events",
+            "params": [
+              {
+                "name": "ids",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of ids"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deletes all events created by the calling account. If the \"ids\" param is passed them it deletes only the provided events.\n\n**Auth:** Requires valid tps token with `manage_legacy_events` permission\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

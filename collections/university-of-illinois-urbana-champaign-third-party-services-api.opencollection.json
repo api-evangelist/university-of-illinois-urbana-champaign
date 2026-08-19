@@ -1,0 +1,179 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Rokwire Core Building Block Admin Third-Party Services API",
+    "version": "1.62.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Third-Party Services",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get service registrations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/tps/service-regs",
+            "params": [
+              {
+                "name": "ids",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of service IDs to return registrations for"
+              }
+            ]
+          },
+          "docs": "Returns service registration records\n"
+        },
+        {
+          "info": {
+            "name": "Get auth public key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/tps/auth-keys"
+          },
+          "docs": "Returns auth public key in JWKS format\n"
+        },
+        {
+          "info": {
+            "name": "Get service account params",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/tps/service-account/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the service account"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns service account parameters\n"
+        },
+        {
+          "info": {
+            "name": "Get service account access token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/tps/access-token",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns a new service account access token\n"
+        },
+        {
+          "info": {
+            "name": "Get all service account access tokens",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/tps/access-tokens",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns a new service account access token for all authorized app org pairs\n"
+        },
+        {
+          "info": {
+            "name": "Finds user accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/tps/accounts",
+            "params": [
+              {
+                "name": "app_id",
+                "value": "",
+                "type": "query",
+                "description": "The application ID to use to filter accounts"
+              },
+              {
+                "name": "org_id",
+                "value": "",
+                "type": "query",
+                "description": "The organization ID to use to filter accounts"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of accounts to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The index of the first account to return"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Finds accounts for the given app_id and org_id (query or token)\n\n**Auth:** Requires service access token with `get_accounts` or `all_accounts` permission\n"
+        },
+        {
+          "info": {
+            "name": "Finds the count of user accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/tps/accounts/count",
+            "params": [
+              {
+                "name": "app_id",
+                "value": "",
+                "type": "query",
+                "description": "The application ID to use to filter accounts"
+              },
+              {
+                "name": "org_id",
+                "value": "",
+                "type": "query",
+                "description": "The organization ID to use to filter accounts"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Finds the count of accounts for the given app_id and org_id (query or token)\n\n**Auth:** Requires service access token with `get_accounts_count` or `get_accounts_count_limited` permission\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

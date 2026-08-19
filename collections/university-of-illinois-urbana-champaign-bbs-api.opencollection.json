@@ -1,0 +1,553 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Rokwire Core Building Block Admin BBs API",
+    "version": "1.62.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "BBs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Test API..",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/bbs/test"
+          },
+          "docs": "Test API.."
+        },
+        {
+          "info": {
+            "name": "Get service registrations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/bbs/service-regs",
+            "params": [
+              {
+                "name": "ids",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of service IDs to return registrations for"
+              }
+            ]
+          },
+          "docs": "Returns service registration records\n"
+        },
+        {
+          "info": {
+            "name": "Get service account params",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/bbs/service-account/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the service account"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns service account parameters\n"
+        },
+        {
+          "info": {
+            "name": "Get service account access token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/bbs/access-token",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns a new service account access token\n"
+        },
+        {
+          "info": {
+            "name": "Get all service account access tokens",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/bbs/access-tokens",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns a new service account access token for all authorized app org pairs\n"
+        },
+        {
+          "info": {
+            "name": "Get deleted accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/bbs/deleted-memberships",
+            "params": [
+              {
+                "name": "service_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the service making the request"
+              },
+              {
+                "name": "start_time",
+                "value": "",
+                "type": "query",
+                "description": "The start time for filtering results, specified as a Unix timestamp in seconds"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of deleted account IDs\n\n**Auth:** Requires auth token with permission to get deleted accounts\n"
+        },
+        {
+          "info": {
+            "name": "Finds user accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/bbs/accounts",
+            "params": [
+              {
+                "name": "app_id",
+                "value": "",
+                "type": "query",
+                "description": "The application ID to use to filter accounts"
+              },
+              {
+                "name": "org_id",
+                "value": "",
+                "type": "query",
+                "description": "The organization ID to use to filter accounts"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of accounts to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The index of the first account to return"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Finds accounts for the given app_id and org_id (query or token)\n\n**Auth:** Requires service access token with `get_accounts` or `all_accounts` permission\n"
+        },
+        {
+          "info": {
+            "name": "Finds the count of user accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/bbs/accounts/count",
+            "params": [
+              {
+                "name": "app_id",
+                "value": "",
+                "type": "query",
+                "description": "The application ID to use to filter accounts"
+              },
+              {
+                "name": "org_id",
+                "value": "",
+                "type": "query",
+                "description": "The organization ID to use to filter accounts"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Finds the count of accounts for the given app_id and org_id (query or token)\n\n**Auth:** Requires service access token with `get_accounts_count` or `get_accounts_count_limited` permission\n"
+        },
+        {
+          "info": {
+            "name": "Get the account ids with FERPA filed true",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/bbs/accounts/ferpa",
+            "params": [
+              {
+                "name": "ids",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of ids"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get the account ids with FERPA filed true\n"
+        },
+        {
+          "info": {
+            "name": "Gets example",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/api/bbs/examples/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of example to retrieve"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Gets example record\n\n**Auth:** Requires valid first-party service account token with `get_examples` permission\n"
+        },
+        {
+          "info": {
+            "name": "Gets the list of units (calendars) for a provider id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/api/bbs/appointments/units",
+            "params": [
+              {
+                "name": "external_id",
+                "value": "",
+                "type": "query",
+                "description": "External system id of person making the request"
+              },
+              {
+                "name": "provider_id",
+                "value": "",
+                "type": "query",
+                "description": "Rokwire provider id of the organization tracking/providing appointment data"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Gets the list of units (calendars) for a provider id\n\n**Auth:** Requires valid first-party service account token with `get_external_appointments` permission \n Requires the External-Authorization header containing the oidc access token from the campus provider\n"
+        },
+        {
+          "info": {
+            "name": "Gets People with Calendars",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/api/bbs/appointments/people",
+            "params": [
+              {
+                "name": "external_id",
+                "value": "",
+                "type": "query",
+                "description": "External system id of person making the request"
+              },
+              {
+                "name": "provider_id",
+                "value": "",
+                "type": "query",
+                "description": "Rokwire provider id of the organization tracking/providing appointment data"
+              },
+              {
+                "name": "unit_id",
+                "value": "",
+                "type": "query",
+                "description": "External id identifying the unit the calendar entries belong to"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Gets a list of people with calendars inside of a unit\n\n**Auth:** Requires valid first-party service account token with `get_external_appointments` permission\n Requires the External-Authorization header containing the oidc access token from the campus provider\n"
+        },
+        {
+          "info": {
+            "name": "Gets available time slots on a calendar",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/api/bbs/appointments/slots",
+            "params": [
+              {
+                "name": "external_id",
+                "value": "",
+                "type": "query",
+                "description": "External system id of person making the request"
+              },
+              {
+                "name": "provider_id",
+                "value": "",
+                "type": "query",
+                "description": "Rokwire provider id of the organization tracking/providing appointment data"
+              },
+              {
+                "name": "unit_id",
+                "value": "",
+                "type": "query",
+                "description": "External id identifying the unit the calendar entries belong to"
+              },
+              {
+                "name": "person_id",
+                "value": "",
+                "type": "query",
+                "description": "External id identifying the advisor the calendar entry belongs to"
+              },
+              {
+                "name": "start_time",
+                "value": "",
+                "type": "query",
+                "description": "The first date to look for available slots (yyyy-mm-dd). Required if end_time is provided."
+              },
+              {
+                "name": "end_time",
+                "value": "",
+                "type": "query",
+                "description": "The last date to look for available slots (yyyy-mm-dd) Required if start_time is provided"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Gets a list of available time slots between two dates on a unit calendar\n\n**Auth:** Requires valid first-party service account token with `get_external_appointments` permission\nRequires the External-Authorization header containing the oidc access token from the campus provider\n"
+        },
+        {
+          "info": {
+            "name": "Gets the questions to ask when making an appointment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/api/bbs/appointments/questions",
+            "params": [
+              {
+                "name": "external_id",
+                "value": "",
+                "type": "query",
+                "description": "External system id of person making the request"
+              },
+              {
+                "name": "provider_id",
+                "value": "",
+                "type": "query",
+                "description": "Rokwire provider id of the organization tracking/providing appointment data"
+              },
+              {
+                "name": "unit_id",
+                "value": "",
+                "type": "query",
+                "description": "External id identifying the unit the calendar entries belong to"
+              },
+              {
+                "name": "person_id",
+                "value": "",
+                "type": "query",
+                "description": "External id identifying the advisor the calendar entry belongs to"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Gets a list of the questions to ask when a user requests an appointment for a particular time slot.\n\n**Auth:** Requires valid first-party service account token with `get_external_appointments` permission\nRequires the External-Authorization header containing the oidc access token from the campus provider\n"
+        },
+        {
+          "info": {
+            "name": "Gets available time slots on a calendar",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/api/bbs/appointments/qands",
+            "params": [
+              {
+                "name": "external_id",
+                "value": "",
+                "type": "query",
+                "description": "External system id of person making the request"
+              },
+              {
+                "name": "provider_id",
+                "value": "",
+                "type": "query",
+                "description": "Rokwire provider id of the organization tracking/providing appointment data"
+              },
+              {
+                "name": "unit_id",
+                "value": "",
+                "type": "query",
+                "description": "External id identifying the unit the calendar entries belong to"
+              },
+              {
+                "name": "person_id",
+                "value": "",
+                "type": "query",
+                "description": "External id identifying the advisor the calendar entry belongs to"
+              },
+              {
+                "name": "start_time",
+                "value": "",
+                "type": "query",
+                "description": "The first date to look for available slots (yyyy-mm-dd). Required if end_time is provided."
+              },
+              {
+                "name": "end_time",
+                "value": "",
+                "type": "query",
+                "description": "The last date to look for available slots (yyyy-mm-dd) Required if start_time is provided"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Gets a list of available time slots between two dates on a unit calendar\n\n**Auth:** Requires valid first-party service account token with `get_external_appointments` permission\nRequires the External-Authorization header containing the oidc access token from the campus provider\n"
+        },
+        {
+          "info": {
+            "name": "Creates an appointment in the specified provider system and returns the appointment data to the client",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/api/bbs/appointments/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Posts an appointment request to the specified provider calendar. Returns the appointment data back to the client. \n\n**Auth:** Requires valid first-party service account token with `update_external_appointments` permission\nRequires the External-Authorization header containing the oidc access token from the campus provider\n"
+        },
+        {
+          "info": {
+            "name": "updates an appointment in the specified provider system and returns the appointment data to the client",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.rokwire.illinois.edu/core/api/bbs/appointments/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates an appointment in the specified provider system and returns the appointment data to the clients.\nFor an upate, the source_id field in the request body is required.\n\n**Auth:** Requires valid first-party service account token with `update_external_appointments` permission\nRequires the External-Authorization header containing the oidc access token from the campus provider\n"
+        },
+        {
+          "info": {
+            "name": "Deletes an appointment in the specified provider system.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.rokwire.illinois.edu/core/api/bbs/appointments/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "source id of the appointment"
+              },
+              {
+                "name": "external_id",
+                "value": "",
+                "type": "query",
+                "description": "Users UIN"
+              },
+              {
+                "name": "provider_id",
+                "value": "",
+                "type": "query",
+                "description": "Rokwire provider id of the organization tracking/providing appointment data"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deletes an appointment request in the specified provider calendar.\n\n**Auth:** Requires valid first-party service account token with `update_external_appointments` permission\nRequires the External-Authorization header containing the oidc access token from the campus provider\n"
+        },
+        {
+          "info": {
+            "name": "Gets all legacy events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/api/bbs/events",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Gets all legacy events \n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

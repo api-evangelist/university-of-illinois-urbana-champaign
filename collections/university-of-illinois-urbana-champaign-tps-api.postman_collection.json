@@ -1,0 +1,780 @@
+{
+  "item": [
+    {
+      "id": "f95c6bc2-f00c-48d8-a91b-3029b034ae3e",
+      "name": "TPS",
+      "description": {
+        "content": "Third-Party Service APIs.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "48b5ee8b-9a46-48d0-8e9a-a9bd14698733",
+          "name": "Gets example",
+          "request": {
+            "name": "Gets example",
+            "description": {
+              "content": "Gets example record\n\n**Auth:** Requires valid third-party service account token with `get_examples` permission\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "tps",
+                "examples",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) ID of example to retrieve"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "05544d53-987d-4dba-8b1f-044995d61705",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "tps",
+                    "examples",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of example to retrieve"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"app_id\": \"string\",\n  \"org_id\": \"string\",\n  \"data\": \"string\",\n  \"date_created\": \"string\",\n  \"date_updated\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ddc6e17b-8207-480c-9373-6db27e6acbb0",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "tps",
+                    "examples",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of example to retrieve"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c17a5a06-5d09-437b-9aed-232ea8d98133",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "tps",
+                    "examples",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of example to retrieve"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "69b9c974-86f6-4b15-ac74-2b3e0aa23bd3",
+              "name": "Internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "tps",
+                    "examples",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of example to retrieve"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a9d12eda-d422-41e8-a83f-eeb5dd2a0d87",
+          "name": "Create events",
+          "request": {
+            "name": "Create events",
+            "description": {
+              "content": "Creates new events\n\n**Auth:** Requires valid tps token with `manage_legacy_events` permission\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "tps",
+                "events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"all_day\": \"<boolean>\",\n    \"category\": \"<string>\",\n    \"subcategory\": \"<string>\",\n    \"cost\": \"<string>\",\n    \"created_by\": \"<string>\",\n    \"date_modified\": \"<string>\",\n    \"start_date\": \"<string>\",\n    \"end_date\": \"<string>\",\n    \"image_url\": \"<string>\",\n    \"registration_url\": \"<string>\",\n    \"is_virtual\": \"<boolean>\",\n    \"long_description\": \"<string>\",\n    \"recurrence_id\": \"<integer>\",\n    \"recurring_flag\": \"<boolean>\",\n    \"sponsor\": \"<string>\",\n    \"registration_label\": \"<string>\",\n    \"title\": \"<string>\",\n    \"title_url\": \"<string>\",\n    \"contacts\": [\n      {\n        \"contact_name\": \"<string>\",\n        \"contact_email\": \"<string>\",\n        \"contact_phone\": \"<string>\"\n      },\n      {\n        \"contact_name\": \"<string>\",\n        \"contact_email\": \"<string>\",\n        \"contact_phone\": \"<string>\"\n      }\n    ],\n    \"tags\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"target_audience\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"location\": {\n      \"description\": \"<string>\",\n      \"latitude\": \"<number>\",\n      \"longitude\": \"<number>\",\n      \"floor\": \"<integer>\",\n      \"address\": \"<string>\",\n      \"building\": \"<string>\",\n      \"room\": \"<string>\"\n    }\n  },\n  {\n    \"all_day\": \"<boolean>\",\n    \"category\": \"<string>\",\n    \"subcategory\": \"<string>\",\n    \"cost\": \"<string>\",\n    \"created_by\": \"<string>\",\n    \"date_modified\": \"<string>\",\n    \"start_date\": \"<string>\",\n    \"end_date\": \"<string>\",\n    \"image_url\": \"<string>\",\n    \"registration_url\": \"<string>\",\n    \"is_virtual\": \"<boolean>\",\n    \"long_description\": \"<string>\",\n    \"recurrence_id\": \"<integer>\",\n    \"recurring_flag\": \"<boolean>\",\n    \"sponsor\": \"<string>\",\n    \"registration_label\": \"<string>\",\n    \"title\": \"<string>\",\n    \"title_url\": \"<string>\",\n    \"contacts\": [\n      {\n        \"contact_name\": \"<string>\",\n        \"contact_email\": \"<string>\",\n        \"contact_phone\": \"<string>\"\n      },\n      {\n        \"contact_name\": \"<string>\",\n        \"contact_email\": \"<string>\",\n        \"contact_phone\": \"<string>\"\n      }\n    ],\n    \"tags\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"target_audience\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"location\": {\n      \"description\": \"<string>\",\n      \"latitude\": \"<number>\",\n      \"longitude\": \"<number>\",\n      \"floor\": \"<integer>\",\n      \"address\": \"<string>\",\n      \"building\": \"<string>\",\n      \"room\": \"<string>\"\n    }\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "12326ece-ad8f-4dc3-8a47-c74ca29c5f0b",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "tps",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"all_day\": \"<boolean>\",\n    \"category\": \"<string>\",\n    \"subcategory\": \"<string>\",\n    \"cost\": \"<string>\",\n    \"created_by\": \"<string>\",\n    \"date_modified\": \"<string>\",\n    \"start_date\": \"<string>\",\n    \"end_date\": \"<string>\",\n    \"image_url\": \"<string>\",\n    \"registration_url\": \"<string>\",\n    \"is_virtual\": \"<boolean>\",\n    \"long_description\": \"<string>\",\n    \"recurrence_id\": \"<integer>\",\n    \"recurring_flag\": \"<boolean>\",\n    \"sponsor\": \"<string>\",\n    \"registration_label\": \"<string>\",\n    \"title\": \"<string>\",\n    \"title_url\": \"<string>\",\n    \"contacts\": [\n      {\n        \"contact_name\": \"<string>\",\n        \"contact_email\": \"<string>\",\n        \"contact_phone\": \"<string>\"\n      },\n      {\n        \"contact_name\": \"<string>\",\n        \"contact_email\": \"<string>\",\n        \"contact_phone\": \"<string>\"\n      }\n    ],\n    \"tags\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"target_audience\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"location\": {\n      \"description\": \"<string>\",\n      \"latitude\": \"<number>\",\n      \"longitude\": \"<number>\",\n      \"floor\": \"<integer>\",\n      \"address\": \"<string>\",\n      \"building\": \"<string>\",\n      \"room\": \"<string>\"\n    }\n  },\n  {\n    \"all_day\": \"<boolean>\",\n    \"category\": \"<string>\",\n    \"subcategory\": \"<string>\",\n    \"cost\": \"<string>\",\n    \"created_by\": \"<string>\",\n    \"date_modified\": \"<string>\",\n    \"start_date\": \"<string>\",\n    \"end_date\": \"<string>\",\n    \"image_url\": \"<string>\",\n    \"registration_url\": \"<string>\",\n    \"is_virtual\": \"<boolean>\",\n    \"long_description\": \"<string>\",\n    \"recurrence_id\": \"<integer>\",\n    \"recurring_flag\": \"<boolean>\",\n    \"sponsor\": \"<string>\",\n    \"registration_label\": \"<string>\",\n    \"title\": \"<string>\",\n    \"title_url\": \"<string>\",\n    \"contacts\": [\n      {\n        \"contact_name\": \"<string>\",\n        \"contact_email\": \"<string>\",\n        \"contact_phone\": \"<string>\"\n      },\n      {\n        \"contact_name\": \"<string>\",\n        \"contact_email\": \"<string>\",\n        \"contact_phone\": \"<string>\"\n      }\n    ],\n    \"tags\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"target_audience\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"location\": {\n      \"description\": \"<string>\",\n      \"latitude\": \"<number>\",\n      \"longitude\": \"<number>\",\n      \"floor\": \"<integer>\",\n      \"address\": \"<string>\",\n      \"building\": \"<string>\",\n      \"room\": \"<string>\"\n    }\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2c71ef2b-4004-463f-a033-8f93b10d1551",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "tps",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"all_day\": \"<boolean>\",\n    \"category\": \"<string>\",\n    \"subcategory\": \"<string>\",\n    \"cost\": \"<string>\",\n    \"created_by\": \"<string>\",\n    \"date_modified\": \"<string>\",\n    \"start_date\": \"<string>\",\n    \"end_date\": \"<string>\",\n    \"image_url\": \"<string>\",\n    \"registration_url\": \"<string>\",\n    \"is_virtual\": \"<boolean>\",\n    \"long_description\": \"<string>\",\n    \"recurrence_id\": \"<integer>\",\n    \"recurring_flag\": \"<boolean>\",\n    \"sponsor\": \"<string>\",\n    \"registration_label\": \"<string>\",\n    \"title\": \"<string>\",\n    \"title_url\": \"<string>\",\n    \"contacts\": [\n      {\n        \"contact_name\": \"<string>\",\n        \"contact_email\": \"<string>\",\n        \"contact_phone\": \"<string>\"\n      },\n      {\n        \"contact_name\": \"<string>\",\n        \"contact_email\": \"<string>\",\n        \"contact_phone\": \"<string>\"\n      }\n    ],\n    \"tags\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"target_audience\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"location\": {\n      \"description\": \"<string>\",\n      \"latitude\": \"<number>\",\n      \"longitude\": \"<number>\",\n      \"floor\": \"<integer>\",\n      \"address\": \"<string>\",\n      \"building\": \"<string>\",\n      \"room\": \"<string>\"\n    }\n  },\n  {\n    \"all_day\": \"<boolean>\",\n    \"category\": \"<string>\",\n    \"subcategory\": \"<string>\",\n    \"cost\": \"<string>\",\n    \"created_by\": \"<string>\",\n    \"date_modified\": \"<string>\",\n    \"start_date\": \"<string>\",\n    \"end_date\": \"<string>\",\n    \"image_url\": \"<string>\",\n    \"registration_url\": \"<string>\",\n    \"is_virtual\": \"<boolean>\",\n    \"long_description\": \"<string>\",\n    \"recurrence_id\": \"<integer>\",\n    \"recurring_flag\": \"<boolean>\",\n    \"sponsor\": \"<string>\",\n    \"registration_label\": \"<string>\",\n    \"title\": \"<string>\",\n    \"title_url\": \"<string>\",\n    \"contacts\": [\n      {\n        \"contact_name\": \"<string>\",\n        \"contact_email\": \"<string>\",\n        \"contact_phone\": \"<string>\"\n      },\n      {\n        \"contact_name\": \"<string>\",\n        \"contact_email\": \"<string>\",\n        \"contact_phone\": \"<string>\"\n      }\n    ],\n    \"tags\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"target_audience\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"location\": {\n      \"description\": \"<string>\",\n      \"latitude\": \"<number>\",\n      \"longitude\": \"<number>\",\n      \"floor\": \"<integer>\",\n      \"address\": \"<string>\",\n      \"building\": \"<string>\",\n      \"room\": \"<string>\"\n    }\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c73878c3-9607-4cea-922c-34057fcaaddd",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "tps",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"all_day\": \"<boolean>\",\n    \"category\": \"<string>\",\n    \"subcategory\": \"<string>\",\n    \"cost\": \"<string>\",\n    \"created_by\": \"<string>\",\n    \"date_modified\": \"<string>\",\n    \"start_date\": \"<string>\",\n    \"end_date\": \"<string>\",\n    \"image_url\": \"<string>\",\n    \"registration_url\": \"<string>\",\n    \"is_virtual\": \"<boolean>\",\n    \"long_description\": \"<string>\",\n    \"recurrence_id\": \"<integer>\",\n    \"recurring_flag\": \"<boolean>\",\n    \"sponsor\": \"<string>\",\n    \"registration_label\": \"<string>\",\n    \"title\": \"<string>\",\n    \"title_url\": \"<string>\",\n    \"contacts\": [\n      {\n        \"contact_name\": \"<string>\",\n        \"contact_email\": \"<string>\",\n        \"contact_phone\": \"<string>\"\n      },\n      {\n        \"contact_name\": \"<string>\",\n        \"contact_email\": \"<string>\",\n        \"contact_phone\": \"<string>\"\n      }\n    ],\n    \"tags\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"target_audience\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"location\": {\n      \"description\": \"<string>\",\n      \"latitude\": \"<number>\",\n      \"longitude\": \"<number>\",\n      \"floor\": \"<integer>\",\n      \"address\": \"<string>\",\n      \"building\": \"<string>\",\n      \"room\": \"<string>\"\n    }\n  },\n  {\n    \"all_day\": \"<boolean>\",\n    \"category\": \"<string>\",\n    \"subcategory\": \"<string>\",\n    \"cost\": \"<string>\",\n    \"created_by\": \"<string>\",\n    \"date_modified\": \"<string>\",\n    \"start_date\": \"<string>\",\n    \"end_date\": \"<string>\",\n    \"image_url\": \"<string>\",\n    \"registration_url\": \"<string>\",\n    \"is_virtual\": \"<boolean>\",\n    \"long_description\": \"<string>\",\n    \"recurrence_id\": \"<integer>\",\n    \"recurring_flag\": \"<boolean>\",\n    \"sponsor\": \"<string>\",\n    \"registration_label\": \"<string>\",\n    \"title\": \"<string>\",\n    \"title_url\": \"<string>\",\n    \"contacts\": [\n      {\n        \"contact_name\": \"<string>\",\n        \"contact_email\": \"<string>\",\n        \"contact_phone\": \"<string>\"\n      },\n      {\n        \"contact_name\": \"<string>\",\n        \"contact_email\": \"<string>\",\n        \"contact_phone\": \"<string>\"\n      }\n    ],\n    \"tags\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"target_audience\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"location\": {\n      \"description\": \"<string>\",\n      \"latitude\": \"<number>\",\n      \"longitude\": \"<number>\",\n      \"floor\": \"<integer>\",\n      \"address\": \"<string>\",\n      \"building\": \"<string>\",\n      \"room\": \"<string>\"\n    }\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1e18d1a7-5556-4ce1-87e5-ccc8c984afba",
+              "name": "Internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "tps",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"all_day\": \"<boolean>\",\n    \"category\": \"<string>\",\n    \"subcategory\": \"<string>\",\n    \"cost\": \"<string>\",\n    \"created_by\": \"<string>\",\n    \"date_modified\": \"<string>\",\n    \"start_date\": \"<string>\",\n    \"end_date\": \"<string>\",\n    \"image_url\": \"<string>\",\n    \"registration_url\": \"<string>\",\n    \"is_virtual\": \"<boolean>\",\n    \"long_description\": \"<string>\",\n    \"recurrence_id\": \"<integer>\",\n    \"recurring_flag\": \"<boolean>\",\n    \"sponsor\": \"<string>\",\n    \"registration_label\": \"<string>\",\n    \"title\": \"<string>\",\n    \"title_url\": \"<string>\",\n    \"contacts\": [\n      {\n        \"contact_name\": \"<string>\",\n        \"contact_email\": \"<string>\",\n        \"contact_phone\": \"<string>\"\n      },\n      {\n        \"contact_name\": \"<string>\",\n        \"contact_email\": \"<string>\",\n        \"contact_phone\": \"<string>\"\n      }\n    ],\n    \"tags\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"target_audience\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"location\": {\n      \"description\": \"<string>\",\n      \"latitude\": \"<number>\",\n      \"longitude\": \"<number>\",\n      \"floor\": \"<integer>\",\n      \"address\": \"<string>\",\n      \"building\": \"<string>\",\n      \"room\": \"<string>\"\n    }\n  },\n  {\n    \"all_day\": \"<boolean>\",\n    \"category\": \"<string>\",\n    \"subcategory\": \"<string>\",\n    \"cost\": \"<string>\",\n    \"created_by\": \"<string>\",\n    \"date_modified\": \"<string>\",\n    \"start_date\": \"<string>\",\n    \"end_date\": \"<string>\",\n    \"image_url\": \"<string>\",\n    \"registration_url\": \"<string>\",\n    \"is_virtual\": \"<boolean>\",\n    \"long_description\": \"<string>\",\n    \"recurrence_id\": \"<integer>\",\n    \"recurring_flag\": \"<boolean>\",\n    \"sponsor\": \"<string>\",\n    \"registration_label\": \"<string>\",\n    \"title\": \"<string>\",\n    \"title_url\": \"<string>\",\n    \"contacts\": [\n      {\n        \"contact_name\": \"<string>\",\n        \"contact_email\": \"<string>\",\n        \"contact_phone\": \"<string>\"\n      },\n      {\n        \"contact_name\": \"<string>\",\n        \"contact_email\": \"<string>\",\n        \"contact_phone\": \"<string>\"\n      }\n    ],\n    \"tags\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"target_audience\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"location\": {\n      \"description\": \"<string>\",\n      \"latitude\": \"<number>\",\n      \"longitude\": \"<number>\",\n      \"floor\": \"<integer>\",\n      \"address\": \"<string>\",\n      \"building\": \"<string>\",\n      \"room\": \"<string>\"\n    }\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "07292610-2dc5-4392-9c08-81a3154447c5",
+          "name": "Delete events",
+          "request": {
+            "name": "Delete events",
+            "description": {
+              "content": "Deletes all events created by the calling account. If the \"ids\" param is passed them it deletes only the provided events.\n\n**Auth:** Requires valid tps token with `manage_legacy_events` permission\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "tps",
+                "events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "ids",
+                  "value": "<string>",
+                  "description": "A comma-separated list of ids"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8d7c2249-cd82-4c07-a71f-569107c0d7cd",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "tps",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ids",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Success",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "58d11b32-9b27-47ea-b476-28cfe4d3013e",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "tps",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ids",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "53908ae2-1092-4eff-9456-f4505d0238d2",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "tps",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ids",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6bd70474-6abc-48e2-80b8-317aa732f0ca",
+              "name": "Internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "tps",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ids",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.rokwire.illinois.edu/core",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "52498c6c-cd7c-41c5-9bc9-53744533e615",
+    "name": "Rokwire Core Building Block Admin TPS API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Core Building Block API Documentation",
+      "type": "text/plain"
+    }
+  }
+}

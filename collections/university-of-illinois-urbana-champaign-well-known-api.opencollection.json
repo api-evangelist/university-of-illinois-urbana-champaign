@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Rokwire Core Building Block Admin .well Known API",
+    "version": "1.62.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": ".well Known",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "OpenID Connect Discovery",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/.well-known/openid-configuration"
+          },
+          "docs": "OpenID Connect Discovery"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

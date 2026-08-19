@@ -1,0 +1,131 @@
+{
+  "item": [
+    {
+      "id": "17b5dfca-de01-4bb2-90a7-ccb26603ff34",
+      "name": "Default",
+      "description": {
+        "content": "Default APIs.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4e84f3e0-15ff-447e-a7a5-dac879edee68",
+          "name": "Get version",
+          "request": {
+            "name": "Get version",
+            "description": {
+              "content": "Gets current version of this service\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "version"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9f792841-04f9-462c-ba63-dcfe1ba54447",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "v1.0.0",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a86237b5-d799-4d6f-81e7-500aa2394063",
+              "name": "Internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.rokwire.illinois.edu/core",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "196d3d02-46b8-4f52-93e4-580ee5ce2f43",
+    "name": "Rokwire Core Building Block Admin Default API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Core Building Block API Documentation",
+      "type": "text/plain"
+    }
+  }
+}

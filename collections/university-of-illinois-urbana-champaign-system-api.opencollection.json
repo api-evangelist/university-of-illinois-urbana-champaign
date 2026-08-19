@@ -1,0 +1,883 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Rokwire Core Building Block Admin System API",
+    "version": "1.62.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "System",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "App org token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/system/auth/app-org-token",
+            "params": [
+              {
+                "name": "app_id",
+                "value": "",
+                "type": "query",
+                "description": "The application ID of the token to return"
+              },
+              {
+                "name": "org_id",
+                "value": "",
+                "type": "query",
+                "description": "The organization ID of the token to return"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve a system token for the specified application and organization\n\n**Auth:** Requires system access token\n"
+        },
+        {
+          "info": {
+            "name": "Get organization by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/system/organizations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the organization"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Gets organization by ID\n\n**Auth:** Requires system access token with `get_organizations`, `update_organizations`, or `all_organizations` permission\n"
+        },
+        {
+          "info": {
+            "name": "Update organization by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.rokwire.illinois.edu/core/system/organizations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the organization that needs to be updated"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates organization by ID\n\n**Auth:** Requires system access token with `update_organizations` or `all_organizations` permission\n"
+        },
+        {
+          "info": {
+            "name": "Get organizations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/system/organizations",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Gets organizations\n\n**Auth:** Requires system access token with `get_organizations`, `update_organizations`, or `all_organizations` permission\n"
+        },
+        {
+          "info": {
+            "name": "Create organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/system/organizations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates organization\n\n**Auth:** Requires system access token with `update_organizations` or `all_organizations` permission\n"
+        },
+        {
+          "info": {
+            "name": "Get service registrations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/system/service-regs",
+            "params": [
+              {
+                "name": "ids",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of service IDs to return registrations for"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns service registration records\n\n**Auth:** Requires system access token with `get_service-regs`, `update_service-regs`, `delete_service-regs`, or `all_service-regs` permission\n"
+        },
+        {
+          "info": {
+            "name": "Register service",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/system/service-regs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a new service registration\n\nThe \"service_id\" of the registration must not match an existing registration  \n\n**Auth:** Requires system access token with `update_service-regs` or `all_service-regs` permission\n"
+        },
+        {
+          "info": {
+            "name": "Update service registration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.rokwire.illinois.edu/core/system/service-regs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing service registration\n\nThe \"service_id\" of the registration must match an existing registration\n\n**Auth:** Requires system access token with `update_service-regs` or `all_service-regs` permission\n"
+        },
+        {
+          "info": {
+            "name": "Deregister service",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.rokwire.illinois.edu/core/system/service-regs",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "The service ID of the registration to delete"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deletes an existing service registration record\n\n**Auth:** Requires system access token with `delete_service-regs` or `all_service-regs` permission\n"
+        },
+        {
+          "info": {
+            "name": "Get service account instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/system/service-accounts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the service account"
+              },
+              {
+                "name": "app_id",
+                "value": "",
+                "type": "query",
+                "description": "Application ID of the service account instance"
+              },
+              {
+                "name": "org_id",
+                "value": "",
+                "type": "query",
+                "description": "Organization ID of the service account instance"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get service account instance by account ID, app ID, and org ID\n\n**Auth:** Requires system access token with `get_service-accounts`, `update_service-accounts`, `delete_service-accounts`, or `all_service-accounts` permission\n"
+        },
+        {
+          "info": {
+            "name": "Update service account instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.rokwire.illinois.edu/core/system/service-accounts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the service account instance"
+              },
+              {
+                "name": "app_id",
+                "value": "",
+                "type": "query",
+                "description": "Application ID of the service account instance"
+              },
+              {
+                "name": "org_id",
+                "value": "",
+                "type": "query",
+                "description": "Organization ID of the service account instance"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates a service account instance\n\n**Auth:** Requires system access token with `update_service-accounts` or `all_service-accounts` permission\n"
+        },
+        {
+          "info": {
+            "name": "Deregister service account instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.rokwire.illinois.edu/core/system/service-accounts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the service account instance to delete"
+              },
+              {
+                "name": "app_id",
+                "value": "",
+                "type": "query",
+                "description": "Application ID of the service account instance"
+              },
+              {
+                "name": "org_id",
+                "value": "",
+                "type": "query",
+                "description": "Organization ID of the service account instance"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Removes a service account instance\n\n**Auth:** Requires system access token with `delete_service-accounts` or `all_service-accounts` permission\n"
+        },
+        {
+          "info": {
+            "name": "Get service accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/system/service-accounts",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "query",
+                "description": "Service account ID to search for"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Service account name to search for"
+              },
+              {
+                "name": "app_id",
+                "value": "",
+                "type": "query",
+                "description": "Service account app ID to search for"
+              },
+              {
+                "name": "org_id",
+                "value": "",
+                "type": "query",
+                "description": "Service account org ID to search for"
+              },
+              {
+                "name": "permissions",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of service account permissions to search for"
+              },
+              {
+                "name": "scopes",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of service account scopes to search for"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get list of all service accounts matching a search\n\n**Auth:** Requires system access token with `get_service-accounts`, `update_service-accounts`, `delete_service-accounts`, or `all_service-accounts` permission\n"
+        },
+        {
+          "info": {
+            "name": "Register service account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/system/service-accounts",
+            "params": [
+              {
+                "name": "app_id",
+                "value": "",
+                "type": "query",
+                "description": "Service account app ID to copy from"
+              },
+              {
+                "name": "org_id",
+                "value": "",
+                "type": "query",
+                "description": "Service account org ID to copy from"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a new service account\n\n**Auth:** Requires system access token with `update_service-accounts` or `all_service-accounts` permission\n"
+        },
+        {
+          "info": {
+            "name": "Delete service accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.rokwire.illinois.edu/core/system/service-accounts",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "query",
+                "description": "Service account ID to delete"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete service accounts matching an account ID\n\n**Auth:** Requires system access token with `delete_service-accounts` or `all_service-accounts` permission\n"
+        },
+        {
+          "info": {
+            "name": "Add service account credential",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/system/service-accounts/:id/creds",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the service account to add new credential"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Adds a new credential to an existing service account\n\n**Auth:** Requires system access token with `update_service-accounts` or `all_service-accounts` permission\n"
+        },
+        {
+          "info": {
+            "name": "Remove service account credential",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.rokwire.illinois.edu/core/system/service-accounts/:id/creds",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the service account to remove credential"
+              },
+              {
+                "name": "cred_id",
+                "value": "",
+                "type": "query",
+                "description": "id of the credential to be removed"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Removes a credential from an existing service account\n\n**Auth:** Requires system access token with `delete_service-accounts` or `all_service-accounts` permission\n"
+        },
+        {
+          "info": {
+            "name": "Get application by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/system/applications/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the application"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Gets application by provided ID\n\n**Auth:** Requires system access token with `get_applications` or `all_applications` permission\n"
+        },
+        {
+          "info": {
+            "name": "Update application by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.rokwire.illinois.edu/core/system/applications/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the application"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates application by provided ID\n\n**Auth:** Requires system access token with `update_applications` or `all_applications` permission\n"
+        },
+        {
+          "info": {
+            "name": "Get applications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/system/applications",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Gets applications\n\n**Auth:** Requires system access token with `get_applications`, `udpate_applications`, or `all_applications` permission\n"
+        },
+        {
+          "info": {
+            "name": "Create application",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/system/applications",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates application\n\n**Auth:** Requires system access token with `update_applications` or `all_applications` permission\n"
+        },
+        {
+          "info": {
+            "name": "Create permission",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/system/permissions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates permission\n\n**Auth:** Requires system access token with `update_permissions` or `all_permissions` permission\n"
+        },
+        {
+          "info": {
+            "name": "Updates permission",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.rokwire.illinois.edu/core/system/permissions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates permission\n\n**Auth:** Requires system access token with `update_permissions` or `all_permissions` permission\n"
+        },
+        {
+          "info": {
+            "name": "Get API key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/system/api-keys",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the API key to return. Required if `app_id` is not provided."
+              },
+              {
+                "name": "app_id",
+                "value": "",
+                "type": "query",
+                "description": "The app ID of the API keys to return. Required if `id` is not provided."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns API key records for given ID or app ID\n\n**Auth:** Requires system access token with `get_api-keys`, `update_api-keys`, `delete_api-keys`, or `all_api-keys` permission\n"
+        },
+        {
+          "info": {
+            "name": "Create API key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/system/api-keys",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a new API key record\n\n**Auth:** Requires system access token with `update_api-keys` or `all_api-keys` permission\n"
+        },
+        {
+          "info": {
+            "name": "Update API key",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.rokwire.illinois.edu/core/system/api-keys",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing API key record\n\nMust include the \"id\" field to identify which key is to be udpated\n\n**Auth:** Requires system access token with `update_api-keys` or `all_api-keys` permission\n"
+        },
+        {
+          "info": {
+            "name": "Delete API key",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.rokwire.illinois.edu/core/system/api-keys",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the API key to delete"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deletes an existing API key record\n\n**Auth:** Requires system access token with `delete_api-keys` or `all_api-keys` permission\n"
+        },
+        {
+          "info": {
+            "name": "Get auth types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/system/auth-types",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Gets auth types\n\n**Auth:** Requires system access token with `get_auth-types`, `update_auth-types`, or `all_auth-types` permission\n"
+        },
+        {
+          "info": {
+            "name": "Create auth type",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/system/auth-types",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates auth type\n\n**Auth:** Requires system access token with `update_auth-types` or `all_auth-types` permission\n"
+        },
+        {
+          "info": {
+            "name": "Update auth type by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.rokwire.illinois.edu/core/system/auth-types/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the auth type that needs to be updated"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates auth type with the provided ID\n\n**Auth:** Requires system access token with `update_auth-types` or `all_auth-types` permission\n"
+        },
+        {
+          "info": {
+            "name": "Get app-org",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/system/app-orgs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the app-org to retrieve"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get app-org by ID\n\n**Auth:** Requires system access token with `get_app_orgs` or `all_app_orgs` permission\n"
+        },
+        {
+          "info": {
+            "name": "Update app-org by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.rokwire.illinois.edu/core/system/app-orgs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the app-org that needs to be updated"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates app-org by ID\n\n**Auth:** Requires system access token with `update_app_orgs` or `all_app_orgs` permission\n"
+        },
+        {
+          "info": {
+            "name": "Get app-orgs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/system/app-orgs",
+            "params": [
+              {
+                "name": "app_id",
+                "value": "",
+                "type": "query",
+                "description": "Application ID to search for"
+              },
+              {
+                "name": "org_id",
+                "value": "",
+                "type": "query",
+                "description": "Organization ID to search for"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get all app-orgs matching query\n\n**Auth:** Requires system access token with `get_app_orgs` or `all_app_orgs` permission\n"
+        },
+        {
+          "info": {
+            "name": "Create app-org",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/system/app-orgs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create app-org\n\n**Auth:** Requires system access token with `update_app_orgs` or `all_app_orgs` permission\n"
+        },
+        {
+          "info": {
+            "name": "Gets example",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/api/system/examples/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of example to retrieve"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Gets example record\n\n**Auth:** Requires valid admin token with `get_examples` permission\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

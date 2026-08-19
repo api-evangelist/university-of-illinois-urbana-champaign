@@ -1,0 +1,101 @@
+{
+  "item": [
+    {
+      "id": "15292faf-e02b-46b5-b8e8-8dd56909e21f",
+      "name": "Enc",
+      "description": {
+        "content": "APIs consumed by the Encryption building block.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7fcbbba4-a93a-4e64-89e1-db54b5ce666b",
+          "name": "Test API..",
+          "request": {
+            "name": "Test API..",
+            "description": {},
+            "url": {
+              "path": [
+                "enc",
+                "test"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ec81e602-5e60-481e-9d66-89153b2d5893",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "enc",
+                    "test"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Echooo",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.rokwire.illinois.edu/core",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "b10fb811-7b8c-49cf-a974-6fc5bef45356",
+    "name": "Rokwire Core Building Block Admin Enc API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Core Building Block API Documentation",
+      "type": "text/plain"
+    }
+  }
+}

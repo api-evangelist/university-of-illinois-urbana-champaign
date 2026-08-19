@@ -1,0 +1,3901 @@
+{
+  "item": [
+    {
+      "id": "0b0008a5-b10e-4c83-8989-5a1cba030bf0",
+      "name": "Client",
+      "description": {
+        "content": "Client applications APIs.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9b29c371-f465-428e-b516-8a3866e30140",
+          "name": "Gets example",
+          "request": {
+            "name": "Gets example",
+            "description": {
+              "content": "Gets example record\n\n**Auth:** Requires valid user token with `get_examples` permission\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "examples",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) ID of example to retrieve"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "162570ae-e201-43b2-bd14-5ef2b12da54d",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "examples",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of example to retrieve"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"app_id\": \"string\",\n  \"org_id\": \"string\",\n  \"data\": \"string\",\n  \"date_created\": \"string\",\n  \"date_updated\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "87c50b89-a37f-44c4-ad0d-22387d857758",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "examples",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of example to retrieve"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2d9b8f16-3398-4f19-8d5b-0c5b1680f55a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "examples",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of example to retrieve"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "48466891-d9e8-4627-9f65-1271fafa2a2a",
+              "name": "Internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "examples",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of example to retrieve"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d0939f23-a34c-4b2d-ac26-859560abc543",
+          "name": "Gets building information",
+          "request": {
+            "name": "Gets building information",
+            "description": {
+              "content": "Gets building information by id\n\n**Auth:** Requires valid first-party service account token with `get_building` permission\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "wayfinidng",
+                "buildng"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "(Required) Building id"
+                },
+                {
+                  "disabled": false,
+                  "key": "adaOnly",
+                  "value": "<boolean>",
+                  "description": "Prioritize ADA accessible entrances in the response"
+                },
+                {
+                  "disabled": false,
+                  "key": "lat",
+                  "value": "<number>",
+                  "description": "lattidue of the user's location"
+                },
+                {
+                  "disabled": false,
+                  "key": "long",
+                  "value": "<number>",
+                  "description": "longitude of the user's location"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "55254ad4-f277-48d4-9f63-e553e3ec788a",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "wayfinidng",
+                    "buildng"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "adaOnly",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "lat",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "long",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ID\": \"string\",\n  \"Number\": \"string\",\n  \"Name\": \"string\",\n  \"FullAddress\": \"string\",\n  \"Address1\": \"string\",\n  \"Address2\": \"string\",\n  \"City\": \"string\",\n  \"State\": \"string\",\n  \"ZipCode\": \"string\",\n  \"ImageURL\": \"string\",\n  \"MailCode\": \"string\",\n  \"Entrances\": [\n    {\n      \"ID\": \"string\",\n      \"Name\": \"string\",\n      \"Available\": true,\n      \"Latitude\": 7908.007749780577,\n      \"Longitude\": 7124.283964615134,\n      \"ADACopmliant\": true,\n      \"ImageUrl\": \"string\"\n    },\n    {\n      \"ID\": \"string\",\n      \"Name\": \"string\",\n      \"Available\": true,\n      \"Latitude\": 1597.5645507239976,\n      \"Longitude\": 670.8139663400991,\n      \"ADACopmliant\": false,\n      \"ImageUrl\": \"string\"\n    }\n  ],\n  \"Latitude\": 1321.5785640556821,\n  \"Longitude\": 2106.053654781811,\n  \"Floors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"Features\": [\n    {\n      \"Key\": \"string\",\n      \"Value\": {\n        \"Name\": \"string\",\n        \"Floors\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    },\n    {\n      \"Key\": \"string\",\n      \"Value\": {\n        \"Name\": \"string\",\n        \"Floors\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    }\n  ],\n  \"ShortName\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "59209fe7-91f2-4664-9ec7-f35b2b68114e",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "wayfinidng",
+                    "buildng"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "adaOnly",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "lat",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "long",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "89536d57-a562-45e4-ad9c-1311eabc49d8",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "wayfinidng",
+                    "buildng"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "adaOnly",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "lat",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "long",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f67f2844-e7c9-4631-9da5-15d519f8d707",
+              "name": "Internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "wayfinidng",
+                    "buildng"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "adaOnly",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "lat",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "long",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1f8eaca5-53c3-43e5-bd72-0303fb3c38c7",
+          "name": "Gets all campus buildings",
+          "request": {
+            "name": "Gets all campus buildings",
+            "description": {
+              "content": "Gets all campus buildings with coordinates, entrances, floors and features\n\n**Auth:** Requires valid first-party service account token with `get_building` permission\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "wayfinding",
+                "buildings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d7fb77e1-0411-4907-8c43-2cec682fe738",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "wayfinding",
+                    "buildings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"ID\": \"string\",\n    \"Number\": \"string\",\n    \"Name\": \"string\",\n    \"FullAddress\": \"string\",\n    \"Address1\": \"string\",\n    \"Address2\": \"string\",\n    \"City\": \"string\",\n    \"State\": \"string\",\n    \"ZipCode\": \"string\",\n    \"ImageURL\": \"string\",\n    \"MailCode\": \"string\",\n    \"Entrances\": [\n      {\n        \"ID\": \"string\",\n        \"Name\": \"string\",\n        \"Available\": true,\n        \"Latitude\": 6292.732301931608,\n        \"Longitude\": 4754.859422051842,\n        \"ADACopmliant\": true,\n        \"ImageUrl\": \"string\"\n      },\n      {\n        \"ID\": \"string\",\n        \"Name\": \"string\",\n        \"Available\": false,\n        \"Latitude\": 8779.744012622341,\n        \"Longitude\": 3608.191945296236,\n        \"ADACopmliant\": false,\n        \"ImageUrl\": \"string\"\n      }\n    ],\n    \"Latitude\": 2036.872351947292,\n    \"Longitude\": 3849.660302337423,\n    \"Floors\": [\n      \"string\",\n      \"string\"\n    ],\n    \"Features\": [\n      {\n        \"Key\": \"string\",\n        \"Value\": {\n          \"Name\": \"string\",\n          \"Floors\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      },\n      {\n        \"Key\": \"string\",\n        \"Value\": {\n          \"Name\": \"string\",\n          \"Floors\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      }\n    ],\n    \"ShortName\": \"string\"\n  },\n  {\n    \"ID\": \"string\",\n    \"Number\": \"string\",\n    \"Name\": \"string\",\n    \"FullAddress\": \"string\",\n    \"Address1\": \"string\",\n    \"Address2\": \"string\",\n    \"City\": \"string\",\n    \"State\": \"string\",\n    \"ZipCode\": \"string\",\n    \"ImageURL\": \"string\",\n    \"MailCode\": \"string\",\n    \"Entrances\": [\n      {\n        \"ID\": \"string\",\n        \"Name\": \"string\",\n        \"Available\": true,\n        \"Latitude\": 4324.243941638971,\n        \"Longitude\": 6100.928530201097,\n        \"ADACopmliant\": false,\n        \"ImageUrl\": \"string\"\n      },\n      {\n        \"ID\": \"string\",\n        \"Name\": \"string\",\n        \"Available\": true,\n        \"Latitude\": 4050.184135674324,\n        \"Longitude\": 2786.3658884491138,\n        \"ADACopmliant\": false,\n        \"ImageUrl\": \"string\"\n      }\n    ],\n    \"Latitude\": 5386.050288305373,\n    \"Longitude\": 1737.9270780545219,\n    \"Floors\": [\n      \"string\",\n      \"string\"\n    ],\n    \"Features\": [\n      {\n        \"Key\": \"string\",\n        \"Value\": {\n          \"Name\": \"string\",\n          \"Floors\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      },\n      {\n        \"Key\": \"string\",\n        \"Value\": {\n          \"Name\": \"string\",\n          \"Floors\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      }\n    ],\n    \"ShortName\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a067a426-e560-4aa2-be9f-106f4bd4d81f",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "wayfinding",
+                    "buildings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fd79e169-314a-4028-8ece-cb43a3d219a6",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "wayfinding",
+                    "buildings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "59af1e50-3920-41be-a750-5b369068dee2",
+              "name": "Internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "wayfinding",
+                    "buildings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "324d9182-8a34-408d-8d08-4ed11e6121e2",
+          "name": "Returns the markup required to display the requested floor plan.",
+          "request": {
+            "name": "Returns the markup required to display the requested floor plan.",
+            "description": {
+              "content": "Returns the markup and data structures needed to display an svg of the request floor plan.\n\n**Auth:** Requires valid first-party service account token with `get_building` permission\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "wayfinding",
+                "floorplan"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "bldgid",
+                  "value": "<string>",
+                  "description": "(Required) The building id for the selected building"
+                },
+                {
+                  "disabled": false,
+                  "key": "floor",
+                  "value": "<string>",
+                  "description": "(Required) Identifier of the floor to retrieve."
+                },
+                {
+                  "disabled": false,
+                  "key": "markers",
+                  "value": "<number>",
+                  "description": "If omitted, the value is set to \"on\". Indicates the initial state of all the marker on the floor plan. Values are \"on\" or \"off\"."
+                },
+                {
+                  "disabled": false,
+                  "key": "highlites",
+                  "value": "<number>",
+                  "description": "If omitted, the values is set to \"on\". Indicates the initial state of all the highlites on the flloor plan. Values are \"on\" or \"off\"."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "04983060-da32-40d3-84af-29ab6a35e97d",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "wayfinding",
+                    "floorplan"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "bldgid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "floor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "markers",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "highlites",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"BuildingNumber\": \"string\",\n  \"BuildingFloor\": \"string\",\n  \"SVGEncoding\": \"string\",\n  \"SVG\": \"string\",\n  \"Markers\": [\n    {\n      \"RenderID\": \"string\",\n      \"Label\": \"string\",\n      \"Description\": \"string\",\n      \"Display\": \"string\",\n      \"Icon\": \"string\"\n    },\n    {\n      \"RenderID\": \"string\",\n      \"Label\": \"string\",\n      \"Description\": \"string\",\n      \"Display\": \"string\",\n      \"Icon\": \"string\"\n    }\n  ],\n  \"Features\": [\n    {\n      \"RenderID\": \"string\",\n      \"Label\": \"string\",\n      \"Color\": \"string\",\n      \"Display\": \"string\"\n    },\n    {\n      \"RenderID\": \"string\",\n      \"Label\": \"string\",\n      \"Color\": \"string\",\n      \"Display\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "70ef0542-4d3a-42b6-bcac-acf1973c217a",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "wayfinding",
+                    "floorplan"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "bldgid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "floor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "markers",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "highlites",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6988ba44-7a17-406c-86d8-9f91e0f21f8e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "wayfinding",
+                    "floorplan"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "bldgid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "floor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "markers",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "highlites",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cf0f4a4f-30da-4461-9cdd-131736be2c11",
+              "name": "Internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "wayfinding",
+                    "floorplan"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "bldgid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "floor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "markers",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "highlites",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c56d2ef6-318b-4595-a25d-aa5534672c7d",
+          "name": "Returns a list of buildings matching the requested name",
+          "request": {
+            "name": "Returns a list of buildings matching the requested name",
+            "description": {
+              "content": "Returns every building in the campus buildings list that contains the name parameter in the building name property. \nThe response is a map where keys are building names and values are building objects.\n\n**Verbosity Levels:**\n- **v=1 or omitted**: Returns CompactBuilding objects (default)\n- **v=2**: Returns full Building objects with complete details\n\n**Auth:** Requires valid first-party service account token with `get_building` permission\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "wayfinding",
+                "searchbuildings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) String to search for in the building name (case-insensitive)"
+                },
+                {
+                  "disabled": false,
+                  "key": "v",
+                  "value": "1",
+                  "description": "Verbosity level. Set to 1 or omit for compact buildings, set to 2 for full building details"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ea4fc9dc-d77b-4e64-827f-9d3349c192ea",
+              "name": "Success - Returns a map of building names to building objects",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "wayfinding",
+                    "searchbuildings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "Illini"
+                    },
+                    {
+                      "key": "v",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Illini Union\": {\n    \"ID\": \"illini_union\",\n    \"Name\": \"Illini Union\",\n    \"Number\": \"1401\",\n    \"FullAddress\": \"1401 W Green St, Urbana, IL 61801\",\n    \"ImageURL\": \"https://example.com/illini_union.jpg\",\n    \"ShortName\": \"Union\",\n    \"Latitude\": 40.1095,\n    \"Longitude\": -88.2272\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "05353fc6-2250-4308-bc00-c3f9888bd619",
+              "name": "Bad request - Missing or invalid name parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "wayfinding",
+                    "searchbuildings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "Illini"
+                    },
+                    {
+                      "key": "v",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"invalid\",\n  \"type\": \"query_param\",\n  \"args\": [\n    \"name\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0c4244d1-024d-466a-809f-fb6bbebbb980",
+              "name": "Unauthorized - Invalid or missing authentication token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "wayfinding",
+                    "searchbuildings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "Illini"
+                    },
+                    {
+                      "key": "v",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f346de6c-e1cb-4b83-b54a-4dc06488d35a",
+              "name": "Not found - No buildings match the search criteria",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "wayfinding",
+                    "searchbuildings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "Illini"
+                    },
+                    {
+                      "key": "v",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "411d20bf-08d7-43f3-8dd5-1af62250f6cc",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "wayfinding",
+                    "searchbuildings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "Illini"
+                    },
+                    {
+                      "key": "v",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ae7c191c-900e-48dd-962e-ca7203ac5b83",
+          "name": "Returns a list of current term sessions",
+          "request": {
+            "name": "Returns a list of current term sessions",
+            "description": {
+              "content": "Based on the current date, returns 4 term sessions for campus. If the current month is between 6 and 12, the current fall term is assumed and returned with the upcomign spring semester, the last summer semster and the previous spring semester. If the current month is less than 6, returns the current spring semester, the upcoming summer and fall semesters and the previous fall semester.\n\n**Auth:** Requires valid first-party service account token with `get_building` permission\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "termsessions",
+                "listcurrent"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "147ac0a2-35c6-45ad-90a0-50d7aa4ce19c",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "termsessions",
+                    "listcurrent"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"term\": \"string\",\n    \"termid\": \"string\",\n    \"is_current\": true\n  },\n  {\n    \"term\": \"string\",\n    \"termid\": \"string\",\n    \"is_current\": true\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "900cdc33-171e-4d9e-abd8-bd9ed751bc85",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "termsessions",
+                    "listcurrent"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f14c468d-6d12-4d23-9775-c1af1b34992c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "termsessions",
+                    "listcurrent"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1e06f0a9-9ee7-42a1-ba5e-62d9a5542edc",
+              "name": "Internal error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "termsessions",
+                    "listcurrent"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4f3be0f9-a152-4d52-9539-3192f06b99fd",
+          "name": "Get list of all campus laundry rooms",
+          "request": {
+            "name": "Get list of all campus laundry rooms",
+            "description": {
+              "content": "Returns a list of all laundry rooms available on campus with their basic information including ID, name, status, and location details.\n\n**Auth:** Requires valid first-party service account token with appropriate permissions\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "laundry",
+                "rooms"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ebfe7690-b820-4a5c-a05b-fec4ce1f620f",
+              "name": "Success - Returns organization with list of laundry rooms",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "laundry",
+                    "rooms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"SchoolName\": \"University of Illinois at Urbana-Champaign\",\n  \"LaundryRooms\": [\n    {\n      \"ID\": 1,\n      \"Name\": \"Illini Tower Laundry\",\n      \"Status\": \"active\",\n      \"Location\": {\n        \"Latitude\": 40.1095,\n        \"Longitude\": -88.2272,\n        \"Floor\": 1\n      }\n    },\n    {\n      \"ID\": 2,\n      \"Name\": \"Bromley Hall Laundry\",\n      \"Status\": \"active\",\n      \"Location\": {\n        \"Latitude\": 40.11,\n        \"Longitude\": -88.228,\n        \"Floor\": 2\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "594428e6-6d28-4b5c-91a1-b0f69429be54",
+              "name": "Unauthorized - Invalid or missing authentication token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "laundry",
+                    "rooms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bd67b5da-f078-402b-95ac-bbada278480c",
+              "name": "Not found - No laundry rooms available",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "laundry",
+                    "rooms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "51034b55-a73e-4c7e-9c58-6daf75f4e5bc",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "laundry",
+                    "rooms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "40b9b945-3e31-47f9-93b7-52ef9f56a5eb",
+          "name": "Get detailed information about a specific laundry room",
+          "request": {
+            "name": "Get detailed information about a specific laundry room",
+            "description": {
+              "content": "Returns detailed information about a specific laundry room including the number of washers and dryers, \na list of all appliances (machines) in the room with their current status, and location details.\n\n**Auth:** Requires valid first-party service account token with appropriate permissions\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "laundry",
+                "room"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "(Required) The unique identifier of the laundry room"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a1975e92-eedc-43c0-88da-0af069add9cd",
+              "name": "Success - Returns detailed laundry room information",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "laundry",
+                    "room"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"NumWashers\": 8,\n  \"NumDryers\": 6,\n  \"RoomName\": \"Illini Tower Laundry\",\n  \"CampusName\": \"University of Illinois at Urbana-Champaign\",\n  \"Location\": {\n    \"Latitude\": 40.1095,\n    \"Longitude\": -88.2272,\n    \"Floor\": 1\n  },\n  \"Appliances\": [\n    {\n      \"ID\": \"washer_001\",\n      \"Status\": \"available\",\n      \"ApplianceType\": \"washer\",\n      \"AverageCycleTime\": 45,\n      \"TimeRemaining\": null,\n      \"Label\": \"Washer 1\"\n    },\n    {\n      \"ID\": \"dryer_001\",\n      \"Status\": \"in_use\",\n      \"ApplianceType\": \"dryer\",\n      \"AverageCycleTime\": 60,\n      \"TimeRemaining\": 15,\n      \"Label\": \"Dryer 1\"\n    },\n    {\n      \"ID\": \"washer_002\",\n      \"Status\": \"maintenance\",\n      \"ApplianceType\": \"washer\",\n      \"AverageCycleTime\": 45,\n      \"TimeRemaining\": null,\n      \"Label\": \"Washer 2\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "20fabc18-4fda-4de9-aa4c-3092878eac4c",
+              "name": "Bad request - Missing or invalid room ID parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "laundry",
+                    "room"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"missing\",\n  \"type\": \"query_param\",\n  \"args\": [\n    \"id\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a2948b1e-bac2-482d-b1ca-dcd549ddbb1c",
+              "name": "Unauthorized - Invalid or missing authentication token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "laundry",
+                    "room"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "36f162a6-c293-47ba-84ae-6077db40664d",
+              "name": "Not found - Laundry room with specified ID not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "laundry",
+                    "room"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "18fc2963-819f-4fe4-b25f-5dd6650502b7",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "laundry",
+                    "room"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ecfeaf65-7e75-4cb5-a679-19016d40fbab",
+          "name": "Initialize a service request for a laundry machine",
+          "request": {
+            "name": "Initialize a service request for a laundry machine",
+            "description": {
+              "content": "Returns the problem codes and pending service request status for a specific laundry machine. \nThis endpoint is used to initialize a service request by providing the available problem codes \nand checking if there's already an open issue for the machine.\n\n**Auth:** Requires valid first-party service account token with appropriate permissions\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "laundry",
+                "initrequest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "machineid",
+                  "value": "<string>",
+                  "description": "(Required) The unique service tag ID of the laundry machine"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "fd220427-dde2-4f4f-b0b5-0e54c391655e",
+              "name": "Success - Returns machine request details and available problem codes",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "laundry",
+                    "initrequest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "machineid",
+                      "value": "washer_001"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"MachineID\": \"washer_001\",\n  \"Message\": \"Machine is available for service requests\",\n  \"OpenIssue\": false,\n  \"ProblemCodes\": [\n    \"not_spinning\",\n    \"not_draining\",\n    \"leaking\",\n    \"not_starting\",\n    \"error_code\",\n    \"other\"\n  ],\n  \"MachineType\": \"washer\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5521b417-d0d1-4a51-a9d7-18f95d9862ba",
+              "name": "Bad request - Missing or invalid machine ID parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "laundry",
+                    "initrequest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "machineid",
+                      "value": "washer_001"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"missing\",\n  \"type\": \"query_param\",\n  \"args\": [\n    \"machineid\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c9d2d017-eafa-4553-9b46-102ea1fb7305",
+              "name": "Unauthorized - Invalid or missing authentication token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "laundry",
+                    "initrequest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "machineid",
+                      "value": "washer_001"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "63a02cd1-918f-4519-88db-e7d8f102b529",
+              "name": "Not found - Machine with specified ID not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "laundry",
+                    "initrequest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "machineid",
+                      "value": "washer_001"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "349491a1-69c5-477c-8792-9bc6cfc1bd9d",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "laundry",
+                    "initrequest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "machineid",
+                      "value": "washer_001"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5938688c-6cb6-4aea-b367-5d922a4578a8",
+          "name": "Submit a service request for a laundry machine",
+          "request": {
+            "name": "Submit a service request for a laundry machine",
+            "description": {
+              "content": "Submits a service request for a specific laundry machine. This endpoint requires detailed information \nabout the problem and contact information for the person submitting the request.\n\n**Required Fields:** machineid, problemcode, firstname, lastname, email\n**Optional Fields:** comments, phone\n\n**Auth:** Requires valid first-party service account token with appropriate permissions\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "laundry",
+                "requestservice"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"machineid\": \"<string>\",\n  \"problemcode\": \"<string>\",\n  \"firstname\": \"<string>\",\n  \"lastname\": \"<string>\",\n  \"email\": \"<email>\",\n  \"comments\": \"<string>\",\n  \"phone\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a0e80245-edf2-47ec-8cfa-cb0ec6759094",
+              "name": "Success - Service request submitted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "laundry",
+                    "requestservice"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"machineid\": \"washer_001\",\n  \"problemcode\": \"not_spinning\",\n  \"comments\": \"Machine makes noise but doesn't spin\",\n  \"firstname\": \"John\",\n  \"lastname\": \"Doe\",\n  \"phone\": \"555-123-4567\",\n  \"email\": \"john.doe@example.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"Service request submitted successfully\",\n  \"RequestNumber\": \"SR-2024-001234\",\n  \"Status\": \"submitted\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b420258e-afc6-4b15-a355-2bc6b23e76cb",
+              "name": "Bad request - Missing required fields or invalid data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "laundry",
+                    "requestservice"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"machineid\": \"washer_001\",\n  \"problemcode\": \"not_spinning\",\n  \"comments\": \"Machine makes noise but doesn't spin\",\n  \"firstname\": \"John\",\n  \"lastname\": \"Doe\",\n  \"phone\": \"555-123-4567\",\n  \"email\": \"john.doe@example.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"missing\",\n  \"type\": \"request_body\",\n  \"args\": [\n    \"machineid\",\n    \"problemcode\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9b8d13fe-95db-4897-9d36-7e184c83ef3e",
+              "name": "Unauthorized - Invalid or missing authentication token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "laundry",
+                    "requestservice"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"machineid\": \"washer_001\",\n  \"problemcode\": \"not_spinning\",\n  \"comments\": \"Machine makes noise but doesn't spin\",\n  \"firstname\": \"John\",\n  \"lastname\": \"Doe\",\n  \"phone\": \"555-123-4567\",\n  \"email\": \"john.doe@example.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "445f932e-96e9-42c2-85c3-22ac5a657340",
+              "name": "Not found - Machine with specified ID not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "laundry",
+                    "requestservice"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"machineid\": \"washer_001\",\n  \"problemcode\": \"not_spinning\",\n  \"comments\": \"Machine makes noise but doesn't spin\",\n  \"firstname\": \"John\",\n  \"lastname\": \"Doe\",\n  \"phone\": \"555-123-4567\",\n  \"email\": \"john.doe@example.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d167e32c-f883-47f6-85e3-327187529c79",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "laundry",
+                    "requestservice"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"machineid\": \"washer_001\",\n  \"problemcode\": \"not_spinning\",\n  \"comments\": \"Machine makes noise but doesn't spin\",\n  \"firstname\": \"John\",\n  \"lastname\": \"Doe\",\n  \"phone\": \"555-123-4567\",\n  \"email\": \"john.doe@example.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "07b0bb31-1e89-40f1-b0cb-118735ed005c",
+          "name": "Get contact information for a person",
+          "request": {
+            "name": "Get contact information for a person",
+            "description": {
+              "content": "Returns comprehensive contact information for a person including name, permanent and mailing addresses, \nphone numbers, and emergency contact information.\n\n**Authentication:** Requires both RokwireAuth and ExternalAuth tokens\n**Mode Parameter:** \n- \"0\" (default): Standard contact information\n- \"1\": Enhanced contact information (for specific UINs)\n\n**Auth:** Requires valid first-party service account token and external authorization token\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "person",
+                "contactinfo"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "(Required) User ID (UIN) of the person"
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "0",
+                  "description": "Mode for contact information retrieval (0=standard, 1=enhanced)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6cfcc6e0-3fd5-4a76-9781-c5d9e2eeb41d",
+              "name": "Success - Returns person's contact information",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "person",
+                    "contactinfo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "123456789"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uin\": \"123456789\",\n  \"FirstName\": \"John\",\n  \"LastName\": \"Doe\",\n  \"PreferredName\": \"Johnny\",\n  \"MailingAddress\": {\n    \"Type\": \"MA\",\n    \"Street1\": \"123 Main St\",\n    \"City\": \"Urbana\",\n    \"StateAbbr\": \"IL\",\n    \"StateName\": \"Illinois\",\n    \"ZipCode\": \"61801\",\n    \"County\": \"Champaign\",\n    \"Phone\": {\n      \"AreaCode\": \"217\",\n      \"Number\": \"333-1234\"\n    }\n  },\n  \"PermAddress\": {\n    \"Type\": \"PR\",\n    \"Street1\": \"456 Oak Ave\",\n    \"City\": \"Chicago\",\n    \"StateAbbr\": \"IL\",\n    \"StateName\": \"Illinois\",\n    \"ZipCode\": \"60601\",\n    \"County\": \"Cook\",\n    \"Phone\": {\n      \"AreaCode\": \"312\",\n      \"Number\": \"555-6789\"\n    }\n  },\n  \"EmergencyContacts\": [\n    {\n      \"Priority\": \"1\",\n      \"RelationShip\": {\n        \"Code\": \"PAR\",\n        \"Name\": \"Parent\"\n      },\n      \"FirstName\": \"Jane\",\n      \"LastName\": \"Doe\",\n      \"Address\": {\n        \"Type\": \"PR\",\n        \"Street1\": \"456 Oak Ave\",\n        \"City\": \"Chicago\",\n        \"StateAbbr\": \"IL\",\n        \"StateName\": \"Illinois\",\n        \"ZipCode\": \"60601\",\n        \"County\": \"Cook\",\n        \"Phone\": {\n          \"AreaCode\": \"312\",\n          \"Number\": \"555-6789\"\n        }\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fb4629d4-dce9-4973-beed-6e71e2b83914",
+              "name": "Bad request - Missing required parameters or invalid external token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "person",
+                    "contactinfo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "123456789"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"missing\",\n  \"type\": \"header\",\n  \"args\": [\n    \"external auth token\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0b5c35ef-591b-4c76-b8d4-6870b80dbbc0",
+              "name": "Unauthorized - Invalid or missing authentication token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "person",
+                    "contactinfo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "123456789"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d968285f-9794-463b-b7e4-6039e4b52b50",
+              "name": "Forbidden - Insufficient permissions or invalid external token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "person",
+                    "contactinfo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "123456789"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6e0b9f22-08df-4c9e-a91d-93e5448d9a36",
+              "name": "Not found - Person with specified UIN not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "person",
+                    "contactinfo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "123456789"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b43709ca-8512-4fab-9e8b-943149ca252e",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "person",
+                    "contactinfo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "123456789"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d28485d1-bf91-45b6-886a-336ee5ee7bba",
+          "name": "Get registered courses for GIES students",
+          "request": {
+            "name": "Get registered courses for GIES students",
+            "description": {
+              "content": "Returns a list of registered courses for GIES (Gies College of Business) students. \nThis endpoint provides course information including term, subject, number, section, \ntitle, and instructor details.\n\n**Authentication:** Requires both RokwireAuth and ExternalAuth tokens\n**Note:** This endpoint is specifically for GIES students and may return different \ncourse information compared to the general student courses endpoint.\n\n**Auth:** Requires valid first-party service account token and external authorization token\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "person",
+                "giescourses"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "(Required) User ID (UIN) of the GIES student"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5239b4ef-0196-424e-82a5-cc1f90e58f95",
+              "name": "Success - Returns list of GIES courses",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "person",
+                    "giescourses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "123456789"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"term\": \"2024-FA\",\n    \"subject\": \"BADM\",\n    \"number\": \"310\",\n    \"section\": \"A\",\n    \"title\": \"Principles of Marketing\",\n    \"instructor\": \"Dr. Smith\"\n  },\n  {\n    \"term\": \"2024-FA\",\n    \"subject\": \"BADM\",\n    \"number\": \"320\",\n    \"section\": \"B\",\n    \"title\": \"Business Statistics\",\n    \"instructor\": \"Dr. Johnson\"\n  },\n  {\n    \"term\": \"2024-FA\",\n    \"subject\": \"FIN\",\n    \"number\": \"300\",\n    \"section\": \"C\",\n    \"title\": \"Financial Management\",\n    \"instructor\": \"Dr. Williams\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "498064ae-6ad6-48d1-a56f-8ebf3e2f920c",
+              "name": "Bad request - Missing required parameters or invalid external token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "person",
+                    "giescourses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "123456789"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"invalid\",\n  \"type\": \"query_param\",\n  \"args\": [\n    \"id\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0ea29d27-cd93-4935-b8f3-a742bdd7271c",
+              "name": "Unauthorized - Invalid or missing authentication token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "person",
+                    "giescourses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "123456789"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "676a480f-51b5-471d-bca0-06ca4dbe54c6",
+              "name": "Forbidden - Insufficient permissions or invalid external token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "person",
+                    "giescourses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "123456789"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9c79b61a-2104-47a3-828a-5be46c555b36",
+              "name": "Not found - Student with specified UIN not found or no courses available",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "person",
+                    "giescourses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "123456789"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b96faf06-e04c-4de6-a706-b9d7d46367cf",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "person",
+                    "giescourses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "123456789"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "45b35c32-3295-4b5f-963d-aa2f9a05a62d",
+          "name": "Get registered courses for a student",
+          "request": {
+            "name": "Get registered courses for a student",
+            "description": {
+              "content": "Returns a comprehensive list of registered courses for a student including detailed course information, \nsection details, meeting times, locations, and building information. This endpoint provides the most \ncomplete course data compared to other course endpoints.\n\n**Authentication:** Requires both RokwireAuth and ExternalAuth tokens\n**Location Enhancement:** Automatically enriches course data with building location information\n**ADA Support:** Optional ADA-only building filtering for accessibility considerations\n\n**Auth:** Requires valid first-party service account token and external authorization token\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "person",
+                "studentcourses"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "(Required) User ID (UIN) of the student"
+                },
+                {
+                  "disabled": false,
+                  "key": "termid",
+                  "value": "<string>",
+                  "description": "Term ID for the academic term (e.g., \"120258\" for Fall 2025). If not provided, defaults to the current term."
+                },
+                {
+                  "disabled": false,
+                  "key": "lat",
+                  "value": "<float>",
+                  "description": "Latitude coordinate for location-based building information (optional)"
+                },
+                {
+                  "disabled": false,
+                  "key": "long",
+                  "value": "<float>",
+                  "description": "Longitude coordinate for location-based building information (optional)"
+                },
+                {
+                  "disabled": false,
+                  "key": "adaOnly",
+                  "value": "false",
+                  "description": "Filter buildings to show only ADA-compliant entrances (optional)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e186d3be-f67a-49f0-9683-c4adca14c6a5",
+              "name": "Success - Returns list of student courses with building information",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "person",
+                    "studentcourses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "123456789"
+                    },
+                    {
+                      "key": "termid",
+                      "value": "120258"
+                    },
+                    {
+                      "key": "lat",
+                      "value": "40.1095"
+                    },
+                    {
+                      "key": "long",
+                      "value": "-88.2272"
+                    },
+                    {
+                      "key": "adaOnly",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"coursetitle\": \"Introduction to Computer Science\",\n    \"courseshortname\": \"CS 101\",\n    \"coursenumber\": \"CS 101\",\n    \"instructionmethod\": \"In Person\",\n    \"coursesection\": {\n      \"days\": \"MWF\",\n      \"meeting_dates_or_range\": \"Aug 26 - Dec 13\",\n      \"room\": \"1001\",\n      \"buildingname\": \"Siebel Center for Computer Science\",\n      \"buildingid\": \"siebel\",\n      \"instructiontype\": \"Lecture\",\n      \"instructor\": \"Dr. Smith\",\n      \"start_time\": \"09:00\",\n      \"endtime\": \"09:50\",\n      \"building\": {\n        \"ID\": \"siebel\",\n        \"Name\": \"Siebel Center for Computer Science\",\n        \"Number\": \"201\",\n        \"FullAddress\": \"201 N Goodwin Ave, Urbana, IL 61801\",\n        \"Address1\": \"201 N Goodwin Ave\",\n        \"Address2\": \"\",\n        \"City\": \"Urbana\",\n        \"State\": \"IL\",\n        \"ZipCode\": \"61801\",\n        \"ImageURL\": \"https://example.com/siebel.jpg\",\n        \"MailCode\": \"MC-258\",\n        \"Latitude\": 40.1135,\n        \"Longitude\": -88.2244,\n        \"Floors\": [\n          \"1\",\n          \"2\",\n          \"3\",\n          \"4\"\n        ],\n        \"Entrances\": [\n          {\n            \"ID\": \"9bd26229-f95e-4b83-bcd3-34ee91f75b5b\",\n            \"Name\": \"Main Entrance\",\n            \"ADACompliant\": true,\n            \"Available\": true,\n            \"ImageURL\": \"https://example.com/entrance1.jpg\",\n            \"Latitude\": 40.1135,\n            \"Longitude\": -88.2244\n          },\n          {\n            \"ID\": \"entrance2\",\n            \"Name\": \"Side Entrance\",\n            \"ADACompliant\": false,\n            \"Available\": true,\n            \"ImageURL\": \"https://example.com/entrance2.jpg\",\n            \"Latitude\": 40.1136,\n            \"Longitude\": -88.2245\n          }\n        ],\n        \"Features\": [\n          {\n            \"Key\": \"ADA_ENTRANCE\",\n            \"Value\": {\n              \"Name\": \"ADA Entrance\",\n              \"Floors\": [\n                \"01\"\n              ]\n            }\n          },\n          {\n            \"Key\": \"RR-ALLGENDER\",\n            \"Value\": {\n              \"Name\": \"All Gender Restroom\",\n              \"Floors\": [\n                \"02\"\n              ]\n            }\n          }\n        ]\n      },\n      \"courseReferenceNumber\": \"12345\",\n      \"course_section\": \"A\"\n    }\n  },\n  {\n    \"coursetitle\": \"Calculus I\",\n    \"courseshortname\": \"MATH 221\",\n    \"coursenumber\": \"MATH 221\",\n    \"instructionmethod\": \"In Person\",\n    \"coursesection\": {\n      \"days\": \"TR\",\n      \"meeting_dates_or_range\": \"Aug 26 - Dec 13\",\n      \"room\": \"314\",\n      \"buildingname\": \"Altgeld Hall\",\n      \"buildingid\": \"altgeld\",\n      \"instructiontype\": \"Lecture\",\n      \"instructor\": \"Dr. Johnson\",\n      \"start_time\": \"14:00\",\n      \"endtime\": \"15:20\",\n      \"building\": {\n        \"ID\": \"altgeld\",\n        \"Name\": \"Altgeld Hall\",\n        \"Number\": \"1409\",\n        \"FullAddress\": \"1409 W Green St, Urbana, IL 61801\",\n        \"Address1\": \"1409 W Green St\",\n        \"Address2\": \"\",\n        \"City\": \"Urbana\",\n        \"State\": \"IL\",\n        \"ZipCode\": \"61801\",\n        \"ImageURL\": \"https://example.com/altgeld.jpg\",\n        \"MailCode\": \"MC-382\",\n        \"Latitude\": 40.1095,\n        \"Longitude\": -88.2272,\n        \"Floors\": [\n          \"1\",\n          \"2\",\n          \"3\"\n        ],\n        \"Entrances\": [\n          {\n            \"ID\": \"9bd26229-f95e-4b83-bcd3-34ee91f75b5b\",\n            \"Name\": \"Main Entrance\",\n            \"ADACompliant\": true,\n            \"Available\": true,\n            \"ImageURL\": \"https://example.com/entrance1.jpg\",\n            \"Latitude\": 40.1135,\n            \"Longitude\": -88.2244\n          },\n          {\n            \"ID\": \"entrance2\",\n            \"Name\": \"Side Entrance\",\n            \"ADACompliant\": false,\n            \"Available\": true,\n            \"ImageURL\": \"https://example.com/entrance2.jpg\",\n            \"Latitude\": 40.1136,\n            \"Longitude\": -88.2245\n          }\n        ],\n        \"Features\": [\n          {\n            \"Key\": \"ADA_ENTRANCE\",\n            \"Value\": {\n              \"Name\": \"ADA Entrance\",\n              \"Floors\": [\n                \"01\"\n              ]\n            }\n          },\n          {\n            \"Key\": \"RR-ALLGENDER\",\n            \"Value\": {\n              \"Name\": \"All Gender Restroom\",\n              \"Floors\": [\n                \"02\"\n              ]\n            }\n          }\n        ]\n      },\n      \"courseReferenceNumber\": \"67890\",\n      \"course_section\": \"B\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "410e48ab-4b3b-437c-a0b7-03592aa2a3cd",
+              "name": "Bad request - Missing required parameters or invalid external token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "person",
+                    "studentcourses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "123456789"
+                    },
+                    {
+                      "key": "termid",
+                      "value": "120258"
+                    },
+                    {
+                      "key": "lat",
+                      "value": "40.1095"
+                    },
+                    {
+                      "key": "long",
+                      "value": "-88.2272"
+                    },
+                    {
+                      "key": "adaOnly",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"missing\",\n  \"type\": \"query_param\",\n  \"args\": [\n    \"id\",\n    \"termid\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8d260122-e1b1-4015-93b5-6c36e18001e8",
+              "name": "Unauthorized - Invalid or missing authentication token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "person",
+                    "studentcourses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "123456789"
+                    },
+                    {
+                      "key": "termid",
+                      "value": "120258"
+                    },
+                    {
+                      "key": "lat",
+                      "value": "40.1095"
+                    },
+                    {
+                      "key": "long",
+                      "value": "-88.2272"
+                    },
+                    {
+                      "key": "adaOnly",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "52bc3235-3196-424a-a302-bfb8f7eee02e",
+              "name": "Forbidden - Insufficient permissions or invalid external token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "person",
+                    "studentcourses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "123456789"
+                    },
+                    {
+                      "key": "termid",
+                      "value": "120258"
+                    },
+                    {
+                      "key": "lat",
+                      "value": "40.1095"
+                    },
+                    {
+                      "key": "long",
+                      "value": "-88.2272"
+                    },
+                    {
+                      "key": "adaOnly",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e8e554bb-1978-4d0c-9d77-5d460a04eccc",
+              "name": "Not found - Student with specified UIN not found or no courses available for the term",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "person",
+                    "studentcourses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "123456789"
+                    },
+                    {
+                      "key": "termid",
+                      "value": "120258"
+                    },
+                    {
+                      "key": "lat",
+                      "value": "40.1095"
+                    },
+                    {
+                      "key": "long",
+                      "value": "-88.2272"
+                    },
+                    {
+                      "key": "adaOnly",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "64e68bf0-547b-422d-8609-7c440f2a20df",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "person",
+                    "studentcourses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "123456789"
+                    },
+                    {
+                      "key": "termid",
+                      "value": "120258"
+                    },
+                    {
+                      "key": "lat",
+                      "value": "40.1095"
+                    },
+                    {
+                      "key": "long",
+                      "value": "-88.2272"
+                    },
+                    {
+                      "key": "adaOnly",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.rokwire.illinois.edu/core",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "cc185b7d-39d6-4117-bd4c-1df5d30cf29f",
+    "name": "Rokwire Core Building Block Admin Client API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Core Building Block API Documentation",
+      "type": "text/plain"
+    }
+  }
+}

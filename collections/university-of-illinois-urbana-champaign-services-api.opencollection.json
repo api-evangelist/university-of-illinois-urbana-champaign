@@ -1,0 +1,982 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Rokwire Core Building Block Admin Services API",
+    "version": "1.62.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Services",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Login",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/services/auth/login",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Login using credentials to retrieve access token, refresh token, and user data\n"
+        },
+        {
+          "info": {
+            "name": "MFA",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/services/auth/mfa",
+            "params": [
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Login state"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Verify multi-factor authentication credentials to complete login\n"
+        },
+        {
+          "info": {
+            "name": "Refresh",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/services/auth/refresh",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Refresh access token using a refresh token\n"
+        },
+        {
+          "info": {
+            "name": "Get SSO login url",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/services/auth/login-url",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieve a pre-formatted SSO login URL\n"
+        },
+        {
+          "info": {
+            "name": "Logout",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/services/auth/logout",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Logouts an account\n"
+        },
+        {
+          "info": {
+            "name": "Validate verification code",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/services/auth/credential/verify",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Credential ID"
+              },
+              {
+                "name": "code",
+                "value": "",
+                "type": "query",
+                "description": "Verification code"
+              }
+            ]
+          },
+          "docs": "Validates verification code to verify account ownership\n"
+        },
+        {
+          "info": {
+            "name": "Send verification code to identifier",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/services/auth/credential/send-verify",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sends verification code to identifier to verify account ownership\n"
+        },
+        {
+          "info": {
+            "name": "Initiate reset credential for a given identifier",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/services/auth/credential/forgot/initiate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Email auth type:\nSends the reset password code for a given identifier\nGenerates a reset code and expiry and sends it to the given identifier \n"
+        },
+        {
+          "info": {
+            "name": "Complete resetting forgotten credential",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/services/auth/credential/forgot/complete",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Complete resetting forgotten credential"
+        },
+        {
+          "info": {
+            "name": "Reset a credential from client application",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/services/auth/credential/update",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Needs user auth token for authorization\n\n**Auth:** Requires token from direct user authentication from recent login\n"
+        },
+        {
+          "info": {
+            "name": "MFA",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/services/auth/verify-mfa",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Verify multi-factor authentication credentials to complete MFA registration\n"
+        },
+        {
+          "info": {
+            "name": "Check if an account already exists",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/services/auth/account/exists",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Account exists checks if an account exists for the provided user identifier and auth type\n"
+        },
+        {
+          "info": {
+            "name": "Check if a client can sign in",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/services/auth/account/can-sign-in",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Checks if a client can sign in to an existing account for the provided user identifier and auth type\n"
+        },
+        {
+          "info": {
+            "name": "Check if a client can link an auth type",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/services/auth/account/can-link",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Checks if a client is able to link a new auth type to an account\n"
+        },
+        {
+          "info": {
+            "name": "Link credentials",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/services/auth/account/auth-type/link",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Link credentials to an existing account\n\n**Auth:** Requires \"authenticated\" auth token\n"
+        },
+        {
+          "info": {
+            "name": "Unlink credentials",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.rokwire.illinois.edu/core/services/auth/account/auth-type/link",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Unlink credentials from an existing account\n\n**Auth:** Requires \"authenticated\" auth token\n"
+        },
+        {
+          "info": {
+            "name": "Authorize service",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/services/auth/authorize-service",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Authorize a third-party service and get a scoped access token that can be used to access its APIs\n\n**Auth:** Requires user auth token\n"
+        },
+        {
+          "info": {
+            "name": "Get service registrations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/services/auth/service-regs",
+            "params": [
+              {
+                "name": "ids",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of service IDs to return registrations for"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns service registration records\n\n**Auth:** Requires auth token\n"
+        },
+        {
+          "info": {
+            "name": "Finds accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/services/accounts",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of accounts to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The index of the first account to return"
+              },
+              {
+                "name": "account-id",
+                "value": "",
+                "type": "query",
+                "description": "The account ID"
+              },
+              {
+                "name": "firstname",
+                "value": "",
+                "type": "query",
+                "description": "The account profile first name"
+              },
+              {
+                "name": "lastname",
+                "value": "",
+                "type": "query",
+                "description": "The account profile last name"
+              },
+              {
+                "name": "auth-type",
+                "value": "",
+                "type": "query",
+                "description": "The auth type"
+              },
+              {
+                "name": "auth-type-identifier",
+                "value": "",
+                "type": "query",
+                "description": "The authentication type identifier"
+              },
+              {
+                "name": "has-permissions",
+                "value": "",
+                "type": "query",
+                "description": "Account has permissions (permissions, roles, or groups) filter"
+              },
+              {
+                "name": "permissions",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of permission names"
+              },
+              {
+                "name": "role-ids",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of role IDs"
+              },
+              {
+                "name": "group-ids",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of group IDs"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Finds accounts using a set of optional search parameters\n\n**Auth:** Requires access token with `get_accounts`, `update_accounts`, or `all_accounts` permission\n"
+        },
+        {
+          "info": {
+            "name": "Create admin account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/services/accounts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new admin account\n\n**Auth:** Requires auth token with `create_accounts` or `all_accounts` permission\n"
+        },
+        {
+          "info": {
+            "name": "Update admin account",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.rokwire.illinois.edu/core/services/accounts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing admin account\n\n**Auth:** Requires auth token with `update_accounts` or `all_accounts` permission\n"
+        },
+        {
+          "info": {
+            "name": "Finds public accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/services/accounts/public",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of accounts to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The index of the first account to return"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "The search for username, firstname, or lastname"
+              },
+              {
+                "name": "username",
+                "value": "",
+                "type": "query",
+                "description": "The username"
+              },
+              {
+                "name": "firstname",
+                "value": "",
+                "type": "query",
+                "description": "The account profile first name"
+              },
+              {
+                "name": "lastname",
+                "value": "",
+                "type": "query",
+                "description": "The account profile last name"
+              },
+              {
+                "name": "following-id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the account being followed"
+              },
+              {
+                "name": "follower-id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the account following"
+              },
+              {
+                "name": "unstructured_properties",
+                "value": "",
+                "type": "query",
+                "description": "Map containing filters by unstructured properties in profile"
+              },
+              {
+                "name": "ids",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of IDs"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Finds public accounts using search, username, first name, and last name, following id, and follower id\n"
+        },
+        {
+          "info": {
+            "name": "Finds public accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/services/v2/accounts/public",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of accounts to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The comma-separated name and ID of the first account to return (lastname,firstname,id)"
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "The sort order to return accounts"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "The search for username, firstname, or lastname"
+              },
+              {
+                "name": "username",
+                "value": "",
+                "type": "query",
+                "description": "The username"
+              },
+              {
+                "name": "firstname",
+                "value": "",
+                "type": "query",
+                "description": "The account profile first name"
+              },
+              {
+                "name": "lastname",
+                "value": "",
+                "type": "query",
+                "description": "The account profile last name"
+              },
+              {
+                "name": "following-id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the account being followed"
+              },
+              {
+                "name": "follower-id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the account following"
+              },
+              {
+                "name": "unstructured_properties",
+                "value": "",
+                "type": "query",
+                "description": "Map containing filters by unstructured properties in profile"
+              },
+              {
+                "name": "ids",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of IDs"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Finds public accounts using search, username, first name, and last name, following id, and follower id\n"
+        },
+        {
+          "info": {
+            "name": "Get account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/services/account",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Gets account\n\n**Auth:** Requires auth token\n"
+        },
+        {
+          "info": {
+            "name": "Delete account",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.rokwire.illinois.edu/core/services/account",
+            "params": [
+              {
+                "name": "apps",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of app_ids"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deletes account\n\n**Auth:** Requires auth token\n"
+        },
+        {
+          "info": {
+            "name": "Get account MFA types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/services/account/mfa",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get MFA types set up for an account\n\n**Auth:** Requires user auth token\n"
+        },
+        {
+          "info": {
+            "name": "Enroll in MFA type",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/services/account/mfa",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Add MFA type to an account\n\n**Auth:** Requires user auth token\n"
+        },
+        {
+          "info": {
+            "name": "Remove MFA type",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.rokwire.illinois.edu/core/services/account/mfa",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Remove MFA type from an account\n\n**Auth:** Requires user auth token\n"
+        },
+        {
+          "info": {
+            "name": "Get preferences",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/services/account/preferences",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns account preferences\n\n**Auth:** Requires auth token\n"
+        },
+        {
+          "info": {
+            "name": "Update account preferences",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.rokwire.illinois.edu/core/services/account/preferences",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates account preferences\n\n**Auth:** Requires auth token\n"
+        },
+        {
+          "info": {
+            "name": "Get user profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/services/account/profile",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a user profile\n\n**Auth:** Requires user auth token\n"
+        },
+        {
+          "info": {
+            "name": "Update user profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.rokwire.illinois.edu/core/services/account/profile",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates a user profile\n\n**Auth:** Requires user auth token\n"
+        },
+        {
+          "info": {
+            "name": "Get user privacy settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/services/account/privacy",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a user's privacy settings\n\n**Auth:** Requires user auth token\n"
+        },
+        {
+          "info": {
+            "name": "Update user privacy",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.rokwire.illinois.edu/core/services/account/privacy",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates a user privacy\n\n**Auth:** Requires user auth token\n"
+        },
+        {
+          "info": {
+            "name": "Get system configs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/services/account/system-configs",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns account system configs\n\n**Auth:** Requires auth token\n"
+        },
+        {
+          "info": {
+            "name": "Update account username",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.rokwire.illinois.edu/core/services/account/username",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update the username associated with the user's account\n\n**Auth:** Requires user access token\n"
+        },
+        {
+          "info": {
+            "name": "Add follower",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/services/account/follow",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Adds follower to specified user\n\n**Auth:** Requires user auth token\n"
+        },
+        {
+          "info": {
+            "name": "Delete a follow relationship",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.rokwire.illinois.edu/core/services/account/follow/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The account ID to stop following"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a follow where subject follows userID\n\n**Auth:** Requires user auth token\n"
+        },
+        {
+          "info": {
+            "name": "Test API..",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/services/test"
+          },
+          "docs": "Test API.."
+        },
+        {
+          "info": {
+            "name": "Gets default app config",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/services/app-configs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the default app config for the highest version that is equal to or less than the provided version\n\n**Auth:** Requires a valid API Key for access.\n"
+        },
+        {
+          "info": {
+            "name": "Gets organization-specific app configs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/services/app-configs/organization",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns the app config for the highest version that is equal to or less than the provided version for the currently authenticated organization\n\n**Auth:** Requires auth token\n"
+        },
+        {
+          "info": {
+            "name": "Gets default app config",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/services/application/configs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the default app config for the highest version that is equal to or less than the provided version\n\n**Auth:** Requires a valid API Key for access.\n"
+        },
+        {
+          "info": {
+            "name": "Gets organization-specific app configs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rokwire.illinois.edu/core/services/application/organization/configs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns the app config for the highest version that is equal to or less than the provided version for the currently authenticated organization\n\n**Auth:** Requires auth token\n"
+        },
+        {
+          "info": {
+            "name": "Get user data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rokwire.illinois.edu/core/services/user-data",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Gets user data\n\n**Auth:** Requires auth token\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
