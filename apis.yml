@@ -1,16 +1,28 @@
 ---
 aid: university-of-illinois-urbana-champaign
 name: University of Illinois Urbana-Champaign
+x-type: university
+x-category: Public Research University
 description: >-
-  The University of Illinois Urbana-Champaign (UIUC) is a public land-grant research
-  university and the flagship campus of the University of Illinois System, ranked #40
-  in the QS World University Rankings 2025. Its public developer footprint includes the
-  Course Information Suite (CISAPI) Course Explorer API, which exposes class schedule and
-  course catalog data without authentication, and the open-source Rokwire platform that
-  powers the official Illinois mobile app via a set of building-block APIs (Core,
-  Gateway, Content, Notifications, Surveys, and more) published under an Apache 2.0
-  license. The University Library exposes institutional repository metadata through the
-  IDEALS OAI-PMH endpoint.
+  The University of Illinois Urbana-Champaign (UIUC) is the public land-grant flagship of the
+  University of Illinois System and a founding Big Ten institution. It is one of the few
+  universities in this cohort that genuinely ENGINEERS a public API estate rather than buying one:
+  the Rokwire platform behind the official Illinois app is UIUC's own open-source work, published
+  under Apache 2.0 in github.com/rokwire and deployed on the institution's own host at
+  api.rokwire.illinois.edu, where nine building blocks answer an unauthenticated /version endpoint
+  and two of them (Core 1.62.0, Gateway 2.21.1) publish OpenAPI 3.0 through Swagger UI. Around it
+  sit four more institution-operated machine-readable surfaces: the Course Information Suite
+  (CISAPI) Course Explorer, which serves class schedule and catalog XML with no authentication; the
+  IDEALS institutional repository's OAI-PMH 2.0 endpoint, running on Illinois Library's own Rails
+  application rather than a vendor platform; the Illinois Data Bank, an in-house research data
+  repository that has minted 1,306 DataCite DOIs under prefix 10.13012 and exposes its catalog as
+  JSON; and the campus Shibboleth identity provider, registered in InCommon as
+  urn:mace:incommon:uiuc.edu. The estate is real but uneven — errors are documented in prose with
+  no schemas, no deprecation policy or Sunset header exists anywhere, seven live Rokwire building
+  blocks ship no contract at all, and illinois.edu answers /llms.txt and /.well-known/security.txt
+  with a soft-404 that returns HTTP 200. Research profiles (Illinois Experts / Elsevier Pure) and
+  library discovery (Ex Libris Primo) are vendor platforms recorded here as tenant relationships:
+  the data is the university's, the contract is not.
 type: Index
 accessModel:
   pricing: free
@@ -18,307 +30,377 @@ accessModel:
   trial: false
   try_now: true
   public: false
-  label: Free · Self-serve signup
+  label: Free · Institutional affiliation for authenticated surfaces
   confidence: high
   source:
   - plans
   - authentication
-  generated: '2026-07-22'
+  generated: '2026-08-19'
   method: derived
 position: Consumer
 access: 3rd-Party
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/university-of-illinois-urbana-champaign.png
 url: https://raw.githubusercontent.com/api-evangelist/university-of-illinois-urbana-champaign/refs/heads/main/apis.yml
 tags:
-  - Education
-  - Higher Education
   - University
-  - Open Data
-  - Courses
-  - Library
-  - United States
-created: '2026-06-03'
-modified: '2026-06-03'
-specificationVersion: '0.23'
-apis:
-- aid: university-of-illinois-urbana-champaign:cisapi-course-explorer
-  name: Course Explorer (CISAPI)
-  description: >-
-    The Course Information Suite API (CISAPI) is a collection of RESTful resources that expose Class Schedule
-    and Course Catalog data. It includes Schedule, Catalog, GenEd, Term, and Subjects modules. The public
-    Course Explorer API requires no authentication; data is available as XML.
-  humanURL: https://courses.illinois.edu/cisdocs/
-  baseURL: https://courses.illinois.edu/cisapp/explorer
-  tags:
-  - Courses
-  - Catalog
-  - Schedule
-  - Open Data
+  - Higher Education
   - Education
-  properties:
-  - type: Documentation
-    url: https://courses.illinois.edu/cisdocs/api
-- aid: university-of-illinois-urbana-champaign:ideals-oai-pmh
-  name: IDEALS OAI-PMH
-  description: >-
-    The University of Illinois institutional repository (IDEALS) exposes Dublin Core metadata records
-    through a standards-based OAI-PMH data provider endpoint for harvesting by external discovery and
-    aggregation services.
-  humanURL: https://guides.library.illinois.edu/ideals
-  baseURL: https://www.ideals.illinois.edu/oai-pmh
-  tags:
-  - Library
-  - Repository
-  - OAI-PMH
-  - Metadata
+  - Public Research University
+  - United States
+  - Illinois
+  - Big Ten
+  - Land-Grant University
+  - Course Catalog
+  - Research Data
+  - Research Repository
   - Open Data
-  properties:
-  - type: Documentation
-    url: >-
-      https://guides.library.illinois.edu/ideals/what_is_the_oai_pmh_data_provider_url_for_ideals
-- aid: >-
-    university-of-illinois-urbana-champaign:university-of-illinois-urbana-champaign-admin-api
-  name: University of Illinois Urbana-Champaign Admin API
-  description: Clients administration applications APIs.
-  humanURL: https://courses.illinois.edu/cisdocs/
-  baseURL: https://courses.illinois.edu/cisapp/explorer
+  - Identity Federation
+  - OAI-PMH
+  - Library
+  - Research Computing
+  - Open Source
+created: '2026-06-03'
+modified: '2026-08-19'
+specificationVersion: '0.23'
+x-coverage:
+  state: covered
+  reason: null
+  detail: >-
+    No wall. Every institution-operated surface claimed here was fetched and read, not linked:
+    both Rokwire OpenAPI documents and nine live /version endpoints on api.rokwire.illinois.edu,
+    the Course Explorer XML, the IDEALS OAI-PMH Identify/ListMetadataFormats/ListSets responses,
+    the Illinois Data Bank catalog JSON (1,259 released datasets) and its DataCite registration,
+    and the Shibboleth IdP metadata both on the campus host and through the InCommon metadata
+    query service. Negative results are equally probed: illinois.edu returns HTTP 200 with a
+    "404 - Page not found" body for /llms.txt and /.well-known/security.txt, so neither was
+    credited. Two vendor tenancies (Elsevier Pure, Ex Libris Primo) were identified by
+    fingerprinting the served page and are recorded as relationships without importing the
+    vendors' contracts. Remaining gap is a harvest backlog, not a wall: seven live Rokwire
+    building blocks (calendar, social, notifications, appointments, content, surveys, polls) are
+    catalogued in lifecycle/ but have no contract in this repo yet.
+  evidence:
+  - url: https://api.rokwire.illinois.edu/core/version
+    status: 200
+  - url: https://api.rokwire.illinois.edu/gateway/doc/ui/
+    status: 200
+  - url: https://api.rokwire.illinois.edu/core/.well-known/openid-configuration
+    status: 200
+  - url: https://api.rokwire.illinois.edu/gateway/api/wayfinding/buildings
+    status: 401
+  - url: https://courses.illinois.edu/cisapp/explorer/schedule.xml
+    status: 200
+  - url: https://www.ideals.illinois.edu/oai-pmh?verb=Identify
+    status: 200
+  - url: https://databank.illinois.edu/datasets.json
+    status: 200
+  - url: https://api.datacite.org/clients/illinois.databank
+    status: 200
+  - url: https://shibboleth.illinois.edu/idp/shibboleth
+    status: 200
+  - url: https://mdq.incommon.org/entities/urn:mace:incommon:uiuc.edu
+    status: 200
+  - url: https://illinois.edu/llms.txt
+    status: 200
+  - url: https://illinois.edu/.well-known/security.txt
+    status: 404
+  checked: '2026-08-19'
+apis:
+- aid: university-of-illinois-urbana-champaign:rokwire-core-building-block
+  name: Rokwire Core Building Block API
+  x-operator: institution
+  description: >-
+    The identity, account and authorization service at the centre of UIUC's Rokwire platform —
+    accounts, profiles, applications, organizations, service registrations, permissions, roles and
+    scopes. Written and operated by the university, deployed at api.rokwire.illinois.edu/core, and
+    published as Apache-2.0 source in github.com/rokwire/core-building-block. Version 1.62.0, 105
+    paths / 151 operations, bearer JWT throughout, with a minimal OIDC discovery document and a
+    live JWKS. The repo holds the pristine specification in openapi/_original/ plus nine
+    tag-refined slices.
+  humanURL: https://api.rokwire.illinois.edu/core/doc/ui/
+  baseURL: https://api.rokwire.illinois.edu/core
   tags:
-  - Admin
-  properties:
-  - type: OpenAPI
-    url: openapi/university-of-illinois-urbana-champaign-admin-api-openapi.yml
-  - type: Documentation
-    url: https://api.rokwire.illinois.edu/core/doc/ui/
-  - type: GitHub
-    url: https://github.com/rokwire/core-building-block
-  - type: Documentation
-    url: https://api.rokwire.illinois.edu/gateway/doc/ui/
-  - type: GitHub
-    url: https://github.com/rokwire/gateway-building-block
-- aid: university-of-illinois-urbana-champaign:university-of-illinois-urbana-champaign-bbs-api
-  name: University of Illinois Urbana-Champaign BBs API
-  description: APIs consumed by the platform building blocks.
-  humanURL: https://courses.illinois.edu/cisdocs/
-  baseURL: https://courses.illinois.edu/cisapp/explorer
-  tags:
-  - BBs
-  properties:
-  - type: OpenAPI
-    url: openapi/university-of-illinois-urbana-champaign-bbs-api-openapi.yml
-  - type: Documentation
-    url: https://api.rokwire.illinois.edu/core/doc/ui/
-  - type: GitHub
-    url: https://github.com/rokwire/core-building-block
-  - type: Documentation
-    url: https://api.rokwire.illinois.edu/gateway/doc/ui/
-  - type: GitHub
-    url: https://github.com/rokwire/gateway-building-block
-- aid: >-
-    university-of-illinois-urbana-champaign:university-of-illinois-urbana-champaign-client-api
-  name: University of Illinois Urbana-Champaign Client API
-  description: Client applications APIs.
-  humanURL: https://courses.illinois.edu/cisdocs/
-  baseURL: https://courses.illinois.edu/cisapp/explorer
-  tags:
-  - Client
-  properties:
-  - type: OpenAPI
-    url: openapi/university-of-illinois-urbana-champaign-client-api-openapi.yml
-  - type: Documentation
-    url: https://api.rokwire.illinois.edu/core/doc/ui/
-  - type: GitHub
-    url: https://github.com/rokwire/core-building-block
-  - type: Documentation
-    url: https://api.rokwire.illinois.edu/gateway/doc/ui/
-  - type: GitHub
-    url: https://github.com/rokwire/gateway-building-block
-- aid: >-
-    university-of-illinois-urbana-champaign:university-of-illinois-urbana-champaign-default-api
-  name: University of Illinois Urbana-Champaign Default API
-  description: Default APIs.
-  humanURL: https://courses.illinois.edu/cisdocs/
-  baseURL: https://courses.illinois.edu/cisapp/explorer
-  tags:
-  - Default
-  properties:
-  - type: OpenAPI
-    url: openapi/university-of-illinois-urbana-champaign-default-api-openapi.yml
-  - type: Documentation
-    url: https://api.rokwire.illinois.edu/core/doc/ui/
-  - type: GitHub
-    url: https://github.com/rokwire/core-building-block
-  - type: Documentation
-    url: https://api.rokwire.illinois.edu/gateway/doc/ui/
-  - type: GitHub
-    url: https://github.com/rokwire/gateway-building-block
-- aid: university-of-illinois-urbana-champaign:university-of-illinois-urbana-champaign-enc-api
-  name: University of Illinois Urbana-Champaign Enc API
-  description: APIs consumed by the Encryption building block.
-  humanURL: https://courses.illinois.edu/cisdocs/
-  baseURL: https://courses.illinois.edu/cisapp/explorer
-  tags:
-  - Enc
-  properties:
-  - type: OpenAPI
-    url: openapi/university-of-illinois-urbana-champaign-enc-api-openapi.yml
-  - type: Documentation
-    url: https://api.rokwire.illinois.edu/core/doc/ui/
-  - type: GitHub
-    url: https://github.com/rokwire/core-building-block
-  - type: Documentation
-    url: https://api.rokwire.illinois.edu/gateway/doc/ui/
-  - type: GitHub
-    url: https://github.com/rokwire/gateway-building-block
-- aid: >-
-    university-of-illinois-urbana-champaign:university-of-illinois-urbana-champaign-services-api
-  name: University of Illinois Urbana-Champaign Services API
-  description: Clients applications APIs.
-  humanURL: https://courses.illinois.edu/cisdocs/
-  baseURL: https://courses.illinois.edu/cisapp/explorer
-  tags:
-  - Services
+  - Identity
+  - Authentication
+  - Authorization
+  - Accounts
+  - Rokwire
+  - Open Source
   properties:
   - type: OpenAPI
     url: openapi/university-of-illinois-urbana-champaign-services-api-openapi.yml
-  - type: Documentation
-    url: https://api.rokwire.illinois.edu/core/doc/ui/
-  - type: GitHub
-    url: https://github.com/rokwire/core-building-block
-  - type: Documentation
-    url: https://api.rokwire.illinois.edu/gateway/doc/ui/
-  - type: GitHub
-    url: https://github.com/rokwire/gateway-building-block
-- aid: >-
-    university-of-illinois-urbana-champaign:university-of-illinois-urbana-champaign-system-api
-  name: University of Illinois Urbana-Champaign System API
-  description: System APIs.
-  humanURL: https://courses.illinois.edu/cisdocs/
-  baseURL: https://courses.illinois.edu/cisapp/explorer
-  tags:
-  - System
-  properties:
+  - type: OpenAPI
+    url: openapi/university-of-illinois-urbana-champaign-admin-api-openapi.yml
   - type: OpenAPI
     url: openapi/university-of-illinois-urbana-champaign-system-api-openapi.yml
-  - type: Documentation
-    url: https://api.rokwire.illinois.edu/core/doc/ui/
-  - type: GitHub
-    url: https://github.com/rokwire/core-building-block
-  - type: Documentation
-    url: https://api.rokwire.illinois.edu/gateway/doc/ui/
-  - type: GitHub
-    url: https://github.com/rokwire/gateway-building-block
-- aid: >-
-    university-of-illinois-urbana-champaign:university-of-illinois-urbana-champaign-third-party-services-api
-  name: University of Illinois Urbana-Champaign Third-Party Services API
-  description: APIs consumed by third-party services.
-  humanURL: https://courses.illinois.edu/cisdocs/
-  baseURL: https://courses.illinois.edu/cisapp/explorer
-  tags:
-  - Third-Party Services
-  properties:
+  - type: OpenAPI
+    url: openapi/university-of-illinois-urbana-champaign-bbs-api-openapi.yml
   - type: OpenAPI
     url: openapi/university-of-illinois-urbana-champaign-third-party-services-api-openapi.yml
-  - type: Documentation
-    url: https://api.rokwire.illinois.edu/core/doc/ui/
-  - type: GitHub
-    url: https://github.com/rokwire/core-building-block
-  - type: Documentation
-    url: https://api.rokwire.illinois.edu/gateway/doc/ui/
-  - type: GitHub
-    url: https://github.com/rokwire/gateway-building-block
-- aid: university-of-illinois-urbana-champaign:university-of-illinois-urbana-champaign-tps-api
-  name: University of Illinois Urbana-Champaign TPS API
-  description: Third-Party Service APIs.
-  humanURL: https://courses.illinois.edu/cisdocs/
-  baseURL: https://courses.illinois.edu/cisapp/explorer
-  tags:
-  - TPS
-  properties:
   - type: OpenAPI
-    url: openapi/university-of-illinois-urbana-champaign-tps-api-openapi.yml
-  - type: Documentation
-    url: https://api.rokwire.illinois.edu/core/doc/ui/
-  - type: GitHub
-    url: https://github.com/rokwire/core-building-block
-  - type: Documentation
-    url: https://api.rokwire.illinois.edu/gateway/doc/ui/
-  - type: GitHub
-    url: https://github.com/rokwire/gateway-building-block
-- aid: university-of-illinois-urbana-champaign:university-of-illinois-urbana-champaign-ui-api
-  name: University of Illinois Urbana-Champaign UI API
-  description: Endpoints for HTML webpages
-  humanURL: https://courses.illinois.edu/cisdocs/
-  baseURL: https://courses.illinois.edu/cisapp/explorer
-  tags:
-  - UI
-  properties:
+    url: openapi/university-of-illinois-urbana-champaign-enc-api-openapi.yml
   - type: OpenAPI
     url: openapi/university-of-illinois-urbana-champaign-ui-api-openapi.yml
-  - type: Documentation
-    url: https://api.rokwire.illinois.edu/core/doc/ui/
-  - type: GitHub
-    url: https://github.com/rokwire/core-building-block
-  - type: Documentation
-    url: https://api.rokwire.illinois.edu/gateway/doc/ui/
-  - type: GitHub
-    url: https://github.com/rokwire/gateway-building-block
-- aid: >-
-    university-of-illinois-urbana-champaign:university-of-illinois-urbana-champaign-version-api
-  name: University of Illinois Urbana-Champaign Version API
-  description: >-
-    The Version API from University of Illinois Urbana-Champaign — 1 operation(s) for version.
-  humanURL: https://courses.illinois.edu/cisdocs/
-  baseURL: https://courses.illinois.edu/cisapp/explorer
-  tags:
-  - Version
-  properties:
   - type: OpenAPI
     url: openapi/university-of-illinois-urbana-champaign-version-api-openapi.yml
-  - type: Documentation
-    url: https://api.rokwire.illinois.edu/core/doc/ui/
-  - type: GitHub
-    url: https://github.com/rokwire/core-building-block
-  - type: Documentation
-    url: https://api.rokwire.illinois.edu/gateway/doc/ui/
-  - type: GitHub
-    url: https://github.com/rokwire/gateway-building-block
-- aid: >-
-    university-of-illinois-urbana-champaign:university-of-illinois-urbana-champaign-well-known-api
-  name: University of Illinois Urbana-Champaign .well Known API
-  description: >-
-    The .well Known API from University of Illinois Urbana-Champaign — 1 operation(s) for .well known.
-  humanURL: https://courses.illinois.edu/cisdocs/
-  baseURL: https://courses.illinois.edu/cisapp/explorer
-  tags:
-  - .well Known
-  properties:
   - type: OpenAPI
     url: openapi/university-of-illinois-urbana-champaign-well-known-api-openapi.yml
   - type: Documentation
     url: https://api.rokwire.illinois.edu/core/doc/ui/
-  - type: GitHub
+  - type: SourceCode
     url: https://github.com/rokwire/core-building-block
+- aid: university-of-illinois-urbana-champaign:rokwire-gateway-building-block
+  name: Rokwire Gateway Building Block API
+  x-operator: institution
+  description: >-
+    The Rokwire service that fronts external and campus systems for the Illinois app — wayfinding
+    and building/floorplan data, campus data streams, and third-party service integration.
+    University-written, deployed at api.rokwire.illinois.edu/gateway, source at
+    github.com/rokwire/gateway-building-block under Apache 2.0. Version 2.21.1, 34 paths / 45
+    operations. An anonymous call to /api/wayfinding/buildings returns 401 with the Rokwire error
+    envelope, confirming the surface is live and bearer-gated rather than absent.
+  humanURL: https://api.rokwire.illinois.edu/gateway/doc/ui/
+  baseURL: https://api.rokwire.illinois.edu/gateway
+  tags:
+  - Wayfinding
+  - Campus
+  - Integration
+  - Buildings
+  - Rokwire
+  - Open Source
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-illinois-urbana-champaign-client-api-openapi.yml
+  - type: OpenAPI
+    url: openapi/university-of-illinois-urbana-champaign-tps-api-openapi.yml
+  - type: OpenAPI
+    url: openapi/university-of-illinois-urbana-champaign-default-api-openapi.yml
   - type: Documentation
     url: https://api.rokwire.illinois.edu/gateway/doc/ui/
-  - type: GitHub
+  - type: SourceCode
     url: https://github.com/rokwire/gateway-building-block
+- aid: university-of-illinois-urbana-champaign:cisapi-course-explorer
+  name: Course Explorer (CISAPI)
+  x-operator: institution
+  description: >-
+    The Course Information Suite API — RESTful resources over Class Schedule and Course Catalog
+    data, organised as Schedule, Catalog, GenEd, Term and Subjects modules and served as XML in a
+    campus-local namespace (http://rest.cis.illinois.edu). No authentication, no rate limit
+    published, no versioning: content versions by academic term rather than by API version.
+    Operated by the university on its own host. No OpenAPI is published for it and none is derived
+    here.
+  humanURL: https://courses.illinois.edu/cisdocs/api
+  baseURL: https://courses.illinois.edu/cisapp/explorer
+  tags:
+  - Course Catalog
+  - Courses
+  - Schedule
+  - Registrar
+  - Open Data
+  properties:
+  - type: Documentation
+    url: https://courses.illinois.edu/cisdocs/api
+  - type: Website
+    url: https://courses.illinois.edu/cisdocs/
+- aid: university-of-illinois-urbana-champaign:ideals-oai-pmh
+  name: IDEALS OAI-PMH
+  x-operator: institution
+  description: >-
+    The OAI-PMH 2.0 data provider for IDEALS, the Illinois Digital Environment for Access to
+    Learning and Scholarship. Identify reports repositoryName "IDEALS @ University of Illinois
+    Urbana-Champaign", adminEmail ideals@library.illinois.edu, earliestDatestamp 2022-06-06,
+    deletedRecord "persistent" and second-granularity datestamps; four metadata formats are served
+    (oai_dc, qdc, etdms, native) across 100 sets. Institution-operated rather than tenant — the
+    repository runs on Illinois Library's own Rails codebase (github.com/medusa-project/ideals),
+    not on a vendor repository platform.
+  humanURL: https://guides.library.illinois.edu/ideals
+  baseURL: https://www.ideals.illinois.edu/oai-pmh
+  tags:
+  - Research Repository
+  - OAI-PMH
+  - Library
+  - Metadata
+  - Open Data
+  - Dublin Core
+  properties:
+  - type: Documentation
+    url: https://guides.library.illinois.edu/ideals
+  - type: Website
+    url: https://www.ideals.illinois.edu/
+  - type: SourceCode
+    url: https://github.com/medusa-project
+- aid: university-of-illinois-urbana-champaign:illinois-data-bank
+  name: Illinois Data Bank Dataset Metadata
+  x-operator: institution
+  description: >-
+    The campus research data repository, built and run in-house by the University Library
+    (github.com/medusa-project/databank, Ruby on Rails) rather than bought from Figshare, Dryad or
+    Dataverse — which makes it one of the few genuinely institution-ENGINEERED research
+    repositories in this cohort. Its catalog is machine-readable without authentication:
+    /datasets.json returns all 1,259 released datasets with identifier, subject, publication and
+    hold state, timestamps, citation and a per-dataset JSON URL. As a registered DataCite
+    repository (client illinois.databank, member since 2018) it has minted 1,306 DOIs under prefix
+    10.13012, 1,082 of which carry ORCID creator identifiers. There is no published API reference,
+    no OAI-PMH endpoint on this host, and /api/* is a soft-404.
+  humanURL: https://databank.illinois.edu/help
+  baseURL: https://databank.illinois.edu
+  tags:
+  - Research Data
+  - Open Data
+  - DataCite
+  - ORCID
+  - Repository
+  - DOI
+  properties:
+  - type: Documentation
+    url: https://databank.illinois.edu/help
+  - type: Website
+    url: https://databank.illinois.edu/
+  - type: SourceCode
+    url: https://github.com/medusa-project
+- aid: university-of-illinois-urbana-champaign:incommon-shibboleth-idp
+  name: Illinois Shibboleth Identity Provider (InCommon)
+  x-operator: institution
+  description: >-
+    The campus SAML identity provider — the one surface a university operates by definition and
+    almost never has catalogued. https://shibboleth.illinois.edu/idp/shibboleth serves a
+    Shibboleth EntityDescriptor with entityID urn:mace:incommon:uiuc.edu, an IDPSSODescriptor
+    supporting SAML 1.1 and SAML 2.0, and shibmd:Scope illinois.edu; the signing certificate is
+    issued to shibboleth.illinois.edu, O=University of Illinois at Urbana-Champaign, OU=CITES. The
+    same entity resolves through the InCommon metadata query service, so federated relying parties
+    can consume it without a bilateral exchange. Machine-readable, unauthenticated, and stable.
+  humanURL: https://techservices.illinois.edu/
+  baseURL: https://shibboleth.illinois.edu/idp/shibboleth
+  tags:
+  - Identity Federation
+  - Shibboleth
+  - SAML
+  - InCommon
+  - eduGAIN
+  - Single Sign-On
+  properties:
+  - type: Metadata
+    url: https://shibboleth.illinois.edu/idp/shibboleth
+  - type: Metadata
+    url: https://mdq.incommon.org/entities/urn:mace:incommon:uiuc.edu
+  - type: Documentation
+    url: https://techservices.illinois.edu/
+- aid: university-of-illinois-urbana-champaign:illinois-experts
+  name: Illinois Experts (Elsevier Pure)
+  x-operator: tenant
+  x-vendor: Elsevier
+  x-vendor-platform: Pure / Pure Portal
+  description: >-
+    TENANT RELATIONSHIP, not a UIUC contract. Illinois Experts is the university's research
+    information and expert-profile portal, and the data in it — people, publications, projects,
+    units — is the university's. The software is Elsevier Pure: the served page identifies itself
+    as "Pure Portal" and carries the Elsevier Fingerprint Engine, and the Pure web service under
+    /ws/api redirects rather than answering anonymously. The Pure API contract belongs in
+    Elsevier's own repo and is deliberately NOT saved here. Recorded because operating a research
+    information system is a real institutional fact and one of the few programmable surfaces most
+    universities have.
+  humanURL: https://experts.illinois.edu/
+  baseURL: https://experts.illinois.edu/ws/api
+  tags:
+  - Research Information
+  - Expert Profiles
+  - Pure
+  - Elsevier
+  - Tenant
+  properties:
+  - type: Website
+    url: https://experts.illinois.edu/
+  - type: TermsOfService
+    url: https://publish.illinois.edu/experts-help/terms-of-use/
+- aid: university-of-illinois-urbana-champaign:library-discovery
+  name: University Library Discovery (Ex Libris Primo)
+  x-operator: tenant
+  x-vendor: Ex Libris (Clarivate)
+  x-vendor-platform: Primo VE
+  description: >-
+    TENANT RELATIONSHIP, not a UIUC contract. Library discovery at Illinois runs on Ex Libris
+    Primo — search.library.illinois.edu redirects into primo.exlibrisgroup.com/discovery with an
+    Illinois view. The holdings and the view configuration are the university's; the discovery and
+    Alma APIs are Ex Libris'. No vendor specification is saved under this institution.
+  humanURL: https://www.library.illinois.edu/
+  baseURL: https://search.library.illinois.edu/discovery
+  tags:
+  - Library
+  - Discovery
+  - Primo
+  - Ex Libris
+  - Tenant
+  properties:
+  - type: Website
+    url: https://search.library.illinois.edu/discovery
 common:
+  - type: Website
+    url: https://illinois.edu/
+  - type: About
+    url: https://illinois.edu/about
+  - type: APIReference
+    url: https://api.rokwire.illinois.edu/core/doc/ui/
+  - type: Documentation
+    url: https://api.rokwire.illinois.edu/gateway/doc/ui/
+  - type: GitHubOrganization
+    url: https://github.com/rokwire
+  - type: GitHub
+    url: https://github.com/illinois
+  - type: SourceCode
+    url: https://github.com/medusa-project
+  - type: LinkedIn
+    url: https://www.linkedin.com/school/university-of-illinois-at-urbana-champaign/
+  - type: Status
+    url: https://status.illinois.edu/
+  - type: Support
+    url: https://help.uillinois.edu/
+  - type: Blog
+    url: https://news.illinois.edu/feed/
+  - type: PrivacyPolicy
+    url: https://www.library.illinois.edu/geninfo/policies/p_policy/
+  - type: TermsOfService
+    url: https://publish.illinois.edu/experts-help/terms-of-use/
+  - type: CourseCatalog
+    url: https://courses.illinois.edu/cisdocs/api
+  - type: ResearchRepository
+    url: https://www.ideals.illinois.edu/
+  - type: OpenData
+    url: https://databank.illinois.edu/
+  - type: LibraryCatalog
+    url: https://search.library.illinois.edu/discovery
+  - type: IdentityFederation
+    url: https://shibboleth.illinois.edu/idp/shibboleth
+  - type: ResearchComputing
+    url: https://ncsa.illinois.edu/
+  - type: AIPolicy
+    url: https://genai.illinois.edu/
+  - type: AITooling
+    url: https://techservices.illinois.edu/
+  - type: Policies
+    url: https://cio.illinois.edu/
   - type: AgenticAccess
     url: agentic-access/university-of-illinois-urbana-champaign-agentic-access.yml
   - type: DomainSecurity
     url: security/university-of-illinois-urbana-champaign-domain-security.yml
   - type: Authentication
     url: authentication/university-of-illinois-urbana-champaign-authentication.yml
-  - type: Website
-    url: https://illinois.edu/
-  - type: GitHub
-    url: https://github.com/rokwire
-  - type: SourceCode
-    url: https://github.com/illinois
-  - type: LinkedIn
-    url: https://www.linkedin.com/school/university-of-illinois-at-urbana-champaign/
-  - type: Status
-    url: https://status.illinois.edu/
+  - type: Scopes
+    url: scopes/university-of-illinois-urbana-champaign-scopes.yml
+  - type: Errors
+    url: errors/university-of-illinois-urbana-champaign-problem-types.yml
+  - type: Conformance
+    url: conformance/university-of-illinois-urbana-champaign-conformance.yml
+  - type: Lifecycle
+    url: lifecycle/university-of-illinois-urbana-champaign-lifecycle.yml
+  - type: Rules
+    url: rules/university-of-illinois-urbana-champaign-rules.yml
+  - type: Vocabulary
+    url: vocabulary/university-of-illinois-urbana-champaign-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/university-of-illinois-urbana-champaign-context.jsonld
+  - type: JSONSchema
+    url: json-schema/university-of-illinois-urbana-champaign-organization-schema.json
+  - type: Examples
+    url: examples/university-of-illinois-urbana-champaign-organization-example.json
   - type: Plans
     url: plans/university-of-illinois-urbana-champaign-plans-pricing.yml
   - type: RateLimits
@@ -327,8 +409,6 @@ common:
     url: finops/university-of-illinois-urbana-champaign-finops.yml
   - type: Review
     url: review.yml
-  - url: https://news.illinois.edu/feed/
-    type: Blog
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
