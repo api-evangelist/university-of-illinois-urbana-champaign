@@ -58,6 +58,24 @@ tags:
   - OAI-PMH
   - Library
   - Research Computing
+  - Open-Source
+tags_raw:
+  - University
+  - Higher Education
+  - Education
+  - Public Research University
+  - United States
+  - Illinois
+  - Big Ten
+  - Land-Grant University
+  - Course Catalog
+  - Research Data
+  - Research Repository
+  - Open Data
+  - Identity Federation
+  - OAI-PMH
+  - Library
+  - Research Computing
   - Open Source
 created: '2026-06-03'
 modified: '2026-08-19'
@@ -122,6 +140,13 @@ apis:
   - Identity
   - Authentication
   - Authorization
+  - Account
+  - Rokwire
+  - Open-Source
+  tags_raw:
+  - Identity
+  - Authentication
+  - Authorization
   - Accounts
   - Rokwire
   - Open Source
@@ -161,6 +186,13 @@ apis:
   humanURL: https://api.rokwire.illinois.edu/gateway/doc/ui/
   baseURL: https://api.rokwire.illinois.edu/gateway
   tags:
+  - Wayfinding
+  - Campus
+  - Integration
+  - Buildings
+  - Rokwire
+  - Open-Source
+  tags_raw:
   - Wayfinding
   - Campus
   - Integration
