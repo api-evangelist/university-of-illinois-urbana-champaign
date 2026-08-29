@@ -1,0 +1,56 @@
+slug: university-of-illinois-urbana-champaign
+provider: University of Illinois Urbana-Champaign
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Education
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 4
+edges:
+- tag: Services
+  spec_file: university-of-illinois-urbana-champaign-services-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.9
+  evidence: POST /services/auth/login; POST /services/auth/mfa; POST /services/auth/credential/forgot/initiate;
+    schemas AccountAuthType, ApplicationOrganization
+  reason: Operations are authentication, MFA, SSO login URLs, credential reset and account existence checks
+    — identity and access management, not any education-specific capability.
+- tag: Admin
+  spec_file: university-of-illinois-urbana-champaign-admin-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.8
+  evidence: POST /admin/auth/login    Login; POST /admin/account/mfa    Enroll in MFA type; _admin_req_grant-roles-to-account;
+    POST /admin/auth/login-url    Get SSO login url
+  reason: Administrative authentication, MFA enrolment, account management and role/permission granting
+    in the Rokwire Core building block — identity and access management.
+- tag: Third-Party Services
+  spec_file: university-of-illinois-urbana-champaign-third-party-services-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.75
+  evidence: POST /tps/access-token Get service account access token; GET /tps/auth-keys Get auth public
+    key; schemas JWKS, AuthServiceReg
+  reason: Machine-to-machine credential issuance, JWKS key publication and service account token retrieval
+    — identity and access management for integrating services.
+- tag: System
+  spec_file: university-of-illinois-urbana-champaign-system-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.7
+  evidence: GET /system/service-regs Get service registrations; DELETE /system/service-accounts/{id} Deregister
+    service account instance; schemas APIKey, AuthType, SupportedAuthTypes
+  reason: Administrative surface for organizations, service registrations, service accounts, API keys
+    and auth types — predominantly identity/credential administration for the platform; some generic platform-admin
+    ambiguity.

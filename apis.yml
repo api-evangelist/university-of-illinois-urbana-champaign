@@ -378,6 +378,9 @@ apis:
   - type: Website
     url: https://search.library.illinois.edu/discovery
 common:
+  - type: CapabilityMap
+    url: capabilities/university-of-illinois-urbana-champaign-capability-edges.yml
+    name: University of Illinois Urbana-Champaign Business Capability Map
   - type: Website
     url: https://illinois.edu/
   - type: About
