@@ -1,0 +1,83 @@
+generated: '2026-08-19'
+method: derived
+source: >-
+  openapi/_original/university-of-illinois-urbana-champaign-rokwire-core.yaml,
+  openapi/_original/university-of-illinois-urbana-champaign-rokwire-gateway.yaml,
+  probed https://api.rokwire.illinois.edu/core/.well-known/openid-configuration
+note: >-
+  UIUC publishes NO enumerated scope list. The Core building block's OIDC discovery document
+  returns only issuer and jwks_uri — there is no scopes_supported array to read — so nothing here
+  is a scope string the institution has advertised. What IS published, in the Core OpenAPI that
+  UIUC authors, is the scope GRAMMAR and the objects that carry scopes; that grammar and the
+  worked examples in the spec are recorded below. Individual scope strings are per-deployment,
+  minted when a service registers, and are NOT enumerable from outside. Do not read this file as a
+  catalog of grantable scopes.
+operator: institution
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  issuer: https://api.rokwire.illinois.edu/core
+  jwks_uri: https://api.rokwire.illinois.edu/core/tps/auth-keys
+  discovery: https://api.rokwire.illinois.edu/core/.well-known/openid-configuration
+  discovery_completeness: >-
+    Minimal — issuer and jwks_uri only. No authorization_endpoint, token_endpoint or
+    scopes_supported.
+  sources:
+  - openapi/_original/university-of-illinois-urbana-champaign-rokwire-core.yaml
+  - openapi/_original/university-of-illinois-urbana-champaign-rokwire-gateway.yaml
+grammar:
+  pattern: '<service_id>:<resource>[.<sub-resource>]:<operation>'
+  examples_in_spec:
+  - core:resource.value:get
+  - core:resource.value2.get
+  detail: >-
+    A scope names the owning service (service_id), the resource path within it, and the operation.
+    Scopes are attached to three objects in the Core data model — AppOrgRole.scopes[],
+    ServiceAccount.scopes[] and ServiceReg.scopes[] — and are granted alongside, not instead of,
+    the named Permission objects.
+carriers:
+- object: ServiceScope
+  where: components.schemas.ServiceScope
+  fields:
+    scope: the scope string itself
+    required: whether the registering service demands it rather than requests it
+    explanation: the human-readable justification shown to the user at consent time
+  detail: >-
+    ServiceScope is the consent-facing unit. A service registration declares the scopes it needs,
+    marks each required or optional, and supplies the explanation a person sees before approving.
+- object: ServiceReg.scopes[]
+  where: components.schemas.ServiceReg
+  detail: >-
+    The full service registration record — service_id, host, first_party, pub_key and the
+    ServiceScope[] the service asks for. This is where a scope enters the system.
+- object: ServiceAccount.scopes[]
+  where: components.schemas.ServiceAccount
+  detail: >-
+    A machine identity scoped to an app_id/org_id pair, carrying both permissions[] and scopes[].
+    Third-party service accounts are distinguished from first-party by ServiceAccount.first_party.
+- object: AppOrgRole.scopes[]
+  where: components.schemas.AppOrgRole
+  detail: >-
+    A role within one application/organization, carrying permissions[] (Permission objects with
+    assigners[]) and scopes[]. Roles are granted to accounts through
+    POST /admin/application/accounts/{id}/roles.
+consent_surface:
+  detail: >-
+    POST /services/auth/authorize-service returns either an access_token with approved_scopes[]
+    or, when the service is not yet authorized, the service_reg record including its
+    ScopeService[] — so the calling client can render the consent screen. This is a real,
+    machine-readable consent handshake and is the strongest agent-facing property in the estate.
+administration:
+  paths:
+  - /admin/application/permissions
+  - /admin/application/roles
+  - /admin/application/roles/{id}/permissions
+  - /admin/application/accounts/{id}/permissions
+  - /admin/application/accounts/{id}/roles
+  - /system/permissions
+  detail: >-
+    Permissions and roles are administered through the Core Admin and System APIs. Every one of
+    these paths is bearer-gated; an unauthenticated call returns 401 with the Rokwire error
+    envelope.
