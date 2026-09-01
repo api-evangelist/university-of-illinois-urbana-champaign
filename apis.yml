@@ -378,6 +378,9 @@ apis:
   - type: Website
     url: https://search.library.illinois.edu/discovery
 common:
+  - type: License
+    name: Apache-2.0
+    url: https://github.com/rokwire/core-building-block/blob/develop/LICENSE
   - type: CapabilityMap
     url: capabilities/university-of-illinois-urbana-champaign-capability-edges.yml
     name: University of Illinois Urbana-Champaign Business Capability Map
