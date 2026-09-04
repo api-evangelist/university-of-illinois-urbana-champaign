@@ -39,18 +39,20 @@ deliveryModel:
   method: derived
 accessModel:
   pricing: free
-  onboarding: self-serve
+  onboarding: open
   trial: false
   try_now: true
-  public: false
-  label: Free · Institutional affiliation for authenticated surfaces
-  confidence: high
+  public: true
+  label: Free · Open access
+  confidence: medium
+  probe_state: covered
   source:
   - plans
   - authentication
-  generated: '2026-08-19'
+  - security
+  generated: '2026-09-03'
   method: derived
-position: Consumer
+position: Consuming
 access: 3rd-Party
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/university-of-illinois-urbana-champaign.png
 url: https://raw.githubusercontent.com/api-evangelist/university-of-illinois-urbana-champaign/refs/heads/main/apis.yml
