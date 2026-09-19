@@ -323,6 +323,13 @@ apis:
   - SAML
   - InCommon
   - eduGAIN
+  - SSO
+  tags_raw:
+  - Identity Federation
+  - Shibboleth
+  - SAML
+  - InCommon
+  - eduGAIN
   - Single Sign-On
   properties:
   - type: Metadata
@@ -352,6 +359,12 @@ apis:
   - Expert Profiles
   - Pure
   - Elsevier
+  - Tenants
+  tags_raw:
+  - Research Information
+  - Expert Profiles
+  - Pure
+  - Elsevier
   - Tenant
   properties:
   - type: Website
@@ -371,6 +384,12 @@ apis:
   humanURL: https://www.library.illinois.edu/
   baseURL: https://search.library.illinois.edu/discovery
   tags:
+  - Library
+  - Discovery
+  - Primo
+  - Ex Libris
+  - Tenants
+  tags_raw:
   - Library
   - Discovery
   - Primo
