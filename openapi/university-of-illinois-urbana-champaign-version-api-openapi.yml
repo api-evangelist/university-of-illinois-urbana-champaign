@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Rokwire Core Building Block Admin Version API
+  title: Rokwire Core Building Block Version API
   description: Core Building Block API Documentation
   version: 1.62.0
 servers:
@@ -21,6 +21,8 @@ paths:
                 example: v1.1.0
       tags:
       - Version
+      operationId: getVersion
+      x-operation-id-source: derived
 components:
   securitySchemes:
     bearerAuth:

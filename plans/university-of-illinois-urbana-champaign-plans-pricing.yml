@@ -1,3 +1,9 @@
+generated: '2026-06-03'
+method: generated
+source: >-
+  UIUC publishes no plan or pricing page for any API in this repo. The tiers below are API
+  Evangelist's characterisation of observed access posture (open vs. affiliation-gated), not a
+  published UIUC price list.
 specification: API Commons Plans
 specificationVersion: '0.1'
 schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans

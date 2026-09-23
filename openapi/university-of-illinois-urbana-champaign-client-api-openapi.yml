@@ -1,10 +1,10 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Rokwire Core Building Block Admin Client API
-  description: Core Building Block API Documentation
-  version: 1.62.0
+  title: Rokwire Gateway Building Block Client API
+  description: Gateway Building Block API Documentation
+  version: 2.21.1
 servers:
-- url: https://api.rokwire.illinois.edu/core
+- url: https://api.rokwire.illinois.edu/gateway
 tags:
 - name: Client
   description: Client applications APIs.
@@ -17,9 +17,7 @@ paths:
       description: 'Gets example record
 
 
-        **Auth:** Requires valid user token with `get_examples` permission
-
-        '
+        **Auth:** Requires valid user token with `get_examples` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -44,6 +42,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getApiExamplesById
+      x-operation-id-source: derived
   /api/wayfinidng/buildng:
     get:
       tags:
@@ -52,9 +52,7 @@ paths:
       description: 'Gets building information by id
 
 
-        **Auth:** Requires valid first-party service account token with `get_building` permission
-
-        '
+        **Auth:** Requires valid first-party service account token with `get_building` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -103,6 +101,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getApiWayfinidngBuildng
+      x-operation-id-source: derived
   /api/wayfinding/buildings:
     get:
       tags:
@@ -111,9 +111,7 @@ paths:
       description: 'Gets all campus buildings with coordinates, entrances, floors and features
 
 
-        **Auth:** Requires valid first-party service account token with `get_building` permission
-
-        '
+        **Auth:** Requires valid first-party service account token with `get_building` permission'
       security:
       - bearerAuth: []
       responses:
@@ -131,17 +129,17 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getApiWayfindingBuildings
+      x-operation-id-source: derived
   /api/wayfinding/floorplan:
     get:
       tags:
       - Client
-      summary: Returns the markup required to display the requested floor plan.
+      summary: Returns the markup required to display the requested floor plan
       description: 'Returns the markup and data structures needed to display an svg of the request floor plan.
 
 
-        **Auth:** Requires valid first-party service account token with `get_building` permission
-
-        '
+        **Auth:** Requires valid first-party service account token with `get_building` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -190,12 +188,26 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getApiWayfindingFloorplan
+      x-operation-id-source: derived
   /api/wayfinding/searchbuildings:
     get:
       tags:
       - Client
       summary: Returns a list of buildings matching the requested name
-      description: "Returns every building in the campus buildings list that contains the name parameter in the building name property. \nThe response is a map where keys are building names and values are building objects.\n\n**Verbosity Levels:**\n- **v=1 or omitted**: Returns CompactBuilding objects (default)\n- **v=2**: Returns full Building objects with complete details\n\n**Auth:** Requires valid first-party service account token with `get_building` permission\n"
+      description: 'Returns every building in the campus buildings list that contains the name parameter in the building name property.
+
+        The response is a map where keys are building names and values are building objects.
+
+
+        **Verbosity Levels:**
+
+        - **v=1 or omitted**: Returns CompactBuilding objects (default)
+
+        - **v=2**: Returns full Building objects with complete details
+
+
+        **Auth:** Requires valid first-party service account token with `get_building` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -263,6 +275,8 @@ paths:
           description: Not found - No buildings match the search criteria
         '500':
           description: Internal server error
+      operationId: getApiWayfindingSearchbuildings
+      x-operation-id-source: derived
   /api/termsessions/listcurrent:
     get:
       tags:
@@ -271,9 +285,7 @@ paths:
       description: 'Based on the current date, returns 4 term sessions for campus. If the current month is between 6 and 12, the current fall term is assumed and returned with the upcomign spring semester, the last summer semster and the previous spring semester. If the current month is less than 6, returns the current spring semester, the upcoming summer and fall semesters and the previous fall semester.
 
 
-        **Auth:** Requires valid first-party service account token with `get_building` permission
-
-        '
+        **Auth:** Requires valid first-party service account token with `get_building` permission'
       security:
       - bearerAuth: []
       responses:
@@ -291,6 +303,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getApiTermsessionsListcurrent
+      x-operation-id-source: derived
   /api/laundry/rooms:
     get:
       tags:
@@ -299,9 +313,7 @@ paths:
       description: 'Returns a list of all laundry rooms available on campus with their basic information including ID, name, status, and location details.
 
 
-        **Auth:** Requires valid first-party service account token with appropriate permissions
-
-        '
+        **Auth:** Requires valid first-party service account token with appropriate permissions'
       security:
       - bearerAuth: []
       responses:
@@ -334,12 +346,19 @@ paths:
           description: Not found - No laundry rooms available
         '500':
           description: Internal server error
+      operationId: getApiLaundryRooms
+      x-operation-id-source: derived
   /api/laundry/room:
     get:
       tags:
       - Client
       summary: Get detailed information about a specific laundry room
-      description: "Returns detailed information about a specific laundry room including the number of washers and dryers, \na list of all appliances (machines) in the room with their current status, and location details.\n\n**Auth:** Requires valid first-party service account token with appropriate permissions\n"
+      description: 'Returns detailed information about a specific laundry room including the number of washers and dryers,
+
+        a list of all appliances (machines) in the room with their current status, and location details.
+
+
+        **Auth:** Requires valid first-party service account token with appropriate permissions'
       security:
       - bearerAuth: []
       parameters:
@@ -412,12 +431,21 @@ paths:
           description: Not found - Laundry room with specified ID not found
         '500':
           description: Internal server error
+      operationId: getApiLaundryRoom
+      x-operation-id-source: derived
   /api/laundry/initrequest:
     get:
       tags:
       - Client
       summary: Initialize a service request for a laundry machine
-      description: "Returns the problem codes and pending service request status for a specific laundry machine. \nThis endpoint is used to initialize a service request by providing the available problem codes \nand checking if there's already an open issue for the machine.\n\n**Auth:** Requires valid first-party service account token with appropriate permissions\n"
+      description: 'Returns the problem codes and pending service request status for a specific laundry machine.
+
+        This endpoint is used to initialize a service request by providing the available problem codes
+
+        and checking if there''s already an open issue for the machine.
+
+
+        **Auth:** Requires valid first-party service account token with appropriate permissions'
       security:
       - bearerAuth: []
       parameters:
@@ -474,12 +502,24 @@ paths:
           description: Not found - Machine with specified ID not found
         '500':
           description: Internal server error
+      operationId: getApiLaundryInitrequest
+      x-operation-id-source: derived
   /api/laundry/requestservice:
     post:
       tags:
       - Client
       summary: Submit a service request for a laundry machine
-      description: "Submits a service request for a specific laundry machine. This endpoint requires detailed information \nabout the problem and contact information for the person submitting the request.\n\n**Required Fields:** machineid, problemcode, firstname, lastname, email\n**Optional Fields:** comments, phone\n\n**Auth:** Requires valid first-party service account token with appropriate permissions\n"
+      description: 'Submits a service request for a specific laundry machine. This endpoint requires detailed information
+
+        about the problem and contact information for the person submitting the request.
+
+
+        **Required Fields:** machineid, problemcode, firstname, lastname, email
+
+        **Optional Fields:** comments, phone
+
+
+        **Auth:** Requires valid first-party service account token with appropriate permissions'
       security:
       - bearerAuth: []
       requestBody:
@@ -533,12 +573,28 @@ paths:
           description: Not found - Machine with specified ID not found
         '500':
           description: Internal server error
+      operationId: postApiLaundryRequestservice
+      x-operation-id-source: derived
   /api/person/contactinfo:
     get:
       tags:
       - Client
       summary: Get contact information for a person
-      description: "Returns comprehensive contact information for a person including name, permanent and mailing addresses, \nphone numbers, and emergency contact information.\n\n**Authentication:** Requires both RokwireAuth and ExternalAuth tokens\n**Mode Parameter:** \n- \"0\" (default): Standard contact information\n- \"1\": Enhanced contact information (for specific UINs)\n\n**Auth:** Requires valid first-party service account token and external authorization token\n"
+      description: 'Returns comprehensive contact information for a person including name, permanent and mailing addresses,
+
+        phone numbers, and emergency contact information.
+
+
+        **Authentication:** Requires both RokwireAuth and ExternalAuth tokens
+
+        **Mode Parameter:**
+
+        - "0" (default): Standard contact information
+
+        - "1": Enhanced contact information (for specific UINs)
+
+
+        **Auth:** Requires valid first-party service account token and external authorization token'
       security:
       - bearerAuth: []
       parameters:
@@ -643,12 +699,28 @@ paths:
           description: Not found - Person with specified UIN not found
         '500':
           description: Internal server error
+      operationId: getApiPersonContactinfo
+      x-operation-id-source: derived
   /api/person/giescourses:
     get:
       tags:
       - Client
       summary: Get registered courses for GIES students
-      description: "Returns a list of registered courses for GIES (Gies College of Business) students. \nThis endpoint provides course information including term, subject, number, section, \ntitle, and instructor details.\n\n**Authentication:** Requires both RokwireAuth and ExternalAuth tokens\n**Note:** This endpoint is specifically for GIES students and may return different \ncourse information compared to the general student courses endpoint.\n\n**Auth:** Requires valid first-party service account token and external authorization token\n"
+      description: 'Returns a list of registered courses for GIES (Gies College of Business) students.
+
+        This endpoint provides course information including term, subject, number, section,
+
+        title, and instructor details.
+
+
+        **Authentication:** Requires both RokwireAuth and ExternalAuth tokens
+
+        **Note:** This endpoint is specifically for GIES students and may return different
+
+        course information compared to the general student courses endpoint.
+
+
+        **Auth:** Requires valid first-party service account token and external authorization token'
       security:
       - bearerAuth: []
       parameters:
@@ -716,12 +788,28 @@ paths:
           description: Not found - Student with specified UIN not found or no courses available
         '500':
           description: Internal server error
+      operationId: getApiPersonGiescourses
+      x-operation-id-source: derived
   /api/person/studentcourses:
     get:
       tags:
       - Client
       summary: Get registered courses for a student
-      description: "Returns a comprehensive list of registered courses for a student including detailed course information, \nsection details, meeting times, locations, and building information. This endpoint provides the most \ncomplete course data compared to other course endpoints.\n\n**Authentication:** Requires both RokwireAuth and ExternalAuth tokens\n**Location Enhancement:** Automatically enriches course data with building location information\n**ADA Support:** Optional ADA-only building filtering for accessibility considerations\n\n**Auth:** Requires valid first-party service account token and external authorization token\n"
+      description: 'Returns a comprehensive list of registered courses for a student including detailed course information,
+
+        section details, meeting times, locations, and building information. This endpoint provides the most
+
+        complete course data compared to other course endpoints.
+
+
+        **Authentication:** Requires both RokwireAuth and ExternalAuth tokens
+
+        **Location Enhancement:** Automatically enriches course data with building location information
+
+        **ADA Support:** Optional ADA-only building filtering for accessibility considerations
+
+
+        **Auth:** Requires valid first-party service account token and external authorization token'
       security:
       - bearerAuth: []
       parameters:
@@ -932,19 +1020,53 @@ paths:
           description: Not found - Student with specified UIN not found or no courses available for the term
         '500':
           description: Internal server error
+      operationId: getApiPersonStudentcourses
+      x-operation-id-source: derived
 components:
   schemas:
-    PhoneNumber:
+    GiesCourse:
       type: object
       required:
-      - AreaCode
-      - Number
+      - term
+      - subject
+      - number
+      - section
+      - title
+      - instructor
       properties:
-        AreaCode:
+        term:
           type: string
           readOnly: true
-        Number:
+        subject:
           type: string
+          readOnly: true
+        number:
+          type: string
+          readOnly: true
+        section:
+          type: string
+          readOnly: true
+        title:
+          type: string
+          readOnly: true
+        instructor:
+          type: string
+          readOnly: true
+    TermSession:
+      type: object
+      required:
+      - term
+      - termid
+      - is_current
+      properties:
+        term:
+          type: string
+          readOnly: true
+        termid:
+          type: string
+          readOnly: true
+        is_current:
+          type: boolean
           readOnly: true
     CourseSection:
       type: object
@@ -997,65 +1119,215 @@ components:
         course_section:
           type: string
           readOnly: true
-    ServiceSubmission:
+    MachineRequestDetail:
       type: object
       required:
-      - machineid
-      - problemcode
-      - firstname
-      - lastname
-      - email
+      - MachineID
+      - Message
+      - OpenIssue
+      - ProblemCodes
+      - MachineType
       properties:
-        machineid:
+        MachineID:
           type: string
-          description: The unique service tag ID of the laundry machine
-        problemcode:
+          readOnly: true
+        Message:
           type: string
-          description: The problem code describing the issue with the machine
-        comments:
+          readOnly: true
+        OpenIssue:
+          type: boolean
+          readOnly: true
+        ProblemCodes:
+          type: array
+          items:
+            type: string
+          readOnly: true
+        MachineType:
           type: string
-          nullable: true
-          description: Additional comments about the problem (optional)
-        firstname:
-          type: string
-          description: First name of the person submitting the request
-        lastname:
-          type: string
-          description: Last name of the person submitting the request
-        phone:
-          type: string
-          nullable: true
-          description: Phone number of the person submitting the request (optional)
-        email:
-          type: string
-          format: email
-          description: Email address of the person submitting the request
-    Example:
+          readOnly: true
+    CompactBuilding:
       type: object
       required:
-      - id
-      - app_id
-      - org_id
-      - data
-      - date_created
+      - ID
+      - Number
+      - Name
+      - FullAddress
+      - ImageURL
+      - Latitude
+      - Longitude
+      - ShortName
       properties:
-        id:
+        ID:
           type: string
           readOnly: true
-        org_id:
+        Name:
           type: string
           readOnly: true
-        app_id:
+        Number:
           type: string
           readOnly: true
-        data:
-          type: string
-        date_created:
+        FullAddress:
           type: string
           readOnly: true
-        date_updated:
+        ImageURL:
           type: string
-          nullable: true
+          readOnly: true
+        Latitude:
+          type: number
+          readOnly: true
+        Longitude:
+          type: number
+          readOnly: true
+        Features:
+          type: array
+          items:
+            $ref: '#/components/schemas/BuildingFeatureLocation'
+          readOnly: true
+        ShortName:
+          type: string
+          readOnly: true
+    Person:
+      type: object
+      required:
+      - uin
+      - FirstName
+      - LastName
+      - PreferredName
+      - MailingAddress
+      - PermAddress
+      - EmergencyContacts
+      properties:
+        uin:
+          type: string
+          readOnly: true
+        FirstName:
+          type: string
+          readOnly: true
+        LastName:
+          type: string
+          readOnly: true
+        PreferredName:
+          type: string
+          readOnly: true
+        MailingAddress:
+          $ref: '#/components/schemas/Address'
+        PermAddress:
+          $ref: '#/components/schemas/Address'
+        EmergencyContacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmergencyContact'
+          readOnly: true
+    BuildingFeatureLocation:
+      type: object
+      required:
+      - Key
+      - Value
+      properties:
+        Key:
+          type: string
+          readOnly: true
+        Value:
+          $ref: '#/components/schemas/FeatureMapEntry'
+    FloorPlan:
+      type: object
+      required:
+      - BuildingNumber
+      - BuildingFloor
+      - SVGEncoding
+      - SVG
+      - Markers
+      - Highlites
+      properties:
+        BuildingNumber:
+          type: string
+          readOnly: true
+        BuildingFloor:
+          type: string
+          readOnly: true
+        SVGEncoding:
+          type: string
+          readOnly: true
+        SVG:
+          type: string
+        Markers:
+          type: array
+          items:
+            $ref: '#/components/schemas/FloorPlanMarker'
+          readOnly: true
+        Features:
+          type: array
+          items:
+            $ref: '#/components/schemas/FloorPlanHighlite'
+          readOnly: true
+    RoomDetail:
+      type: object
+      required:
+      - NumWashers
+      - NumDryers
+      - Appliances
+      - RoomName
+      - CampusName
+      properties:
+        NumWashers:
+          type: integer
+          readOnly: true
+        NumDryers:
+          type: integer
+          readOnly: true
+        Appliances:
+          type: array
+          items:
+            $ref: '#/components/schemas/Appliance'
+          readOnly: true
+        RoomName:
+          type: string
+          readOnly: true
+        CampusName:
+          type: string
+          readOnly: true
+        Location:
+          $ref: '#/components/schemas/LaundryDetails'
+    LaundryRoom:
+      type: object
+      required:
+      - ID
+      - Name
+      - Status
+      properties:
+        ID:
+          type: integer
+          readOnly: true
+        Name:
+          type: string
+          readOnly: true
+        Status:
+          type: string
+          readOnly: true
+        Location:
+          $ref: '#/components/schemas/LaundryDetails'
+    FloorPlanMarker:
+      type: object
+      required:
+      - RenderID
+      - Label
+      - Description
+      - Display
+      - Icon
+      properties:
+        RenderID:
+          type: string
+          readOnly: true
+        Label:
+          type: string
+          readOnly: true
+        Description:
+          type: string
+          readOnly: true
+        Display:
+          type: string
+        Icon:
+          type: string
           readOnly: true
     Address:
       type: object
@@ -1095,14 +1367,227 @@ components:
           readOnly: true
         Phone:
           $ref: '#/components/schemas/PhoneNumber'
-    FloorPlanMarker:
+    LaundryDetails:
+      type: object
+      required:
+      - Latitude
+      - Longitude
+      - Floor
+      properties:
+        Latitude:
+          type: number
+          format: float
+          readOnly: true
+        Longitude:
+          type: number
+          format: float
+          readOnly: true
+        Floor:
+          type: integer
+          readOnly: true
+    FeatureMapEntry:
+      type: object
+      required:
+      - Name
+      - Floors
+      properties:
+        Name:
+          type: string
+          readOnly: true
+        Floors:
+          type: array
+          items:
+            type: string
+          readOnly: true
+    CodeDescType:
+      type: object
+      required:
+      - Code
+      - Name
+      properties:
+        Code:
+          type: string
+          readOnly: true
+        Name:
+          type: string
+          readOnly: true
+    ServiceRequestResult:
+      type: object
+      required:
+      - Message
+      - RequestNumber
+      - Status
+      properties:
+        Message:
+          type: string
+          readOnly: true
+        RequestNumber:
+          type: string
+          readOnly: true
+        Status:
+          type: string
+          readOnly: true
+    SearchBuildingsResponse:
+      type: object
+      additionalProperties:
+        oneOf:
+        - $ref: '#/components/schemas/CompactBuilding'
+        - $ref: '#/components/schemas/Building'
+      description: "A map where keys are building names and values are either CompactBuilding objects (when v=1 or omitted) \nor Building objects (when v=2) \n"
+    Organization:
+      type: object
+      required:
+      - SchoolName
+      - LaundryRooms
+      properties:
+        SchoolName:
+          type: string
+          readOnly: true
+        LaundryRooms:
+          type: array
+          items:
+            $ref: '#/components/schemas/LaundryRoom'
+          readOnly: true
+    EmergencyContact:
+      type: object
+      required:
+      - Priority
+      - RelationShip
+      - FirstName
+      - LastName
+      - Address
+      properties:
+        Priority:
+          type: string
+          readOnly: true
+        RelationShip:
+          $ref: '#/components/schemas/CodeDescType'
+        FirstName:
+          type: string
+          readOnly: true
+        LastName:
+          type: string
+          readOnly: true
+        Address:
+          $ref: '#/components/schemas/Address'
+    Course:
+      type: object
+      required:
+      - coursetitle
+      - courseshortname
+      - coursenumber
+      - instructionmethod
+      - coursesection
+      properties:
+        coursetitle:
+          type: string
+          readOnly: true
+        courseshortname:
+          type: string
+          readOnly: true
+        coursenumber:
+          type: string
+          readOnly: true
+        instructionmethod:
+          type: string
+          readOnly: true
+        coursesection:
+          $ref: '#/components/schemas/CourseSection'
+    Example:
+      type: object
+      required:
+      - id
+      - app_id
+      - org_id
+      - data
+      - date_created
+      properties:
+        id:
+          type: string
+          readOnly: true
+        org_id:
+          type: string
+          readOnly: true
+        app_id:
+          type: string
+          readOnly: true
+        data:
+          type: string
+        date_created:
+          type: string
+          readOnly: true
+        date_updated:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+    Appliance:
+      type: object
+      required:
+      - ID
+      - Status
+      - ApplianceType
+      - AverageCycleTime
+      - Label
+      properties:
+        ID:
+          type: string
+          readOnly: true
+        Status:
+          type: string
+          readOnly: true
+        ApplianceType:
+          type: string
+          readOnly: true
+        AverageCycleTime:
+          type: integer
+          readOnly: true
+        TimeRemaining:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        Label:
+          type: string
+          readOnly: true
+    Entrance:
+      type: object
+      required:
+      - ID
+      - Name
+      - ADACompliant
+      - Available
+      - ImageURL
+      - Latitude
+      - Longitude
+      properties:
+        ID:
+          type: string
+          readOnly: true
+        Name:
+          type: string
+          readOnly: true
+        ADACopmliant:
+          type: boolean
+          readOnly: true
+        Available:
+          type: boolean
+        ImageUrl:
+          type: string
+          readOnly: true
+        Latitude:
+          type: number
+          readOnly: true
+        Longitude:
+          type: number
+          readOnly: true
+    FloorPlanHighlite:
       type: object
       required:
       - RenderID
       - Label
-      - Description
+      - Color
       - Display
-      - Icon
       properties:
         RenderID:
           type: string
@@ -1110,12 +1595,56 @@ components:
         Label:
           type: string
           readOnly: true
-        Description:
+        Color:
           type: string
           readOnly: true
         Display:
           type: string
-        Icon:
+    ServiceSubmission:
+      type: object
+      required:
+      - machineid
+      - problemcode
+      - firstname
+      - lastname
+      - email
+      properties:
+        machineid:
+          type: string
+          description: The unique service tag ID of the laundry machine
+        problemcode:
+          type: string
+          description: The problem code describing the issue with the machine
+        comments:
+          type:
+          - string
+          - 'null'
+          description: Additional comments about the problem (optional)
+        firstname:
+          type: string
+          description: First name of the person submitting the request
+        lastname:
+          type: string
+          description: Last name of the person submitting the request
+        phone:
+          type:
+          - string
+          - 'null'
+          description: Phone number of the person submitting the request (optional)
+        email:
+          type: string
+          format: email
+          description: Email address of the person submitting the request
+    PhoneNumber:
+      type: object
+      required:
+      - AreaCode
+      - Number
+      properties:
+        AreaCode:
+          type: string
+          readOnly: true
+        Number:
           type: string
           readOnly: true
     Building:
@@ -1193,441 +1722,6 @@ components:
           readOnly: true
         ShortName:
           type: string
-          readOnly: true
-    MachineRequestDetail:
-      type: object
-      required:
-      - MachineID
-      - Message
-      - OpenIssue
-      - ProblemCodes
-      - MachineType
-      properties:
-        MachineID:
-          type: string
-          readOnly: true
-        Message:
-          type: string
-          readOnly: true
-        OpenIssue:
-          type: boolean
-          readOnly: true
-        ProblemCodes:
-          type: array
-          items:
-            type: string
-          readOnly: true
-        MachineType:
-          type: string
-          readOnly: true
-    Organization:
-      type: object
-      required:
-      - SchoolName
-      - LaundryRooms
-      properties:
-        SchoolName:
-          type: string
-          readOnly: true
-        LaundryRooms:
-          type: array
-          items:
-            $ref: '#/components/schemas/LaundryRoom'
-          readOnly: true
-    BuildingFeatureLocation:
-      type: object
-      required:
-      - Key
-      - Value
-      properties:
-        Key:
-          type: string
-          readOnly: true
-        Value:
-          $ref: '#/components/schemas/FeatureMapEntry'
-    EmergencyContact:
-      type: object
-      required:
-      - Priority
-      - RelationShip
-      - FirstName
-      - LastName
-      - Address
-      properties:
-        Priority:
-          type: string
-          readOnly: true
-        RelationShip:
-          $ref: '#/components/schemas/CodeDescType'
-        FirstName:
-          type: string
-          readOnly: true
-        LastName:
-          type: string
-          readOnly: true
-        Address:
-          $ref: '#/components/schemas/Address'
-    Person:
-      type: object
-      required:
-      - uin
-      - FirstName
-      - LastName
-      - PreferredName
-      - MailingAddress
-      - PermAddress
-      - EmergencyContacts
-      properties:
-        uin:
-          type: string
-          readOnly: true
-        FirstName:
-          type: string
-          readOnly: true
-        LastName:
-          type: string
-          readOnly: true
-        PreferredName:
-          type: string
-          readOnly: true
-        MailingAddress:
-          $ref: '#/components/schemas/Address'
-        PermAddress:
-          $ref: '#/components/schemas/Address'
-        EmergencyContacts:
-          type: array
-          items:
-            $ref: '#/components/schemas/EmergencyContact'
-          readOnly: true
-    FloorPlanHighlite:
-      type: object
-      required:
-      - RenderID
-      - Label
-      - Color
-      - Display
-      properties:
-        RenderID:
-          type: string
-          readOnly: true
-        Label:
-          type: string
-          readOnly: true
-        Color:
-          type: string
-          readOnly: true
-        Display:
-          type: string
-    CompactBuilding:
-      type: object
-      required:
-      - ID
-      - Number
-      - Name
-      - FullAddress
-      - ImageURL
-      - Latitude
-      - Longitude
-      - ShortName
-      properties:
-        ID:
-          type: string
-          readOnly: true
-        Name:
-          type: string
-          readOnly: true
-        Number:
-          type: string
-          readOnly: true
-        FullAddress:
-          type: string
-          readOnly: true
-        ImageURL:
-          type: string
-          readOnly: true
-        Latitude:
-          type: number
-          readOnly: true
-        Longitude:
-          type: number
-          readOnly: true
-        Features:
-          type: array
-          items:
-            $ref: '#/components/schemas/BuildingFeatureLocation'
-          readOnly: true
-        ShortName:
-          type: string
-          readOnly: true
-    GiesCourse:
-      type: object
-      required:
-      - term
-      - subject
-      - number
-      - section
-      - title
-      - instructor
-      properties:
-        term:
-          type: string
-          readOnly: true
-        subject:
-          type: string
-          readOnly: true
-        number:
-          type: string
-          readOnly: true
-        section:
-          type: string
-          readOnly: true
-        title:
-          type: string
-          readOnly: true
-        instructor:
-          type: string
-          readOnly: true
-    SearchBuildingsResponse:
-      type: object
-      additionalProperties:
-        oneOf:
-        - $ref: '#/components/schemas/CompactBuilding'
-        - $ref: '#/components/schemas/Building'
-      description: "A map where keys are building names and values are either CompactBuilding objects (when v=1 or omitted) \nor Building objects (when v=2) \n"
-    Entrance:
-      type: object
-      required:
-      - ID
-      - Name
-      - ADACompliant
-      - Available
-      - ImageURL
-      - Latitude
-      - Longitude
-      properties:
-        ID:
-          type: string
-          readOnly: true
-        Name:
-          type: string
-          readOnly: true
-        ADACopmliant:
-          type: boolean
-          readOnly: true
-        Available:
-          type: boolean
-        ImageUrl:
-          type: string
-          readOnly: true
-        Latitude:
-          type: number
-          readOnly: true
-        Longitude:
-          type: number
-          readOnly: true
-    TermSession:
-      type: object
-      required:
-      - term
-      - termid
-      - is_current
-      properties:
-        term:
-          type: string
-          readOnly: true
-        termid:
-          type: string
-          readOnly: true
-        is_current:
-          type: boolean
-          readOnly: true
-    CodeDescType:
-      type: object
-      required:
-      - Code
-      - Name
-      properties:
-        Code:
-          type: string
-          readOnly: true
-        Name:
-          type: string
-          readOnly: true
-    ServiceRequestResult:
-      type: object
-      required:
-      - Message
-      - RequestNumber
-      - Status
-      properties:
-        Message:
-          type: string
-          readOnly: true
-        RequestNumber:
-          type: string
-          readOnly: true
-        Status:
-          type: string
-          readOnly: true
-    RoomDetail:
-      type: object
-      required:
-      - NumWashers
-      - NumDryers
-      - Appliances
-      - RoomName
-      - CampusName
-      properties:
-        NumWashers:
-          type: integer
-          readOnly: true
-        NumDryers:
-          type: integer
-          readOnly: true
-        Appliances:
-          type: array
-          items:
-            $ref: '#/components/schemas/Appliance'
-          readOnly: true
-        RoomName:
-          type: string
-          readOnly: true
-        CampusName:
-          type: string
-          readOnly: true
-        Location:
-          $ref: '#/components/schemas/LaundryDetails'
-    Course:
-      type: object
-      required:
-      - coursetitle
-      - courseshortname
-      - coursenumber
-      - instructionmethod
-      - coursesection
-      properties:
-        coursetitle:
-          type: string
-          readOnly: true
-        courseshortname:
-          type: string
-          readOnly: true
-        coursenumber:
-          type: string
-          readOnly: true
-        instructionmethod:
-          type: string
-          readOnly: true
-        coursesection:
-          $ref: '#/components/schemas/CourseSection'
-    FeatureMapEntry:
-      type: object
-      required:
-      - Name
-      - Floors
-      properties:
-        Name:
-          type: string
-          readOnly: true
-        Floors:
-          type: array
-          items:
-            type: string
-          readOnly: true
-    Appliance:
-      type: object
-      required:
-      - ID
-      - Status
-      - ApplianceType
-      - AverageCycleTime
-      - Label
-      properties:
-        ID:
-          type: string
-          readOnly: true
-        Status:
-          type: string
-          readOnly: true
-        ApplianceType:
-          type: string
-          readOnly: true
-        AverageCycleTime:
-          type: integer
-          readOnly: true
-        TimeRemaining:
-          type: integer
-          nullable: true
-          readOnly: true
-        Label:
-          type: string
-          readOnly: true
-    FloorPlan:
-      type: object
-      required:
-      - BuildingNumber
-      - BuildingFloor
-      - SVGEncoding
-      - SVG
-      - Markers
-      - Highlites
-      properties:
-        BuildingNumber:
-          type: string
-          readOnly: true
-        BuildingFloor:
-          type: string
-          readOnly: true
-        SVGEncoding:
-          type: string
-          readOnly: true
-        SVG:
-          type: string
-        Markers:
-          type: array
-          items:
-            $ref: '#/components/schemas/FloorPlanMarker'
-          readOnly: true
-        Features:
-          type: array
-          items:
-            $ref: '#/components/schemas/FloorPlanHighlite'
-          readOnly: true
-    LaundryRoom:
-      type: object
-      required:
-      - ID
-      - Name
-      - Status
-      properties:
-        ID:
-          type: integer
-          readOnly: true
-        Name:
-          type: string
-          readOnly: true
-        Status:
-          type: string
-          readOnly: true
-        Location:
-          $ref: '#/components/schemas/LaundryDetails'
-    LaundryDetails:
-      type: object
-      required:
-      - Latitude
-      - Longitude
-      - Floor
-      properties:
-        Latitude:
-          type: number
-          format: float
-          readOnly: true
-        Longitude:
-          type: number
-          format: float
-          readOnly: true
-        Floor:
-          type: integer
           readOnly: true
   securitySchemes:
     bearerAuth:

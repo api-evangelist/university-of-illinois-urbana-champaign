@@ -1,0 +1,108 @@
+generated: '2026-08-19'
+method: derived
+source: >-
+  openapi/_original/*.yaml, probed https://api.rokwire.illinois.edu/{core,gateway,content,
+  notifications,surveys,calendar,social,polls,appointments}/version
+operator: institution
+note: >-
+  The Rokwire platform is versioned in the open and the live deployment reports its own version on
+  an unauthenticated endpoint — an unusually good operational-transparency property for a
+  university, and the reason the contract versions in this repo can be checked rather than trusted.
+versioning:
+  scheme: semver-per-building-block
+  advertised_at: 'GET /<building-block>/version (200, text/plain, unauthenticated)'
+  detail: >-
+    Each building block versions independently. There is no /v1 URI path segment and no version
+    header; the base path is the building-block name.
+  observed_2026_08_19:
+  - block: core
+    live: 1.62.0
+    spec: 1.62.0
+    matches: true
+    base: https://api.rokwire.illinois.edu/core
+  - block: gateway
+    live: 2.21.1
+    spec: 2.21.1
+    matches: true
+    base: https://api.rokwire.illinois.edu/gateway
+  - block: calendar
+    live: 1.98.0
+    spec: null
+    matches: null
+    base: https://api.rokwire.illinois.edu/calendar
+  - block: social
+    live: 1.61.0
+    spec: null
+    matches: null
+    base: https://api.rokwire.illinois.edu/social
+  - block: notifications
+    live: 1.28.0
+    spec: null
+    matches: null
+    base: https://api.rokwire.illinois.edu/notifications
+  - block: appointments
+    live: 1.27.2
+    spec: null
+    matches: null
+    base: https://api.rokwire.illinois.edu/appointments
+  - block: content
+    live: 1.14.3
+    spec: null
+    matches: null
+    base: https://api.rokwire.illinois.edu/content
+  - block: surveys
+    live: 1.14.1
+    spec: null
+    matches: null
+    base: https://api.rokwire.illinois.edu/surveys
+  - block: polls
+    live: 1.12.1
+    spec: null
+    matches: null
+    base: https://api.rokwire.illinois.edu/polls
+  coverage_gap: >-
+    Nine building blocks answer /version on the production host; this repo holds a contract for
+    two of them. The other seven (calendar, social, notifications, appointments, content, surveys,
+    polls) are live, institution-operated, and uncatalogued here — a real harvest backlog, not an
+    absence.
+deprecation:
+  policy_url: null
+  policy_published: false
+  sunset_header: false
+  detail: >-
+    No deprecation policy is published for the Rokwire platform, no Sunset or Deprecation header
+    was observed on any probed response, and neither OpenAPI marks an operation deprecated. The
+    only deprecation signal available is the semver major on a building block (Gateway is at 2.x,
+    Core still at 1.x).
+change_communication:
+  channels:
+  - kind: source
+    url: https://github.com/rokwire
+    detail: >-
+      Every building block is a public Apache-2.0 repository with tagged releases and a
+      CHANGELOG. This is where a consumer actually learns what changed — the institution ships no
+      changelog on the API host itself.
+  - kind: live-version-endpoint
+    url: https://api.rokwire.illinois.edu/core/version
+    detail: Unauthenticated, so a client can detect a deployed change without credentials.
+  changelog_on_api_host: false
+  status_page: https://status.illinois.edu/
+other_surfaces:
+- surface: Course Explorer (CISAPI)
+  base: https://courses.illinois.edu/cisapp/explorer
+  versioning: >-
+    None advertised. The XML vocabulary is namespaced http://rest.cis.illinois.edu with no version
+    in the path, the namespace or a header. Content versions by academic term rather than by API
+    version — schedule.xml enumerates calendarYears.
+- surface: IDEALS OAI-PMH
+  base: https://www.ideals.illinois.edu/oai-pmh
+  versioning: >-
+    Protocol-versioned by OAI-PMH itself — Identify reports protocolVersion 2.0, granularity
+    YYYY-MM-DDThh:mm:ssZ and deletedRecord "persistent", meaning deletions stay harvestable
+    forever. earliestDatestamp 2022-06-06 marks the migration off the previous DSpace platform.
+- surface: Illinois Data Bank
+  base: https://databank.illinois.edu
+  versioning: >-
+    Datasets version in the identifier, not the API — DOIs carry an explicit _V1 suffix
+    (10.13012/B2IDB-0887518_V1) so every revision is separately citable and the prior version
+    stays resolvable. The JSON surface itself is unversioned.

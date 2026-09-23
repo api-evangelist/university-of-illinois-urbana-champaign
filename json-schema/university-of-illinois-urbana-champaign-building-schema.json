@@ -1,27 +1,109 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://api.rokwire.illinois.edu/gateway/schemas/building.json",
+  "x-provenance": {
+    "generated": "2026-06-03",
+    "method": "derived",
+    "source": "openapi/_original/university-of-illinois-urbana-champaign-rokwire-gateway.yaml",
+    "note": "Authored by API Evangelist from the Gateway wayfinding building/floorplan responses; UIUC publishes no JSON Schema of its own."
+  },
   "title": "Building",
   "description": "A campus building returned by the Rokwire Gateway Building Block API.",
   "type": "object",
-  "required": ["ID", "Number", "Name", "FullAddress", "Address1", "Address2", "City", "State", "ZipCode", "ImageURL", "MailCode", "Entrances", "Latitude", "Longitude", "Floors", "Features"],
+  "required": [
+    "ID",
+    "Number",
+    "Name",
+    "FullAddress",
+    "Address1",
+    "Address2",
+    "City",
+    "State",
+    "ZipCode",
+    "ImageURL",
+    "MailCode",
+    "Entrances",
+    "Latitude",
+    "Longitude",
+    "Floors",
+    "Features"
+  ],
   "properties": {
-    "ID": { "type": "string", "readOnly": true },
-    "Name": { "type": "string", "readOnly": true },
-    "Number": { "type": "string", "readOnly": true },
-    "FullAddress": { "type": "string", "readOnly": true },
-    "Address1": { "type": "string" },
-    "Address2": { "type": "string", "readOnly": true },
-    "City": { "type": "string", "readOnly": true },
-    "State": { "type": "string", "readOnly": true },
-    "ZipCode": { "type": "string", "readOnly": true },
-    "ImageURL": { "type": "string", "readOnly": true },
-    "MailCode": { "type": "string", "readOnly": true },
-    "Latitude": { "type": "number", "readOnly": true },
-    "Longitude": { "type": "number", "readOnly": true },
-    "Entrances": { "type": "array", "items": { "type": "object" }, "readOnly": true },
-    "Floors": { "type": "array", "items": { "type": "string" }, "readOnly": true },
-    "Features": { "type": "array", "items": { "type": "object" }, "readOnly": true },
-    "ShortName": { "type": "string", "readOnly": true }
+    "ID": {
+      "type": "string",
+      "readOnly": true
+    },
+    "Name": {
+      "type": "string",
+      "readOnly": true
+    },
+    "Number": {
+      "type": "string",
+      "readOnly": true
+    },
+    "FullAddress": {
+      "type": "string",
+      "readOnly": true
+    },
+    "Address1": {
+      "type": "string"
+    },
+    "Address2": {
+      "type": "string",
+      "readOnly": true
+    },
+    "City": {
+      "type": "string",
+      "readOnly": true
+    },
+    "State": {
+      "type": "string",
+      "readOnly": true
+    },
+    "ZipCode": {
+      "type": "string",
+      "readOnly": true
+    },
+    "ImageURL": {
+      "type": "string",
+      "readOnly": true
+    },
+    "MailCode": {
+      "type": "string",
+      "readOnly": true
+    },
+    "Latitude": {
+      "type": "number",
+      "readOnly": true
+    },
+    "Longitude": {
+      "type": "number",
+      "readOnly": true
+    },
+    "Entrances": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      },
+      "readOnly": true
+    },
+    "Floors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "readOnly": true
+    },
+    "Features": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      },
+      "readOnly": true
+    },
+    "ShortName": {
+      "type": "string",
+      "readOnly": true
+    }
   }
 }

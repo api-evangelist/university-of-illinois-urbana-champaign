@@ -1,10 +1,20 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://api.rokwire.illinois.edu/core/schemas/organization.json",
+  "x-provenance": {
+    "generated": "2026-06-03",
+    "method": "derived",
+    "source": "openapi/_original/university-of-illinois-urbana-champaign-rokwire-core.yaml",
+    "note": "Authored by API Evangelist from components.schemas.Organization; UIUC publishes no JSON Schema of its own."
+  },
   "title": "Organization",
   "description": "An organization within the Rokwire Core Building Block API.",
   "type": "object",
-  "required": ["id", "name", "type"],
+  "required": [
+    "id",
+    "name",
+    "type"
+  ],
   "properties": {
     "id": {
       "type": "string",
@@ -17,7 +27,13 @@
     },
     "type": {
       "type": "string",
-      "enum": ["micro", "small", "medium", "large", "huge"],
+      "enum": [
+        "micro",
+        "small",
+        "medium",
+        "large",
+        "huge"
+      ],
       "description": "Size classification of the organization."
     },
     "config": {

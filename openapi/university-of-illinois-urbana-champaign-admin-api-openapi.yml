@@ -1,10 +1,11 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Rokwire Core Building Block Admin API
-  description: Core Building Block API Documentation
-  version: 1.62.0
+  title: University Of Illinois Urbana Champaign Admin API
+  version: '1.0'
+  description: 'Operations tagged Admin across 2 of this provider''s published API definitions: university-of-illinois-urbana-champaign-rokwire-core.yaml, university-of-illinois-urbana-champaign-rokwire-gateway.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.rokwire.illinois.edu/core
+- url: https://api.rokwire.illinois.edu/gateway
 tags:
 - name: Admin
   description: Clients administration applications APIs.
@@ -17,9 +18,7 @@ paths:
       description: 'Login using credentials to retrieve access token, refresh token, and user data
 
 
-        **Auth:** Requires API key
-
-        '
+        **Auth:** Requires API key'
       requestBody:
         description: 'User credential details and parameters
 
@@ -93,6 +92,10 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: postAdminAuthLogin
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /admin/auth/mfa:
     post:
       tags:
@@ -101,9 +104,7 @@ paths:
       description: 'Verify multi-factor authentication credentials to complete login
 
 
-        **Auth:** Requires API key
-
-        '
+        **Auth:** Requires API key'
       parameters:
       - name: state
         in: query
@@ -135,6 +136,10 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: postAdminAuthMfa
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /admin/auth/refresh:
     post:
       tags:
@@ -143,9 +148,7 @@ paths:
       description: 'Refresh access token using a refresh token
 
 
-        **Auth:** Requires API key
-
-        '
+        **Auth:** Requires API key'
       requestBody:
         description: 'Refresh token
 
@@ -168,6 +171,10 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: postAdminAuthRefresh
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /admin/auth/login-url:
     post:
       tags:
@@ -176,9 +183,7 @@ paths:
       description: 'Retrieve a pre-formatted SSO login URL
 
 
-        **Auth:** Requires API key
-
-        '
+        **Auth:** Requires API key'
       requestBody:
         content:
           application/json:
@@ -198,6 +203,10 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: postAdminAuthLoginUrl
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /admin/auth/verify-mfa:
     post:
       tags:
@@ -206,9 +215,7 @@ paths:
       description: 'Verify multi-factor authentication credentials to complete MFA registration
 
 
-        **Auth:** Requires admin access token
-
-        '
+        **Auth:** Requires admin access token'
       requestBody:
         description: 'MFA credentials and parameters
 
@@ -233,6 +240,10 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: postAdminAuthVerifyMfa
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /admin/auth/app-token:
     get:
       tags:
@@ -241,9 +252,7 @@ paths:
       description: 'Retrieve an admin token for the specified application
 
 
-        **Auth:** Requires admin access token
-
-        '
+        **Auth:** Requires admin access token'
       security:
       - bearerAuth: []
       parameters:
@@ -268,6 +277,10 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getAdminAuthAppToken
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /admin/account:
     get:
       tags:
@@ -276,9 +289,7 @@ paths:
       description: 'Get the user account
 
 
-        **Auth:** Requires admin access token
-
-        '
+        **Auth:** Requires admin access token'
       security:
       - bearerAuth: []
       responses:
@@ -294,6 +305,10 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getAdminAccount
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /admin/account/mfa:
     get:
       tags:
@@ -302,9 +317,7 @@ paths:
       description: 'Get MFA types set up for an account
 
 
-        **Auth:** Requires admin access token
-
-        '
+        **Auth:** Requires admin access token'
       security:
       - bearerAuth: []
       responses:
@@ -322,6 +335,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getAdminAccountMfa
+      x-operation-id-source: derived
     post:
       tags:
       - Admin
@@ -329,9 +344,7 @@ paths:
       description: 'Add MFA type to an account
 
 
-        **Auth:** Requires user auth token
-
-        '
+        **Auth:** Requires user auth token'
       security:
       - bearerAuth: []
       parameters:
@@ -356,6 +369,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: postAdminAccountMfa
+      x-operation-id-source: derived
     delete:
       tags:
       - Admin
@@ -363,9 +378,7 @@ paths:
       description: 'Remove MFA type from an account
 
 
-        **Auth:** Requires user auth token
-
-        '
+        **Auth:** Requires user auth token'
       security:
       - bearerAuth: []
       parameters:
@@ -386,6 +399,10 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: deleteAdminAccountMfa
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /admin/account/username:
     put:
       tags:
@@ -394,9 +411,7 @@ paths:
       description: 'Update the username associated with the user''s account
 
 
-        **Auth:** Requires user access token
-
-        '
+        **Auth:** Requires user access token'
       security:
       - bearerAuth: []
       requestBody:
@@ -420,6 +435,10 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: putAdminAccountUsername
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /admin/app-configs:
     post:
       tags:
@@ -428,9 +447,7 @@ paths:
       description: 'Returns the default admin app config for the highest version that is equal to or less than the provided version
 
 
-        **Auth:** Requires a valid API Key for access.
-
-        '
+        **Auth:** Requires a valid API Key for access.'
       requestBody:
         description: 'App config query
 
@@ -458,6 +475,10 @@ paths:
           description: AppConfig not found
         '500':
           description: Internal error
+      operationId: postAdminAppConfigs
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /admin/app-configs/organization:
     post:
       tags:
@@ -466,9 +487,7 @@ paths:
       description: 'Returns the admin app config for the highest version that is equal to or less than the provided version for the currently authenticated organization
 
 
-        **Auth:** Requires admin auth token
-
-        '
+        **Auth:** Requires admin auth token'
       security:
       - bearerAuth: []
       requestBody:
@@ -494,6 +513,10 @@ paths:
           description: AppConfig not found
         '500':
           description: Internal error
+      operationId: postAdminAppConfigsOrganization
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /admin/application/accounts:
     get:
       tags:
@@ -502,9 +525,7 @@ paths:
       description: 'Finds accounts for the specified application
 
 
-        **Auth:** Requires admin access token with `get_accounts`, `update_accounts`, or `all_accounts` permission
-
-        '
+        **Auth:** Requires admin access token with `get_accounts`, `update_accounts`, or `all_accounts` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -619,6 +640,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getAdminApplicationAccounts
+      x-operation-id-source: derived
     post:
       tags:
       - Admin
@@ -627,9 +650,7 @@ paths:
       description: 'Create a new admin account
 
 
-        **Auth:** Requires admin access token with `create_accounts` or `all_accounts` permission
-
-        '
+        **Auth:** Requires admin access token with `create_accounts` or `all_accounts` permission'
       security:
       - bearerAuth: []
       requestBody:
@@ -654,6 +675,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: postAdminApplicationAccounts
+      x-operation-id-source: derived
     put:
       tags:
       - Admin
@@ -661,9 +684,7 @@ paths:
       description: 'Update an existing admin account
 
 
-        **Auth:** Requires admin access token with `update_accounts` or `all_accounts` permission
-
-        '
+        **Auth:** Requires admin access token with `update_accounts` or `all_accounts` permission'
       security:
       - bearerAuth: []
       requestBody:
@@ -688,6 +709,10 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: putAdminApplicationAccounts
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /admin/v2/application/accounts:
     post:
       tags:
@@ -696,9 +721,7 @@ paths:
       description: 'Create accounts
 
 
-        **Auth:** Requires admin access token with `create_accounts` or `all_accounts` permission
-
-        '
+        **Auth:** Requires admin access token with `create_accounts` or `all_accounts` permission'
       security:
       - bearerAuth: []
       requestBody:
@@ -721,6 +744,10 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: postAdminV2ApplicationAccounts
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /admin/application/accounts/{id}/devices:
     get:
       tags:
@@ -729,9 +756,7 @@ paths:
       description: 'Finds devices for the specified account and application
 
 
-        **Auth:** Requires admin access token with `get_account-devices` permission
-
-        '
+        **Auth:** Requires admin access token with `get_account-devices` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -758,6 +783,10 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getAdminApplicationAccountsByIdDevices
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /admin/application/accounts/{account_id}/login-sessions/{session_id}:
     delete:
       tags:
@@ -766,9 +795,7 @@ paths:
       description: 'Delete an account session for specific application
 
 
-        **Auth:** Requires admin access token with `delete_login-sessions` or `all_login-sessions` permission
-
-        '
+        **Auth:** Requires admin access token with `delete_login-sessions` or `all_login-sessions` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -800,6 +827,10 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: deleteAdminApplicationAccountsByAccountIdLoginSessionsBySessionId
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /admin/application/accounts/{id}/permissions:
     put:
       tags:
@@ -808,9 +839,7 @@ paths:
       description: 'Grant account permissions
 
 
-        **Auth:** Requires admin access token with `update_account-permissions`, `update_accounts`, or `all_accounts` permission
-
-        '
+        **Auth:** Requires admin access token with `update_account-permissions`, `update_accounts`, or `all_accounts` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -843,6 +872,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: putAdminApplicationAccountsByIdPermissions
+      x-operation-id-source: derived
     delete:
       tags:
       - Admin
@@ -850,9 +881,7 @@ paths:
       description: 'Deletes an existing permissions from account
 
 
-        **Auth:** Requires admin access token with `update_account-permissions`, `update_accounts`, or `all_accounts` permission
-
-        '
+        **Auth:** Requires admin access token with `update_account-permissions`, `update_accounts`, or `all_accounts` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -884,6 +913,10 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: deleteAdminApplicationAccountsByIdPermissions
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /admin/application/accounts/{id}/roles:
     put:
       tags:
@@ -892,9 +925,7 @@ paths:
       description: 'Grant account roles
 
 
-        **Auth:** Requires admin access token with `update_account-auth-roles`, `update_accounts`, or `all_accounts` permission
-
-        '
+        **Auth:** Requires admin access token with `update_account-auth-roles`, `update_accounts`, or `all_accounts` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -927,6 +958,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: putAdminApplicationAccountsByIdRoles
+      x-operation-id-source: derived
     delete:
       tags:
       - Admin
@@ -934,9 +967,7 @@ paths:
       description: 'Deletes an existing roles from account
 
 
-        **Auth:** Requires admin access token with `update_account-auth-roles`, `update_accounts`, or `all_accounts` permission
-
-        '
+        **Auth:** Requires admin access token with `update_account-auth-roles`, `update_accounts`, or `all_accounts` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -968,6 +999,10 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: deleteAdminApplicationAccountsByIdRoles
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /admin/application/accounts/{id}/system-configs:
     get:
       tags:
@@ -976,9 +1011,7 @@ paths:
       description: 'Returns account system configs
 
 
-        **Auth:** Requires admin access token with `get_account-system-configs` or `all_account-system-configs` permission
-
-        '
+        **Auth:** Requires admin access token with `get_account-system-configs` or `all_account-system-configs` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -996,14 +1029,17 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                nullable: true
+                type:
+                - object
+                - 'null'
         '400':
           description: Bad request
         '401':
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getAdminApplicationAccountsByIdSystemConfigs
+      x-operation-id-source: derived
     put:
       tags:
       - Admin
@@ -1011,9 +1047,7 @@ paths:
       description: 'Updates account system configs
 
 
-        **Auth:** Requires admin access token with `update_account-system-configs` or `all_account-system-configs` permission
-
-        '
+        **Auth:** Requires admin access token with `update_account-system-configs` or `all_account-system-configs` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -1054,6 +1088,10 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: putAdminApplicationAccountsByIdSystemConfigs
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /admin/application/accounts/{id}/verified:
     put:
       tags:
@@ -1062,9 +1100,7 @@ paths:
       description: 'Update the verified flag associated with the specified user''s account
 
 
-        **Auth:** Requires admin access token with `update_account-verified` permission
-
-        '
+        **Auth:** Requires admin access token with `update_account-verified` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -1097,6 +1133,10 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: putAdminApplicationAccountsByIdVerified
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /admin/application/configs:
     get:
       tags:
@@ -1109,9 +1149,7 @@ paths:
         be returned, otherwise the default configs will be returned.
 
 
-        **Auth:** Requires admin access token with `get_app-configs`, `update_app-configs`, `delete_app-configs`, or `all_app-configs` permission
-
-        '
+        **Auth:** Requires admin access token with `get_app-configs`, `update_app-configs`, `delete_app-configs`, or `all_app-configs` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -1149,6 +1187,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getAdminApplicationConfigs
+      x-operation-id-source: derived
     post:
       tags:
       - Admin
@@ -1156,9 +1196,7 @@ paths:
       description: 'Creates a new app config
 
 
-        **Auth:** Requires admin access token with `update_app-configs` or `all_app-configs` permission
-
-        '
+        **Auth:** Requires admin access token with `update_app-configs` or `all_app-configs` permission'
       security:
       - bearerAuth: []
       requestBody:
@@ -1187,6 +1225,10 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: postAdminApplicationConfigs
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /admin/application/configs/{id}:
     get:
       tags:
@@ -1195,9 +1237,7 @@ paths:
       description: 'Get app configs for the provided ID
 
 
-        **Auth:** Requires admin access token with `get_app-configs`, `update_app-configs`, `delete_app-configs`, or `all_app-configs` permission
-
-        '
+        **Auth:** Requires admin access token with `get_app-configs`, `update_app-configs`, `delete_app-configs`, or `all_app-configs` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -1222,6 +1262,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getAdminApplicationConfigsById
+      x-operation-id-source: derived
     put:
       tags:
       - Admin
@@ -1229,9 +1271,7 @@ paths:
       description: 'Updates app config with the provided ID
 
 
-        **Auth:** Requires admin access token with `update_app-configs` or `all_app-configs` permission
-
-        '
+        **Auth:** Requires admin access token with `update_app-configs` or `all_app-configs` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -1269,6 +1309,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: putAdminApplicationConfigsById
+      x-operation-id-source: derived
     delete:
       tags:
       - Admin
@@ -1276,9 +1318,7 @@ paths:
       description: 'Deletes app config with the provided ID
 
 
-        **Auth:** Requires admin access token with `delete_app-configs` or `all_app-configs` permission
-
-        '
+        **Auth:** Requires admin access token with `delete_app-configs` or `all_app-configs` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -1298,14 +1338,16 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: deleteAdminApplicationConfigsById
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /admin/application/filter/accounts:
     post:
       tags:
       - Admin
       summary: Finds user accounts matching provided filter
-      description: '**Auth:** Requires admin access token with `get_filter-accounts` permission
-
-        '
+      description: '**Auth:** Requires admin access token with `get_filter-accounts` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -1368,14 +1410,16 @@ paths:
           description: Forbidden
         '500':
           description: Internal error
+      operationId: postAdminApplicationFilterAccounts
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /admin/application/filter/accounts/count:
     post:
       tags:
       - Admin
       summary: Finds the count of user accounts matching filter
-      description: '**Auth:** Requires service access token with `get_filter-accounts-count` permission
-
-        '
+      description: '**Auth:** Requires service access token with `get_filter-accounts-count` permission'
       security:
       - bearerAuth: []
       requestBody:
@@ -1422,6 +1466,10 @@ paths:
           description: Forbidden
         '500':
           description: Internal error
+      operationId: postAdminApplicationFilterAccountsCount
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /admin/application/login-sessions:
     get:
       tags:
@@ -1430,9 +1478,7 @@ paths:
       description: 'Get application sessions
 
 
-        **Auth:** Requires admin access token with `get_login-sessions`, `update_login-sessions`, `delete_login-sessions`, or `all_login-sessions` permission
-
-        '
+        **Auth:** Requires admin access token with `get_login-sessions`, `update_login-sessions`, `delete_login-sessions`, or `all_login-sessions` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -1507,12 +1553,35 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getAdminApplicationLoginSessions
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /admin/application/groups:
     get:
       tags:
       - Admin
       summary: Get application groups
-      description: "Gets application groups\n    \n**Auth:** Requires admin access token with at least one of the following permissions:\n- `get_auth-groups`\n- `update_auth-groups`\n- `delete_auth-groups`\n- `all_auth-groups`\n- `update_account-auth-groups`\n- `create_accounts`\n- `update_accounts`\n- `all_accounts`\n"
+      description: 'Gets application groups
+
+
+        **Auth:** Requires admin access token with at least one of the following permissions:
+
+        - `get_auth-groups`
+
+        - `update_auth-groups`
+
+        - `delete_auth-groups`
+
+        - `all_auth-groups`
+
+        - `update_account-auth-groups`
+
+        - `create_accounts`
+
+        - `update_accounts`
+
+        - `all_accounts`'
       security:
       - bearerAuth: []
       responses:
@@ -1530,11 +1599,18 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getAdminApplicationGroups
+      x-operation-id-source: derived
     post:
       tags:
       - Admin
       summary: Create application group
-      description: "Create application group\n\n **Auth:** Requires admin access token with `update_auth-groups` or `all_auth-groups` permission\n - bearerAuth: []\n"
+      description: 'Create application group
+
+
+        **Auth:** Requires admin access token with `update_auth-groups` or `all_auth-groups` permission
+
+        - bearerAuth: []'
       security:
       - bearerAuth: []
       requestBody:
@@ -1557,6 +1633,10 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: postAdminApplicationGroups
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /admin/application/groups/{id}:
     put:
       tags:
@@ -1565,9 +1645,7 @@ paths:
       description: 'Updates an existing application group
 
 
-        **Auth:** Requires admin access token with `update_auth-groups` or `all_auth-groups` permission
-
-        '
+        **Auth:** Requires admin access token with `update_auth-groups` or `all_auth-groups` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -1597,6 +1675,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: putAdminApplicationGroupsById
+      x-operation-id-source: derived
     delete:
       tags:
       - Admin
@@ -1604,9 +1684,7 @@ paths:
       description: 'Deletes an existing application group
 
 
-        **Auth:** Requires admin access token with `delete_auth-groups` or `all_auth-groups` permission
-
-        '
+        **Auth:** Requires admin access token with `delete_auth-groups` or `all_auth-groups` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -1625,12 +1703,19 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: deleteAdminApplicationGroupsById
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /admin/application/groups/{id}/accounts:
     put:
       tags:
       - Admin
       summary: Add accounts to a group
-      description: "Add accounts \n\n**Auth:** Requires admin access token with `update_account-auth-groups`, `update_accounts`, or `all_accounts` permission\n"
+      description: 'Add accounts
+
+
+        **Auth:** Requires admin access token with `update_account-auth-groups`, `update_accounts`, or `all_accounts` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -1663,6 +1748,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: putAdminApplicationGroupsByIdAccounts
+      x-operation-id-source: derived
     delete:
       tags:
       - Admin
@@ -1670,9 +1757,7 @@ paths:
       description: 'Deletes an existing accounts from group
 
 
-        **Auth:** Requires admin access token with `update_account-auth-groups`, `update_accounts`, or `all_accounts` permission
-
-        '
+        **Auth:** Requires admin access token with `update_account-auth-groups`, `update_accounts`, or `all_accounts` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -1704,6 +1789,10 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: deleteAdminApplicationGroupsByIdAccounts
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /admin/application/permissions:
     get:
       tags:
@@ -1722,9 +1811,7 @@ paths:
 
         - `update_accounts`
 
-        - `all_accounts`
-
-        '
+        - `all_accounts`'
       security:
       - bearerAuth: []
       responses:
@@ -1742,12 +1829,35 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getAdminApplicationPermissions
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /admin/application/roles:
     get:
       tags:
       - Admin
       summary: Get application roles
-      description: "Gets application roles\n\n**Auth:** Requires admin access token with at least one of the following permissions: \n- `get_auth-roles`\n- `update_auth-roles`\n- `delete_auth-roles`\n- `all_auth-roles`\n- `update_account-auth-roles`\n- `create_accounts`\n- `update_accounts`\n- `all_accounts`\n"
+      description: 'Gets application roles
+
+
+        **Auth:** Requires admin access token with at least one of the following permissions:
+
+        - `get_auth-roles`
+
+        - `update_auth-roles`
+
+        - `delete_auth-roles`
+
+        - `all_auth-roles`
+
+        - `update_account-auth-roles`
+
+        - `create_accounts`
+
+        - `update_accounts`
+
+        - `all_accounts`'
       security:
       - bearerAuth: []
       responses:
@@ -1765,6 +1875,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getAdminApplicationRoles
+      x-operation-id-source: derived
     post:
       tags:
       - Admin
@@ -1772,9 +1884,7 @@ paths:
       description: 'Creates application role
 
 
-        **Auth:** Requires admin access token with `update_auth-roles` or `all_auth-roles` permission
-
-        '
+        **Auth:** Requires admin access token with `update_auth-roles` or `all_auth-roles` permission'
       security:
       - bearerAuth: []
       requestBody:
@@ -1797,6 +1907,10 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: postAdminApplicationRoles
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /admin/application/roles/{id}:
     put:
       tags:
@@ -1805,9 +1919,7 @@ paths:
       description: 'Update application role
 
 
-        **Auth:** Requires admin access token with `update_auth-roles` or `all_auth-roles` permission
-
-        '
+        **Auth:** Requires admin access token with `update_auth-roles` or `all_auth-roles` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -1837,6 +1949,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: putAdminApplicationRolesById
+      x-operation-id-source: derived
     delete:
       tags:
       - Admin
@@ -1844,9 +1958,7 @@ paths:
       description: 'Delete application role
 
 
-        **Auth:** Requires admin access token with `delete_auth-roles` or `all_auth-roles` permission
-
-        '
+        **Auth:** Requires admin access token with `delete_auth-roles` or `all_auth-roles` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -1865,6 +1977,10 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: deleteAdminApplicationRolesById
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /admin/application/roles/{id}/permissions:
     put:
       tags:
@@ -1873,9 +1989,7 @@ paths:
       description: 'Grant permissions to role
 
 
-        **Auth:** Requires admin access token with `update_auth-roles` or `all_auth-roles` permission
-
-        '
+        **Auth:** Requires admin access token with `update_auth-roles` or `all_auth-roles` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -1906,6 +2020,10 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: putAdminApplicationRolesByIdPermissions
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /admin/organization/applications:
     get:
       tags:
@@ -1914,9 +2032,7 @@ paths:
       description: 'Gets applications for an organization
 
 
-        **Auth:** Requires admin access token
-
-        '
+        **Auth:** Requires admin access token'
       security:
       - bearerAuth: []
       responses:
@@ -1934,6 +2050,10 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getAdminOrganizationApplications
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /admin/configs:
     get:
       tags:
@@ -1942,9 +2062,7 @@ paths:
       description: 'Get existing configs by search parameters
 
 
-        **Auth:** Requires admin access token with `get_configs_core`, `update_configs_core`, `delete_configs_core`, or `all_configs_core` permission:
-
-        '
+        **Auth:** Requires admin access token with `get_configs_core`, `update_configs_core`, `delete_configs_core`, or `all_configs_core` permission:'
       security:
       - bearerAuth: []
       parameters:
@@ -1971,6 +2089,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getAdminConfigs
+      x-operation-id-source: derived
     post:
       tags:
       - Admin
@@ -1978,9 +2098,7 @@ paths:
       description: 'Creates a new config
 
 
-        **Auth:** Requires admin access token with `update_configs_core` or `all_configs_core` permission
-
-        '
+        **Auth:** Requires admin access token with `update_configs_core` or `all_configs_core` permission'
       security:
       - bearerAuth: []
       requestBody:
@@ -2036,6 +2154,10 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: postAdminConfigs
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /admin/configs/{id}:
     get:
       tags:
@@ -2044,9 +2166,7 @@ paths:
       description: 'Get an existing config
 
 
-        **Auth:** Requires admin access token with `get_configs_core`, `update_configs_core`, `delete_configs_core`, or `all_configs_core` permission
-
-        '
+        **Auth:** Requires admin access token with `get_configs_core`, `update_configs_core`, `delete_configs_core`, or `all_configs_core` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -2071,6 +2191,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getAdminConfigsById
+      x-operation-id-source: derived
     put:
       tags:
       - Admin
@@ -2078,9 +2200,7 @@ paths:
       description: 'Updates an existing config
 
 
-        **Auth:** Requires admin access token with `update_configs_core` or `all_configs_core` permission
-
-        '
+        **Auth:** Requires admin access token with `update_configs_core` or `all_configs_core` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -2147,6 +2267,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: putAdminConfigsById
+      x-operation-id-source: derived
     delete:
       tags:
       - Admin
@@ -2154,9 +2276,7 @@ paths:
       description: 'Deletes a config
 
 
-        **Auth:** Requires admin access token with `delete_configs_core` or `all_configs_core` permission
-
-        '
+        **Auth:** Requires admin access token with `delete_configs_core` or `all_configs_core` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -2182,6 +2302,10 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: deleteAdminConfigsById
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /api/admin/examples:
     post:
       tags:
@@ -2190,9 +2314,7 @@ paths:
       description: 'Creates new example record
 
 
-        **Auth:** Requires valid admin token with `update_examples` or `all_examples`  permission
-
-        '
+        **Auth:** Requires valid admin token with `update_examples` or `all_examples` permission'
       security:
       - bearerAuth: []
       requestBody:
@@ -2214,6 +2336,10 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: postApiAdminExamples
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/gateway
   /api/admin/examples/{id}:
     get:
       tags:
@@ -2230,9 +2356,7 @@ paths:
 
         - `delete_examples`
 
-        - `all_examples`
-
-        '
+        - `all_examples`'
       security:
       - bearerAuth: []
       parameters:
@@ -2257,6 +2381,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getApiAdminExamplesById
+      x-operation-id-source: derived
     put:
       tags:
       - Admin
@@ -2264,9 +2390,7 @@ paths:
       description: 'Updates example record
 
 
-        **Auth:** Requires valid admin token with `update_examples` or `all_examples`  permission
-
-        '
+        **Auth:** Requires valid admin token with `update_examples` or `all_examples` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -2298,6 +2422,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: putApiAdminExamplesById
+      x-operation-id-source: derived
     delete:
       tags:
       - Admin
@@ -2305,9 +2431,7 @@ paths:
       description: 'Deletes example record
 
 
-        **Auth:** Requires valid admin token with `delete_examples` or `all_examples` permission
-
-        '
+        **Auth:** Requires valid admin token with `delete_examples` or `all_examples` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -2333,6 +2457,10 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: deleteApiAdminExamplesById
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/gateway
   /api/admin/configs:
     get:
       tags:
@@ -2349,9 +2477,7 @@ paths:
 
         - `delete_configs_gateway`
 
-        - `all_configs_gateway`
-
-        '
+        - `all_configs_gateway`'
       security:
       - bearerAuth: []
       parameters:
@@ -2378,6 +2504,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getApiAdminConfigs
+      x-operation-id-source: derived
     post:
       tags:
       - Admin
@@ -2389,9 +2517,7 @@ paths:
 
         - `update_configs_gateway`
 
-        - `all_configs_gateway`
-
-        '
+        - `all_configs_gateway`'
       security:
       - bearerAuth: []
       requestBody:
@@ -2441,6 +2567,10 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: postApiAdminConfigs
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/gateway
   /api/admin/configs/{id}:
     get:
       tags:
@@ -2457,9 +2587,7 @@ paths:
 
         - `delete_configs_gateway`
 
-        - `all_configs_gateway`
-
-        '
+        - `all_configs_gateway`'
       security:
       - bearerAuth: []
       parameters:
@@ -2484,6 +2612,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getApiAdminConfigsById
+      x-operation-id-source: derived
     put:
       tags:
       - Admin
@@ -2495,9 +2625,7 @@ paths:
 
         - `update_configs_gateway`
 
-        - `all_configs_gateway`
-
-        '
+        - `all_configs_gateway`'
       security:
       - bearerAuth: []
       parameters:
@@ -2558,6 +2686,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: putApiAdminConfigsById
+      x-operation-id-source: derived
     delete:
       tags:
       - Admin
@@ -2569,9 +2699,7 @@ paths:
 
         - `delete_configs_gateway`
 
-        - `all_configs_gateway`
-
-        '
+        - `all_configs_gateway`'
       security:
       - bearerAuth: []
       parameters:
@@ -2597,6 +2725,10 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: deleteApiAdminConfigsById
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/gateway
   /api/admin/webtools-blacklist:
     put:
       tags:
@@ -2605,9 +2737,7 @@ paths:
       description: 'Add webtools blacklist data
 
 
-        **Auth:** Requires valid admin token and "webtools_blacklist" permission
-
-        '
+        **Auth:** Requires valid admin token and "webtools_blacklist" permission'
       security:
       - bearerAuth: []
       deprecated: true
@@ -2626,11 +2756,16 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: putApiAdminWebtoolsBlacklist
+      x-operation-id-source: derived
     get:
       tags:
       - Admin
       summary: Get all webtools blacklist item
-      description: "Get all webtools blacklist items\n\n **Auth:** Requires valid admin token and \"webtools_blacklist\" permission\n"
+      description: 'Get all webtools blacklist items
+
+
+        **Auth:** Requires valid admin token and "webtools_blacklist" permission'
       security:
       - bearerAuth: []
       deprecated: true
@@ -2649,6 +2784,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getApiAdminWebtoolsBlacklist
+      x-operation-id-source: derived
     delete:
       tags:
       - Admin
@@ -2656,9 +2793,7 @@ paths:
       description: 'Deletes webtools blacklist items.
 
 
-        **Auth:** Requires valid admin token and "webtools_blacklist" permission
-
-        '
+        **Auth:** Requires valid admin token and "webtools_blacklist" permission'
       security:
       - bearerAuth: []
       deprecated: true
@@ -2701,6 +2836,10 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: deleteApiAdminWebtoolsBlacklist
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/gateway
   /api/admin/events/webtools-blacklist:
     put:
       tags:
@@ -2709,9 +2848,7 @@ paths:
       description: 'Add webtools blacklist data
 
 
-        **Auth:** Requires valid admin token and `all_events` permission
-
-        '
+        **Auth:** Requires valid admin token and `all_events` permission'
       security:
       - bearerAuth: []
       requestBody:
@@ -2729,11 +2866,16 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: putApiAdminEventsWebtoolsBlacklist
+      x-operation-id-source: derived
     get:
       tags:
       - Admin
       summary: Get all webtools blacklist item
-      description: "Get all webtools blacklist items\n\n **Auth:** Requires valid admin token and `all_events` permission\n"
+      description: 'Get all webtools blacklist items
+
+
+        **Auth:** Requires valid admin token and `all_events` permission'
       security:
       - bearerAuth: []
       responses:
@@ -2751,6 +2893,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getApiAdminEventsWebtoolsBlacklist
+      x-operation-id-source: derived
     delete:
       tags:
       - Admin
@@ -2758,9 +2902,7 @@ paths:
       description: 'Deletes webtools blacklist items.
 
 
-        **Auth:** Requires valid admin token and `all_events` permission
-
-        '
+        **Auth:** Requires valid admin token and `all_events` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -2802,12 +2944,19 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: deleteApiAdminEventsWebtoolsBlacklist
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/gateway
   /api/admin/events/summary:
     get:
       tags:
       - Admin
       summary: Get events summary
-      description: "Get events summary\n\n **Auth:** Requires valid admin token and `all_events` permission\n"
+      description: 'Get events summary
+
+
+        **Auth:** Requires valid admin token and `all_events` permission'
       security:
       - bearerAuth: []
       responses:
@@ -2823,12 +2972,19 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getApiAdminEventsSummary
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/gateway
   /api/admin/events/load:
     get:
       tags:
       - Admin
       summary: Load events
-      description: "Get existing events by search parameters\n\n **Auth:** Requires valid admin token and `all_events` permission\n"
+      description: 'Get existing events by search parameters
+
+
+        **Auth:** Requires valid admin token and `all_events` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -2887,96 +3043,353 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getApiAdminEventsLoad
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/gateway
 components:
   schemas:
-    ApplicationConfig:
+    _shared_req_ParamsNone:
+      type:
+      - object
+      - 'null'
+      description: Auth login request params for unlisted auth_types (None)
+    _shared_req_CreateAccount:
       required:
-      - id
-      - app_type_id
-      - version
-      - data
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        app_type_id:
-          type: string
-        org_id:
-          type: string
-        version:
-          type: string
-          description: conforms major.minor.patch format
-        data:
-          type: object
-    _shared_res_ParamsOIDC:
-      type: object
-      description: Auth login response params for auth_type="oidc" (or variants)
-      properties:
-        oidc_token:
-          type: object
-          properties:
-            id_token:
-              type: string
-            access_token:
-              type: string
-            refresh_token:
-              type: string
-            token_type:
-              type: string
-        redirect_uri:
-          type: string
-    ApplicationType:
-      required:
-      - id
+      - auth_type
       - identifier
       type: object
       properties:
-        id:
-          readOnly: true
+        auth_type:
           type: string
+          enum:
+          - email
+          - illinois_oidc
         identifier:
           type: string
-        name:
-          type: string
-        versions:
-          type: array
-          items:
-            type: string
-    _admin_req_grant-permissions-to-role:
-      required:
-      - permissions
-      type: object
-      properties:
         permissions:
           type: array
           items:
             type: string
-    _shared_res_Login_Mfa:
-      required:
-      - enrolled
-      - account_id
-      - session_id
-      - state
-      type: object
-      properties:
-        enrolled:
+        role_ids:
           type: array
           items:
-            $ref: '#/components/schemas/_shared_res_Mfa'
-        account_id:
-          type: string
-        session_id:
-          type: string
-        state:
-          type: string
+            type: string
+        group_ids:
+          type: array
+          items:
+            type: string
+        scopes:
+          type: array
+          items:
+            type: string
+        profile:
+          $ref: '#/components/schemas/ProfileNullable'
+        privacy:
+          $ref: '#/components/schemas/PrivacyNullable'
+        username:
+          type:
+          - string
+          - 'null'
+    _admin_req_remove-account-from-group:
+      required:
+      - account_ids
+      type: object
+      properties:
+        account_ids:
+          type: array
+          items:
+            type: string
+    _shared_res_Refresh:
+      type: object
+      properties:
+        token:
+          $ref: '#/components/schemas/_shared_res_RokwireToken'
         params:
-          type: object
-          nullable: true
+          type:
+          - object
+          - 'null'
           anyOf:
           - $ref: '#/components/schemas/_shared_res_ParamsOIDC'
           - $ref: '#/components/schemas/_shared_res_ParamsAPIKey'
           - $ref: '#/components/schemas/_shared_res_ParamsNone'
+    SupportedAuthTypes:
+      type: object
+      properties:
+        app_type_id:
+          type: string
+        supported_auth_types:
+          type: array
+          items:
+            $ref: '#/components/schemas/SupportedAuthType'
+    IdentityProviderSettings:
+      required:
+      - identity_provider_id
+      - user_identifier_field
+      type: object
+      properties:
+        identity_provider_id:
+          type: string
+        user_identifier_field:
+          type: string
+        external_id_fields:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+        first_name_field:
+          type: string
+        middle_name_field:
+          type: string
+        last_name_field:
+          type: string
+        email_field:
+          type: string
+        ferpa_field:
+          type: string
+        roles_field:
+          type: string
+        groups_field:
+          type: string
+        user_specific_fields:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        roles:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+        groups:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+        always_sync_profile:
+          type: boolean
+        identity_bb_base_url:
+          type: string
+        identity_bb_profile_fields:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+        admin_app_access_roles:
+          type: array
+          items:
+            type: string
+    SupportedAuthType:
+      type: object
+      properties:
+        auth_type_id:
+          type: string
+        params:
+          type:
+          - object
+          - 'null'
+          additionalProperties: true
+    _admin_req_revoke-roles-from-account:
+      required:
+      - role_ids
+      type: object
+      properties:
+        role_ids:
+          type: array
+          items:
+            type: string
+    PrivacyNullable:
+      type:
+      - object
+      - 'null'
+      properties:
+        public:
+          type:
+          - boolean
+          - 'null'
+        field_visibility:
+          type:
+          - object
+          - 'null'
+          additionalProperties: true
+    _shared_req_ParamsEmail:
+      type: object
+      description: Auth login params for auth_type="email"
+      properties:
+        confirm_password:
+          type: string
+          description: This should match the `creds` password field when sign_up=true. This should be verified on the client side as well to reduce invalid requests.
+        sign_up:
+          type: boolean
+    PartialAccount:
+      required:
+      - id
+      - app_id
+      - org_id
+      - first_name
+      - last_name
+      - permissions
+      - roles
+      - groups
+      - anonymous
+      - auth_types
+      - date_created
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        app_id:
+          type: string
+        org_id:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        system:
+          type: boolean
+        username:
+          type: string
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/AppOrgRole'
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/AppOrgGroup'
+        apps:
+          type: array
+          items:
+            $ref: '#/components/schemas/PartialApp'
+        scopes:
+          type: array
+          items:
+            type: string
+        auth_types:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccountAuthType'
+        system_configs:
+          type:
+          - object
+          - 'null'
+        params:
+          type:
+          - object
+          - 'null'
+        anonymous:
+          type: boolean
+        privacy:
+          $ref: '#/components/schemas/Privacy'
+        verified:
+          type: boolean
+        date_created:
+          readOnly: true
+          type: string
+        date_updated:
+          type:
+          - string
+          - 'null'
+        external_ids:
+          type:
+          - object
+          - 'null'
+    LoginSessionSettings:
+      type: object
+      properties:
+        max_concurrent_sessions:
+          type: integer
+        inactivity_expire_policy:
+          $ref: '#/components/schemas/InactiveExpirePolicy'
+        time_since_login_expire_policy:
+          $ref: '#/components/schemas/TSLExpirePolicy'
+        yearly_expire_policy:
+          $ref: '#/components/schemas/YearlyExpirePolicy'
+        refresh_grace_period_policy:
+          $ref: '#/components/schemas/RefreshGracePeriodPolicy'
+    RefreshGracePeriodPolicy:
+      type: object
+      required:
+      - active
+      - grace_period
+      properties:
+        active:
+          type: boolean
+        grace_period:
+          type: integer
+    _admin_req_add-accounts-to-group:
+      required:
+      - account_ids
+      type: object
+      properties:
+        account_ids:
+          type: array
+          items:
+            type: string
+    _shared_res_LoginUrl:
+      required:
+      - login_url
+      type: object
+      properties:
+        login_url:
+          type: string
+        params:
+          type: object
+          description: Params to be submitted with 'login' request (if necessary)
+    ApplicationOrganization:
+      required:
+      - id
+      - app_id
+      - org_id
+      type:
+      - object
+      - 'null'
+      properties:
+        id:
+          readOnly: true
+          type: string
+        app_id:
+          type: string
+        org_id:
+          type: string
+        services_ids:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        identity_provider_settings:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/IdentityProviderSettings'
+        supported_auth_types:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SupportedAuthTypes'
+        logins_session_settings:
+          $ref: '#/components/schemas/LoginSessionSettings'
+    AdminToken:
+      required:
+      - token
+      type: object
+      properties:
+        token:
+          type: string
     _shared_req_Refresh:
       required:
       - api_key
@@ -2987,54 +3400,32 @@ components:
           type: string
         refresh_token:
           type: string
-    _shared_req_CredsTwilioPhone:
-      type: object
-      description: Auth login creds for auth_type="twilio_phone"
+    Username:
       required:
-      - phone
+      - username
+      type: object
       properties:
-        phone:
+        username:
           type: string
-        code:
-          type: string
-    AdminToken:
+    InactiveExpirePolicy:
+      type: object
       required:
-      - token
+      - active
+      - inactivity_period
+      properties:
+        active:
+          type: boolean
+        inactivity_period:
+          type: integer
+    _shared_res_Mfa:
       type: object
       properties:
-        token:
+        type:
           type: string
-    SupportedAuthTypes:
-      type: object
-      properties:
-        app_type_id:
-          type: string
-        supported_auth_types:
-          type: array
-          items:
-            $ref: '#/components/schemas/SupportedAuthType'
-    _shared_req_ParamsNone:
-      type: object
-      description: Auth login request params for unlisted auth_types (None)
-      nullable: true
-    _admin_req_grant-permissions:
-      required:
-      - permissions
-      type: object
-      properties:
-        permissions:
-          type: array
-          items:
-            type: string
-    ValidIgnored:
-      type: object
-      properties:
-        webtools_source:
-          items:
-            $ref: '#/components/schemas/WebtoolsSource'
-        tps_api:
-          items:
-            $ref: '#/components/schemas/TPsSource'
+        verified:
+          type: boolean
+        params:
+          type: object
     _admin_req_application_role:
       required:
       - name
@@ -3056,7 +3447,122 @@ components:
           type: array
           items:
             type: string
-    _admin_req_revoke-permissions:
+    Device:
+      required:
+      - id
+      - type
+      type: object
+      properties:
+        id:
+          readOnly: true
+          type: string
+        device_id:
+          type:
+          - string
+          - 'null'
+        type:
+          type: string
+          enum:
+          - mobile
+          - web
+          - desktop
+          - other
+        os:
+          type: string
+    _shared_req_ParamsOIDC:
+      type: object
+      description: Auth login params for auth_type="oidc" (or variants)
+      properties:
+        redirect_uri:
+          type: string
+        pkce_verifier:
+          type: string
+    Config:
+      required:
+      - id
+      - type
+      - app_id
+      - org_id
+      - system
+      - data
+      - date_created
+      - date_updated
+      type: object
+      properties:
+        id:
+          readOnly: true
+          type: string
+        type:
+          type: string
+        app_id:
+          readOnly: true
+          type: string
+        org_id:
+          readOnly: true
+          type: string
+        system:
+          type: boolean
+        data:
+          anyOf:
+          - $ref: '#/components/schemas/EnvConfigData'
+        date_created:
+          readOnly: true
+          type: string
+        date_updated:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+    YearlyExpirePolicy:
+      type: object
+      required:
+      - active
+      - day
+      - month
+      - hour
+      - min
+      properties:
+        active:
+          type: boolean
+        day:
+          type: integer
+        month:
+          type: integer
+        hour:
+          type: integer
+        min:
+          type: integer
+    _shared_req_LoginUrl:
+      required:
+      - auth_type
+      - app_type_identifier
+      - org_id
+      - api_key
+      - redirect_uri
+      type: object
+      properties:
+        auth_type:
+          type: string
+          enum:
+          - illinois_oidc
+        app_type_identifier:
+          type: string
+        org_id:
+          type: string
+        api_key:
+          type: string
+        redirect_uri:
+          type: string
+    _admin_req_grant-roles-to-account:
+      required:
+      - role_ids
+      type: object
+      properties:
+        role_ids:
+          type: array
+          items:
+            type: string
+    _admin_req_grant-permissions:
       required:
       - permissions
       type: object
@@ -3065,85 +3571,15 @@ components:
           type: array
           items:
             type: string
-    _shared_req_CredsAPIKey:
-      type: object
-      description: Auth login creds for auth_type="anonymous"
-      properties:
-        anonymous_id:
-          type: string
-    _shared_req_Login_Mfa:
+    _admin_req_grant-permissions-to-role:
       required:
-      - api_key
-      - account_id
-      - session_id
-      - state
-      - identifier
-      - type
-      - code
+      - permissions
       type: object
       properties:
-        api_key:
-          type: string
-        account_id:
-          type: string
-        session_id:
-          type: string
-        state:
-          type: string
-        identifier:
-          type: string
-        type:
-          type: string
-          enum:
-          - email
-          - phone
-          - totp
-          - recovery
-        code:
-          type: string
-    _shared_req_CredsEmail:
-      required:
-      - email
-      - password
-      type: object
-      description: Auth login creds for auth_type="email"
-      properties:
-        email:
-          type: string
-        password:
-          type: string
-    _shared_req_Mfa:
-      required:
-      - identifier
-      - type
-      type: object
-      properties:
-        identifier:
-          type: string
-        type:
-          type: string
-          enum:
-          - email
-          - phone
-          - totp
-        code:
-          type: string
-    _shared_res_Login:
-      type: object
-      properties:
-        token:
-          $ref: '#/components/schemas/_shared_res_RokwireToken'
-        account:
-          $ref: '#/components/schemas/Account'
-        params:
-          type: object
-          nullable: true
-          anyOf:
-          - $ref: '#/components/schemas/_shared_res_ParamsOIDC'
-          - $ref: '#/components/schemas/_shared_res_ParamsAPIKey'
-          - $ref: '#/components/schemas/_shared_res_ParamsNone'
-        message:
-          type: string
+        permissions:
+          type: array
+          items:
+            type: string
     _shared_req_CredsUsername:
       required:
       - username
@@ -3155,172 +3591,13 @@ components:
           type: string
         password:
           type: string
-    LoginSessionSettings:
-      type: object
-      properties:
-        max_concurrent_sessions:
-          type: integer
-        inactivity_expire_policy:
-          $ref: '#/components/schemas/InactiveExpirePolicy'
-        time_since_login_expire_policy:
-          $ref: '#/components/schemas/TSLExpirePolicy'
-        yearly_expire_policy:
-          $ref: '#/components/schemas/YearlyExpirePolicy'
-        refresh_grace_period_policy:
-          $ref: '#/components/schemas/RefreshGracePeriodPolicy'
-    Application:
+    _admin_req_verified:
       required:
-      - id
-      - name
-      - multi_tenant
-      - admin
-      - code
+      - verified
       type: object
       properties:
-        id:
-          readOnly: true
-          type: string
-        name:
-          type: string
-        multi_tenant:
-          type: boolean
-        admin:
-          type: boolean
-        code:
-          type: string
-        types:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApplicationType'
-    ProfileNullable:
-      type: object
-      nullable: true
-      properties:
-        photo_url:
-          type: string
-          nullable: true
-        pronunciation_url:
-          type: string
-          nullable: true
-        pronouns:
-          type: string
-          nullable: true
-        first_name:
-          type: string
-          nullable: true
-        last_name:
-          type: string
-          nullable: true
-        email:
-          type: string
-          nullable: true
-        phone:
-          type: string
-          nullable: true
-        birth_year:
-          type: integer
-          nullable: true
-        address:
-          type: string
-          nullable: true
-        address2:
-          type: string
-          nullable: true
-        po_box:
-          type: string
-          nullable: true
-        city:
-          type: string
-          nullable: true
-        zip_code:
-          type: string
-          nullable: true
-        state:
-          type: string
-          nullable: true
-        country:
-          type: string
-          nullable: true
-        website:
-          type: string
-          nullable: true
-        unstructured_properties:
-          type: object
-          nullable: true
-    _admin_req_application_group:
-      required:
-      - name
-      - description
-      type: object
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        system:
-          type: boolean
-        permissions:
-          type: array
-          items:
-            type: string
-        roles:
-          type: array
-          items:
-            type: string
-        account_ids:
-          nullable: true
-          type: array
-          items:
-            type: string
-    _shared_res_LoginUrl:
-      required:
-      - login_url
-      type: object
-      properties:
-        login_url:
-          type: string
-        params:
-          type: object
-          description: Params to be submitted with 'login' request (if necessary)
-    _shared_req_CredsOIDC:
-      type: string
-      description: "Auth login creds for auth_type=\"oidc\" (or variants)\n  - full redirect URI received from OIDC provider\n"
-    Example:
-      type: object
-      required:
-      - id
-      - app_id
-      - org_id
-      - data
-      - date_created
-      properties:
-        id:
-          type: string
-          readOnly: true
-        org_id:
-          type: string
-          readOnly: true
-        app_id:
-          type: string
-          readOnly: true
-        data:
-          type: string
-        date_created:
-          type: string
-          readOnly: true
-        date_updated:
-          type: string
-          nullable: true
-          readOnly: true
-    _shared_res_Mfa:
-      type: object
-      properties:
-        type:
-          type: string
         verified:
           type: boolean
-        params:
-          type: object
     _shared_req_UpdateAccount:
       required:
       - auth_type
@@ -3350,147 +3627,34 @@ components:
           type: array
           items:
             type: string
-    _shared_req_app-configs-org:
-      required:
-      - app_type_identifier
-      - version
-      type: object
-      properties:
-        app_type_identifier:
-          type: string
-        version:
-          type: string
-          description: conforms major.minor.patch format
-    YearlyExpirePolicy:
-      type: object
-      required:
-      - active
-      - day
-      - month
-      - hour
-      - min
-      properties:
-        active:
-          type: boolean
-        day:
-          type: integer
-        month:
-          type: integer
-        hour:
-          type: integer
-        min:
-          type: integer
-    IdentityProviderSettings:
-      required:
-      - identity_provider_id
-      - user_identifier_field
-      type: object
-      properties:
-        identity_provider_id:
-          type: string
-        user_identifier_field:
-          type: string
-        external_id_fields:
-          type: object
-          additionalProperties:
-            type: string
-          nullable: true
-        first_name_field:
-          type: string
-        middle_name_field:
-          type: string
-        last_name_field:
-          type: string
-        email_field:
-          type: string
-        ferpa_field:
-          type: string
-        roles_field:
-          type: string
-        groups_field:
-          type: string
-        user_specific_fields:
-          type: array
-          items:
-            type: string
-          nullable: true
-        roles:
-          type: object
-          additionalProperties:
-            type: string
-          nullable: true
-        groups:
-          type: object
-          additionalProperties:
-            type: string
-          nullable: true
-        always_sync_profile:
-          type: boolean
-        identity_bb_base_url:
-          type: string
-        identity_bb_profile_fields:
-          type: object
-          additionalProperties:
-            type: string
-          nullable: true
-        admin_app_access_roles:
-          type: array
-          items:
-            type: string
-    _shared_req_LoginUrl:
-      required:
-      - auth_type
-      - app_type_identifier
-      - org_id
-      - api_key
-      - redirect_uri
-      type: object
-      properties:
-        auth_type:
-          type: string
-          enum:
-          - illinois_oidc
-        app_type_identifier:
-          type: string
-        org_id:
-          type: string
-        api_key:
-          type: string
-        redirect_uri:
-          type: string
-    AppOrgRole:
+    AccountAuthType:
       required:
       - id
-      - name
+      - code
+      - identifier
       type: object
       properties:
         id:
           type: string
-          readOnly: true
-        name:
+        code:
           type: string
-        description:
+        identifier:
           type: string
-        system:
+        params:
+          type:
+          - object
+          - 'null'
+          additionalProperties: true
+        active:
           type: boolean
-        date_created:
-          type: string
-        date_updated:
-          type: string
-        application:
-          $ref: '#/components/schemas/Application'
-        permissions:
-          type: array
-          items:
-            $ref: '#/components/schemas/Permission'
-        scopes:
-          type: array
-          items:
-            type: string
-    PartialApp:
+        unverified:
+          type: boolean
+    Application:
       required:
       - id
       - name
+      - multi_tenant
+      - admin
       - code
       type: object
       properties:
@@ -3499,7 +3663,38 @@ components:
           type: string
         name:
           type: string
+        multi_tenant:
+          type: boolean
+        admin:
+          type: boolean
         code:
+          type: string
+        types:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApplicationType'
+    Permission:
+      required:
+      - id
+      - name
+      type: object
+      properties:
+        id:
+          readOnly: true
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        service_id:
+          type: string
+        assigners:
+          type: array
+          items:
+            type: string
+        date_created:
+          type: string
+        date_updated:
           type: string
     _shared_req_ParamsUsername:
       type: object
@@ -3510,16 +3705,42 @@ components:
           description: This should match the `creds` password field when sign_up=true. This should be verified on the client side as well to reduce invalid requests.
         sign_up:
           type: boolean
-    TSLExpirePolicy:
-      type: object
+    _shared_req_app-configs:
       required:
-      - active
-      - time_since_login_period
+      - app_type_identifier
+      - version
+      - api_key
+      type: object
       properties:
-        active:
+        app_type_identifier:
+          type: string
+        version:
+          type: string
+          description: conforms major.minor.patch format
+        api_key:
+          type: string
+    _admin_req_create-update-config:
+      required:
+      - type
+      - system
+      - data
+      type: object
+      properties:
+        type:
+          type: string
+        all_apps:
+          type:
+          - boolean
+          - 'null'
+        all_orgs:
+          type:
+          - boolean
+          - 'null'
+        system:
           type: boolean
-        time_since_login_period:
-          type: integer
+        data:
+          anyOf:
+          - $ref: '#/components/schemas/EnvConfigData'
     _shared_req_Login:
       required:
       - auth_type
@@ -3564,222 +3785,13 @@ components:
         privacy:
           $ref: '#/components/schemas/PrivacyNullable'
         preferences:
-          type: object
-          nullable: true
+          type:
+          - object
+          - 'null'
         username:
-          type: string
-          nullable: true
-    LegacyEventStatus:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-        reason_ignored:
-          type: string
-          nullable: true
-    SummaryEvents:
-      type: object
-      properties:
-        all_events_count:
-          type: integer
-        valid_events_count:
-          type: integer
-        ignored_events_count:
-          type: integer
-        total_originating_calendars:
-          type: integer
-        valid:
-          items:
-            $ref: '#/components/schemas/ValidIgnored'
-        ignored:
-          items:
-            $ref: '#/components/schemas/ValidIgnored'
-        blacklists:
-          type: array
-          items:
-            $ref: '#/components/schemas/BlacklistItems'
-    InactiveExpirePolicy:
-      type: object
-      required:
-      - active
-      - inactivity_period
-      properties:
-        active:
-          type: boolean
-        inactivity_period:
-          type: integer
-    RefreshGracePeriodPolicy:
-      type: object
-      required:
-      - active
-      - grace_period
-      properties:
-        active:
-          type: boolean
-        grace_period:
-          type: integer
-    _shared_req_app-configs:
-      required:
-      - app_type_identifier
-      - version
-      - api_key
-      type: object
-      properties:
-        app_type_identifier:
-          type: string
-        version:
-          type: string
-          description: conforms major.minor.patch format
-        api_key:
-          type: string
-    Username:
-      required:
-      - username
-      type: object
-      properties:
-        username:
-          type: string
-    _admin_req_add-webtools-blacklist:
-      type: object
-      properties:
-        data_source_ids:
-          type: array
-          nullable: true
-          items:
-            type: string
-        data_calendar_ids:
-          type: array
-          nullable: true
-          items:
-            type: string
-        data_originating_calendar_ids:
-          type: array
-          nullable: true
-          items:
-            type: string
-    Permission:
-      required:
-      - id
-      - name
-      type: object
-      properties:
-        id:
-          readOnly: true
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        service_id:
-          type: string
-        assigners:
-          type: array
-          items:
-            type: string
-        date_created:
-          type: string
-        date_updated:
-          type: string
-    _admin_req_revoke-roles-from-account:
-      required:
-      - role_ids
-      type: object
-      properties:
-        role_ids:
-          type: array
-          items:
-            type: string
-    LegacyEventItem:
-      type: object
-      required:
-      - source
-      - status
-      - legacy_event
-      properties:
-        source:
-          type: string
-        status:
-          $ref: '#/components/schemas/LegacyEventStatus'
-        legacy_event:
-          $ref: '#/components/schemas/LegacyEvent'
-    _shared_req_ParamsOIDC:
-      type: object
-      description: Auth login params for auth_type="oidc" (or variants)
-      properties:
-        redirect_uri:
-          type: string
-        pkce_verifier:
-          type: string
-    _shared_res_ParamsAPIKey:
-      type: object
-      description: Auth login response params for auth_type="anonymous"
-      properties:
-        anonymous_id:
-          type: string
-    _admin_req_add-accounts-to-group:
-      required:
-      - account_ids
-      type: object
-      properties:
-        account_ids:
-          type: array
-          items:
-            type: string
-    _admin_req_verified:
-      required:
-      - verified
-      type: object
-      properties:
-        verified:
-          type: boolean
-    _admin_req_create-update-config:
-      required:
-      - type
-      - system
-      - data
-      type: object
-      properties:
-        type:
-          type: string
-        all_apps:
-          type: boolean
-          nullable: true
-        all_orgs:
-          type: boolean
-          nullable: true
-        system:
-          type: boolean
-        data:
-          anyOf:
-          - $ref: '#/components/schemas/EnvConfigData'
-    TPsSource:
-      type: object
-      properties:
-        count:
-          type: integer
-    AccountAuthType:
-      required:
-      - id
-      - code
-      - identifier
-      type: object
-      properties:
-        id:
-          type: string
-        code:
-          type: string
-        identifier:
-          type: string
-        params:
-          type: object
-          additionalProperties: true
-          nullable: true
-        active:
-          type: boolean
-        unverified:
-          type: boolean
+          type:
+          - string
+          - 'null'
     AppOrgGroup:
       required:
       - id
@@ -3809,143 +3821,151 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AppOrgRole'
-    _shared_res_Refresh:
-      type: object
-      properties:
-        token:
-          $ref: '#/components/schemas/_shared_res_RokwireToken'
-        params:
-          type: object
-          nullable: true
-          anyOf:
-          - $ref: '#/components/schemas/_shared_res_ParamsOIDC'
-          - $ref: '#/components/schemas/_shared_res_ParamsAPIKey'
-          - $ref: '#/components/schemas/_shared_res_ParamsNone'
-    Profile:
+    _shared_req_Mfa:
       required:
-      - id
-      type: object
-      properties:
-        id:
-          readOnly: true
-          type: string
-        photo_url:
-          type: string
-        pronunciation_url:
-          type: string
-        pronouns:
-          type: string
-        first_name:
-          type: string
-        last_name:
-          type: string
-        email:
-          type: string
-          nullable: true
-        phone:
-          type: string
-          nullable: true
-        birth_year:
-          type: integer
-          nullable: true
-        address:
-          type: string
-          nullable: true
-        address2:
-          type: string
-          nullable: true
-        po_box:
-          type: string
-          nullable: true
-        city:
-          type: string
-          nullable: true
-        zip_code:
-          type: string
-          nullable: true
-        state:
-          type: string
-          nullable: true
-        country:
-          type: string
-          nullable: true
-        website:
-          type: string
-        unstructured_properties:
-          type: object
-          nullable: true
-    _shared_res_ParamsNone:
-      type: object
-      description: Auth login response params for unlisted auth_types (None)
-      nullable: true
-    WebtoolsSource:
-      type: object
-      properties:
-        count:
-          type: integer
-        originating_calendar:
-          type: array
-          items:
-            $ref: '#/components/schemas/OriginatingCalendarItem'
-    PrivacyNullable:
-      type: object
-      nullable: true
-      properties:
-        public:
-          type: boolean
-          nullable: true
-        field_visibility:
-          type: object
-          additionalProperties: true
-          nullable: true
-    Device:
-      required:
-      - id
+      - identifier
       - type
       type: object
       properties:
-        id:
-          readOnly: true
+        identifier:
           type: string
-        device_id:
-          type: string
-          nullable: true
         type:
           type: string
           enum:
-          - mobile
-          - web
-          - desktop
-          - other
-        os:
+          - email
+          - phone
+          - totp
+        code:
           type: string
-    _shared_req_ParamsEmail:
+    _shared_req_CredsTwilioPhone:
       type: object
-      description: Auth login params for auth_type="email"
+      description: Auth login creds for auth_type="twilio_phone"
+      required:
+      - phone
       properties:
-        confirm_password:
+        phone:
           type: string
-          description: This should match the `creds` password field when sign_up=true. This should be verified on the client side as well to reduce invalid requests.
-        sign_up:
+        code:
+          type: string
+    ProfileNullable:
+      type:
+      - object
+      - 'null'
+      properties:
+        photo_url:
+          type:
+          - string
+          - 'null'
+        pronunciation_url:
+          type:
+          - string
+          - 'null'
+        pronouns:
+          type:
+          - string
+          - 'null'
+        first_name:
+          type:
+          - string
+          - 'null'
+        last_name:
+          type:
+          - string
+          - 'null'
+        email:
+          type:
+          - string
+          - 'null'
+        phone:
+          type:
+          - string
+          - 'null'
+        birth_year:
+          type:
+          - integer
+          - 'null'
+        address:
+          type:
+          - string
+          - 'null'
+        address2:
+          type:
+          - string
+          - 'null'
+        po_box:
+          type:
+          - string
+          - 'null'
+        city:
+          type:
+          - string
+          - 'null'
+        zip_code:
+          type:
+          - string
+          - 'null'
+        state:
+          type:
+          - string
+          - 'null'
+        country:
+          type:
+          - string
+          - 'null'
+        website:
+          type:
+          - string
+          - 'null'
+        unstructured_properties:
+          type:
+          - object
+          - 'null'
+    _shared_req_CredsAPIKey:
+      type: object
+      description: Auth login creds for auth_type="anonymous"
+      properties:
+        anonymous_id:
+          type: string
+    _shared_req_CredsEmail:
+      required:
+      - email
+      - password
+      type: object
+      description: Auth login creds for auth_type="email"
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+    _admin_req_application_group:
+      required:
+      - name
+      - description
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        system:
           type: boolean
-    _admin_req_remove-account-from-group:
-      required:
-      - account_ids
-      type: object
-      properties:
+        permissions:
+          type: array
+          items:
+            type: string
+        roles:
+          type: array
+          items:
+            type: string
         account_ids:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-    _admin_req_grant-roles-to-account:
-      required:
-      - role_ids
-      type: object
-      properties:
-        role_ids:
-          type: array
-          items:
-            type: string
+    _shared_req_CredsOIDC:
+      type: string
+      description: "Auth login creds for auth_type=\"oidc\" (or variants)\n  - full redirect URI received from OIDC provider\n"
     Account:
       required:
       - id
@@ -3963,11 +3983,13 @@ components:
         privacy:
           $ref: '#/components/schemas/Privacy'
         preferences:
-          type: object
-          nullable: true
+          type:
+          - object
+          - 'null'
         system_configs:
-          type: object
-          nullable: true
+          type:
+          - object
+          - 'null'
         anonymous:
           type: boolean
         verified:
@@ -3975,8 +3997,9 @@ components:
         system:
           type: boolean
         external_ids:
-          type: object
-          nullable: true
+          type:
+          - object
+          - 'null'
         auth_types:
           type: array
           items:
@@ -4011,61 +4034,433 @@ components:
           type: string
         most_recent_client_version:
           type: string
-    Privacy:
-      type: object
-      properties:
-        public:
-          type: boolean
-          nullable: true
-        field_visibility:
-          type: object
-          additionalProperties: true
-          nullable: true
-    _shared_req_CreateAccount:
+    _shared_res_Login_Mfa:
       required:
-      - auth_type
-      - identifier
+      - enrolled
+      - account_id
+      - session_id
+      - state
       type: object
       properties:
-        auth_type:
+        enrolled:
+          type: array
+          items:
+            $ref: '#/components/schemas/_shared_res_Mfa'
+        account_id:
+          type: string
+        session_id:
+          type: string
+        state:
+          type: string
+        params:
+          type:
+          - object
+          - 'null'
+          anyOf:
+          - $ref: '#/components/schemas/_shared_res_ParamsOIDC'
+          - $ref: '#/components/schemas/_shared_res_ParamsAPIKey'
+          - $ref: '#/components/schemas/_shared_res_ParamsNone'
+    EnvConfigData:
+      type: object
+      properties:
+        cors_allowed_origins:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        cors_allowed_headers:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+    _shared_res_RokwireToken:
+      type: object
+      properties:
+        access_token:
+          description: The user's access token to be provided to authorize access to ROKWIRE APIs
+          type: string
+        refresh_token:
+          description: A refresh token that can be used to get a new access token once the one provided expires
+          type: string
+        token_type:
+          description: The type of the provided tokens to be specified when they are sent in the "Authorization" header
           type: string
           enum:
-          - email
-          - illinois_oidc
-        identifier:
+          - Bearer
+    _shared_req_app-configs-org:
+      required:
+      - app_type_identifier
+      - version
+      type: object
+      properties:
+        app_type_identifier:
           type: string
+        version:
+          type: string
+          description: conforms major.minor.patch format
+    ApplicationConfig:
+      required:
+      - id
+      - app_type_id
+      - version
+      - data
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        app_type_id:
+          type: string
+        org_id:
+          type: string
+        version:
+          type: string
+          description: conforms major.minor.patch format
+        data:
+          type: object
+    _shared_res_ParamsNone:
+      type:
+      - object
+      - 'null'
+      description: Auth login response params for unlisted auth_types (None)
+    _admin_req_revoke-permissions:
+      required:
+      - permissions
+      type: object
+      properties:
         permissions:
           type: array
           items:
             type: string
-        role_ids:
+    Profile:
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          readOnly: true
+          type: string
+        photo_url:
+          type: string
+        pronunciation_url:
+          type: string
+        pronouns:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type:
+          - string
+          - 'null'
+        phone:
+          type:
+          - string
+          - 'null'
+        birth_year:
+          type:
+          - integer
+          - 'null'
+        address:
+          type:
+          - string
+          - 'null'
+        address2:
+          type:
+          - string
+          - 'null'
+        po_box:
+          type:
+          - string
+          - 'null'
+        city:
+          type:
+          - string
+          - 'null'
+        zip_code:
+          type:
+          - string
+          - 'null'
+        state:
+          type:
+          - string
+          - 'null'
+        country:
+          type:
+          - string
+          - 'null'
+        website:
+          type: string
+        unstructured_properties:
+          type:
+          - object
+          - 'null'
+    _shared_res_ParamsOIDC:
+      type: object
+      description: Auth login response params for auth_type="oidc" (or variants)
+      properties:
+        oidc_token:
+          type: object
+          properties:
+            id_token:
+              type: string
+            access_token:
+              type: string
+            refresh_token:
+              type: string
+            token_type:
+              type: string
+        redirect_uri:
+          type: string
+    PartialApp:
+      required:
+      - id
+      - name
+      - code
+      type: object
+      properties:
+        id:
+          readOnly: true
+          type: string
+        name:
+          type: string
+        code:
+          type: string
+    _shared_res_ParamsAPIKey:
+      type: object
+      description: Auth login response params for auth_type="anonymous"
+      properties:
+        anonymous_id:
+          type: string
+    _shared_req_Login_Mfa:
+      required:
+      - api_key
+      - account_id
+      - session_id
+      - state
+      - identifier
+      - type
+      - code
+      type: object
+      properties:
+        api_key:
+          type: string
+        account_id:
+          type: string
+        session_id:
+          type: string
+        state:
+          type: string
+        identifier:
+          type: string
+        type:
+          type: string
+          enum:
+          - email
+          - phone
+          - totp
+          - recovery
+        code:
+          type: string
+    LoginSession:
+      type: object
+      properties:
+        id:
+          type: string
+        anonymous:
+          type: boolean
+        identifier:
+          type: string
+        auth_type_code:
+          type: string
+        app_org_id:
+          type: string
+        app_type_id:
+          type: string
+        app_type_identifier:
+          type: string
+        account_auth_type_id:
+          type: string
+        account_auth_type_identifier:
+          type: string
+        device_id:
+          type:
+          - string
+          - 'null'
+        ip_address:
+          type: string
+        refresh_tokens_count:
+          type: integer
+        state:
+          type: string
+        state_expires:
+          type:
+          - string
+          - 'null'
+        mfa_attempts:
+          type: integer
+        date_refreshed:
+          type:
+          - string
+          - 'null'
+        date_updated:
+          type:
+          - string
+          - 'null'
+        date_created:
+          type: string
+    TSLExpirePolicy:
+      type: object
+      required:
+      - active
+      - time_since_login_period
+      properties:
+        active:
+          type: boolean
+        time_since_login_period:
+          type: integer
+    AppOrgRole:
+      required:
+      - id
+      - name
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        name:
+          type: string
+        description:
+          type: string
+        system:
+          type: boolean
+        date_created:
+          type: string
+        date_updated:
+          type: string
+        application:
+          $ref: '#/components/schemas/Application'
+        permissions:
           type: array
           items:
-            type: string
-        group_ids:
-          type: array
-          items:
-            type: string
+            $ref: '#/components/schemas/Permission'
         scopes:
           type: array
           items:
             type: string
-        profile:
-          $ref: '#/components/schemas/ProfileNullable'
-        privacy:
-          $ref: '#/components/schemas/PrivacyNullable'
-        username:
-          type: string
-          nullable: true
-    SupportedAuthType:
+    _shared_res_Login:
       type: object
       properties:
-        auth_type_id:
-          type: string
+        token:
+          $ref: '#/components/schemas/_shared_res_RokwireToken'
+        account:
+          $ref: '#/components/schemas/Account'
         params:
-          type: object
+          type:
+          - object
+          - 'null'
+          anyOf:
+          - $ref: '#/components/schemas/_shared_res_ParamsOIDC'
+          - $ref: '#/components/schemas/_shared_res_ParamsAPIKey'
+          - $ref: '#/components/schemas/_shared_res_ParamsNone'
+        message:
+          type: string
+    Privacy:
+      type: object
+      properties:
+        public:
+          type:
+          - boolean
+          - 'null'
+        field_visibility:
+          type:
+          - object
+          - 'null'
           additionalProperties: true
-          nullable: true
+    ApplicationType:
+      required:
+      - id
+      - identifier
+      type: object
+      properties:
+        id:
+          readOnly: true
+          type: string
+        identifier:
+          type: string
+        name:
+          type: string
+        versions:
+          type: array
+          items:
+            type: string
+    SummaryEvents:
+      type: object
+      properties:
+        all_events_count:
+          type: integer
+        valid_events_count:
+          type: integer
+        ignored_events_count:
+          type: integer
+        total_originating_calendars:
+          type: integer
+        valid:
+          items:
+            $ref: '#/components/schemas/ValidIgnored'
+        ignored:
+          items:
+            $ref: '#/components/schemas/ValidIgnored'
+        blacklists:
+          type: array
+          items:
+            $ref: '#/components/schemas/BlacklistItems'
+    WebtoolsSource:
+      type: object
+      properties:
+        count:
+          type: integer
+        originating_calendar:
+          type: array
+          items:
+            $ref: '#/components/schemas/OriginatingCalendarItem'
+    _admin_req_add-webtools-blacklist:
+      type: object
+      properties:
+        data_source_ids:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        data_calendar_ids:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        data_originating_calendar_ids:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+    LegacyEventItem:
+      type: object
+      required:
+      - source
+      - status
+      - legacy_event
+      properties:
+        source:
+          type: string
+        status:
+          $ref: '#/components/schemas/LegacyEventStatus'
+        legacy_event:
+          $ref: '#/components/schemas/LegacyEvent'
     LegacyEvent:
       type: object
       required:
@@ -4124,8 +4519,9 @@ components:
         id:
           type: string
         image_url:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         is_event_free:
           type: boolean
         is_virtual:
@@ -4137,8 +4533,9 @@ components:
         outlook_url:
           type: string
         recurrence_id:
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
         is_super_event:
           type: boolean
         recurring_flag:
@@ -4154,165 +4551,21 @@ components:
         title_url:
           type: string
         tags:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
         target_audience:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
         registration_url:
           type: string
         cost:
           type: string
-    LoginSession:
-      type: object
-      properties:
-        id:
-          type: string
-        anonymous:
-          type: boolean
-        identifier:
-          type: string
-        auth_type_code:
-          type: string
-        app_org_id:
-          type: string
-        app_type_id:
-          type: string
-        app_type_identifier:
-          type: string
-        account_auth_type_id:
-          type: string
-        account_auth_type_identifier:
-          type: string
-        device_id:
-          type: string
-          nullable: true
-        ip_address:
-          type: string
-        refresh_tokens_count:
-          type: integer
-        state:
-          type: string
-        state_expires:
-          type: string
-          nullable: true
-        mfa_attempts:
-          type: integer
-        date_refreshed:
-          type: string
-          nullable: true
-        date_updated:
-          type: string
-          nullable: true
-        date_created:
-          type: string
-    EnvConfigData:
-      type: object
-      properties:
-        cors_allowed_origins:
-          type: array
-          items:
-            type: string
-          nullable: true
-        cors_allowed_headers:
-          type: array
-          items:
-            type: string
-          nullable: true
-    ApplicationOrganization:
-      required:
-      - id
-      - app_id
-      - org_id
-      type: object
-      nullable: true
-      properties:
-        id:
-          readOnly: true
-          type: string
-        app_id:
-          type: string
-        org_id:
-          type: string
-        services_ids:
-          type: array
-          nullable: true
-          items:
-            type: string
-        identity_provider_settings:
-          type: array
-          nullable: true
-          items:
-            $ref: '#/components/schemas/IdentityProviderSettings'
-        supported_auth_types:
-          type: array
-          nullable: true
-          items:
-            $ref: '#/components/schemas/SupportedAuthTypes'
-        logins_session_settings:
-          $ref: '#/components/schemas/LoginSessionSettings'
-    BlacklistItems:
-      type: object
-      properties:
-        name:
-          type: string
-        data:
-          type: array
-          items:
-            type: string
-    _shared_res_RokwireToken:
-      type: object
-      properties:
-        access_token:
-          description: The user's access token to be provided to authorize access to ROKWIRE APIs
-          type: string
-        refresh_token:
-          description: A refresh token that can be used to get a new access token once the one provided expires
-          type: string
-        token_type:
-          description: The type of the provided tokens to be specified when they are sent in the "Authorization" header
-          type: string
-          enum:
-          - Bearer
-    Config:
-      required:
-      - id
-      - type
-      - app_id
-      - org_id
-      - system
-      - data
-      - date_created
-      - date_updated
-      type: object
-      properties:
-        id:
-          readOnly: true
-          type: string
-        type:
-          type: string
-        app_id:
-          readOnly: true
-          type: string
-        org_id:
-          readOnly: true
-          type: string
-        system:
-          type: boolean
-        data:
-          anyOf:
-          - $ref: '#/components/schemas/EnvConfigData'
-        date_created:
-          readOnly: true
-          type: string
-        date_updated:
-          readOnly: true
-          type: string
-          nullable: true
     OriginatingCalendarItem:
       type: object
       properties:
@@ -4322,83 +4575,80 @@ components:
           type: string
         name:
           type: string
-    PartialAccount:
+    ValidIgnored:
+      type: object
+      properties:
+        webtools_source:
+          items:
+            $ref: '#/components/schemas/WebtoolsSource'
+        tps_api:
+          items:
+            $ref: '#/components/schemas/TPsSource'
+    LegacyEventStatus:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        reason_ignored:
+          type:
+          - string
+          - 'null'
+    TPsSource:
+      type: object
+      properties:
+        count:
+          type: integer
+    BlacklistItems:
+      type: object
+      properties:
+        name:
+          type: string
+        data:
+          type: array
+          items:
+            type: string
+    Example:
+      type: object
       required:
       - id
       - app_id
       - org_id
-      - first_name
-      - last_name
-      - permissions
-      - roles
-      - groups
-      - anonymous
-      - auth_types
+      - data
       - date_created
-      type: object
       properties:
         id:
           type: string
           readOnly: true
-        app_id:
-          type: string
         org_id:
           type: string
-        first_name:
-          type: string
-        last_name:
-          type: string
-        system:
-          type: boolean
-        username:
-          type: string
-        permissions:
-          type: array
-          items:
-            $ref: '#/components/schemas/Permission'
-        roles:
-          type: array
-          items:
-            $ref: '#/components/schemas/AppOrgRole'
-        groups:
-          type: array
-          items:
-            $ref: '#/components/schemas/AppOrgGroup'
-        apps:
-          type: array
-          items:
-            $ref: '#/components/schemas/PartialApp'
-        scopes:
-          type: array
-          items:
-            type: string
-        auth_types:
-          type: array
-          items:
-            $ref: '#/components/schemas/AccountAuthType'
-        system_configs:
-          type: object
-          nullable: true
-        params:
-          type: object
-          nullable: true
-        anonymous:
-          type: boolean
-        privacy:
-          $ref: '#/components/schemas/Privacy'
-        verified:
-          type: boolean
-        date_created:
           readOnly: true
+        app_id:
           type: string
+          readOnly: true
+        data:
+          type: string
+        date_created:
+          type: string
+          readOnly: true
         date_updated:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+    EnvConfigData_2:
+      type: object
+      required:
+      - example_env
+      properties:
+        example_env:
           type: string
-          nullable: true
-        external_ids:
-          type: object
-          nullable: true
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
       bearerFormat: JWT
+x-refined-from:
+- university-of-illinois-urbana-champaign-rokwire-core.yaml
+- university-of-illinois-urbana-champaign-rokwire-gateway.yaml

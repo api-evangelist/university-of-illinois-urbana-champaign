@@ -1,0 +1,18 @@
+generated: '2026-06-03'
+method: derived
+source: >-
+  openapi/_original/university-of-illinois-urbana-champaign-rokwire-core.yaml and
+  openapi/_original/university-of-illinois-urbana-champaign-rokwire-gateway.yaml
+note: >-
+  The payloads in this directory are API Evangelist's, not UIUC's. They are instances constructed
+  to satisfy the schemas in json-schema/, which were themselves derived from the Rokwire
+  building-block OpenAPI components. UIUC publishes no example payloads for these APIs. The files
+  carry no inline provenance key because adding one would make them invalid instances of their own
+  schemas — this sidecar is the marker.
+examples:
+- file: university-of-illinois-urbana-champaign-organization-example.json
+  schema: json-schema/university-of-illinois-urbana-champaign-organization-schema.json
+  method: derived
+- file: university-of-illinois-urbana-champaign-building-example.json
+  schema: json-schema/university-of-illinois-urbana-champaign-building-schema.json
+  method: derived

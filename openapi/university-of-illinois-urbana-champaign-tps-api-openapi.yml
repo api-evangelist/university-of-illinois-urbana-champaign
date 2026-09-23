@@ -1,10 +1,10 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Rokwire Core Building Block Admin TPS API
-  description: Core Building Block API Documentation
-  version: 1.62.0
+  title: Rokwire Gateway Building Block TPS API
+  description: Gateway Building Block API Documentation
+  version: 2.21.1
 servers:
-- url: https://api.rokwire.illinois.edu/core
+- url: https://api.rokwire.illinois.edu/gateway
 tags:
 - name: TPS
   description: Third-Party Service APIs.
@@ -17,9 +17,7 @@ paths:
       description: 'Gets example record
 
 
-        **Auth:** Requires valid third-party service account token with `get_examples` permission
-
-        '
+        **Auth:** Requires valid third-party service account token with `get_examples` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -44,6 +42,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getApiTpsExamplesById
+      x-operation-id-source: derived
   /api/tps/events:
     post:
       tags:
@@ -52,9 +52,7 @@ paths:
       description: 'Creates new events
 
 
-        **Auth:** Requires valid tps token with `manage_legacy_events` permission
-
-        '
+        **Auth:** Requires valid tps token with `manage_legacy_events` permission'
       security:
       - bearerAuth: []
       requestBody:
@@ -74,6 +72,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: postApiTpsEvents
+      x-operation-id-source: derived
     delete:
       tags:
       - TPS
@@ -81,9 +81,7 @@ paths:
       description: 'Deletes all events created by the calling account. If the "ids" param is passed them it deletes only the provided events.
 
 
-        **Auth:** Requires valid tps token with `manage_legacy_events` permission
-
-        '
+        **Auth:** Requires valid tps token with `manage_legacy_events` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -109,6 +107,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: deleteApiTpsEvents
+      x-operation-id-source: derived
 components:
   schemas:
     _tps_req_create-event-contact:
@@ -120,6 +120,34 @@ components:
           type: string
         contact_phone:
           type: string
+    Example:
+      type: object
+      required:
+      - id
+      - app_id
+      - org_id
+      - data
+      - date_created
+      properties:
+        id:
+          type: string
+          readOnly: true
+        org_id:
+          type: string
+          readOnly: true
+        app_id:
+          type: string
+          readOnly: true
+        data:
+          type: string
+        date_created:
+          type: string
+          readOnly: true
+        date_updated:
+          type:
+          - string
+          - 'null'
+          readOnly: true
     _tps_req_create-event:
       type: object
       properties:
@@ -140,8 +168,9 @@ components:
         end_date:
           type: string
         image_url:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         registration_url:
           type: string
         is_virtual:
@@ -174,33 +203,6 @@ components:
             type: string
         location:
           $ref: '#/components/schemas/_tps_req_create-event-location'
-    Example:
-      type: object
-      required:
-      - id
-      - app_id
-      - org_id
-      - data
-      - date_created
-      properties:
-        id:
-          type: string
-          readOnly: true
-        org_id:
-          type: string
-          readOnly: true
-        app_id:
-          type: string
-          readOnly: true
-        data:
-          type: string
-        date_created:
-          type: string
-          readOnly: true
-        date_updated:
-          type: string
-          nullable: true
-          readOnly: true
     _tps_req_create-event-location:
       type: object
       properties:

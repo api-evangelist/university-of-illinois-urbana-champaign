@@ -1,3 +1,8 @@
+generated: '2026-06-03'
+method: generated
+source: >-
+  No rate-limit table is published on any illinois.edu host and no RateLimit or Retry-After
+  header was observed on a probed response. The guidance below is API Evangelist's, not UIUC's.
 specification: API Commons Rate Limits
 specificationVersion: '0.1'
 schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits

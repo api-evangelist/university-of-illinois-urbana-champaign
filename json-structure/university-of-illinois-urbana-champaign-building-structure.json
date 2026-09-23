@@ -1,26 +1,82 @@
 {
   "$schema": "https://json-structure.org/meta/core/v0/#",
   "$id": "https://api.rokwire.illinois.edu/gateway/structures/building.json",
+  "x-provenance": {
+    "generated": "2026-06-03",
+    "method": "derived",
+    "source": "json-schema/university-of-illinois-urbana-champaign-building-schema.json",
+    "note": "Authored by API Evangelist from json-schema/university-of-illinois-urbana-champaign-building-schema.json; UIUC publishes no JSON Schema of its own."
+  },
   "name": "Building",
   "type": "object",
   "properties": {
-    "ID": { "type": "string" },
-    "Name": { "type": "string" },
-    "Number": { "type": "string" },
-    "FullAddress": { "type": "string" },
-    "Address1": { "type": "string" },
-    "Address2": { "type": "string" },
-    "City": { "type": "string" },
-    "State": { "type": "string" },
-    "ZipCode": { "type": "string" },
-    "ImageURL": { "type": "string" },
-    "MailCode": { "type": "string" },
-    "Latitude": { "type": "number" },
-    "Longitude": { "type": "number" },
-    "Entrances": { "type": "array", "items": { "type": "object" } },
-    "Floors": { "type": "array", "items": { "type": "string" } },
-    "Features": { "type": "array", "items": { "type": "object" } },
-    "ShortName": { "type": "string" }
+    "ID": {
+      "type": "string"
+    },
+    "Name": {
+      "type": "string"
+    },
+    "Number": {
+      "type": "string"
+    },
+    "FullAddress": {
+      "type": "string"
+    },
+    "Address1": {
+      "type": "string"
+    },
+    "Address2": {
+      "type": "string"
+    },
+    "City": {
+      "type": "string"
+    },
+    "State": {
+      "type": "string"
+    },
+    "ZipCode": {
+      "type": "string"
+    },
+    "ImageURL": {
+      "type": "string"
+    },
+    "MailCode": {
+      "type": "string"
+    },
+    "Latitude": {
+      "type": "number"
+    },
+    "Longitude": {
+      "type": "number"
+    },
+    "Entrances": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "Floors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "Features": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "ShortName": {
+      "type": "string"
+    }
   },
-  "required": ["ID", "Number", "Name", "FullAddress", "Latitude", "Longitude"]
+  "required": [
+    "ID",
+    "Number",
+    "Name",
+    "FullAddress",
+    "Latitude",
+    "Longitude"
+  ]
 }

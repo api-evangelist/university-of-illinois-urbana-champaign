@@ -3,8 +3,83 @@ name: University of Illinois Urbana-Champaign
 description: University of Illinois Urbana-Champaign public developer/API footprint review for APIs.json cataloging.
 url: https://raw.githubusercontent.com/api-evangelist/university-of-illinois-urbana-champaign/refs/heads/main/review.yml
 created: '2026-06-03'
-modified: '2026-06-03'
+modified: '2026-08-19'
 reviews:
+  - date: '2026-08-19'
+    rating: 4
+    summary: >-
+      University-pipeline re-profile with the operator axis applied. Attribution held up: every
+      contract in this repo is genuinely UIUC's own engineering (Rokwire, Apache 2.0, deployed on
+      api.rokwire.illinois.edu), not a vendor's running under the institution's name — the failure
+      mode this pipeline exists to catch. Three previously uncatalogued institution-operated
+      surfaces were found and verified: the campus Shibboleth IdP (entityID
+      urn:mace:incommon:uiuc.edu, also resolvable through the InCommon MDQ service), the Illinois
+      Data Bank (in-house Rails repository, 1,259 datasets as JSON, DataCite client
+      illinois.databank with 1,306 DOIs and 1,082 ORCID-bearing records), and nine live Rokwire
+      building blocks where the repo held contracts for two. Two vendor tenancies were identified
+      by fingerprint and recorded as relationships without importing the vendors' contracts —
+      Illinois Experts (Elsevier Pure Portal) and library discovery (Ex Libris Primo VE).
+      CORRECTIONS: the twelve apis[] entries were tag slices of two documents, all twelve carried
+      baseURL https://courses.illinois.edu/cisapp/explorer, which is the Course Explorer, not
+      Rokwire — consolidated to two building-block entries with correct base URLs. All twelve
+      refined specs were titled "Rokwire Core Building Block Admin ... API", including the three
+      that are Gateway-only; retitled. The three Gateway slices declared
+      servers[0].url = .../core, which 404s — verified /core/api/wayfinding/buildings returns 404
+      and /gateway/api/wayfinding/buildings returns 401, and corrected the server. Eleven
+      artifacts carried no method: and were being credited to UIUC as though they published them;
+      all now stamped, with sidecars for the JSON-LD context and the example payloads where an
+      inline key would corrupt the document. Added conformance/, scopes/, errors/ and lifecycle/.
+      NOT CREDITED: https://illinois.edu/llms.txt returns HTTP 200 but the body is the soft-404
+      template, byte-identical to a nonsense path.
+    endpoints:
+      - url: https://api.rokwire.illinois.edu/core/version
+        status: 200
+        note: Returns 1.62.0 — matches the version in the Core OpenAPI held here.
+      - url: https://api.rokwire.illinois.edu/gateway/version
+        status: 200
+        note: Returns 2.21.1 — matches the Gateway OpenAPI held here.
+      - url: https://api.rokwire.illinois.edu/core/.well-known/openid-configuration
+        status: 200
+        note: Minimal OIDC discovery — issuer and jwks_uri only, no scopes_supported.
+      - url: https://api.rokwire.illinois.edu/core/tps/auth-keys
+        status: 200
+        note: Live JWKS, RS256.
+      - url: https://api.rokwire.illinois.edu/gateway/api/wayfinding/buildings
+        status: 401
+        note: >-
+          Live and bearer-gated; error envelope is {"message":…,"status":"unauthorized"}, not
+          RFC 9457.
+      - url: https://api.rokwire.illinois.edu/core/api/wayfinding/buildings
+        status: 404
+        note: Negative control proving the Gateway slices' declared /core server was wrong.
+      - url: https://www.ideals.illinois.edu/oai-pmh?verb=Identify
+        status: 200
+        note: >-
+          OAI-PMH 2.0, repositoryName "IDEALS @ University of Illinois Urbana-Champaign",
+          deletedRecord persistent. Requires a browser User-Agent; a bare agent gets 403.
+      - url: https://databank.illinois.edu/datasets.json
+        status: 200
+        note: 1,259 released datasets, 726 KB, no authentication.
+      - url: https://api.datacite.org/clients/illinois.databank
+        status: 200
+        note: DataCite repository registration for the Illinois Data Bank, member since 2018.
+      - url: https://shibboleth.illinois.edu/idp/shibboleth
+        status: 200
+        note: Shibboleth IdP metadata, SAML 1.1 + 2.0, shibmd:Scope illinois.edu.
+      - url: https://mdq.incommon.org/entities/urn:mace:incommon:uiuc.edu
+        status: 200
+        note: Same entity resolvable through the InCommon federation metadata query service.
+      - url: https://experts.illinois.edu/
+        status: 200
+        note: Elsevier Pure Portal fingerprint — tenant, no vendor contract imported.
+      - url: https://search.library.illinois.edu/discovery
+        status: 200
+        note: Redirects into primo.exlibrisgroup.com/discovery — Ex Libris tenant.
+      - url: https://illinois.edu/llms.txt
+        status: 200
+        note: >-
+          SOFT-404. Body is the "404 - Page not found | Illinois" template, byte-identical to
+          https://illinois.edu/nonsense-xyz-123. Not credited.
   - date: '2026-06-03'
     rating: 4
     summary: >-

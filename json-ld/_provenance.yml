@@ -1,0 +1,15 @@
+generated: '2026-06-03'
+method: derived
+source: >-
+  vocabulary/university-of-illinois-urbana-champaign-vocabulary.yml and
+  openapi/_original/university-of-illinois-urbana-champaign-rokwire-core.yaml
+note: >-
+  The JSON-LD context in this directory is API Evangelist's mapping of Rokwire terms onto
+  schema.org, not a UIUC-published context. The uiuc: / @vocab prefix
+  (https://illinois.edu/vocab#) is a namespace WE chose for the mapping — UIUC does not serve a
+  vocabulary document at that URI, and the prefix must not be read as a claim that it does. Held
+  as a sidecar because a root-level provenance key inside the .jsonld document would be
+  interpreted as a term under @vocab.
+files:
+- file: university-of-illinois-urbana-champaign-context.jsonld
+  method: derived

@@ -1,13 +1,31 @@
 {
   "$schema": "https://json-structure.org/meta/core/v0/#",
   "$id": "https://api.rokwire.illinois.edu/core/structures/organization.json",
+  "x-provenance": {
+    "generated": "2026-06-03",
+    "method": "derived",
+    "source": "json-schema/university-of-illinois-urbana-champaign-organization-schema.json",
+    "note": "Authored by API Evangelist from json-schema/university-of-illinois-urbana-champaign-organization-schema.json; UIUC publishes no JSON Schema of its own."
+  },
   "name": "Organization",
   "type": "object",
   "properties": {
-    "id": { "type": "string" },
-    "name": { "type": "string" },
-    "type": { "type": "string" },
-    "config": { "type": "object" }
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "config": {
+      "type": "object"
+    }
   },
-  "required": ["id", "name", "type"]
+  "required": [
+    "id",
+    "name",
+    "type"
+  ]
 }

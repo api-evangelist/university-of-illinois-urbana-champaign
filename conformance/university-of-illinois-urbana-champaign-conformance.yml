@@ -1,0 +1,176 @@
+generated: '2026-08-19'
+method: probed
+source: >-
+  Live probes of institution-operated hosts (shibboleth.illinois.edu, www.ideals.illinois.edu,
+  databank.illinois.edu, api.rokwire.illinois.edu, courses.illinois.edu), the InCommon metadata
+  query service, and the DataCite REST API, cross-read against openapi/_original/.
+note: >-
+  Conformance targets are the Kin Score `education` regime standards[] plus the general protocol
+  checks. Reward-only: an absent standard is recorded as conforms:false with the probe that showed
+  it absent, never left blank and never asserted from prose. Every surface listed here is
+  x-operator: institution — UIUC's own hosts, not a vendor tenant. The Elsevier Pure and Ex Libris
+  Primo tenancies are deliberately excluded: those contracts are the vendors' and are graded in the
+  vendors' own repos.
+standards:
+# ---- education regime domain standards ----
+- id: oai-pmh
+  conforms: true
+  operator: institution
+  evidence: >-
+    https://www.ideals.illinois.edu/oai-pmh?verb=Identify returns 200 with a valid OAI-PMH 2.0
+    Identify response: repositoryName "IDEALS @ University of Illinois Urbana-Champaign",
+    baseURL https://www.ideals.illinois.edu/oai-pmh, protocolVersion 2.0, adminEmail
+    ideals@library.illinois.edu, earliestDatestamp 2022-06-06T21:13:21Z, deletedRecord persistent,
+    granularity YYYY-MM-DDThh:mm:ssZ. ?verb=ListMetadataFormats returns four prefixes —
+    oai_dc, qdc, etdms, native. ?verb=ListSets returns 100 sets. The host is the institution's own
+    registrable domain and the repository software is Illinois Library's own Rails application
+    (github.com/medusa-project/ideals), not a vendor platform.
+- id: shibboleth
+  conforms: true
+  operator: institution
+  evidence: >-
+    https://shibboleth.illinois.edu/idp/shibboleth returns 200 with a Shibboleth IdP
+    EntityDescriptor, entityID urn:mace:incommon:uiuc.edu, carrying
+    shibmd:Scope regexp="false">illinois.edu and protocolSupportEnumeration
+    "urn:mace:shibboleth:1.0". Signing certificate CN=shibboleth.illinois.edu,
+    O=University of Illinois at Urbana-Champaign, OU=CITES.
+- id: saml
+  conforms: true
+  operator: institution
+  evidence: >-
+    The same EntityDescriptor declares an IDPSSODescriptor with
+    protocolSupportEnumeration including urn:oasis:names:tc:SAML:1.1:protocol and
+    urn:oasis:names:tc:SAML:2.0:protocol. The entity is registered in the InCommon federation and
+    resolves through the federation's metadata query service:
+    https://mdq.incommon.org/entities/urn:mace:incommon:uiuc.edu returns 200 with a signed
+    SAML 2.0 EntityDescriptor.
+- id: datacite
+  conforms: true
+  operator: institution
+  evidence: >-
+    Illinois Data Bank is a registered DataCite repository — https://api.datacite.org/clients/illinois.databank
+    returns 200 for client id "illinois.databank", symbol ILLINOIS.DATABANK, name "Illinois Data Bank",
+    member since 2018. 1,306 DOIs are minted under prefix 10.13012 with
+    schemaVersion http://datacite.org/schema/kernel-4 and publisher
+    "University of Illinois Urbana-Champaign". DOI content negotiation works:
+    https://doi.org/10.13012/B2IDB-0887518_V1 with
+    Accept: application/vnd.datacite.datacite+json returns 200 DataCite JSON.
+- id: orcid
+  conforms: true
+  operator: institution
+  evidence: >-
+    1,082 of the 1,306 DataCite records under prefix 10.13012 carry creator nameIdentifiers with
+    nameIdentifierScheme "ORCID" and schemeUri https://orcid.org — e.g.
+    https://orcid.org/0009-0006-8718-8940. ORCID identifiers are captured at deposit time by the
+    Illinois Data Bank and propagated into the DOI metadata the institution mints.
+- id: crossref
+  conforms: false
+  operator: institution
+  evidence: >-
+    No Crossref prefix is registered to the Urbana-Champaign campus. The institution's persistent
+    identifiers are DataCite DOIs under 10.13012 (research data) rather than Crossref DOIs;
+    Crossref registration for Illinois-affiliated journals runs through publishers, not the campus.
+- id: scim
+  conforms: false
+  operator: institution
+  evidence: >-
+    No SCIM 2.0 service provider configuration is published. api.rokwire.illinois.edu/core exposes
+    an account/permission/role model of its own (Account, Permission, AppOrgRole, ServiceAccount)
+    under /admin/application/* and /system/*, but no /scim/v2 path and no
+    urn:ietf:params:scim:schemas:core:2.0 schema appears in either building-block OpenAPI.
+- id: lti
+  conforms: false
+  operator: tenant
+  evidence: >-
+    LTI 1.3 tool launches at Illinois run inside Instructure Canvas, which is a tenant
+    relationship, not an institution-operated contract. No LTI platform configuration or JWKS is
+    published on an illinois.edu host, so nothing here is UIUC's own conformance to claim.
+- id: oneroster
+  conforms: false
+  operator: institution
+  evidence: >-
+    No IMS/1EdTech OneRoster endpoint found. Roster data reaches the campus LMS through internal
+    SIS integration; courses.illinois.edu/cisapp/explorer publishes schedule and catalog data in a
+    Rokwire/CIS-local XML vocabulary (ns2:schedule, xmlns http://rest.cis.illinois.edu), not
+    OneRoster.
+- id: ed-fi
+  conforms: false
+  operator: institution
+  evidence: >-
+    Ed-Fi is a K-12 data standard; no Ed-Fi ODS/API is published on any illinois.edu host and none
+    is expected for a higher-education institution.
+- id: caliper
+  conforms: false
+  operator: institution
+  evidence: >-
+    No 1EdTech Caliper Analytics event store or sensor endpoint is published on an illinois.edu
+    host. Learning-analytics event capture, where it exists, is inside the vendor LMS.
+- id: qti
+  conforms: false
+  operator: institution
+  evidence: >-
+    No QTI assessment item bank or QTI-conformant service is published on an illinois.edu host.
+# ---- general protocol / contract standards ----
+- id: openapi-3.0
+  conforms: true
+  operator: institution
+  evidence: >-
+    Both Rokwire building blocks publish OpenAPI 3.0 documents that UIUC itself authors and
+    versions in the open — Core 1.62.0 (105 paths / 151 operations) and Gateway 2.21.1
+    (34 paths / 45 operations), served through Swagger UI at
+    https://api.rokwire.illinois.edu/core/doc/ui/ and /gateway/doc/ui/ (both 200), and maintained
+    as source in github.com/rokwire under Apache 2.0.
+- id: oidc-discovery
+  conforms: partial
+  operator: institution
+  evidence: >-
+    https://api.rokwire.illinois.edu/core/.well-known/openid-configuration returns 200 with a
+    valid but minimal document — only issuer (https://api.rokwire.illinois.edu/core) and jwks_uri.
+    The JWKS at https://api.rokwire.illinois.edu/core/tps/auth-keys returns 200 with RS256 keys.
+    Partial because the discovery document omits authorization_endpoint, token_endpoint,
+    scopes_supported, response_types_supported and grant_types_supported, so a standards client
+    cannot bootstrap from it.
+- id: rfc6750-bearer-token
+  conforms: true
+  operator: institution
+  evidence: >-
+    Both building blocks declare a single securityScheme bearerAuth (type http, scheme bearer,
+    bearerFormat JWT) and both reject an unauthenticated call with HTTP 401 —
+    GET https://api.rokwire.illinois.edu/gateway/api/wayfinding/buildings returns 401
+    application/json {"message":"Error validating request: error validating token",
+    "status":"unauthorized"}.
+- id: rfc9457-problem-details
+  conforms: false
+  operator: institution
+  evidence: >-
+    Errors use a Rokwire-local envelope ({"message":…,"status":…}) with
+    content-type application/json; charset=utf-8, and many operations return text/plain error
+    bodies (46 of 151 Core response bodies, 8 of 45 Gateway). No application/problem+json media
+    type appears in either OpenAPI or in any probed response.
+- id: rfc9116-security-txt
+  conforms: false
+  operator: institution
+  evidence: >-
+    https://illinois.edu/.well-known/security.txt is a soft-404 — the host answers with the
+    55,536-byte "404 - Page not found | Illinois" template. No security.txt is served on
+    illinois.edu or api.rokwire.illinois.edu.
+- id: rfc8594-sunset-header
+  conforms: false
+  operator: institution
+  evidence: >-
+    No Sunset or Deprecation header is advertised on any probed Rokwire, Course Explorer or IDEALS
+    response, and neither building-block OpenAPI declares one.
+- id: rfc8615-well-known
+  conforms: partial
+  operator: institution
+  evidence: >-
+    api.rokwire.illinois.edu/core serves exactly one well-known document
+    (/.well-known/openid-configuration, 200). illinois.edu serves none — /.well-known/security.txt
+    and /llms.txt both hit the soft-404 template.
+- id: llms-txt
+  conforms: false
+  operator: institution
+  evidence: >-
+    https://illinois.edu/llms.txt returns HTTP 200 but the body is the institution's soft-404
+    template (title "404 - Page not found | Illinois", identical byte length to
+    https://illinois.edu/nonsense-xyz-123). Status code alone would have credited this falsely.

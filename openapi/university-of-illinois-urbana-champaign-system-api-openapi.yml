@@ -1,10 +1,11 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Rokwire Core Building Block Admin System API
-  description: Core Building Block API Documentation
-  version: 1.62.0
+  title: University Of Illinois Urbana Champaign System API
+  version: '1.0'
+  description: 'Operations tagged System across 2 of this provider''s published API definitions: university-of-illinois-urbana-champaign-rokwire-core.yaml, university-of-illinois-urbana-champaign-rokwire-gateway.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.rokwire.illinois.edu/core
+- url: https://api.rokwire.illinois.edu/gateway
 tags:
 - name: System
   description: System APIs.
@@ -17,9 +18,7 @@ paths:
       description: 'Retrieve a system token for the specified application and organization
 
 
-        **Auth:** Requires system access token
-
-        '
+        **Auth:** Requires system access token'
       security:
       - bearerAuth: []
       parameters:
@@ -52,6 +51,10 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getSystemAuthAppOrgToken
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /system/organizations/{id}:
     get:
       tags:
@@ -60,9 +63,7 @@ paths:
       description: 'Gets organization by ID
 
 
-        **Auth:** Requires system access token with `get_organizations`, `update_organizations`, or `all_organizations` permission
-
-        '
+        **Auth:** Requires system access token with `get_organizations`, `update_organizations`, or `all_organizations` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -89,6 +90,8 @@ paths:
           description: Not Found
         '500':
           description: Internal error
+      operationId: getSystemOrganizationsById
+      x-operation-id-source: derived
     put:
       tags:
       - System
@@ -96,9 +99,7 @@ paths:
       description: 'Updates organization by ID
 
 
-        **Auth:** Requires system access token with `update_organizations` or `all_organizations` permission
-
-        '
+        **Auth:** Requires system access token with `update_organizations` or `all_organizations` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -131,6 +132,10 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: putSystemOrganizationsById
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /system/organizations:
     get:
       tags:
@@ -139,9 +144,7 @@ paths:
       description: 'Gets organizations
 
 
-        **Auth:** Requires system access token with `get_organizations`, `update_organizations`, or `all_organizations` permission
-
-        '
+        **Auth:** Requires system access token with `get_organizations`, `update_organizations`, or `all_organizations` permission'
       security:
       - bearerAuth: []
       responses:
@@ -159,6 +162,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getSystemOrganizations
+      x-operation-id-source: derived
     post:
       tags:
       - System
@@ -166,9 +171,7 @@ paths:
       description: 'Creates organization
 
 
-        **Auth:** Requires system access token with `update_organizations` or `all_organizations` permission
-
-        '
+        **Auth:** Requires system access token with `update_organizations` or `all_organizations` permission'
       security:
       - bearerAuth: []
       requestBody:
@@ -192,6 +195,10 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: postSystemOrganizations
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /system/service-regs:
     get:
       tags:
@@ -200,9 +207,7 @@ paths:
       description: 'Returns service registration records
 
 
-        **Auth:** Requires system access token with `get_service-regs`, `update_service-regs`, `delete_service-regs`, or `all_service-regs` permission
-
-        '
+        **Auth:** Requires system access token with `get_service-regs`, `update_service-regs`, `delete_service-regs`, or `all_service-regs` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -229,11 +234,19 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getSystemServiceRegs
+      x-operation-id-source: derived
     post:
       tags:
       - System
       summary: Register service
-      description: "Creates a new service registration\n\nThe \"service_id\" of the registration must not match an existing registration  \n\n**Auth:** Requires system access token with `update_service-regs` or `all_service-regs` permission\n"
+      description: 'Creates a new service registration
+
+
+        The "service_id" of the registration must not match an existing registration
+
+
+        **Auth:** Requires system access token with `update_service-regs` or `all_service-regs` permission'
       security:
       - bearerAuth: []
       requestBody:
@@ -257,6 +270,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: postSystemServiceRegs
+      x-operation-id-source: derived
     put:
       tags:
       - System
@@ -267,9 +282,7 @@ paths:
         The "service_id" of the registration must match an existing registration
 
 
-        **Auth:** Requires system access token with `update_service-regs` or `all_service-regs` permission
-
-        '
+        **Auth:** Requires system access token with `update_service-regs` or `all_service-regs` permission'
       security:
       - bearerAuth: []
       requestBody:
@@ -293,6 +306,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: putSystemServiceRegs
+      x-operation-id-source: derived
     delete:
       tags:
       - System
@@ -300,9 +315,7 @@ paths:
       description: 'Deletes an existing service registration record
 
 
-        **Auth:** Requires system access token with `delete_service-regs` or `all_service-regs` permission
-
-        '
+        **Auth:** Requires system access token with `delete_service-regs` or `all_service-regs` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -328,6 +341,10 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: deleteSystemServiceRegs
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /system/service-accounts/{id}:
     get:
       tags:
@@ -336,9 +353,7 @@ paths:
       description: 'Get service account instance by account ID, app ID, and org ID
 
 
-        **Auth:** Requires system access token with `get_service-accounts`, `update_service-accounts`, `delete_service-accounts`, or `all_service-accounts` permission
-
-        '
+        **Auth:** Requires system access token with `get_service-accounts`, `update_service-accounts`, `delete_service-accounts`, or `all_service-accounts` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -379,6 +394,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getSystemServiceAccountsById
+      x-operation-id-source: derived
     put:
       tags:
       - System
@@ -386,9 +403,7 @@ paths:
       description: 'Updates a service account instance
 
 
-        **Auth:** Requires system access token with `update_service-accounts` or `all_service-accounts` permission
-
-        '
+        **Auth:** Requires system access token with `update_service-accounts` or `all_service-accounts` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -449,6 +464,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: putSystemServiceAccountsById
+      x-operation-id-source: derived
     delete:
       tags:
       - System
@@ -456,9 +473,7 @@ paths:
       description: 'Removes a service account instance
 
 
-        **Auth:** Requires system access token with `delete_service-accounts` or `all_service-accounts` permission
-
-        '
+        **Auth:** Requires system access token with `delete_service-accounts` or `all_service-accounts` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -495,6 +510,10 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: deleteSystemServiceAccountsById
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /system/service-accounts:
     get:
       tags:
@@ -503,9 +522,7 @@ paths:
       description: 'Get list of all service accounts matching a search
 
 
-        **Auth:** Requires system access token with `get_service-accounts`, `update_service-accounts`, `delete_service-accounts`, or `all_service-accounts` permission
-
-        '
+        **Auth:** Requires system access token with `get_service-accounts`, `update_service-accounts`, `delete_service-accounts`, or `all_service-accounts` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -572,6 +589,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getSystemServiceAccounts
+      x-operation-id-source: derived
     post:
       tags:
       - System
@@ -579,9 +598,7 @@ paths:
       description: 'Creates a new service account
 
 
-        **Auth:** Requires system access token with `update_service-accounts` or `all_service-accounts` permission
-
-        '
+        **Auth:** Requires system access token with `update_service-accounts` or `all_service-accounts` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -669,6 +686,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: postSystemServiceAccounts
+      x-operation-id-source: derived
     delete:
       tags:
       - System
@@ -676,9 +695,7 @@ paths:
       description: 'Delete service accounts matching an account ID
 
 
-        **Auth:** Requires system access token with `delete_service-accounts` or `all_service-accounts` permission
-
-        '
+        **Auth:** Requires system access token with `delete_service-accounts` or `all_service-accounts` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -699,6 +716,10 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: deleteSystemServiceAccounts
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /system/service-accounts/{id}/creds:
     post:
       tags:
@@ -707,9 +728,7 @@ paths:
       description: 'Adds a new credential to an existing service account
 
 
-        **Auth:** Requires system access token with `update_service-accounts` or `all_service-accounts` permission
-
-        '
+        **Auth:** Requires system access token with `update_service-accounts` or `all_service-accounts` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -757,6 +776,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: postSystemServiceAccountsByIdCreds
+      x-operation-id-source: derived
     delete:
       tags:
       - System
@@ -764,9 +785,7 @@ paths:
       description: 'Removes a credential from an existing service account
 
 
-        **Auth:** Requires system access token with `delete_service-accounts` or `all_service-accounts` permission
-
-        '
+        **Auth:** Requires system access token with `delete_service-accounts` or `all_service-accounts` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -795,6 +814,10 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: deleteSystemServiceAccountsByIdCreds
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /system/applications/{id}:
     get:
       tags:
@@ -803,9 +826,7 @@ paths:
       description: 'Gets application by provided ID
 
 
-        **Auth:** Requires system access token with `get_applications` or `all_applications` permission
-
-        '
+        **Auth:** Requires system access token with `get_applications` or `all_applications` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -832,6 +853,8 @@ paths:
           description: Not Found
         '500':
           description: Internal error
+      operationId: getSystemApplicationsById
+      x-operation-id-source: derived
     put:
       tags:
       - System
@@ -839,9 +862,7 @@ paths:
       description: 'Updates application by provided ID
 
 
-        **Auth:** Requires system access token with `update_applications` or `all_applications` permission
-
-        '
+        **Auth:** Requires system access token with `update_applications` or `all_applications` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -876,6 +897,10 @@ paths:
           description: Not Found
         '500':
           description: Internal error
+      operationId: putSystemApplicationsById
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /system/applications:
     get:
       tags:
@@ -884,9 +909,7 @@ paths:
       description: 'Gets applications
 
 
-        **Auth:** Requires system access token with `get_applications`, `udpate_applications`, or `all_applications` permission
-
-        '
+        **Auth:** Requires system access token with `get_applications`, `udpate_applications`, or `all_applications` permission'
       security:
       - bearerAuth: []
       responses:
@@ -904,6 +927,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getSystemApplications
+      x-operation-id-source: derived
     post:
       tags:
       - System
@@ -911,9 +936,7 @@ paths:
       description: 'Creates application
 
 
-        **Auth:** Requires system access token with `update_applications` or `all_applications` permission
-
-        '
+        **Auth:** Requires system access token with `update_applications` or `all_applications` permission'
       security:
       - bearerAuth: []
       requestBody:
@@ -937,6 +960,10 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: postSystemApplications
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /system/permissions:
     post:
       tags:
@@ -945,9 +972,7 @@ paths:
       description: 'Creates permission
 
 
-        **Auth:** Requires system access token with `update_permissions` or `all_permissions` permission
-
-        '
+        **Auth:** Requires system access token with `update_permissions` or `all_permissions` permission'
       security:
       - bearerAuth: []
       requestBody:
@@ -971,6 +996,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: postSystemPermissions
+      x-operation-id-source: derived
     put:
       tags:
       - System
@@ -978,9 +1005,7 @@ paths:
       description: 'Updates permission
 
 
-        **Auth:** Requires system access token with `update_permissions` or `all_permissions` permission
-
-        '
+        **Auth:** Requires system access token with `update_permissions` or `all_permissions` permission'
       security:
       - bearerAuth: []
       requestBody:
@@ -1004,6 +1029,10 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: putSystemPermissions
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /system/api-keys:
     get:
       tags:
@@ -1012,9 +1041,7 @@ paths:
       description: 'Returns API key records for given ID or app ID
 
 
-        **Auth:** Requires system access token with `get_api-keys`, `update_api-keys`, `delete_api-keys`, or `all_api-keys` permission
-
-        '
+        **Auth:** Requires system access token with `get_api-keys`, `update_api-keys`, `delete_api-keys`, or `all_api-keys` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -1049,6 +1076,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getSystemApiKeys
+      x-operation-id-source: derived
     post:
       tags:
       - System
@@ -1056,9 +1085,7 @@ paths:
       description: 'Creates a new API key record
 
 
-        **Auth:** Requires system access token with `update_api-keys` or `all_api-keys` permission
-
-        '
+        **Auth:** Requires system access token with `update_api-keys` or `all_api-keys` permission'
       security:
       - bearerAuth: []
       requestBody:
@@ -1085,6 +1112,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: postSystemApiKeys
+      x-operation-id-source: derived
     put:
       tags:
       - System
@@ -1095,9 +1124,7 @@ paths:
         Must include the "id" field to identify which key is to be udpated
 
 
-        **Auth:** Requires system access token with `update_api-keys` or `all_api-keys` permission
-
-        '
+        **Auth:** Requires system access token with `update_api-keys` or `all_api-keys` permission'
       security:
       - bearerAuth: []
       requestBody:
@@ -1121,6 +1148,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: putSystemApiKeys
+      x-operation-id-source: derived
     delete:
       tags:
       - System
@@ -1128,9 +1157,7 @@ paths:
       description: 'Deletes an existing API key record
 
 
-        **Auth:** Requires system access token with `delete_api-keys` or `all_api-keys` permission
-
-        '
+        **Auth:** Requires system access token with `delete_api-keys` or `all_api-keys` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -1156,6 +1183,10 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: deleteSystemApiKeys
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /system/auth-types:
     get:
       tags:
@@ -1164,9 +1195,7 @@ paths:
       description: 'Gets auth types
 
 
-        **Auth:** Requires system access token with `get_auth-types`, `update_auth-types`, or `all_auth-types` permission
-
-        '
+        **Auth:** Requires system access token with `get_auth-types`, `update_auth-types`, or `all_auth-types` permission'
       security:
       - bearerAuth: []
       responses:
@@ -1184,6 +1213,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getSystemAuthTypes
+      x-operation-id-source: derived
     post:
       tags:
       - System
@@ -1191,9 +1222,7 @@ paths:
       description: 'Creates auth type
 
 
-        **Auth:** Requires system access token with `update_auth-types` or `all_auth-types` permission
-
-        '
+        **Auth:** Requires system access token with `update_auth-types` or `all_auth-types` permission'
       security:
       - bearerAuth: []
       requestBody:
@@ -1217,6 +1246,10 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: postSystemAuthTypes
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /system/auth-types/{id}:
     put:
       tags:
@@ -1225,9 +1258,7 @@ paths:
       description: 'Updates auth type with the provided ID
 
 
-        **Auth:** Requires system access token with `update_auth-types` or `all_auth-types` permission
-
-        '
+        **Auth:** Requires system access token with `update_auth-types` or `all_auth-types` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -1259,6 +1290,10 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: putSystemAuthTypesById
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /system/app-orgs/{id}:
     get:
       tags:
@@ -1267,9 +1302,7 @@ paths:
       description: 'Get app-org by ID
 
 
-        **Auth:** Requires system access token with `get_app_orgs` or `all_app_orgs` permission
-
-        '
+        **Auth:** Requires system access token with `get_app_orgs` or `all_app_orgs` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -1294,6 +1327,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getSystemAppOrgsById
+      x-operation-id-source: derived
     put:
       tags:
       - System
@@ -1301,9 +1336,7 @@ paths:
       description: 'Updates app-org by ID
 
 
-        **Auth:** Requires system access token with `update_app_orgs` or `all_app_orgs` permission
-
-        '
+        **Auth:** Requires system access token with `update_app_orgs` or `all_app_orgs` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -1336,6 +1369,10 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: putSystemAppOrgsById
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /system/app-orgs:
     get:
       tags:
@@ -1344,9 +1381,7 @@ paths:
       description: 'Get all app-orgs matching query
 
 
-        **Auth:** Requires system access token with `get_app_orgs` or `all_app_orgs` permission
-
-        '
+        **Auth:** Requires system access token with `get_app_orgs` or `all_app_orgs` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -1381,6 +1416,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getSystemAppOrgs
+      x-operation-id-source: derived
     post:
       tags:
       - System
@@ -1388,9 +1425,7 @@ paths:
       description: 'Create app-org
 
 
-        **Auth:** Requires system access token with `update_app_orgs` or `all_app_orgs` permission
-
-        '
+        **Auth:** Requires system access token with `update_app_orgs` or `all_app_orgs` permission'
       security:
       - bearerAuth: []
       requestBody:
@@ -1414,6 +1449,10 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: postSystemAppOrgs
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /api/system/examples/{id}:
     get:
       tags:
@@ -1422,9 +1461,7 @@ paths:
       description: 'Gets example record
 
 
-        **Auth:** Requires valid admin token with `get_examples` permission
-
-        '
+        **Auth:** Requires valid admin token with `get_examples` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -1449,25 +1486,203 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getApiSystemExamplesById
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/gateway
 components:
   schemas:
-    ApplicationType:
+    SupportedAuthTypes:
+      type: object
+      properties:
+        app_type_id:
+          type: string
+        supported_auth_types:
+          type: array
+          items:
+            $ref: '#/components/schemas/SupportedAuthType'
+    IdentityProviderSettings:
+      required:
+      - identity_provider_id
+      - user_identifier_field
+      type: object
+      properties:
+        identity_provider_id:
+          type: string
+        user_identifier_field:
+          type: string
+        external_id_fields:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+        first_name_field:
+          type: string
+        middle_name_field:
+          type: string
+        last_name_field:
+          type: string
+        email_field:
+          type: string
+        ferpa_field:
+          type: string
+        roles_field:
+          type: string
+        groups_field:
+          type: string
+        user_specific_fields:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        roles:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+        groups:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+        always_sync_profile:
+          type: boolean
+        identity_bb_base_url:
+          type: string
+        identity_bb_profile_fields:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+        admin_app_access_roles:
+          type: array
+          items:
+            type: string
+    SupportedAuthType:
+      type: object
+      properties:
+        auth_type_id:
+          type: string
+        params:
+          type:
+          - object
+          - 'null'
+          additionalProperties: true
+    LoginSessionSettings:
+      type: object
+      properties:
+        max_concurrent_sessions:
+          type: integer
+        inactivity_expire_policy:
+          $ref: '#/components/schemas/InactiveExpirePolicy'
+        time_since_login_expire_policy:
+          $ref: '#/components/schemas/TSLExpirePolicy'
+        yearly_expire_policy:
+          $ref: '#/components/schemas/YearlyExpirePolicy'
+        refresh_grace_period_policy:
+          $ref: '#/components/schemas/RefreshGracePeriodPolicy'
+    RefreshGracePeriodPolicy:
+      type: object
+      required:
+      - active
+      - grace_period
+      properties:
+        active:
+          type: boolean
+        grace_period:
+          type: integer
+    OrganizationConfig:
       required:
       - id
-      - identifier
+      - domains
       type: object
       properties:
         id:
           readOnly: true
           type: string
-        identifier:
-          type: string
-        name:
-          type: string
-        versions:
+          description: organization config id
+        domains:
           type: array
+          description: organization domains
           items:
             type: string
+    ApplicationOrganization:
+      required:
+      - id
+      - app_id
+      - org_id
+      type:
+      - object
+      - 'null'
+      properties:
+        id:
+          readOnly: true
+          type: string
+        app_id:
+          type: string
+        org_id:
+          type: string
+        services_ids:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        identity_provider_settings:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/IdentityProviderSettings'
+        supported_auth_types:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SupportedAuthTypes'
+        logins_session_settings:
+          $ref: '#/components/schemas/LoginSessionSettings'
+    AdminToken:
+      required:
+      - token
+      type: object
+      properties:
+        token:
+          type: string
+    InactiveExpirePolicy:
+      type: object
+      required:
+      - active
+      - inactivity_period
+      properties:
+        active:
+          type: boolean
+        inactivity_period:
+          type: integer
+    YearlyExpirePolicy:
+      type: object
+      required:
+      - active
+      - day
+      - month
+      - hour
+      - min
+      properties:
+        active:
+          type: boolean
+        day:
+          type: integer
+        month:
+          type: integer
+        hour:
+          type: integer
+        min:
+          type: integer
     AuthType:
       required:
       - id
@@ -1502,58 +1717,13 @@ components:
         params:
           type: object
           additionalProperties: true
-    InactiveExpirePolicy:
-      type: object
-      required:
-      - active
-      - inactivity_period
-      properties:
-        active:
-          type: boolean
-        inactivity_period:
-          type: integer
-    RefreshGracePeriodPolicy:
-      type: object
-      required:
-      - active
-      - grace_period
-      properties:
-        active:
-          type: boolean
-        grace_period:
-          type: integer
-    Example:
-      type: object
-      required:
-      - id
-      - app_id
-      - org_id
-      - data
-      - date_created
-      properties:
-        id:
-          type: string
-          readOnly: true
-        org_id:
-          type: string
-          readOnly: true
-        app_id:
-          type: string
-          readOnly: true
-        data:
-          type: string
-        date_created:
-          type: string
-          readOnly: true
-        date_updated:
-          type: string
-          nullable: true
-          readOnly: true
-    Organization:
+    Application:
       required:
       - id
       - name
-      - type
+      - multi_tenant
+      - admin
+      - code
       type: object
       properties:
         id:
@@ -1561,134 +1731,16 @@ components:
           type: string
         name:
           type: string
-        type:
+        multi_tenant:
+          type: boolean
+        admin:
+          type: boolean
+        code:
           type: string
-          enum:
-          - micro
-          - small
-          - medium
-          - large
-          - huge
-        config:
-          $ref: '#/components/schemas/OrganizationConfig'
-    AdminToken:
-      required:
-      - token
-      type: object
-      properties:
-        token:
-          type: string
-    SupportedAuthTypes:
-      type: object
-      properties:
-        app_type_id:
-          type: string
-        supported_auth_types:
+        types:
           type: array
           items:
-            $ref: '#/components/schemas/SupportedAuthType'
-    APIKey:
-      required:
-      - app_id
-      - key
-      type: object
-      description: API key record
-      properties:
-        id:
-          type: string
-        app_id:
-          type: string
-        key:
-          type: string
-    YearlyExpirePolicy:
-      type: object
-      required:
-      - active
-      - day
-      - month
-      - hour
-      - min
-      properties:
-        active:
-          type: boolean
-        day:
-          type: integer
-        month:
-          type: integer
-        hour:
-          type: integer
-        min:
-          type: integer
-    ServiceScope:
-      required:
-      - scope
-      - required
-      type: object
-      properties:
-        scope:
-          type: string
-        required:
-          type: boolean
-        explanation:
-          description: Explanation displayed to users for why this scope is requested/required
-          type: string
-    IdentityProviderSettings:
-      required:
-      - identity_provider_id
-      - user_identifier_field
-      type: object
-      properties:
-        identity_provider_id:
-          type: string
-        user_identifier_field:
-          type: string
-        external_id_fields:
-          type: object
-          additionalProperties:
-            type: string
-          nullable: true
-        first_name_field:
-          type: string
-        middle_name_field:
-          type: string
-        last_name_field:
-          type: string
-        email_field:
-          type: string
-        ferpa_field:
-          type: string
-        roles_field:
-          type: string
-        groups_field:
-          type: string
-        user_specific_fields:
-          type: array
-          items:
-            type: string
-          nullable: true
-        roles:
-          type: object
-          additionalProperties:
-            type: string
-          nullable: true
-        groups:
-          type: object
-          additionalProperties:
-            type: string
-          nullable: true
-        always_sync_profile:
-          type: boolean
-        identity_bb_base_url:
-          type: string
-        identity_bb_profile_fields:
-          type: object
-          additionalProperties:
-            type: string
-          nullable: true
-        admin_app_access_roles:
-          type: array
-          items:
-            type: string
+            $ref: '#/components/schemas/ApplicationType'
     Permission:
       required:
       - id
@@ -1712,109 +1764,6 @@ components:
           type: string
         date_updated:
           type: string
-    SupportedAuthType:
-      type: object
-      properties:
-        auth_type_id:
-          type: string
-        params:
-          type: object
-          additionalProperties: true
-          nullable: true
-    PubKey:
-      required:
-      - key_pem
-      - alg
-      type: object
-      properties:
-        key_pem:
-          type: string
-        alg:
-          type: string
-    ServiceAccountCredential:
-      required:
-      - name
-      - type
-      type: object
-      properties:
-        id:
-          readOnly: true
-          type: string
-        name:
-          type: string
-        type:
-          type: string
-          enum:
-          - static_token
-          - signature
-        params:
-          type: object
-          nullable: true
-        date_created:
-          readOnly: true
-          type: string
-    _system_req_update_service-account:
-      type: object
-      properties:
-        name:
-          type: string
-        permissions:
-          nullable: true
-          type: array
-          items:
-            type: string
-        scopes:
-          nullable: true
-          type: array
-          items:
-            type: string
-    ApplicationOrganization:
-      required:
-      - id
-      - app_id
-      - org_id
-      type: object
-      nullable: true
-      properties:
-        id:
-          readOnly: true
-          type: string
-        app_id:
-          type: string
-        org_id:
-          type: string
-        services_ids:
-          type: array
-          nullable: true
-          items:
-            type: string
-        identity_provider_settings:
-          type: array
-          nullable: true
-          items:
-            $ref: '#/components/schemas/IdentityProviderSettings'
-        supported_auth_types:
-          type: array
-          nullable: true
-          items:
-            $ref: '#/components/schemas/SupportedAuthTypes'
-        logins_session_settings:
-          $ref: '#/components/schemas/LoginSessionSettings'
-    OrganizationConfig:
-      required:
-      - id
-      - domains
-      type: object
-      properties:
-        id:
-          readOnly: true
-          type: string
-          description: organization config id
-        domains:
-          type: array
-          description: organization domains
-          items:
-            type: string
     ServiceAccount:
       required:
       - app_id
@@ -1830,13 +1779,15 @@ components:
         org_id:
           type: string
         permissions:
-          nullable: true
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
         scopes:
-          nullable: true
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
         first_party:
@@ -1845,29 +1796,38 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ServiceAccountCredential'
-    LoginSessionSettings:
-      type: object
-      properties:
-        max_concurrent_sessions:
-          type: integer
-        inactivity_expire_policy:
-          $ref: '#/components/schemas/InactiveExpirePolicy'
-        time_since_login_expire_policy:
-          $ref: '#/components/schemas/TSLExpirePolicy'
-        yearly_expire_policy:
-          $ref: '#/components/schemas/YearlyExpirePolicy'
-        refresh_grace_period_policy:
-          $ref: '#/components/schemas/RefreshGracePeriodPolicy'
-    TSLExpirePolicy:
-      type: object
+    Organization:
       required:
-      - active
-      - time_since_login_period
+      - id
+      - name
+      - type
+      type: object
       properties:
-        active:
-          type: boolean
-        time_since_login_period:
-          type: integer
+        id:
+          readOnly: true
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+          - micro
+          - small
+          - medium
+          - large
+          - huge
+        config:
+          $ref: '#/components/schemas/OrganizationConfig'
+    PubKey:
+      required:
+      - key_pem
+      - alg
+      type: object
+      properties:
+        key_pem:
+          type: string
+        alg:
+          type: string
     ServiceReg:
       required:
       - service_id
@@ -1895,19 +1855,70 @@ components:
         logo_url:
           type: string
         scopes:
-          type: array
-          nullable: true
+          type:
+          - array
+          - 'null'
           items:
             $ref: '#/components/schemas/ServiceScope'
         first_party:
           type: boolean
-    Application:
+    ServiceScope:
       required:
-      - id
+      - scope
+      - required
+      type: object
+      properties:
+        scope:
+          type: string
+        required:
+          type: boolean
+        explanation:
+          description: Explanation displayed to users for why this scope is requested/required
+          type: string
+    _system_req_update_service-account:
+      type: object
+      properties:
+        name:
+          type: string
+        permissions:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        scopes:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+    TSLExpirePolicy:
+      type: object
+      required:
+      - active
+      - time_since_login_period
+      properties:
+        active:
+          type: boolean
+        time_since_login_period:
+          type: integer
+    APIKey:
+      required:
+      - app_id
+      - key
+      type: object
+      description: API key record
+      properties:
+        id:
+          type: string
+        app_id:
+          type: string
+        key:
+          type: string
+    ServiceAccountCredential:
+      required:
       - name
-      - multi_tenant
-      - admin
-      - code
+      - type
       type: object
       properties:
         id:
@@ -1915,18 +1926,68 @@ components:
           type: string
         name:
           type: string
-        multi_tenant:
-          type: boolean
-        admin:
-          type: boolean
-        code:
+        type:
           type: string
-        types:
+          enum:
+          - static_token
+          - signature
+        params:
+          type:
+          - object
+          - 'null'
+        date_created:
+          readOnly: true
+          type: string
+    ApplicationType:
+      required:
+      - id
+      - identifier
+      type: object
+      properties:
+        id:
+          readOnly: true
+          type: string
+        identifier:
+          type: string
+        name:
+          type: string
+        versions:
           type: array
           items:
-            $ref: '#/components/schemas/ApplicationType'
+            type: string
+    Example:
+      type: object
+      required:
+      - id
+      - app_id
+      - org_id
+      - data
+      - date_created
+      properties:
+        id:
+          type: string
+          readOnly: true
+        org_id:
+          type: string
+          readOnly: true
+        app_id:
+          type: string
+          readOnly: true
+        data:
+          type: string
+        date_created:
+          type: string
+          readOnly: true
+        date_updated:
+          type:
+          - string
+          - 'null'
+          readOnly: true
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
       bearerFormat: JWT
+x-refined-from:
+- university-of-illinois-urbana-champaign-rokwire-core.yaml
+- university-of-illinois-urbana-champaign-rokwire-gateway.yaml

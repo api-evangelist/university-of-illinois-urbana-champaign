@@ -1,3 +1,9 @@
+generated: '2026-06-03'
+method: derived
+source: >-
+  openapi/_original/university-of-illinois-urbana-champaign-rokwire-core.yaml,
+  openapi/_original/university-of-illinois-urbana-champaign-rokwire-gateway.yaml. Terms are
+  extracted from the Rokwire schemas and tags; the definitions are API Evangelist's wording.
 vocabulary:
   name: University of Illinois Urbana-Champaign API Vocabulary
   description: >-

@@ -1,36 +1,51 @@
 {
   "provider": "university-of-illinois-urbana-champaign",
   "sources": [
-    "university-of-illinois-urbana-champaign-admin-api-openapi.yml",
-    "university-of-illinois-urbana-champaign-bbs-api-openapi.yml",
-    "university-of-illinois-urbana-champaign-client-api-openapi.yml",
-    "university-of-illinois-urbana-champaign-default-api-openapi.yml",
-    "university-of-illinois-urbana-champaign-enc-api-openapi.yml",
-    "university-of-illinois-urbana-champaign-services-api-openapi.yml",
-    "university-of-illinois-urbana-champaign-system-api-openapi.yml",
-    "university-of-illinois-urbana-champaign-third-party-services-api-openapi.yml",
-    "university-of-illinois-urbana-champaign-tps-api-openapi.yml",
-    "university-of-illinois-urbana-champaign-ui-api-openapi.yml",
-    "university-of-illinois-urbana-champaign-version-api-openapi.yml",
-    "university-of-illinois-urbana-champaign-well-known-api-openapi.yml"
+    "_original/university-of-illinois-urbana-champaign-rokwire-core.yaml",
+    "_original/university-of-illinois-urbana-champaign-rokwire-gateway.yaml"
   ],
   "outputs": [
+    "university-of-illinois-urbana-champaign-well-known-api-openapi.yml",
     "university-of-illinois-urbana-champaign-admin-api-openapi.yml",
     "university-of-illinois-urbana-champaign-bbs-api-openapi.yml",
-    "university-of-illinois-urbana-champaign-client-api-openapi.yml",
-    "university-of-illinois-urbana-champaign-default-api-openapi.yml",
     "university-of-illinois-urbana-champaign-enc-api-openapi.yml",
     "university-of-illinois-urbana-champaign-services-api-openapi.yml",
     "university-of-illinois-urbana-champaign-system-api-openapi.yml",
     "university-of-illinois-urbana-champaign-third-party-services-api-openapi.yml",
-    "university-of-illinois-urbana-champaign-tps-api-openapi.yml",
     "university-of-illinois-urbana-champaign-ui-api-openapi.yml",
     "university-of-illinois-urbana-champaign-version-api-openapi.yml",
-    "university-of-illinois-urbana-champaign-well-known-api-openapi.yml"
+    "university-of-illinois-urbana-champaign-client-api-openapi.yml",
+    "university-of-illinois-urbana-champaign-default-api-openapi.yml",
+    "university-of-illinois-urbana-champaign-tps-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "university-of-illinois-urbana-champaign-rokwire-core.yaml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "university-of-illinois-urbana-champaign-rokwire-core.yaml: tagged paths GET /version -> Version",
+    "university-of-illinois-urbana-champaign-rokwire-core.yaml: tagged paths GET /.well-known/openid-configuration -> .well Known",
+    "university-of-illinois-urbana-champaign-rokwire-core.yaml: declared missing tag: .well Known",
+    "university-of-illinois-urbana-champaign-rokwire-core.yaml: declared missing tag: Version",
+    "university-of-illinois-urbana-champaign-rokwire-gateway.yaml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "tag 'Admin' spans 2 source specs (university-of-illinois-urbana-champaign-rokwire-core.yaml, university-of-illinois-urbana-champaign-rokwire-gateway.yaml): per-path servers applied",
+    "tag 'BBs' spans 2 source specs (university-of-illinois-urbana-champaign-rokwire-core.yaml, university-of-illinois-urbana-champaign-rokwire-gateway.yaml): per-path servers applied",
+    "tag 'System' spans 2 source specs (university-of-illinois-urbana-champaign-rokwire-core.yaml, university-of-illinois-urbana-champaign-rokwire-gateway.yaml): per-path servers applied",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "university-of-illinois-urbana-champaign-admin-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "university-of-illinois-urbana-champaign-bbs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "university-of-illinois-urbana-champaign-client-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "university-of-illinois-urbana-champaign-default-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "university-of-illinois-urbana-champaign-enc-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "university-of-illinois-urbana-champaign-services-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "university-of-illinois-urbana-champaign-system-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "university-of-illinois-urbana-champaign-third-party-services-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "university-of-illinois-urbana-champaign-tps-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "university-of-illinois-urbana-champaign-ui-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "university-of-illinois-urbana-champaign-version-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "university-of-illinois-urbana-champaign-well-known-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

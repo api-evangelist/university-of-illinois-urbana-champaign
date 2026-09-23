@@ -1,10 +1,10 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Rokwire Core Building Block Admin Default API
-  description: Core Building Block API Documentation
-  version: 1.62.0
+  title: Rokwire Gateway Building Block Default API
+  description: Gateway Building Block API Documentation
+  version: 2.21.1
 servers:
-- url: https://api.rokwire.illinois.edu/core
+- url: https://api.rokwire.illinois.edu/gateway
 tags:
 - name: Default
   description: Default APIs.
@@ -14,9 +14,7 @@ paths:
       tags:
       - Default
       summary: Get version
-      description: 'Gets current version of this service
-
-        '
+      description: Gets current version of this service
       responses:
         '200':
           description: Success
@@ -27,6 +25,8 @@ paths:
                 example: v1.0.0
         '500':
           description: Internal error
+      operationId: getVersion
+      x-operation-id-source: derived
 components:
   securitySchemes:
     bearerAuth:

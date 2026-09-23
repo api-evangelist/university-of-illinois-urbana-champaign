@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Rokwire Core Building Block Admin Enc API
+  title: Rokwire Core Building Block Enc API
   description: Core Building Block API Documentation
   version: 1.62.0
 servers:
@@ -13,7 +13,7 @@ paths:
     get:
       tags:
       - Enc
-      summary: Test API..
+      summary: Test API
       responses:
         '200':
           description: Success
@@ -22,6 +22,8 @@ paths:
               schema:
                 type: string
                 example: Echooo
+      operationId: getEncTest
+      x-operation-id-source: derived
 components:
   securitySchemes:
     bearerAuth:

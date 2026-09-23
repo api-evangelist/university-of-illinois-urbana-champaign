@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Rokwire Core Building Block Admin Third-Party Services API
+  title: Rokwire Core Building Block Third-Party Services API
   description: Core Building Block API Documentation
   version: 1.62.0
 servers:
@@ -14,9 +14,7 @@ paths:
       tags:
       - Third-Party Services
       summary: Get service registrations
-      description: 'Returns service registration records
-
-        '
+      description: Returns service registration records
       parameters:
       - name: ids
         in: query
@@ -41,14 +39,14 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getTpsServiceRegs
+      x-operation-id-source: derived
   /tps/auth-keys:
     get:
       tags:
       - Third-Party Services
       summary: Get auth public key
-      description: 'Returns auth public key in JWKS format
-
-        '
+      description: Returns auth public key in JWKS format
       responses:
         '200':
           description: Success
@@ -62,14 +60,14 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getTpsAuthKeys
+      x-operation-id-source: derived
   /tps/service-account/{id}:
     post:
       tags:
       - Third-Party Services
       summary: Get service account params
-      description: 'Returns service account parameters
-
-        '
+      description: Returns service account parameters
       parameters:
       - name: id
         in: path
@@ -114,14 +112,14 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: postTpsServiceAccountById
+      x-operation-id-source: derived
   /tps/access-token:
     post:
       tags:
       - Third-Party Services
       summary: Get service account access token
-      description: 'Returns a new service account access token
-
-        '
+      description: Returns a new service account access token
       requestBody:
         description: 'Service account credentials
 
@@ -161,14 +159,14 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: postTpsAccessToken
+      x-operation-id-source: derived
   /tps/access-tokens:
     post:
       tags:
       - Third-Party Services
       summary: Get all service account access tokens
-      description: 'Returns a new service account access token for all authorized app org pairs
-
-        '
+      description: Returns a new service account access token for all authorized app org pairs
       requestBody:
         description: 'Service account credentials
 
@@ -206,6 +204,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: postTpsAccessTokens
+      x-operation-id-source: derived
   /tps/accounts:
     post:
       tags:
@@ -214,9 +214,7 @@ paths:
       description: 'Finds accounts for the given app_id and org_id (query or token)
 
 
-        **Auth:** Requires service access token with `get_accounts` or `all_accounts` permission
-
-        '
+        **Auth:** Requires service access token with `get_accounts` or `all_accounts` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -294,6 +292,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal error
+      operationId: postTpsAccounts
+      x-operation-id-source: derived
   /tps/accounts/count:
     post:
       tags:
@@ -302,9 +302,7 @@ paths:
       description: 'Finds the count of accounts for the given app_id and org_id (query or token)
 
 
-        **Auth:** Requires service access token with `get_accounts_count` or `get_accounts_count_limited` permission
-
-        '
+        **Auth:** Requires service access token with `get_accounts_count` or `get_accounts_count_limited` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -364,125 +362,10 @@ paths:
           description: Forbidden
         '500':
           description: Internal error
+      operationId: postTpsAccountsCount
+      x-operation-id-source: derived
 components:
   schemas:
-    _shared_res_RokwireToken:
-      type: object
-      properties:
-        access_token:
-          description: The user's access token to be provided to authorize access to ROKWIRE APIs
-          type: string
-        refresh_token:
-          description: A refresh token that can be used to get a new access token once the one provided expires
-          type: string
-        token_type:
-          description: The type of the provided tokens to be specified when they are sent in the "Authorization" header
-          type: string
-          enum:
-          - Bearer
-    AppOrgPair:
-      required:
-      - app_id
-      - org_id
-      type: object
-      properties:
-        app_id:
-          type: string
-        org_id:
-          type: string
-    PubKey:
-      required:
-      - key_pem
-      - alg
-      type: object
-      properties:
-        key_pem:
-          type: string
-        alg:
-          type: string
-    JWKParamsRSA:
-      type: object
-      description: JSON Web Key RSA parameters
-      properties:
-        n:
-          type: string
-          description: The modulus of the key - Base64URL encoded
-        e:
-          type: string
-          description: The exponent of the key - Base64URL encoded
-    JWKParamsEC:
-      type: object
-      description: JSON Web Key EC parameters
-      properties:
-        crv:
-          type: string
-          description: The curve used with the key
-        x:
-          type: string
-          description: x coordinate of the key - Base64URL encoded
-        y:
-          type: string
-          description: y coordinate of the key - Base64URL encoded
-    _services_req_service-accounts_access-tokens:
-      required:
-      - account_id
-      - auth_type
-      type: object
-      properties:
-        account_id:
-          type: string
-        auth_type:
-          type: string
-          enum:
-          - static_token
-          - signature
-        creds:
-          $ref: '#/components/schemas/_services_service-accounts_CredsStaticToken'
-    _services_req_service-accounts_params:
-      required:
-      - auth_type
-      type: object
-      properties:
-        auth_type:
-          type: string
-          enum:
-          - static_token
-          - signature
-        creds:
-          $ref: '#/components/schemas/_services_service-accounts_CredsStaticToken'
-    _services_res_service-accounts_access-tokens:
-      required:
-      - app_id
-      - org_id
-      - token
-      type: object
-      properties:
-        app_id:
-          type: string
-        org_id:
-          type: string
-        token:
-          $ref: '#/components/schemas/_shared_res_RokwireToken'
-    JWKS:
-      required:
-      - keys
-      type: object
-      description: JSON Web Key Set (JWKS)
-      properties:
-        keys:
-          type: array
-          items:
-            $ref: '#/components/schemas/JWK'
-    JWKParamsOKP:
-      type: object
-      description: JSON Web Key OKP parameters
-      properties:
-        crv:
-          type: string
-          description: The curve used with the key
-        x:
-          type: string
-          description: x coordinate of the key - Base64URL encoded
     _services_req_service-accounts_access-token:
       required:
       - account_id
@@ -504,29 +387,51 @@ components:
           - signature
         creds:
           $ref: '#/components/schemas/_services_service-accounts_CredsStaticToken'
-    AuthServiceReg:
+    JWKS:
       required:
-      - service_id
-      - host
+      - keys
       type: object
-      description: Service registration record used for auth
+      description: JSON Web Key Set (JWKS)
       properties:
-        service_id:
-          type: string
-        service_account_id:
-          type: string
-        host:
-          type: string
-        pub_key:
-          $ref: '#/components/schemas/PubKey'
-    _services_service-accounts_CredsStaticToken:
+        keys:
+          type: array
+          items:
+            $ref: '#/components/schemas/JWK'
+    _services_res_service-accounts_access-tokens:
       required:
+      - app_id
+      - org_id
       - token
       type: object
-      description: Service account token for auth_type="static_token"
       properties:
-        token:
+        app_id:
           type: string
+        org_id:
+          type: string
+        token:
+          $ref: '#/components/schemas/_shared_res_RokwireToken'
+    _services_req_service-accounts_params:
+      required:
+      - auth_type
+      type: object
+      properties:
+        auth_type:
+          type: string
+          enum:
+          - static_token
+          - signature
+        creds:
+          $ref: '#/components/schemas/_services_service-accounts_CredsStaticToken'
+    JWKParamsOKP:
+      type: object
+      description: JSON Web Key OKP parameters
+      properties:
+        crv:
+          type: string
+          description: The curve used with the key
+        x:
+          type: string
+          description: x coordinate of the key - Base64URL encoded
     JWK:
       type: object
       allOf:
@@ -569,6 +474,101 @@ components:
           kid:
             type: string
             description: The "kid" (key ID) parameter is used to match a specific key
+    JWKParamsRSA:
+      type: object
+      description: JSON Web Key RSA parameters
+      properties:
+        n:
+          type: string
+          description: The modulus of the key - Base64URL encoded
+        e:
+          type: string
+          description: The exponent of the key - Base64URL encoded
+    _services_req_service-accounts_access-tokens:
+      required:
+      - account_id
+      - auth_type
+      type: object
+      properties:
+        account_id:
+          type: string
+        auth_type:
+          type: string
+          enum:
+          - static_token
+          - signature
+        creds:
+          $ref: '#/components/schemas/_services_service-accounts_CredsStaticToken'
+    AuthServiceReg:
+      required:
+      - service_id
+      - host
+      type: object
+      description: Service registration record used for auth
+      properties:
+        service_id:
+          type: string
+        service_account_id:
+          type: string
+        host:
+          type: string
+        pub_key:
+          $ref: '#/components/schemas/PubKey'
+    JWKParamsEC:
+      type: object
+      description: JSON Web Key EC parameters
+      properties:
+        crv:
+          type: string
+          description: The curve used with the key
+        x:
+          type: string
+          description: x coordinate of the key - Base64URL encoded
+        y:
+          type: string
+          description: y coordinate of the key - Base64URL encoded
+    PubKey:
+      required:
+      - key_pem
+      - alg
+      type: object
+      properties:
+        key_pem:
+          type: string
+        alg:
+          type: string
+    AppOrgPair:
+      required:
+      - app_id
+      - org_id
+      type: object
+      properties:
+        app_id:
+          type: string
+        org_id:
+          type: string
+    _services_service-accounts_CredsStaticToken:
+      required:
+      - token
+      type: object
+      description: Service account token for auth_type="static_token"
+      properties:
+        token:
+          type: string
+    _shared_res_RokwireToken:
+      type: object
+      properties:
+        access_token:
+          description: The user's access token to be provided to authorize access to ROKWIRE APIs
+          type: string
+        refresh_token:
+          description: A refresh token that can be used to get a new access token once the one provided expires
+          type: string
+        token_type:
+          description: The type of the provided tokens to be specified when they are sent in the "Authorization" header
+          type: string
+          enum:
+          - Bearer
   securitySchemes:
     bearerAuth:
       type: http

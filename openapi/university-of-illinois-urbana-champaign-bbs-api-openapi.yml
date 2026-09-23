@@ -1,10 +1,11 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Rokwire Core Building Block Admin BBs API
-  description: Core Building Block API Documentation
-  version: 1.62.0
+  title: University Of Illinois Urbana Champaign B Bs API
+  version: '1.0'
+  description: 'Operations tagged BBs across 2 of this provider''s published API definitions: university-of-illinois-urbana-champaign-rokwire-core.yaml, university-of-illinois-urbana-champaign-rokwire-gateway.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.rokwire.illinois.edu/core
+- url: https://api.rokwire.illinois.edu/gateway
 tags:
 - name: BBs
   description: APIs consumed by the platform building blocks.
@@ -13,7 +14,7 @@ paths:
     get:
       tags:
       - BBs
-      summary: Test API..
+      summary: Test API
       responses:
         '200':
           description: Success
@@ -22,14 +23,16 @@ paths:
               schema:
                 type: string
                 example: Echooo
+      operationId: getBbsTest
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /bbs/service-regs:
     get:
       tags:
       - BBs
       summary: Get service registrations
-      description: 'Returns service registration records
-
-        '
+      description: Returns service registration records
       parameters:
       - name: ids
         in: query
@@ -54,14 +57,16 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getBbsServiceRegs
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /bbs/service-account/{id}:
     post:
       tags:
       - BBs
       summary: Get service account params
-      description: 'Returns service account parameters
-
-        '
+      description: Returns service account parameters
       parameters:
       - name: id
         in: path
@@ -106,14 +111,16 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: postBbsServiceAccountById
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /bbs/access-token:
     post:
       tags:
       - BBs
       summary: Get service account access token
-      description: 'Returns a new service account access token
-
-        '
+      description: Returns a new service account access token
       requestBody:
         description: 'Service account credentials
 
@@ -153,14 +160,16 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: postBbsAccessToken
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /bbs/access-tokens:
     post:
       tags:
       - BBs
       summary: Get all service account access tokens
-      description: 'Returns a new service account access token for all authorized app org pairs
-
-        '
+      description: Returns a new service account access token for all authorized app org pairs
       requestBody:
         description: 'Service account credentials
 
@@ -198,6 +207,10 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: postBbsAccessTokens
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /bbs/deleted-memberships:
     get:
       tags:
@@ -206,9 +219,7 @@ paths:
       description: 'Returns a list of deleted account IDs
 
 
-        **Auth:** Requires auth token with permission to get deleted accounts
-
-        '
+        **Auth:** Requires auth token with permission to get deleted accounts'
       security:
       - bearerAuth: []
       parameters:
@@ -244,6 +255,10 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getBbsDeletedMemberships
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /bbs/accounts:
     post:
       tags:
@@ -252,9 +267,7 @@ paths:
       description: 'Finds accounts for the given app_id and org_id (query or token)
 
 
-        **Auth:** Requires service access token with `get_accounts` or `all_accounts` permission
-
-        '
+        **Auth:** Requires service access token with `get_accounts` or `all_accounts` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -332,6 +345,10 @@ paths:
           description: Forbidden
         '500':
           description: Internal error
+      operationId: postBbsAccounts
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /bbs/accounts/count:
     post:
       tags:
@@ -340,9 +357,7 @@ paths:
       description: 'Finds the count of accounts for the given app_id and org_id (query or token)
 
 
-        **Auth:** Requires service access token with `get_accounts_count` or `get_accounts_count_limited` permission
-
-        '
+        **Auth:** Requires service access token with `get_accounts_count` or `get_accounts_count_limited` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -402,14 +417,15 @@ paths:
           description: Forbidden
         '500':
           description: Internal error
+      operationId: postBbsAccountsCount
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /bbs/accounts/ferpa:
     get:
       tags:
       - BBs
       summary: Get the account ids with FERPA filed true
-      description: 'Get the account ids with FERPA filed true
-
-        '
       security:
       - bearerAuth: []
       parameters:
@@ -436,6 +452,10 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getBbsAccountsFerpa
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/core
   /api/bbs/examples/{id}:
     get:
       tags:
@@ -444,9 +464,7 @@ paths:
       description: 'Gets example record
 
 
-        **Auth:** Requires valid first-party service account token with `get_examples` permission
-
-        '
+        **Auth:** Requires valid first-party service account token with `get_examples` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -471,12 +489,21 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getApiBbsExamplesById
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/gateway
   /api/bbs/appointments/units:
     get:
       tags:
       - BBs
       summary: Gets the list of units (calendars) for a provider id
-      description: "Gets the list of units (calendars) for a provider id\n\n**Auth:** Requires valid first-party service account token with `get_external_appointments` permission \n Requires the External-Authorization header containing the oidc access token from the campus provider\n"
+      description: 'Gets the list of units (calendars) for a provider id
+
+
+        **Auth:** Requires valid first-party service account token with `get_external_appointments` permission
+
+        Requires the External-Authorization header containing the oidc access token from the campus provider'
       security:
       - bearerAuth: []
       parameters:
@@ -509,12 +536,21 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getApiBbsAppointmentsUnits
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/gateway
   /api/bbs/appointments/people:
     get:
       tags:
       - BBs
       summary: Gets People with Calendars
-      description: "Gets a list of people with calendars inside of a unit\n\n**Auth:** Requires valid first-party service account token with `get_external_appointments` permission\n Requires the External-Authorization header containing the oidc access token from the campus provider\n"
+      description: 'Gets a list of people with calendars inside of a unit
+
+
+        **Auth:** Requires valid first-party service account token with `get_external_appointments` permission
+
+        Requires the External-Authorization header containing the oidc access token from the campus provider'
       security:
       - bearerAuth: []
       parameters:
@@ -555,6 +591,10 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getApiBbsAppointmentsPeople
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/gateway
   /api/bbs/appointments/slots:
     get:
       tags:
@@ -565,9 +605,7 @@ paths:
 
         **Auth:** Requires valid first-party service account token with `get_external_appointments` permission
 
-        Requires the External-Authorization header containing the oidc access token from the campus provider
-
-        '
+        Requires the External-Authorization header containing the oidc access token from the campus provider'
       security:
       - bearerAuth: []
       parameters:
@@ -632,6 +670,10 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getApiBbsAppointmentsSlots
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/gateway
   /api/bbs/appointments/questions:
     get:
       tags:
@@ -642,9 +684,7 @@ paths:
 
         **Auth:** Requires valid first-party service account token with `get_external_appointments` permission
 
-        Requires the External-Authorization header containing the oidc access token from the campus provider
-
-        '
+        Requires the External-Authorization header containing the oidc access token from the campus provider'
       security:
       - bearerAuth: []
       parameters:
@@ -695,6 +735,10 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getApiBbsAppointmentsQuestions
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/gateway
   /api/bbs/appointments/qands:
     get:
       tags:
@@ -705,9 +749,7 @@ paths:
 
         **Auth:** Requires valid first-party service account token with `get_external_appointments` permission
 
-        Requires the External-Authorization header containing the oidc access token from the campus provider
-
-        '
+        Requires the External-Authorization header containing the oidc access token from the campus provider'
       security:
       - bearerAuth: []
       parameters:
@@ -772,12 +814,21 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getApiBbsAppointmentsQands
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/gateway
   /api/bbs/appointments/:
     post:
       tags:
       - BBs
-      summary: Creates an appointment in the specified provider system and returns the appointment data to the client
-      description: "Posts an appointment request to the specified provider calendar. Returns the appointment data back to the client. \n\n**Auth:** Requires valid first-party service account token with `update_external_appointments` permission\nRequires the External-Authorization header containing the oidc access token from the campus provider\n"
+      summary: Creates an appointment in the specified provider system and returns the…
+      description: 'Posts an appointment request to the specified provider calendar. Returns the appointment data back to the client.
+
+
+        **Auth:** Requires valid first-party service account token with `update_external_appointments` permission
+
+        Requires the External-Authorization header containing the oidc access token from the campus provider'
       security:
       - bearerAuth: []
       requestBody:
@@ -798,10 +849,12 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: postApiBbsAppointments
+      x-operation-id-source: derived
     put:
       tags:
       - BBs
-      summary: updates an appointment in the specified provider system and returns the appointment data to the client
+      summary: updates an appointment in the specified provider system and returns the…
       description: 'Updates an appointment in the specified provider system and returns the appointment data to the clients.
 
         For an upate, the source_id field in the request body is required.
@@ -809,9 +862,7 @@ paths:
 
         **Auth:** Requires valid first-party service account token with `update_external_appointments` permission
 
-        Requires the External-Authorization header containing the oidc access token from the campus provider
-
-        '
+        Requires the External-Authorization header containing the oidc access token from the campus provider'
       security:
       - bearerAuth: []
       requestBody:
@@ -832,19 +883,21 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: putApiBbsAppointments
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/gateway
   /api/bbs/appointments/{id}:
     delete:
       tags:
       - BBs
-      summary: Deletes an appointment in the specified provider system.
+      summary: Deletes an appointment in the specified provider system
       description: 'Deletes an appointment request in the specified provider calendar.
 
 
         **Auth:** Requires valid first-party service account token with `update_external_appointments` permission
 
-        Requires the External-Authorization header containing the oidc access token from the campus provider
-
-        '
+        Requires the External-Authorization header containing the oidc access token from the campus provider'
       security:
       - bearerAuth: []
       parameters:
@@ -881,12 +934,15 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: deleteApiBbsAppointmentsById
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/gateway
   /api/bbs/events:
     get:
       tags:
       - BBs
       summary: Gets all legacy events
-      description: "Gets all legacy events \n"
       security:
       - bearerAuth: []
       responses:
@@ -904,178 +960,12 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getApiBbsEvents
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.rokwire.illinois.edu/gateway
 components:
   schemas:
-    AppOrgPair:
-      required:
-      - app_id
-      - org_id
-      type: object
-      properties:
-        app_id:
-          type: string
-        org_id:
-          type: string
-    ExternalUserID:
-      type: object
-      required:
-      - uin
-      properties:
-        uin:
-          type: string
-          readOnly: true
-    _services_req_service-accounts_access-tokens:
-      required:
-      - account_id
-      - auth_type
-      type: object
-      properties:
-        account_id:
-          type: string
-        auth_type:
-          type: string
-          enum:
-          - static_token
-          - signature
-        creds:
-          $ref: '#/components/schemas/_services_service-accounts_CredsStaticToken'
-    _services_req_service-accounts_params:
-      required:
-      - auth_type
-      type: object
-      properties:
-        auth_type:
-          type: string
-          enum:
-          - static_token
-          - signature
-        creds:
-          $ref: '#/components/schemas/_services_service-accounts_CredsStaticToken'
-    AppointmentHost:
-      type: object
-      required:
-      - first_name
-      - last_name
-      properties:
-        first_name:
-          type: string
-          readOnly: true
-        last_name:
-          type: string
-          readOnly: true
-    Example:
-      type: object
-      required:
-      - id
-      - app_id
-      - org_id
-      - data
-      - date_created
-      properties:
-        id:
-          type: string
-          readOnly: true
-        org_id:
-          type: string
-          readOnly: true
-        app_id:
-          type: string
-          readOnly: true
-        data:
-          type: string
-        date_created:
-          type: string
-          readOnly: true
-        date_updated:
-          type: string
-          nullable: true
-          readOnly: true
-    TimeSlot:
-      type: object
-      required:
-      - id
-      - provider_id
-      - unit_id
-      - person_id
-      - start_time
-      - end_time
-      - capacity
-      - filled
-      - details
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        provider_id:
-          type: integer
-          readOnly: true
-        unit_id:
-          type: integer
-          readOnly: true
-        person_id:
-          type: integer
-        start_time:
-          type: string
-        end_time:
-          type: string
-        capacity:
-          type: integer
-        filled:
-          type: integer
-        details:
-          type: object
-    _services_res_service-accounts_access-tokens:
-      required:
-      - app_id
-      - org_id
-      - token
-      type: object
-      properties:
-        app_id:
-          type: string
-        org_id:
-          type: string
-        token:
-          $ref: '#/components/schemas/_shared_res_RokwireToken'
-    BuildingBlockAppointment:
-      type: object
-      required:
-      - provider_id
-      - unit_id
-      - person_id
-      - type
-      - start_time
-      - end_time
-      - user_external_ids
-      - source_id
-      - host
-      properties:
-        provider_id:
-          type: string
-          readOnly: true
-        unit_id:
-          type: string
-          readOnly: true
-        person_id:
-          type: string
-          readOnly: true
-        type:
-          type: string
-          readOnly: true
-        start_time:
-          type: string
-          readOnly: true
-        end_time:
-          type: string
-          readOnly: true
-        user_external_ids:
-          $ref: '#/components/schemas/ExternalUserID'
-          readOnly: true
-        source_id:
-          type: string
-          readOnly: true
-        host:
-          $ref: '#/components/schemas/AppointmentHost'
     _services_req_service-accounts_access-token:
       required:
       - account_id
@@ -1097,37 +987,130 @@ components:
           - signature
         creds:
           $ref: '#/components/schemas/_services_service-accounts_CredsStaticToken'
-    AppointmentUnit:
-      type: object
+    _services_res_service-accounts_access-tokens:
       required:
-      - id
-      - provider_id
-      - name
-      - location
-      - hours_of_operation
-      - details
-      - next_available
-      - image_url
+      - app_id
+      - org_id
+      - token
+      type: object
       properties:
-        id:
-          type: integer
+        app_id:
+          type: string
+        org_id:
+          type: string
+        token:
+          $ref: '#/components/schemas/_shared_res_RokwireToken'
+    _services_req_service-accounts_params:
+      required:
+      - auth_type
+      type: object
+      properties:
+        auth_type:
+          type: string
+          enum:
+          - static_token
+          - signature
+        creds:
+          $ref: '#/components/schemas/_services_service-accounts_CredsStaticToken'
+    DeletedMembership:
+      required:
+      - account_id
+      type: object
+      properties:
+        account_id:
           readOnly: true
-        provider_id:
-          type: integer
-          readOnly: true
-        name:
           type: string
-          readOnly: true
-        location:
+        external_ids:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+        context:
+          type: object
+    DeletedAppOrgMembership:
+      allOf:
+      - $ref: '#/components/schemas/AppOrgPair'
+      - required:
+        - memberships
+        type: object
+        properties:
+          memberships:
+            type: array
+            items:
+              $ref: '#/components/schemas/DeletedMembership'
+    _services_req_service-accounts_access-tokens:
+      required:
+      - account_id
+      - auth_type
+      type: object
+      properties:
+        account_id:
           type: string
-        hours_of_operation:
+        auth_type:
           type: string
-        details:
+          enum:
+          - static_token
+          - signature
+        creds:
+          $ref: '#/components/schemas/_services_service-accounts_CredsStaticToken'
+    AuthServiceReg:
+      required:
+      - service_id
+      - host
+      type: object
+      description: Service registration record used for auth
+      properties:
+        service_id:
           type: string
-        next_available:
+        service_account_id:
           type: string
-        image_url:
+        host:
           type: string
+        pub_key:
+          $ref: '#/components/schemas/PubKey'
+    PubKey:
+      required:
+      - key_pem
+      - alg
+      type: object
+      properties:
+        key_pem:
+          type: string
+        alg:
+          type: string
+    AppOrgPair:
+      required:
+      - app_id
+      - org_id
+      type: object
+      properties:
+        app_id:
+          type: string
+        org_id:
+          type: string
+    _services_service-accounts_CredsStaticToken:
+      required:
+      - token
+      type: object
+      description: Service account token for auth_type="static_token"
+      properties:
+        token:
+          type: string
+    _shared_res_RokwireToken:
+      type: object
+      properties:
+        access_token:
+          description: The user's access token to be provided to authorize access to ROKWIRE APIs
+          type: string
+        refresh_token:
+          description: A refresh token that can be used to get a new access token once the one provided expires
+          type: string
+        token_type:
+          description: The type of the provided tokens to be specified when they are sent in the "Authorization" header
+          type: string
+          enum:
+          - Bearer
     AppointmentPost:
       type: object
       required:
@@ -1173,74 +1156,6 @@ components:
           items:
             $ref: '#/components/schemas/QuestionAnswer'
           readOnly: true
-    AppointmentOptions:
-      type: object
-      required:
-      - time_slots
-      - questions
-      properties:
-        time_slots:
-          type: array
-          items:
-            $ref: '#/components/schemas/TimeSlot'
-          readOnly: true
-        questions:
-          type: array
-          items:
-            $ref: '#/components/schemas/Question'
-          readOnly: true
-    PubKey:
-      required:
-      - key_pem
-      - alg
-      type: object
-      properties:
-        key_pem:
-          type: string
-        alg:
-          type: string
-    AppointmentPerson:
-      type: object
-      required:
-      - id
-      - provider_id
-      - unit_id
-      - next_available
-      - name
-      - notes
-      - image_url
-      properties:
-        id:
-          type: string
-          readOnly: true
-        provider_id:
-          type: integer
-          readOnly: true
-        unit_id:
-          type: integer
-          readOnly: true
-        next_available:
-          type: string
-        name:
-          type: string
-        notes:
-          type: string
-        image_url:
-          type: string
-    QuestionAnswer:
-      type: object
-      required:
-      - question_id
-      - values
-      properties:
-        question_id:
-          type: string
-          readOnly: true
-        values:
-          type: array
-          items:
-            type: string
-          readOnly: true
     Question:
       type: object
       required:
@@ -1270,6 +1185,56 @@ components:
           readOnly: true
         question:
           type: string
+          readOnly: true
+    TimeSlot:
+      type: object
+      required:
+      - id
+      - provider_id
+      - unit_id
+      - person_id
+      - start_time
+      - end_time
+      - capacity
+      - filled
+      - details
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        provider_id:
+          type: integer
+          readOnly: true
+        unit_id:
+          type: integer
+          readOnly: true
+        person_id:
+          type: integer
+        start_time:
+          type: string
+        end_time:
+          type: string
+        capacity:
+          type: integer
+        filled:
+          type: integer
+        details:
+          type: object
+    AppointmentOptions:
+      type: object
+      required:
+      - time_slots
+      - questions
+      properties:
+        time_slots:
+          type: array
+          items:
+            $ref: '#/components/schemas/TimeSlot'
+          readOnly: true
+        questions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Question'
           readOnly: true
     LegacyEvent:
       type: object
@@ -1329,8 +1294,9 @@ components:
         id:
           type: string
         image_url:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         is_event_free:
           type: boolean
         is_virtual:
@@ -1342,8 +1308,9 @@ components:
         outlook_url:
           type: string
         recurrence_id:
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
         is_super_event:
           type: boolean
         recurring_flag:
@@ -1359,84 +1326,186 @@ components:
         title_url:
           type: string
         tags:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
         target_audience:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
         registration_url:
           type: string
         cost:
           type: string
-    DeletedAppOrgMembership:
-      allOf:
-      - $ref: '#/components/schemas/AppOrgPair'
-      - required:
-        - memberships
-        type: object
-        properties:
-          memberships:
-            type: array
-            items:
-              $ref: '#/components/schemas/DeletedMembership'
-    _shared_res_RokwireToken:
+    BuildingBlockAppointment:
       type: object
-      properties:
-        access_token:
-          description: The user's access token to be provided to authorize access to ROKWIRE APIs
-          type: string
-        refresh_token:
-          description: A refresh token that can be used to get a new access token once the one provided expires
-          type: string
-        token_type:
-          description: The type of the provided tokens to be specified when they are sent in the "Authorization" header
-          type: string
-          enum:
-          - Bearer
-    DeletedMembership:
       required:
-      - account_id
-      type: object
-      properties:
-        account_id:
-          readOnly: true
-          type: string
-        external_ids:
-          type: object
-          nullable: true
-          additionalProperties:
-            type: string
-        context:
-          type: object
-    AuthServiceReg:
-      required:
-      - service_id
+      - provider_id
+      - unit_id
+      - person_id
+      - type
+      - start_time
+      - end_time
+      - user_external_ids
+      - source_id
       - host
-      type: object
-      description: Service registration record used for auth
       properties:
-        service_id:
+        provider_id:
           type: string
-        service_account_id:
+          readOnly: true
+        unit_id:
           type: string
+          readOnly: true
+        person_id:
+          type: string
+          readOnly: true
+        type:
+          type: string
+          readOnly: true
+        start_time:
+          type: string
+          readOnly: true
+        end_time:
+          type: string
+          readOnly: true
+        user_external_ids:
+          $ref: '#/components/schemas/ExternalUserID'
+          readOnly: true
+        source_id:
+          type: string
+          readOnly: true
         host:
-          type: string
-        pub_key:
-          $ref: '#/components/schemas/PubKey'
-    _services_service-accounts_CredsStaticToken:
-      required:
-      - token
+          $ref: '#/components/schemas/AppointmentHost'
+    AppointmentHost:
       type: object
-      description: Service account token for auth_type="static_token"
+      required:
+      - first_name
+      - last_name
       properties:
-        token:
+        first_name:
           type: string
+          readOnly: true
+        last_name:
+          type: string
+          readOnly: true
+    QuestionAnswer:
+      type: object
+      required:
+      - question_id
+      - values
+      properties:
+        question_id:
+          type: string
+          readOnly: true
+        values:
+          type: array
+          items:
+            type: string
+          readOnly: true
+    AppointmentUnit:
+      type: object
+      required:
+      - id
+      - provider_id
+      - name
+      - location
+      - hours_of_operation
+      - details
+      - next_available
+      - image_url
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        provider_id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          readOnly: true
+        location:
+          type: string
+        hours_of_operation:
+          type: string
+        details:
+          type: string
+        next_available:
+          type: string
+        image_url:
+          type: string
+    AppointmentPerson:
+      type: object
+      required:
+      - id
+      - provider_id
+      - unit_id
+      - next_available
+      - name
+      - notes
+      - image_url
+      properties:
+        id:
+          type: string
+          readOnly: true
+        provider_id:
+          type: integer
+          readOnly: true
+        unit_id:
+          type: integer
+          readOnly: true
+        next_available:
+          type: string
+        name:
+          type: string
+        notes:
+          type: string
+        image_url:
+          type: string
+    Example:
+      type: object
+      required:
+      - id
+      - app_id
+      - org_id
+      - data
+      - date_created
+      properties:
+        id:
+          type: string
+          readOnly: true
+        org_id:
+          type: string
+          readOnly: true
+        app_id:
+          type: string
+          readOnly: true
+        data:
+          type: string
+        date_created:
+          type: string
+          readOnly: true
+        date_updated:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+    ExternalUserID:
+      type: object
+      required:
+      - uin
+      properties:
+        uin:
+          type: string
+          readOnly: true
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
       bearerFormat: JWT
+x-refined-from:
+- university-of-illinois-urbana-champaign-rokwire-core.yaml
+- university-of-illinois-urbana-champaign-rokwire-gateway.yaml

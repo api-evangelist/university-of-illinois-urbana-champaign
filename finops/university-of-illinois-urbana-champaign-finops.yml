@@ -1,3 +1,9 @@
+generated: '2026-06-03'
+method: generated
+source: >-
+  No FinOps, cost-allocation or chargeback disclosure is published by the University of
+  Illinois Urbana-Champaign. This artifact is API Evangelist's FOCUS-shaped framing of a
+  non-commercial institutional estate, not a UIUC document.
 specification: FinOps Framework
 specificationVersion: '1.0'
 schema: https://www.finops.org/framework/

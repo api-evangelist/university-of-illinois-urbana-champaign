@@ -1,3 +1,8 @@
+x-generated: '2026-07-12'
+x-method: generated
+x-source: >-
+  Spectral ruleset authored by API Evangelist against the two Rokwire building-block OpenAPIs.
+  UIUC publishes no governance ruleset of its own; these rules are ours, not theirs.
 formats:
   - oas3
 rules:

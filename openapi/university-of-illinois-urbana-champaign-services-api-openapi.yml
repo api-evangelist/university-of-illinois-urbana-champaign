@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Rokwire Core Building Block Admin Services API
+  title: Rokwire Core Building Block Services API
   description: Core Building Block API Documentation
   version: 1.62.0
 servers:
@@ -14,9 +14,7 @@ paths:
       tags:
       - Services
       summary: Login
-      description: 'Login using credentials to retrieve access token, refresh token, and user data
-
-        '
+      description: Login using credentials to retrieve access token, refresh token, and user data
       requestBody:
         description: 'User credential details and parameters
 
@@ -254,14 +252,14 @@ paths:
                       '
                   message:
                     type: string
+      operationId: postServicesAuthLogin
+      x-operation-id-source: derived
   /services/auth/mfa:
     post:
       tags:
       - Services
       summary: MFA
-      description: 'Verify multi-factor authentication credentials to complete login
-
-        '
+      description: Verify multi-factor authentication credentials to complete login
       parameters:
       - name: state
         in: query
@@ -293,14 +291,14 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: postServicesAuthMfa
+      x-operation-id-source: derived
   /services/auth/refresh:
     post:
       tags:
       - Services
       summary: Refresh
-      description: 'Refresh access token using a refresh token
-
-        '
+      description: Refresh access token using a refresh token
       requestBody:
         description: 'Refresh token
 
@@ -323,14 +321,14 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: postServicesAuthRefresh
+      x-operation-id-source: derived
   /services/auth/login-url:
     post:
       tags:
       - Services
       summary: Get SSO login url
-      description: 'Retrieve a pre-formatted SSO login URL
-
-        '
+      description: Retrieve a pre-formatted SSO login URL
       requestBody:
         content:
           application/json:
@@ -350,14 +348,14 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: postServicesAuthLoginUrl
+      x-operation-id-source: derived
   /services/auth/logout:
     post:
       tags:
       - Services
       summary: Logout
-      description: 'Logouts an account
-
-        '
+      description: Logouts an account
       security:
       - bearerAuth: []
       requestBody:
@@ -385,14 +383,14 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: postServicesAuthLogout
+      x-operation-id-source: derived
   /services/auth/credential/verify:
     get:
       tags:
       - Services
       summary: Validate verification code
-      description: 'Validates verification code to verify account ownership
-
-        '
+      description: Validates verification code to verify account ownership
       parameters:
       - name: id
         in: query
@@ -424,14 +422,14 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getServicesAuthCredentialVerify
+      x-operation-id-source: derived
   /services/auth/credential/send-verify:
     post:
       tags:
       - Services
       summary: Send verification code to identifier
-      description: 'Sends verification code to identifier to verify account ownership
-
-        '
+      description: Sends verification code to identifier to verify account ownership
       requestBody:
         description: 'Account information to be checked
 
@@ -455,12 +453,18 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: postServicesAuthCredentialSendVerify
+      x-operation-id-source: derived
   /services/auth/credential/forgot/initiate:
     post:
       tags:
       - Services
       summary: Initiate reset credential for a given identifier
-      description: "Email auth type:\nSends the reset password code for a given identifier\nGenerates a reset code and expiry and sends it to the given identifier \n"
+      description: 'Email auth type:
+
+        Sends the reset password code for a given identifier
+
+        Generates a reset code and expiry and sends it to the given identifier'
       requestBody:
         content:
           application/json:
@@ -500,6 +504,8 @@ paths:
                       '
                   message:
                     type: string
+      operationId: postServicesAuthCredentialForgotInitiate
+      x-operation-id-source: derived
   /services/auth/credential/forgot/complete:
     post:
       tags:
@@ -524,6 +530,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: postServicesAuthCredentialForgotComplete
+      x-operation-id-source: derived
   /services/auth/credential/update:
     post:
       tags:
@@ -532,9 +540,7 @@ paths:
       description: 'Needs user auth token for authorization
 
 
-        **Auth:** Requires token from direct user authentication from recent login
-
-        '
+        **Auth:** Requires token from direct user authentication from recent login'
       security:
       - bearerAuth: []
       requestBody:
@@ -556,14 +562,14 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: postServicesAuthCredentialUpdate
+      x-operation-id-source: derived
   /services/auth/verify-mfa:
     post:
       tags:
       - Services
       summary: MFA
-      description: 'Verify multi-factor authentication credentials to complete MFA registration
-
-        '
+      description: Verify multi-factor authentication credentials to complete MFA registration
       requestBody:
         description: 'MFA credentials and parameters
 
@@ -588,14 +594,14 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: postServicesAuthVerifyMfa
+      x-operation-id-source: derived
   /services/auth/account/exists:
     post:
       tags:
       - Services
       summary: Check if an account already exists
-      description: 'Account exists checks if an account exists for the provided user identifier and auth type
-
-        '
+      description: Account exists checks if an account exists for the provided user identifier and auth type
       requestBody:
         description: 'Account information to be checked
 
@@ -618,14 +624,14 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: postServicesAuthAccountExists
+      x-operation-id-source: derived
   /services/auth/account/can-sign-in:
     post:
       tags:
       - Services
       summary: Check if a client can sign in
-      description: 'Checks if a client can sign in to an existing account for the provided user identifier and auth type
-
-        '
+      description: Checks if a client can sign in to an existing account for the provided user identifier and auth type
       requestBody:
         description: 'Account information to be checked
 
@@ -648,14 +654,14 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: postServicesAuthAccountCanSignIn
+      x-operation-id-source: derived
   /services/auth/account/can-link:
     post:
       tags:
       - Services
       summary: Check if a client can link an auth type
-      description: 'Checks if a client is able to link a new auth type to an account
-
-        '
+      description: Checks if a client is able to link a new auth type to an account
       requestBody:
         description: 'Account information to be checked
 
@@ -678,6 +684,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: postServicesAuthAccountCanLink
+      x-operation-id-source: derived
   /services/auth/account/auth-type/link:
     post:
       tags:
@@ -686,9 +694,7 @@ paths:
       description: 'Link credentials to an existing account
 
 
-        **Auth:** Requires "authenticated" auth token
-
-        '
+        **Auth:** Requires "authenticated" auth token'
       security:
       - bearerAuth: []
       requestBody:
@@ -772,6 +778,8 @@ paths:
                       '
                   message:
                     type: string
+      operationId: postServicesAuthAccountAuthTypeLink
+      x-operation-id-source: derived
     delete:
       tags:
       - Services
@@ -779,9 +787,7 @@ paths:
       description: 'Unlink credentials from an existing account
 
 
-        **Auth:** Requires "authenticated" auth token
-
-        '
+        **Auth:** Requires "authenticated" auth token'
       security:
       - bearerAuth: []
       requestBody:
@@ -822,6 +828,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: deleteServicesAuthAccountAuthTypeLink
+      x-operation-id-source: derived
   /services/auth/authorize-service:
     post:
       tags:
@@ -830,9 +838,7 @@ paths:
       description: 'Authorize a third-party service and get a scoped access token that can be used to access its APIs
 
 
-        **Auth:** Requires user auth token
-
-        '
+        **Auth:** Requires user auth token'
       security:
       - bearerAuth: []
       requestBody:
@@ -880,6 +886,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: postServicesAuthAuthorizeService
+      x-operation-id-source: derived
   /services/auth/service-regs:
     get:
       tags:
@@ -888,9 +896,7 @@ paths:
       description: 'Returns service registration records
 
 
-        **Auth:** Requires auth token
-
-        '
+        **Auth:** Requires auth token'
       security:
       - bearerAuth: []
       parameters:
@@ -917,6 +923,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getServicesAuthServiceRegs
+      x-operation-id-source: derived
   /services/accounts:
     get:
       tags:
@@ -925,9 +933,7 @@ paths:
       description: 'Finds accounts using a set of optional search parameters
 
 
-        **Auth:** Requires access token with `get_accounts`, `update_accounts`, or `all_accounts` permission
-
-        '
+        **Auth:** Requires access token with `get_accounts`, `update_accounts`, or `all_accounts` permission'
       security:
       - bearerAuth: []
       parameters:
@@ -1034,6 +1040,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getServicesAccounts
+      x-operation-id-source: derived
     post:
       tags:
       - Services
@@ -1041,9 +1049,7 @@ paths:
       description: 'Create a new admin account
 
 
-        **Auth:** Requires auth token with `create_accounts` or `all_accounts` permission
-
-        '
+        **Auth:** Requires auth token with `create_accounts` or `all_accounts` permission'
       security:
       - bearerAuth: []
       requestBody:
@@ -1068,6 +1074,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: postServicesAccounts
+      x-operation-id-source: derived
     put:
       tags:
       - Services
@@ -1075,9 +1083,7 @@ paths:
       description: 'Update an existing admin account
 
 
-        **Auth:** Requires auth token with `update_accounts` or `all_accounts` permission
-
-        '
+        **Auth:** Requires auth token with `update_accounts` or `all_accounts` permission'
       security:
       - bearerAuth: []
       requestBody:
@@ -1102,14 +1108,14 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: putServicesAccounts
+      x-operation-id-source: derived
   /services/accounts/public:
     get:
       tags:
       - Services
       summary: Finds public accounts
-      description: 'Finds public accounts using search, username, first name, and last name, following id, and follower id
-
-        '
+      description: Finds public accounts using search, username, first name, and last name, following id, and follower id
       security:
       - bearerAuth: []
       parameters:
@@ -1208,14 +1214,14 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getServicesAccountsPublic
+      x-operation-id-source: derived
   /services/v2/accounts/public:
     get:
       tags:
       - Services
       summary: Finds public accounts
-      description: 'Finds public accounts using search, username, first name, and last name, following id, and follower id
-
-        '
+      description: Finds public accounts using search, username, first name, and last name, following id, and follower id
       security:
       - bearerAuth: []
       parameters:
@@ -1323,6 +1329,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getServicesV2AccountsPublic
+      x-operation-id-source: derived
   /services/account:
     delete:
       tags:
@@ -1331,9 +1339,7 @@ paths:
       description: 'Deletes account
 
 
-        **Auth:** Requires auth token
-
-        '
+        **Auth:** Requires auth token'
       security:
       - bearerAuth: []
       parameters:
@@ -1405,6 +1411,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: deleteServicesAccount
+      x-operation-id-source: derived
     get:
       tags:
       - Services
@@ -1412,9 +1420,7 @@ paths:
       description: 'Gets account
 
 
-        **Auth:** Requires auth token
-
-        '
+        **Auth:** Requires auth token'
       security:
       - bearerAuth: []
       responses:
@@ -1430,6 +1436,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getServicesAccount
+      x-operation-id-source: derived
   /services/account/mfa:
     get:
       tags:
@@ -1438,9 +1446,7 @@ paths:
       description: 'Get MFA types set up for an account
 
 
-        **Auth:** Requires user auth token
-
-        '
+        **Auth:** Requires user auth token'
       security:
       - bearerAuth: []
       responses:
@@ -1458,6 +1464,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getServicesAccountMfa
+      x-operation-id-source: derived
     post:
       tags:
       - Services
@@ -1465,9 +1473,7 @@ paths:
       description: 'Add MFA type to an account
 
 
-        **Auth:** Requires user auth token
-
-        '
+        **Auth:** Requires user auth token'
       security:
       - bearerAuth: []
       requestBody:
@@ -1498,6 +1504,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: postServicesAccountMfa
+      x-operation-id-source: derived
     delete:
       tags:
       - Services
@@ -1505,9 +1513,7 @@ paths:
       description: 'Remove MFA type from an account
 
 
-        **Auth:** Requires user auth token
-
-        '
+        **Auth:** Requires user auth token'
       security:
       - bearerAuth: []
       requestBody:
@@ -1533,6 +1539,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: deleteServicesAccountMfa
+      x-operation-id-source: derived
   /services/account/preferences:
     put:
       tags:
@@ -1541,9 +1549,7 @@ paths:
       description: 'Updates account preferences
 
 
-        **Auth:** Requires auth token
-
-        '
+        **Auth:** Requires auth token'
       security:
       - bearerAuth: []
       requestBody:
@@ -1567,6 +1573,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: putServicesAccountPreferences
+      x-operation-id-source: derived
     get:
       tags:
       - Services
@@ -1574,9 +1582,7 @@ paths:
       description: 'Returns account preferences
 
 
-        **Auth:** Requires auth token
-
-        '
+        **Auth:** Requires auth token'
       security:
       - bearerAuth: []
       responses:
@@ -1592,6 +1598,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getServicesAccountPreferences
+      x-operation-id-source: derived
   /services/account/profile:
     get:
       tags:
@@ -1600,9 +1608,7 @@ paths:
       description: 'Returns a user profile
 
 
-        **Auth:** Requires user auth token
-
-        '
+        **Auth:** Requires user auth token'
       security:
       - bearerAuth: []
       responses:
@@ -1618,6 +1624,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getServicesAccountProfile
+      x-operation-id-source: derived
     put:
       tags:
       - Services
@@ -1625,9 +1633,7 @@ paths:
       description: 'Updates a user profile
 
 
-        **Auth:** Requires user auth token
-
-        '
+        **Auth:** Requires user auth token'
       security:
       - bearerAuth: []
       requestBody:
@@ -1651,6 +1657,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: putServicesAccountProfile
+      x-operation-id-source: derived
   /services/account/privacy:
     get:
       tags:
@@ -1659,9 +1667,7 @@ paths:
       description: 'Returns a user''s privacy settings
 
 
-        **Auth:** Requires user auth token
-
-        '
+        **Auth:** Requires user auth token'
       security:
       - bearerAuth: []
       responses:
@@ -1677,6 +1683,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getServicesAccountPrivacy
+      x-operation-id-source: derived
     put:
       tags:
       - Services
@@ -1684,9 +1692,7 @@ paths:
       description: 'Updates a user privacy
 
 
-        **Auth:** Requires user auth token
-
-        '
+        **Auth:** Requires user auth token'
       security:
       - bearerAuth: []
       requestBody:
@@ -1719,6 +1725,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: putServicesAccountPrivacy
+      x-operation-id-source: derived
   /services/account/system-configs:
     get:
       tags:
@@ -1727,9 +1735,7 @@ paths:
       description: 'Returns account system configs
 
 
-        **Auth:** Requires auth token
-
-        '
+        **Auth:** Requires auth token'
       security:
       - bearerAuth: []
       responses:
@@ -1738,14 +1744,17 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                nullable: true
+                type:
+                - object
+                - 'null'
         '400':
           description: Bad request
         '401':
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getServicesAccountSystemConfigs
+      x-operation-id-source: derived
   /services/account/username:
     put:
       tags:
@@ -1754,9 +1763,7 @@ paths:
       description: 'Update the username associated with the user''s account
 
 
-        **Auth:** Requires user access token
-
-        '
+        **Auth:** Requires user access token'
       security:
       - bearerAuth: []
       requestBody:
@@ -1780,6 +1787,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: putServicesAccountUsername
+      x-operation-id-source: derived
   /services/account/follow:
     post:
       tags:
@@ -1788,9 +1797,7 @@ paths:
       description: 'Adds follower to specified user
 
 
-        **Auth:** Requires user auth token
-
-        '
+        **Auth:** Requires user auth token'
       security:
       - bearerAuth: []
       requestBody:
@@ -1814,6 +1821,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: postServicesAccountFollow
+      x-operation-id-source: derived
   /services/account/follow/{id}:
     delete:
       tags:
@@ -1822,9 +1831,7 @@ paths:
       description: 'Delete a follow where subject follows userID
 
 
-        **Auth:** Requires user auth token
-
-        '
+        **Auth:** Requires user auth token'
       security:
       - bearerAuth: []
       parameters:
@@ -1845,11 +1852,13 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: deleteServicesAccountFollowById
+      x-operation-id-source: derived
   /services/test:
     get:
       tags:
       - Services
-      summary: Test API..
+      summary: Test API
       responses:
         '200':
           description: Success
@@ -1858,6 +1867,8 @@ paths:
               schema:
                 type: string
                 example: Echooo
+      operationId: getServicesTest
+      x-operation-id-source: derived
   /services/app-configs:
     post:
       tags:
@@ -1866,9 +1877,7 @@ paths:
       description: 'Returns the default app config for the highest version that is equal to or less than the provided version
 
 
-        **Auth:** Requires a valid API Key for access.
-
-        '
+        **Auth:** Requires a valid API Key for access.'
       requestBody:
         description: 'App config query
 
@@ -1896,6 +1905,8 @@ paths:
           description: AppConfig not found
         '500':
           description: Internal error
+      operationId: postServicesAppConfigs
+      x-operation-id-source: derived
   /services/app-configs/organization:
     post:
       tags:
@@ -1904,9 +1915,7 @@ paths:
       description: 'Returns the app config for the highest version that is equal to or less than the provided version for the currently authenticated organization
 
 
-        **Auth:** Requires auth token
-
-        '
+        **Auth:** Requires auth token'
       security:
       - bearerAuth: []
       requestBody:
@@ -1932,6 +1941,8 @@ paths:
           description: AppConfig not found
         '500':
           description: Internal error
+      operationId: postServicesAppConfigsOrganization
+      x-operation-id-source: derived
   /services/application/configs:
     post:
       tags:
@@ -1940,9 +1951,7 @@ paths:
       description: 'Returns the default app config for the highest version that is equal to or less than the provided version
 
 
-        **Auth:** Requires a valid API Key for access.
-
-        '
+        **Auth:** Requires a valid API Key for access.'
       deprecated: true
       requestBody:
         description: 'App config query
@@ -1971,6 +1980,8 @@ paths:
           description: AppConfig not found
         '500':
           description: Internal error
+      operationId: postServicesApplicationConfigs
+      x-operation-id-source: derived
   /services/application/organization/configs:
     post:
       tags:
@@ -1979,9 +1990,7 @@ paths:
       description: 'Returns the app config for the highest version that is equal to or less than the provided version for the currently authenticated organization
 
 
-        **Auth:** Requires auth token
-
-        '
+        **Auth:** Requires auth token'
       security:
       - bearerAuth: []
       deprecated: true
@@ -2008,6 +2017,8 @@ paths:
           description: AppConfig not found
         '500':
           description: Internal error
+      operationId: postServicesApplicationOrganizationConfigs
+      x-operation-id-source: derived
   /services/user-data:
     get:
       tags:
@@ -2016,9 +2027,7 @@ paths:
       description: 'Gets user data
 
 
-        **Auth:** Requires auth token
-
-        '
+        **Auth:** Requires auth token'
       security:
       - bearerAuth: []
       responses:
@@ -2034,159 +2043,163 @@ paths:
           description: Unauthorized
         '500':
           description: Internal errors
+      operationId: getServicesUserData
+      x-operation-id-source: derived
 components:
   schemas:
-    AccountAuthType:
-      required:
-      - id
-      - code
-      - identifier
-      type: object
-      properties:
-        id:
-          type: string
-        code:
-          type: string
-        identifier:
-          type: string
-        params:
-          type: object
-          additionalProperties: true
-          nullable: true
-        active:
-          type: boolean
-        unverified:
-          type: boolean
-    _services_req_credential_forgot_complete:
-      required:
-      - credential_id
-      - reset_code
-      type: object
-      properties:
-        credential_id:
-          type: string
-        reset_code:
-          type: string
-        params:
-          type: object
-          anyOf:
-          - $ref: '#/components/schemas/_shared_req_ParamsSetEmailCredential'
-    ApplicationConfig:
-      required:
-      - id
-      - app_type_id
-      - version
-      - data
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        app_type_id:
-          type: string
-        org_id:
-          type: string
-        version:
-          type: string
-          description: conforms major.minor.patch format
-        data:
-          type: object
-    _shared_res_ParamsOIDC:
-      type: object
-      description: Auth login response params for auth_type="oidc" (or variants)
-      properties:
-        oidc_token:
-          type: object
-          properties:
-            id_token:
-              type: string
-            access_token:
-              type: string
-            refresh_token:
-              type: string
-            token_type:
-              type: string
-        redirect_uri:
-          type: string
-    _shared_res_LoginUrl:
-      required:
-      - login_url
-      type: object
-      properties:
-        login_url:
-          type: string
-        params:
-          type: object
-          description: Params to be submitted with 'login' request (if necessary)
-    ApplicationType:
-      required:
-      - id
-      - identifier
-      type: object
-      properties:
-        id:
-          readOnly: true
-          type: string
-        identifier:
-          type: string
-        name:
-          type: string
-        versions:
-          type: array
-          items:
-            type: string
-    _shared_req_CredsOIDC:
-      type: string
-      description: "Auth login creds for auth_type=\"oidc\" (or variants)\n  - full redirect URI received from OIDC provider\n"
-    _shared_req_Login:
+    _services_req_credential_forgot_initiate:
       required:
       - auth_type
       - app_type_identifier
       - org_id
       - api_key
-      - device
+      - identifier
       type: object
       properties:
         auth_type:
           type: string
           enum:
           - email
-          - twilio_phone
-          - illinois_oidc
-          - anonymous
-          - username
         app_type_identifier:
           type: string
         org_id:
           type: string
         api_key:
           type: string
-        creds:
-          anyOf:
-          - $ref: '#/components/schemas/_shared_req_CredsEmail'
-          - $ref: '#/components/schemas/_shared_req_CredsTwilioPhone'
-          - $ref: '#/components/schemas/_shared_req_CredsOIDC'
-          - $ref: '#/components/schemas/_shared_req_CredsAPIKey'
-          - $ref: '#/components/schemas/_shared_req_CredsUsername'
-        params:
-          type: object
-          anyOf:
-          - $ref: '#/components/schemas/_shared_req_ParamsEmail'
-          - $ref: '#/components/schemas/_shared_req_ParamsOIDC'
-          - $ref: '#/components/schemas/_shared_req_ParamsNone'
-          - $ref: '#/components/schemas/_shared_req_ParamsUsername'
-        device:
-          $ref: '#/components/schemas/Device'
-        profile:
-          $ref: '#/components/schemas/ProfileNullable'
-        privacy:
-          $ref: '#/components/schemas/PrivacyNullable'
-        preferences:
-          type: object
-          nullable: true
-        username:
+        identifier:
           type: string
-          nullable: true
+    _shared_req_ParamsNone:
+      type:
+      - object
+      - 'null'
+      description: Auth login request params for unlisted auth_types (None)
+    TSLExpirePolicy:
+      type: object
+      required:
+      - active
+      - time_since_login_period
+      properties:
+        active:
+          type: boolean
+        time_since_login_period:
+          type: integer
+    _shared_res_Refresh:
+      type: object
+      properties:
+        token:
+          $ref: '#/components/schemas/_shared_res_RokwireToken'
+        params:
+          type:
+          - object
+          - 'null'
+          anyOf:
+          - $ref: '#/components/schemas/_shared_res_ParamsOIDC'
+          - $ref: '#/components/schemas/_shared_res_ParamsAPIKey'
+          - $ref: '#/components/schemas/_shared_res_ParamsNone'
+    SupportedAuthTypes:
+      type: object
+      properties:
+        app_type_id:
+          type: string
+        supported_auth_types:
+          type: array
+          items:
+            $ref: '#/components/schemas/SupportedAuthType'
+    IdentityProviderSettings:
+      required:
+      - identity_provider_id
+      - user_identifier_field
+      type: object
+      properties:
+        identity_provider_id:
+          type: string
+        user_identifier_field:
+          type: string
+        external_id_fields:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+        first_name_field:
+          type: string
+        middle_name_field:
+          type: string
+        last_name_field:
+          type: string
+        email_field:
+          type: string
+        ferpa_field:
+          type: string
+        roles_field:
+          type: string
+        groups_field:
+          type: string
+        user_specific_fields:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        roles:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+        groups:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+        always_sync_profile:
+          type: boolean
+        identity_bb_base_url:
+          type: string
+        identity_bb_profile_fields:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+        admin_app_access_roles:
+          type: array
+          items:
+            type: string
+    SupportedAuthType:
+      type: object
+      properties:
+        auth_type_id:
+          type: string
+        params:
+          type:
+          - object
+          - 'null'
+          additionalProperties: true
+    _shared_res_AccountCheck:
+      type: boolean
+    _services_req_credential_send-verify:
+      required:
+      - auth_type
+      - app_type_identifier
+      - org_id
+      - api_key
+      - identifier
+      type: object
+      properties:
+        identifier:
+          type: string
+        org_id:
+          type: string
+        api_key:
+          type: string
+        app_type_identifier:
+          type: string
+        auth_type:
+          type: string
+          enum:
+          - email
     PublicAccount:
       required:
       - id
@@ -2209,304 +2222,38 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PublicAccountIdentifier'
-    _shared_req_ParamsSetEmailCredential:
-      required:
-      - new_password
-      - confirm_password
+    _shared_req_ParamsEmail:
       type: object
+      description: Auth login params for auth_type="email"
       properties:
-        new_password:
-          type: string
         confirm_password:
           type: string
-    InactiveExpirePolicy:
-      type: object
-      required:
-      - active
-      - inactivity_period
-      properties:
-        active:
+          description: This should match the `creds` password field when sign_up=true. This should be verified on the client side as well to reduce invalid requests.
+        sign_up:
           type: boolean
-        inactivity_period:
-          type: integer
-    AppOrgGroup:
-      required:
-      - id
-      - name
-      type: object
+    PrivacyNullable:
+      type:
+      - object
+      - 'null'
       properties:
-        id:
-          type: string
-          readOnly: true
-        name:
-          type: string
-        description:
-          type: string
-        system:
-          type: boolean
-        date_created:
-          type: string
-        date_updated:
-          type: string
-        application:
-          $ref: '#/components/schemas/Application'
-        permissions:
-          type: array
-          items:
-            $ref: '#/components/schemas/Permission'
-        roles:
-          type: array
-          items:
-            $ref: '#/components/schemas/AppOrgRole'
-    RefreshGracePeriodPolicy:
-      type: object
+        public:
+          type:
+          - boolean
+          - 'null'
+        field_visibility:
+          type:
+          - object
+          - 'null'
+          additionalProperties: true
+    PublicAccountIdentifier:
       required:
-      - active
-      - grace_period
-      properties:
-        active:
-          type: boolean
-        grace_period:
-          type: integer
-    _services_req_credential_send-verify:
-      required:
-      - auth_type
-      - app_type_identifier
-      - org_id
-      - api_key
+      - code
       - identifier
       type: object
       properties:
-        identifier:
-          type: string
-        org_id:
-          type: string
-        api_key:
-          type: string
-        app_type_identifier:
-          type: string
-        auth_type:
-          type: string
-          enum:
-          - email
-    _shared_res_Mfa:
-      type: object
-      properties:
-        type:
-          type: string
-        verified:
-          type: boolean
-        params:
-          type: object
-    _shared_req_DeleteAccount:
-      required:
-      - app_id
-      type: object
-      properties:
-        app_id:
-          writeOnly: true
-          type: string
-        context:
-          type: object
-    Profile:
-      required:
-      - id
-      type: object
-      properties:
-        id:
-          readOnly: true
-          type: string
-        photo_url:
-          type: string
-        pronunciation_url:
-          type: string
-        pronouns:
-          type: string
-        first_name:
-          type: string
-        last_name:
-          type: string
-        email:
-          type: string
-          nullable: true
-        phone:
-          type: string
-          nullable: true
-        birth_year:
-          type: integer
-          nullable: true
-        address:
-          type: string
-          nullable: true
-        address2:
-          type: string
-          nullable: true
-        po_box:
-          type: string
-          nullable: true
-        city:
-          type: string
-          nullable: true
-        zip_code:
-          type: string
-          nullable: true
-        state:
-          type: string
-          nullable: true
-        country:
-          type: string
-          nullable: true
-        website:
-          type: string
-        unstructured_properties:
-          type: object
-          nullable: true
-    _services_res_authorize-service:
-      type: object
-      properties:
-        access_token:
-          type: string
-        token_type:
-          description: The type of the provided tokens to be specified when they are sent in the "Authorization" header
-          type: string
-          enum:
-          - Bearer
-        approved_scopes:
-          type: array
-          items:
-            type: string
-        service_reg:
-          $ref: '#/components/schemas/ServiceReg'
-    _shared_res_Login_Mfa:
-      required:
-      - enrolled
-      - account_id
-      - session_id
-      - state
-      type: object
-      properties:
-        enrolled:
-          type: array
-          items:
-            $ref: '#/components/schemas/_shared_res_Mfa'
-        account_id:
-          type: string
-        session_id:
-          type: string
-        state:
-          type: string
-        params:
-          type: object
-          nullable: true
-          anyOf:
-          - $ref: '#/components/schemas/_shared_res_ParamsOIDC'
-          - $ref: '#/components/schemas/_shared_res_ParamsAPIKey'
-          - $ref: '#/components/schemas/_shared_res_ParamsNone'
-    _shared_res_Refresh:
-      type: object
-      properties:
-        token:
-          $ref: '#/components/schemas/_shared_res_RokwireToken'
-        params:
-          type: object
-          nullable: true
-          anyOf:
-          - $ref: '#/components/schemas/_shared_res_ParamsOIDC'
-          - $ref: '#/components/schemas/_shared_res_ParamsAPIKey'
-          - $ref: '#/components/schemas/_shared_res_ParamsNone'
-    _shared_req_UpdateAccount:
-      required:
-      - auth_type
-      - identifier
-      type: object
-      properties:
-        auth_type:
-          type: string
-          enum:
-          - email
-          - illinois_oidc
-        identifier:
-          type: string
-        permissions:
-          type: array
-          items:
-            type: string
-        role_ids:
-          type: array
-          items:
-            type: string
-        group_ids:
-          type: array
-          items:
-            type: string
-        scopes:
-          type: array
-          items:
-            type: string
-    _shared_res_ParamsNone:
-      type: object
-      description: Auth login response params for unlisted auth_types (None)
-      nullable: true
-    _services_res_account_auth-type-link:
-      required:
-      - auth_types
-      type: object
-      properties:
-        message:
-          type: string
-          nullable: true
-        auth_types:
-          type: array
-          items:
-            $ref: '#/components/schemas/AccountAuthType'
-    _shared_req_app-configs:
-      required:
-      - app_type_identifier
-      - version
-      - api_key
-      type: object
-      properties:
-        app_type_identifier:
-          type: string
-        version:
-          type: string
-          description: conforms major.minor.patch format
-        api_key:
-          type: string
-    _shared_req_AccountCheck:
-      required:
-      - auth_type
-      - app_type_identifier
-      - org_id
-      - api_key
-      - user_identifier
-      type: object
-      properties:
-        auth_type:
-          type: string
-          enum:
-          - username
-          - email
-          - twilio_phone
-          - illinois_oidc
-          - anonymous
-        app_type_identifier:
-          type: string
-        org_id:
-          type: string
-        api_key:
-          type: string
-        user_identifier:
-          type: string
-    _shared_req_CredsTwilioPhone:
-      type: object
-      description: Auth login creds for auth_type="twilio_phone"
-      required:
-      - phone
-      properties:
-        phone:
-          type: string
         code:
+          type: string
+        identifier:
           type: string
     Follow:
       required:
@@ -2523,712 +2270,6 @@ components:
         follower_id:
           readOnly: true
           type: string
-    _services_req_authorize-service:
-      required:
-      - service_id
-      type: object
-      properties:
-        service_id:
-          type: string
-        approved_scopes:
-          description: Scopes to be granted to this service in this and future tokens. Replaces existing scopes if present.
-          type: array
-          items:
-            type: string
-    _services_req_account_auth-type-link:
-      required:
-      - auth_type
-      - app_type_identifier
-      - creds
-      type: object
-      properties:
-        auth_type:
-          type: string
-          enum:
-          - email
-          - twilio_phone
-          - illinois_oidc
-          - username
-        app_type_identifier:
-          type: string
-        creds:
-          anyOf:
-          - $ref: '#/components/schemas/_shared_req_CredsEmail'
-          - $ref: '#/components/schemas/_shared_req_CredsTwilioPhone'
-          - $ref: '#/components/schemas/_shared_req_CredsOIDC'
-        params:
-          type: object
-          anyOf:
-          - $ref: '#/components/schemas/_shared_req_ParamsEmail'
-          - $ref: '#/components/schemas/_shared_req_ParamsOIDC'
-          - $ref: '#/components/schemas/_shared_req_ParamsNone'
-    _shared_req_Refresh:
-      required:
-      - api_key
-      - refresh_token
-      type: object
-      properties:
-        api_key:
-          type: string
-        refresh_token:
-          type: string
-    _services_req_credential_forgot_initiate:
-      required:
-      - auth_type
-      - app_type_identifier
-      - org_id
-      - api_key
-      - identifier
-      type: object
-      properties:
-        auth_type:
-          type: string
-          enum:
-          - email
-        app_type_identifier:
-          type: string
-        org_id:
-          type: string
-        api_key:
-          type: string
-        identifier:
-          type: string
-    PrivacyNullable:
-      type: object
-      nullable: true
-      properties:
-        public:
-          type: boolean
-          nullable: true
-        field_visibility:
-          type: object
-          additionalProperties: true
-          nullable: true
-    _shared_req_app-configs-org:
-      required:
-      - app_type_identifier
-      - version
-      type: object
-      properties:
-        app_type_identifier:
-          type: string
-        version:
-          type: string
-          description: conforms major.minor.patch format
-    Device:
-      required:
-      - id
-      - type
-      type: object
-      properties:
-        id:
-          readOnly: true
-          type: string
-        device_id:
-          type: string
-          nullable: true
-        type:
-          type: string
-          enum:
-          - mobile
-          - web
-          - desktop
-          - other
-        os:
-          type: string
-    Username:
-      required:
-      - username
-      type: object
-      properties:
-        username:
-          type: string
-    _shared_req_ParamsEmail:
-      type: object
-      description: Auth login params for auth_type="email"
-      properties:
-        confirm_password:
-          type: string
-          description: This should match the `creds` password field when sign_up=true. This should be verified on the client side as well to reduce invalid requests.
-        sign_up:
-          type: boolean
-    SupportedAuthTypes:
-      type: object
-      properties:
-        app_type_id:
-          type: string
-        supported_auth_types:
-          type: array
-          items:
-            $ref: '#/components/schemas/SupportedAuthType'
-    _shared_req_ParamsNone:
-      type: object
-      description: Auth login request params for unlisted auth_types (None)
-      nullable: true
-    Account:
-      required:
-      - id
-      type: object
-      properties:
-        id:
-          readOnly: true
-          type: string
-        app_org:
-          $ref: '#/components/schemas/ApplicationOrganization'
-        username:
-          type: string
-        profile:
-          $ref: '#/components/schemas/Profile'
-        privacy:
-          $ref: '#/components/schemas/Privacy'
-        preferences:
-          type: object
-          nullable: true
-        system_configs:
-          type: object
-          nullable: true
-        anonymous:
-          type: boolean
-        verified:
-          type: boolean
-        system:
-          type: boolean
-        external_ids:
-          type: object
-          nullable: true
-        auth_types:
-          type: array
-          items:
-            $ref: '#/components/schemas/AccountAuthType'
-        permissions:
-          type: array
-          items:
-            $ref: '#/components/schemas/Permission'
-        roles:
-          type: array
-          items:
-            $ref: '#/components/schemas/AppOrgRole'
-        apps:
-          type: array
-          items:
-            $ref: '#/components/schemas/PartialApp'
-        groups:
-          type: array
-          items:
-            $ref: '#/components/schemas/AppOrgGroup'
-        scopes:
-          type: array
-          items:
-            type: string
-        devices:
-          type: array
-          items:
-            $ref: '#/components/schemas/Device'
-        last_login_date:
-          type: string
-        last_access_token_date:
-          type: string
-        most_recent_client_version:
-          type: string
-    YearlyExpirePolicy:
-      type: object
-      required:
-      - active
-      - day
-      - month
-      - hour
-      - min
-      properties:
-        active:
-          type: boolean
-        day:
-          type: integer
-        month:
-          type: integer
-        hour:
-          type: integer
-        min:
-          type: integer
-    ServiceScope:
-      required:
-      - scope
-      - required
-      type: object
-      properties:
-        scope:
-          type: string
-        required:
-          type: boolean
-        explanation:
-          description: Explanation displayed to users for why this scope is requested/required
-          type: string
-    Permission:
-      required:
-      - id
-      - name
-      type: object
-      properties:
-        id:
-          readOnly: true
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        service_id:
-          type: string
-        assigners:
-          type: array
-          items:
-            type: string
-        date_created:
-          type: string
-        date_updated:
-          type: string
-    Privacy:
-      type: object
-      properties:
-        public:
-          type: boolean
-          nullable: true
-        field_visibility:
-          type: object
-          additionalProperties: true
-          nullable: true
-    IdentityProviderSettings:
-      required:
-      - identity_provider_id
-      - user_identifier_field
-      type: object
-      properties:
-        identity_provider_id:
-          type: string
-        user_identifier_field:
-          type: string
-        external_id_fields:
-          type: object
-          additionalProperties:
-            type: string
-          nullable: true
-        first_name_field:
-          type: string
-        middle_name_field:
-          type: string
-        last_name_field:
-          type: string
-        email_field:
-          type: string
-        ferpa_field:
-          type: string
-        roles_field:
-          type: string
-        groups_field:
-          type: string
-        user_specific_fields:
-          type: array
-          items:
-            type: string
-          nullable: true
-        roles:
-          type: object
-          additionalProperties:
-            type: string
-          nullable: true
-        groups:
-          type: object
-          additionalProperties:
-            type: string
-          nullable: true
-        always_sync_profile:
-          type: boolean
-        identity_bb_base_url:
-          type: string
-        identity_bb_profile_fields:
-          type: object
-          additionalProperties:
-            type: string
-          nullable: true
-        admin_app_access_roles:
-          type: array
-          items:
-            type: string
-    PubKey:
-      required:
-      - key_pem
-      - alg
-      type: object
-      properties:
-        key_pem:
-          type: string
-        alg:
-          type: string
-    SupportedAuthType:
-      type: object
-      properties:
-        auth_type_id:
-          type: string
-        params:
-          type: object
-          additionalProperties: true
-          nullable: true
-    _shared_req_LoginUrl:
-      required:
-      - auth_type
-      - app_type_identifier
-      - org_id
-      - api_key
-      - redirect_uri
-      type: object
-      properties:
-        auth_type:
-          type: string
-          enum:
-          - illinois_oidc
-        app_type_identifier:
-          type: string
-        org_id:
-          type: string
-        api_key:
-          type: string
-        redirect_uri:
-          type: string
-    _shared_req_CreateAccount:
-      required:
-      - auth_type
-      - identifier
-      type: object
-      properties:
-        auth_type:
-          type: string
-          enum:
-          - email
-          - illinois_oidc
-        identifier:
-          type: string
-        permissions:
-          type: array
-          items:
-            type: string
-        role_ids:
-          type: array
-          items:
-            type: string
-        group_ids:
-          type: array
-          items:
-            type: string
-        scopes:
-          type: array
-          items:
-            type: string
-        profile:
-          $ref: '#/components/schemas/ProfileNullable'
-        privacy:
-          $ref: '#/components/schemas/PrivacyNullable'
-        username:
-          type: string
-          nullable: true
-    _shared_req_ParamsOIDC:
-      type: object
-      description: Auth login params for auth_type="oidc" (or variants)
-      properties:
-        redirect_uri:
-          type: string
-        pkce_verifier:
-          type: string
-    _shared_req_CredsAPIKey:
-      type: object
-      description: Auth login creds for auth_type="anonymous"
-      properties:
-        anonymous_id:
-          type: string
-    LoginSession:
-      type: object
-      properties:
-        id:
-          type: string
-        anonymous:
-          type: boolean
-        identifier:
-          type: string
-        auth_type_code:
-          type: string
-        app_org_id:
-          type: string
-        app_type_id:
-          type: string
-        app_type_identifier:
-          type: string
-        account_auth_type_id:
-          type: string
-        account_auth_type_identifier:
-          type: string
-        device_id:
-          type: string
-          nullable: true
-        ip_address:
-          type: string
-        refresh_tokens_count:
-          type: integer
-        state:
-          type: string
-        state_expires:
-          type: string
-          nullable: true
-        mfa_attempts:
-          type: integer
-        date_refreshed:
-          type: string
-          nullable: true
-        date_updated:
-          type: string
-          nullable: true
-        date_created:
-          type: string
-    _shared_res_ParamsAPIKey:
-      type: object
-      description: Auth login response params for auth_type="anonymous"
-      properties:
-        anonymous_id:
-          type: string
-    AppOrgRole:
-      required:
-      - id
-      - name
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        name:
-          type: string
-        description:
-          type: string
-        system:
-          type: boolean
-        date_created:
-          type: string
-        date_updated:
-          type: string
-        application:
-          $ref: '#/components/schemas/Application'
-        permissions:
-          type: array
-          items:
-            $ref: '#/components/schemas/Permission'
-        scopes:
-          type: array
-          items:
-            type: string
-    _services_res_accounts-public:
-      required:
-      - total
-      - counts
-      - accounts
-      type: object
-      properties:
-        total:
-          type: integer
-        counts:
-          type: object
-          additionalProperties:
-            type: integer
-        accounts:
-          type: array
-          items:
-            $ref: '#/components/schemas/PublicAccount'
-    _shared_req_Login_Mfa:
-      required:
-      - api_key
-      - account_id
-      - session_id
-      - state
-      - identifier
-      - type
-      - code
-      type: object
-      properties:
-        api_key:
-          type: string
-        account_id:
-          type: string
-        session_id:
-          type: string
-        state:
-          type: string
-        identifier:
-          type: string
-        type:
-          type: string
-          enum:
-          - email
-          - phone
-          - totp
-          - recovery
-        code:
-          type: string
-    _services_req_account_auth-type-unlink:
-      required:
-      - auth_type
-      - app_type_identifier
-      - identifier
-      type: object
-      properties:
-        auth_type:
-          type: string
-          enum:
-          - email
-          - twilio_phone
-          - illinois_oidc
-          - username
-        app_type_identifier:
-          type: string
-        identifier:
-          type: string
-    PartialApp:
-      required:
-      - id
-      - name
-      - code
-      type: object
-      properties:
-        id:
-          readOnly: true
-          type: string
-        name:
-          type: string
-        code:
-          type: string
-    PublicAccountIdentifier:
-      required:
-      - code
-      - identifier
-      type: object
-      properties:
-        code:
-          type: string
-        identifier:
-          type: string
-    ApplicationOrganization:
-      required:
-      - id
-      - app_id
-      - org_id
-      type: object
-      nullable: true
-      properties:
-        id:
-          readOnly: true
-          type: string
-        app_id:
-          type: string
-        org_id:
-          type: string
-        services_ids:
-          type: array
-          nullable: true
-          items:
-            type: string
-        identity_provider_settings:
-          type: array
-          nullable: true
-          items:
-            $ref: '#/components/schemas/IdentityProviderSettings'
-        supported_auth_types:
-          type: array
-          nullable: true
-          items:
-            $ref: '#/components/schemas/SupportedAuthTypes'
-        logins_session_settings:
-          $ref: '#/components/schemas/LoginSessionSettings'
-    _shared_res_RokwireToken:
-      type: object
-      properties:
-        access_token:
-          description: The user's access token to be provided to authorize access to ROKWIRE APIs
-          type: string
-        refresh_token:
-          description: A refresh token that can be used to get a new access token once the one provided expires
-          type: string
-        token_type:
-          description: The type of the provided tokens to be specified when they are sent in the "Authorization" header
-          type: string
-          enum:
-          - Bearer
-    _shared_req_CredsEmail:
-      required:
-      - email
-      - password
-      type: object
-      description: Auth login creds for auth_type="email"
-      properties:
-        email:
-          type: string
-        password:
-          type: string
-    _shared_req_Mfa:
-      required:
-      - identifier
-      - type
-      type: object
-      properties:
-        identifier:
-          type: string
-        type:
-          type: string
-          enum:
-          - email
-          - phone
-          - totp
-        code:
-          type: string
-    _services_req_credential_update:
-      required:
-      - account_auth_type_id
-      type: object
-      properties:
-        account_auth_type_id:
-          type: string
-        params:
-          type: object
-          anyOf:
-          - $ref: '#/components/schemas/_shared_req_ParamsSetEmailCredential'
-    _shared_res_Login:
-      type: object
-      properties:
-        token:
-          $ref: '#/components/schemas/_shared_res_RokwireToken'
-        account:
-          $ref: '#/components/schemas/Account'
-        params:
-          type: object
-          nullable: true
-          anyOf:
-          - $ref: '#/components/schemas/_shared_res_ParamsOIDC'
-          - $ref: '#/components/schemas/_shared_res_ParamsAPIKey'
-          - $ref: '#/components/schemas/_shared_res_ParamsNone'
-        message:
-          type: string
-    _shared_req_ParamsUsername:
-      type: object
-      description: Auth login params for auth_type="username"
-      properties:
-        confirm_password:
-          type: string
-          description: This should match the `creds` password field when sign_up=true. This should be verified on the client side as well to reduce invalid requests.
-        sign_up:
-          type: boolean
-    _shared_req_CredsUsername:
-      required:
-      - username
-      - password
-      type: object
-      description: Auth login creds for auth_type="username"
-      properties:
-        username:
-          type: string
-        password:
-          type: string
     LoginSessionSettings:
       type: object
       properties:
@@ -3242,58 +2283,79 @@ components:
           $ref: '#/components/schemas/YearlyExpirePolicy'
         refresh_grace_period_policy:
           $ref: '#/components/schemas/RefreshGracePeriodPolicy'
-    UserData:
-      type: object
-      properties:
-        account:
-          $ref: '#/components/schemas/Account'
-        login_sessions:
-          type: array
-          items:
-            $ref: '#/components/schemas/LoginSession'
-    TSLExpirePolicy:
+    RefreshGracePeriodPolicy:
       type: object
       required:
       - active
-      - time_since_login_period
+      - grace_period
       properties:
         active:
           type: boolean
-        time_since_login_period:
+        grace_period:
           type: integer
-    ServiceReg:
+    Username:
       required:
-      - service_id
-      - host
-      - name
-      - description
-      - first_party
+      - username
       type: object
-      description: Full service registration record
       properties:
-        service_id:
+        username:
           type: string
-        service_account_id:
+    _shared_res_LoginUrl:
+      required:
+      - login_url
+      type: object
+      properties:
+        login_url:
           type: string
-        host:
+        params:
+          type: object
+          description: Params to be submitted with 'login' request (if necessary)
+    ApplicationOrganization:
+      required:
+      - id
+      - app_id
+      - org_id
+      type:
+      - object
+      - 'null'
+      properties:
+        id:
+          readOnly: true
           type: string
-        pub_key:
-          $ref: '#/components/schemas/PubKey'
-        name:
+        app_id:
           type: string
-        description:
+        org_id:
           type: string
-        info_url:
-          type: string
-        logo_url:
-          type: string
-        scopes:
-          type: array
-          nullable: true
+        services_ids:
+          type:
+          - array
+          - 'null'
           items:
-            $ref: '#/components/schemas/ServiceScope'
-        first_party:
-          type: boolean
+            type: string
+        identity_provider_settings:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/IdentityProviderSettings'
+        supported_auth_types:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SupportedAuthTypes'
+        logins_session_settings:
+          $ref: '#/components/schemas/LoginSessionSettings'
+    _shared_req_Refresh:
+      required:
+      - api_key
+      - refresh_token
+      type: object
+      properties:
+        api_key:
+          type: string
+        refresh_token:
+          type: string
     PartialAccount:
       required:
       - id
@@ -3349,11 +2411,13 @@ components:
           items:
             $ref: '#/components/schemas/AccountAuthType'
         system_configs:
-          type: object
-          nullable: true
+          type:
+          - object
+          - 'null'
         params:
-          type: object
-          nullable: true
+          type:
+          - object
+          - 'null'
         anonymous:
           type: boolean
         privacy:
@@ -3364,11 +2428,235 @@ components:
           readOnly: true
           type: string
         date_updated:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         external_ids:
+          type:
+          - object
+          - 'null'
+    ApplicationType:
+      required:
+      - id
+      - identifier
+      type: object
+      properties:
+        id:
+          readOnly: true
+          type: string
+        identifier:
+          type: string
+        name:
+          type: string
+        versions:
+          type: array
+          items:
+            type: string
+    InactiveExpirePolicy:
+      type: object
+      required:
+      - active
+      - inactivity_period
+      properties:
+        active:
+          type: boolean
+        inactivity_period:
+          type: integer
+    _shared_res_Mfa:
+      type: object
+      properties:
+        type:
+          type: string
+        verified:
+          type: boolean
+        params:
           type: object
-          nullable: true
+    Device:
+      required:
+      - id
+      - type
+      type: object
+      properties:
+        id:
+          readOnly: true
+          type: string
+        device_id:
+          type:
+          - string
+          - 'null'
+        type:
+          type: string
+          enum:
+          - mobile
+          - web
+          - desktop
+          - other
+        os:
+          type: string
+    _shared_req_ParamsOIDC:
+      type: object
+      description: Auth login params for auth_type="oidc" (or variants)
+      properties:
+        redirect_uri:
+          type: string
+        pkce_verifier:
+          type: string
+    _services_res_authorize-service:
+      type: object
+      properties:
+        access_token:
+          type: string
+        token_type:
+          description: The type of the provided tokens to be specified when they are sent in the "Authorization" header
+          type: string
+          enum:
+          - Bearer
+        approved_scopes:
+          type: array
+          items:
+            type: string
+        service_reg:
+          $ref: '#/components/schemas/ServiceReg'
+    YearlyExpirePolicy:
+      type: object
+      required:
+      - active
+      - day
+      - month
+      - hour
+      - min
+      properties:
+        active:
+          type: boolean
+        day:
+          type: integer
+        month:
+          type: integer
+        hour:
+          type: integer
+        min:
+          type: integer
+    _shared_req_LoginUrl:
+      required:
+      - auth_type
+      - app_type_identifier
+      - org_id
+      - api_key
+      - redirect_uri
+      type: object
+      properties:
+        auth_type:
+          type: string
+          enum:
+          - illinois_oidc
+        app_type_identifier:
+          type: string
+        org_id:
+          type: string
+        api_key:
+          type: string
+        redirect_uri:
+          type: string
+    UserData:
+      type: object
+      properties:
+        account:
+          $ref: '#/components/schemas/Account'
+        login_sessions:
+          type: array
+          items:
+            $ref: '#/components/schemas/LoginSession'
+    _shared_req_CredsUsername:
+      required:
+      - username
+      - password
+      type: object
+      description: Auth login creds for auth_type="username"
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+    _services_req_authorize-service:
+      required:
+      - service_id
+      type: object
+      properties:
+        service_id:
+          type: string
+        approved_scopes:
+          description: Scopes to be granted to this service in this and future tokens. Replaces existing scopes if present.
+          type: array
+          items:
+            type: string
+    _services_res_accounts-public:
+      required:
+      - total
+      - counts
+      - accounts
+      type: object
+      properties:
+        total:
+          type: integer
+        counts:
+          type: object
+          additionalProperties:
+            type: integer
+        accounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublicAccount'
+    AccountAuthType:
+      required:
+      - id
+      - code
+      - identifier
+      type: object
+      properties:
+        id:
+          type: string
+        code:
+          type: string
+        identifier:
+          type: string
+        params:
+          type:
+          - object
+          - 'null'
+          additionalProperties: true
+        active:
+          type: boolean
+        unverified:
+          type: boolean
+    _shared_req_UpdateAccount:
+      required:
+      - auth_type
+      - identifier
+      type: object
+      properties:
+        auth_type:
+          type: string
+          enum:
+          - email
+          - illinois_oidc
+        identifier:
+          type: string
+        permissions:
+          type: array
+          items:
+            type: string
+        role_ids:
+          type: array
+          items:
+            type: string
+        group_ids:
+          type: array
+          items:
+            type: string
+        scopes:
+          type: array
+          items:
+            type: string
     Application:
       required:
       - id
@@ -3393,63 +2681,853 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ApplicationType'
-    _shared_res_AccountCheck:
-      type: boolean
-    ProfileNullable:
+    Permission:
+      required:
+      - id
+      - name
       type: object
-      nullable: true
       properties:
-        photo_url:
+        id:
+          readOnly: true
           type: string
-          nullable: true
-        pronunciation_url:
+        name:
           type: string
-          nullable: true
-        pronouns:
+        description:
           type: string
-          nullable: true
-        first_name:
+        service_id:
           type: string
-          nullable: true
-        last_name:
+        assigners:
+          type: array
+          items:
+            type: string
+        date_created:
           type: string
-          nullable: true
-        email:
+        date_updated:
           type: string
-          nullable: true
+    _shared_req_ParamsUsername:
+      type: object
+      description: Auth login params for auth_type="username"
+      properties:
+        confirm_password:
+          type: string
+          description: This should match the `creds` password field when sign_up=true. This should be verified on the client side as well to reduce invalid requests.
+        sign_up:
+          type: boolean
+    _shared_req_app-configs:
+      required:
+      - app_type_identifier
+      - version
+      - api_key
+      type: object
+      properties:
+        app_type_identifier:
+          type: string
+        version:
+          type: string
+          description: conforms major.minor.patch format
+        api_key:
+          type: string
+    _services_req_credential_update:
+      required:
+      - account_auth_type_id
+      type: object
+      properties:
+        account_auth_type_id:
+          type: string
+        params:
+          type: object
+          anyOf:
+          - $ref: '#/components/schemas/_shared_req_ParamsSetEmailCredential'
+    _shared_req_CredsTwilioPhone:
+      type: object
+      description: Auth login creds for auth_type="twilio_phone"
+      required:
+      - phone
+      properties:
         phone:
           type: string
-          nullable: true
+        code:
+          type: string
+    _shared_req_Login:
+      required:
+      - auth_type
+      - app_type_identifier
+      - org_id
+      - api_key
+      - device
+      type: object
+      properties:
+        auth_type:
+          type: string
+          enum:
+          - email
+          - twilio_phone
+          - illinois_oidc
+          - anonymous
+          - username
+        app_type_identifier:
+          type: string
+        org_id:
+          type: string
+        api_key:
+          type: string
+        creds:
+          anyOf:
+          - $ref: '#/components/schemas/_shared_req_CredsEmail'
+          - $ref: '#/components/schemas/_shared_req_CredsTwilioPhone'
+          - $ref: '#/components/schemas/_shared_req_CredsOIDC'
+          - $ref: '#/components/schemas/_shared_req_CredsAPIKey'
+          - $ref: '#/components/schemas/_shared_req_CredsUsername'
+        params:
+          type: object
+          anyOf:
+          - $ref: '#/components/schemas/_shared_req_ParamsEmail'
+          - $ref: '#/components/schemas/_shared_req_ParamsOIDC'
+          - $ref: '#/components/schemas/_shared_req_ParamsNone'
+          - $ref: '#/components/schemas/_shared_req_ParamsUsername'
+        device:
+          $ref: '#/components/schemas/Device'
+        profile:
+          $ref: '#/components/schemas/ProfileNullable'
+        privacy:
+          $ref: '#/components/schemas/PrivacyNullable'
+        preferences:
+          type:
+          - object
+          - 'null'
+        username:
+          type:
+          - string
+          - 'null'
+    AppOrgGroup:
+      required:
+      - id
+      - name
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        name:
+          type: string
+        description:
+          type: string
+        system:
+          type: boolean
+        date_created:
+          type: string
+        date_updated:
+          type: string
+        application:
+          $ref: '#/components/schemas/Application'
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/AppOrgRole'
+    _shared_req_Mfa:
+      required:
+      - identifier
+      - type
+      type: object
+      properties:
+        identifier:
+          type: string
+        type:
+          type: string
+          enum:
+          - email
+          - phone
+          - totp
+        code:
+          type: string
+    ProfileNullable:
+      type:
+      - object
+      - 'null'
+      properties:
+        photo_url:
+          type:
+          - string
+          - 'null'
+        pronunciation_url:
+          type:
+          - string
+          - 'null'
+        pronouns:
+          type:
+          - string
+          - 'null'
+        first_name:
+          type:
+          - string
+          - 'null'
+        last_name:
+          type:
+          - string
+          - 'null'
+        email:
+          type:
+          - string
+          - 'null'
+        phone:
+          type:
+          - string
+          - 'null'
         birth_year:
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
         address:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         address2:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         po_box:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         city:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         zip_code:
+          type:
+          - string
+          - 'null'
+        state:
+          type:
+          - string
+          - 'null'
+        country:
+          type:
+          - string
+          - 'null'
+        website:
+          type:
+          - string
+          - 'null'
+        unstructured_properties:
+          type:
+          - object
+          - 'null'
+    _shared_req_AccountCheck:
+      required:
+      - auth_type
+      - app_type_identifier
+      - org_id
+      - api_key
+      - user_identifier
+      type: object
+      properties:
+        auth_type:
           type: string
-          nullable: true
+          enum:
+          - username
+          - email
+          - twilio_phone
+          - illinois_oidc
+          - anonymous
+        app_type_identifier:
+          type: string
+        org_id:
+          type: string
+        api_key:
+          type: string
+        user_identifier:
+          type: string
+    _shared_req_CredsEmail:
+      required:
+      - email
+      - password
+      type: object
+      description: Auth login creds for auth_type="email"
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+    _shared_req_CredsAPIKey:
+      type: object
+      description: Auth login creds for auth_type="anonymous"
+      properties:
+        anonymous_id:
+          type: string
+    _shared_req_CredsOIDC:
+      type: string
+      description: "Auth login creds for auth_type=\"oidc\" (or variants)\n  - full redirect URI received from OIDC provider\n"
+    Account:
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          readOnly: true
+          type: string
+        app_org:
+          $ref: '#/components/schemas/ApplicationOrganization'
+        username:
+          type: string
+        profile:
+          $ref: '#/components/schemas/Profile'
+        privacy:
+          $ref: '#/components/schemas/Privacy'
+        preferences:
+          type:
+          - object
+          - 'null'
+        system_configs:
+          type:
+          - object
+          - 'null'
+        anonymous:
+          type: boolean
+        verified:
+          type: boolean
+        system:
+          type: boolean
+        external_ids:
+          type:
+          - object
+          - 'null'
+        auth_types:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccountAuthType'
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/AppOrgRole'
+        apps:
+          type: array
+          items:
+            $ref: '#/components/schemas/PartialApp'
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/AppOrgGroup'
+        scopes:
+          type: array
+          items:
+            type: string
+        devices:
+          type: array
+          items:
+            $ref: '#/components/schemas/Device'
+        last_login_date:
+          type: string
+        last_access_token_date:
+          type: string
+        most_recent_client_version:
+          type: string
+    PubKey:
+      required:
+      - key_pem
+      - alg
+      type: object
+      properties:
+        key_pem:
+          type: string
+        alg:
+          type: string
+    _shared_res_Login_Mfa:
+      required:
+      - enrolled
+      - account_id
+      - session_id
+      - state
+      type: object
+      properties:
+        enrolled:
+          type: array
+          items:
+            $ref: '#/components/schemas/_shared_res_Mfa'
+        account_id:
+          type: string
+        session_id:
+          type: string
         state:
           type: string
-          nullable: true
-        country:
+        params:
+          type:
+          - object
+          - 'null'
+          anyOf:
+          - $ref: '#/components/schemas/_shared_res_ParamsOIDC'
+          - $ref: '#/components/schemas/_shared_res_ParamsAPIKey'
+          - $ref: '#/components/schemas/_shared_res_ParamsNone'
+    _shared_req_ParamsSetEmailCredential:
+      required:
+      - new_password
+      - confirm_password
+      type: object
+      properties:
+        new_password:
           type: string
-          nullable: true
+        confirm_password:
+          type: string
+    _services_req_account_auth-type-unlink:
+      required:
+      - auth_type
+      - app_type_identifier
+      - identifier
+      type: object
+      properties:
+        auth_type:
+          type: string
+          enum:
+          - email
+          - twilio_phone
+          - illinois_oidc
+          - username
+        app_type_identifier:
+          type: string
+        identifier:
+          type: string
+    ServiceReg:
+      required:
+      - service_id
+      - host
+      - name
+      - description
+      - first_party
+      type: object
+      description: Full service registration record
+      properties:
+        service_id:
+          type: string
+        service_account_id:
+          type: string
+        host:
+          type: string
+        pub_key:
+          $ref: '#/components/schemas/PubKey'
+        name:
+          type: string
+        description:
+          type: string
+        info_url:
+          type: string
+        logo_url:
+          type: string
+        scopes:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ServiceScope'
+        first_party:
+          type: boolean
+    _shared_res_RokwireToken:
+      type: object
+      properties:
+        access_token:
+          description: The user's access token to be provided to authorize access to ROKWIRE APIs
+          type: string
+        refresh_token:
+          description: A refresh token that can be used to get a new access token once the one provided expires
+          type: string
+        token_type:
+          description: The type of the provided tokens to be specified when they are sent in the "Authorization" header
+          type: string
+          enum:
+          - Bearer
+    _shared_req_app-configs-org:
+      required:
+      - app_type_identifier
+      - version
+      type: object
+      properties:
+        app_type_identifier:
+          type: string
+        version:
+          type: string
+          description: conforms major.minor.patch format
+    ApplicationConfig:
+      required:
+      - id
+      - app_type_id
+      - version
+      - data
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        app_type_id:
+          type: string
+        org_id:
+          type: string
+        version:
+          type: string
+          description: conforms major.minor.patch format
+        data:
+          type: object
+    _shared_res_ParamsNone:
+      type:
+      - object
+      - 'null'
+      description: Auth login response params for unlisted auth_types (None)
+    ServiceScope:
+      required:
+      - scope
+      - required
+      type: object
+      properties:
+        scope:
+          type: string
+        required:
+          type: boolean
+        explanation:
+          description: Explanation displayed to users for why this scope is requested/required
+          type: string
+    _services_req_credential_forgot_complete:
+      required:
+      - credential_id
+      - reset_code
+      type: object
+      properties:
+        credential_id:
+          type: string
+        reset_code:
+          type: string
+        params:
+          type: object
+          anyOf:
+          - $ref: '#/components/schemas/_shared_req_ParamsSetEmailCredential'
+    _shared_req_DeleteAccount:
+      required:
+      - app_id
+      type: object
+      properties:
+        app_id:
+          writeOnly: true
+          type: string
+        context:
+          type: object
+    Profile:
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          readOnly: true
+          type: string
+        photo_url:
+          type: string
+        pronunciation_url:
+          type: string
+        pronouns:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type:
+          - string
+          - 'null'
+        phone:
+          type:
+          - string
+          - 'null'
+        birth_year:
+          type:
+          - integer
+          - 'null'
+        address:
+          type:
+          - string
+          - 'null'
+        address2:
+          type:
+          - string
+          - 'null'
+        po_box:
+          type:
+          - string
+          - 'null'
+        city:
+          type:
+          - string
+          - 'null'
+        zip_code:
+          type:
+          - string
+          - 'null'
+        state:
+          type:
+          - string
+          - 'null'
+        country:
+          type:
+          - string
+          - 'null'
         website:
           type: string
-          nullable: true
         unstructured_properties:
+          type:
+          - object
+          - 'null'
+    _shared_res_ParamsOIDC:
+      type: object
+      description: Auth login response params for auth_type="oidc" (or variants)
+      properties:
+        oidc_token:
           type: object
-          nullable: true
+          properties:
+            id_token:
+              type: string
+            access_token:
+              type: string
+            refresh_token:
+              type: string
+            token_type:
+              type: string
+        redirect_uri:
+          type: string
+    PartialApp:
+      required:
+      - id
+      - name
+      - code
+      type: object
+      properties:
+        id:
+          readOnly: true
+          type: string
+        name:
+          type: string
+        code:
+          type: string
+    _shared_res_ParamsAPIKey:
+      type: object
+      description: Auth login response params for auth_type="anonymous"
+      properties:
+        anonymous_id:
+          type: string
+    _shared_req_Login_Mfa:
+      required:
+      - api_key
+      - account_id
+      - session_id
+      - state
+      - identifier
+      - type
+      - code
+      type: object
+      properties:
+        api_key:
+          type: string
+        account_id:
+          type: string
+        session_id:
+          type: string
+        state:
+          type: string
+        identifier:
+          type: string
+        type:
+          type: string
+          enum:
+          - email
+          - phone
+          - totp
+          - recovery
+        code:
+          type: string
+    _shared_res_Login:
+      type: object
+      properties:
+        token:
+          $ref: '#/components/schemas/_shared_res_RokwireToken'
+        account:
+          $ref: '#/components/schemas/Account'
+        params:
+          type:
+          - object
+          - 'null'
+          anyOf:
+          - $ref: '#/components/schemas/_shared_res_ParamsOIDC'
+          - $ref: '#/components/schemas/_shared_res_ParamsAPIKey'
+          - $ref: '#/components/schemas/_shared_res_ParamsNone'
+        message:
+          type: string
+    _shared_req_CreateAccount:
+      required:
+      - auth_type
+      - identifier
+      type: object
+      properties:
+        auth_type:
+          type: string
+          enum:
+          - email
+          - illinois_oidc
+        identifier:
+          type: string
+        permissions:
+          type: array
+          items:
+            type: string
+        role_ids:
+          type: array
+          items:
+            type: string
+        group_ids:
+          type: array
+          items:
+            type: string
+        scopes:
+          type: array
+          items:
+            type: string
+        profile:
+          $ref: '#/components/schemas/ProfileNullable'
+        privacy:
+          $ref: '#/components/schemas/PrivacyNullable'
+        username:
+          type:
+          - string
+          - 'null'
+    AppOrgRole:
+      required:
+      - id
+      - name
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        name:
+          type: string
+        description:
+          type: string
+        system:
+          type: boolean
+        date_created:
+          type: string
+        date_updated:
+          type: string
+        application:
+          $ref: '#/components/schemas/Application'
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        scopes:
+          type: array
+          items:
+            type: string
+    LoginSession:
+      type: object
+      properties:
+        id:
+          type: string
+        anonymous:
+          type: boolean
+        identifier:
+          type: string
+        auth_type_code:
+          type: string
+        app_org_id:
+          type: string
+        app_type_id:
+          type: string
+        app_type_identifier:
+          type: string
+        account_auth_type_id:
+          type: string
+        account_auth_type_identifier:
+          type: string
+        device_id:
+          type:
+          - string
+          - 'null'
+        ip_address:
+          type: string
+        refresh_tokens_count:
+          type: integer
+        state:
+          type: string
+        state_expires:
+          type:
+          - string
+          - 'null'
+        mfa_attempts:
+          type: integer
+        date_refreshed:
+          type:
+          - string
+          - 'null'
+        date_updated:
+          type:
+          - string
+          - 'null'
+        date_created:
+          type: string
+    Privacy:
+      type: object
+      properties:
+        public:
+          type:
+          - boolean
+          - 'null'
+        field_visibility:
+          type:
+          - object
+          - 'null'
+          additionalProperties: true
+    _services_req_account_auth-type-link:
+      required:
+      - auth_type
+      - app_type_identifier
+      - creds
+      type: object
+      properties:
+        auth_type:
+          type: string
+          enum:
+          - email
+          - twilio_phone
+          - illinois_oidc
+          - username
+        app_type_identifier:
+          type: string
+        creds:
+          anyOf:
+          - $ref: '#/components/schemas/_shared_req_CredsEmail'
+          - $ref: '#/components/schemas/_shared_req_CredsTwilioPhone'
+          - $ref: '#/components/schemas/_shared_req_CredsOIDC'
+        params:
+          type: object
+          anyOf:
+          - $ref: '#/components/schemas/_shared_req_ParamsEmail'
+          - $ref: '#/components/schemas/_shared_req_ParamsOIDC'
+          - $ref: '#/components/schemas/_shared_req_ParamsNone'
+    _services_res_account_auth-type-link:
+      required:
+      - auth_types
+      type: object
+      properties:
+        message:
+          type:
+          - string
+          - 'null'
+        auth_types:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccountAuthType'
   securitySchemes:
     bearerAuth:
       type: http

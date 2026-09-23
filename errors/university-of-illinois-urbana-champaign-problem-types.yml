@@ -1,0 +1,71 @@
+generated: '2026-08-19'
+method: derived
+source: >-
+  openapi/_original/university-of-illinois-urbana-champaign-rokwire-core.yaml,
+  openapi/_original/university-of-illinois-urbana-champaign-rokwire-gateway.yaml
+probes:
+- url: https://api.rokwire.illinois.edu/gateway/api/wayfinding/buildings
+  status: 401
+  content_type: application/json; charset=utf-8
+  body: '{"message":"Error validating request: error validating token","status":"unauthorized"}'
+- url: https://api.rokwire.illinois.edu/core/services/account
+  status: 401
+  content_type: application/json; charset=utf-8
+  body: '{"message":"Error validating request: error validating token","status":"unauthorized"}'
+- url: https://api.rokwire.illinois.edu/core/admin/organizations
+  status: 404
+  content_type: text/plain; charset=utf-8
+  body: 404 page not found
+operator: institution
+format: rokwire-error-envelope
+rfc9457: false
+note: >-
+  Rokwire does NOT use RFC 9457 application/problem+json. Live errors carry a small local envelope
+  with two fields, message and status. The bigger ergonomic gap is not the envelope but the
+  DOCUMENTATION of it: both OpenAPI documents declare 400/401/500 on nearly every operation with a
+  one-word description and no response schema, so a client cannot tell the failure modes apart
+  ahead of time. 46 of 151 Core response bodies and 8 of 45 Gateway response bodies are declared
+  text/plain rather than JSON.
+envelope:
+  content_type: application/json; charset=utf-8
+  fields:
+    message: free-text description of what failed
+    status: a short machine token — 'unauthorized' observed
+  example:
+    message: 'Error validating request: error validating token'
+    status: unauthorized
+  schema_declared_in_openapi: false
+status_codes:
+- status: 400
+  meaning: Bad request — malformed body, missing required field, invalid parameter
+  retryable: false
+  operations_declaring_core: 146
+  operations_declaring_gateway: 43
+- status: 401
+  meaning: Unauthorized — missing, expired or unverifiable bearer JWT
+  retryable: false
+  operations_declaring_core: 146
+  operations_declaring_gateway: 44
+- status: 403
+  meaning: Forbidden — the token is valid but lacks the permission, role or scope required
+  retryable: false
+  operations_declaring_core: 6
+  operations_declaring_gateway: 3
+- status: 404
+  meaning: >-
+    Not found. Also returned by the Go router as text/plain "404 page not found" for any path the
+    building block does not serve — which is how a slice pointed at the wrong base URL fails.
+  retryable: false
+  operations_declaring_core: 9
+  operations_declaring_gateway: 8
+- status: 500
+  meaning: Internal error
+  retryable: true
+  operations_declaring_core: 146
+  operations_declaring_gateway: 45
+gaps:
+- No error response schema is declared anywhere in either OpenAPI — every non-200 response is
+  described in prose only.
+- No error code taxonomy, no correlation/request id in the envelope, no Retry-After.
+- 403 is declared on only 6 of 151 Core operations despite a permission/role/scope model that can
+  produce it on nearly all of them.

@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Rokwire Core Building Block Admin UI API
+  title: Rokwire Core Building Block UI API
   description: Core Building Block API Documentation
   version: 1.62.0
 servers:
@@ -14,9 +14,7 @@ paths:
       tags:
       - UI
       summary: Display HTML password reset page
-      description: 'Serves an HTML page with password reset form
-
-        '
+      description: Serves an HTML page with password reset form
       parameters:
       - name: id
         in: query
@@ -43,14 +41,14 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getUiCredentialReset
+      x-operation-id-source: derived
   /ui/credential/verify:
     get:
       tags:
       - UI
       summary: Validate verification code
-      description: 'Validates verification code to verify account ownership and displays result in an HTML page
-
-        '
+      description: Validates verification code to verify account ownership and displays result in an HTML page
       parameters:
       - name: id
         in: query
@@ -77,6 +75,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal error
+      operationId: getUiCredentialVerify
+      x-operation-id-source: derived
 components:
   securitySchemes:
     bearerAuth:
