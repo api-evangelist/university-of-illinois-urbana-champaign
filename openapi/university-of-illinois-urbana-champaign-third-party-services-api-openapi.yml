@@ -366,72 +366,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    _services_req_service-accounts_access-token:
-      required:
-      - account_id
-      - app_id
-      - org_id
-      - auth_type
-      type: object
-      properties:
-        account_id:
-          type: string
-        app_id:
-          type: string
-        org_id:
-          type: string
-        auth_type:
-          type: string
-          enum:
-          - static_token
-          - signature
-        creds:
-          $ref: '#/components/schemas/_services_service-accounts_CredsStaticToken'
-    JWKS:
-      required:
-      - keys
-      type: object
-      description: JSON Web Key Set (JWKS)
-      properties:
-        keys:
-          type: array
-          items:
-            $ref: '#/components/schemas/JWK'
-    _services_res_service-accounts_access-tokens:
-      required:
-      - app_id
-      - org_id
-      - token
-      type: object
-      properties:
-        app_id:
-          type: string
-        org_id:
-          type: string
-        token:
-          $ref: '#/components/schemas/_shared_res_RokwireToken'
-    _services_req_service-accounts_params:
-      required:
-      - auth_type
-      type: object
-      properties:
-        auth_type:
-          type: string
-          enum:
-          - static_token
-          - signature
-        creds:
-          $ref: '#/components/schemas/_services_service-accounts_CredsStaticToken'
-    JWKParamsOKP:
-      type: object
-      description: JSON Web Key OKP parameters
-      properties:
-        crv:
-          type: string
-          description: The curve used with the key
-        x:
-          type: string
-          description: x coordinate of the key - Base64URL encoded
     JWK:
       type: object
       allOf:
@@ -484,6 +418,27 @@ components:
         e:
           type: string
           description: The exponent of the key - Base64URL encoded
+    _services_service-accounts_CredsStaticToken:
+      required:
+      - token
+      type: object
+      description: Service account token for auth_type="static_token"
+      properties:
+        token:
+          type: string
+    _services_res_service-accounts_access-tokens:
+      required:
+      - app_id
+      - org_id
+      - token
+      type: object
+      properties:
+        app_id:
+          type: string
+        org_id:
+          type: string
+        token:
+          $ref: '#/components/schemas/_shared_res_RokwireToken'
     _services_req_service-accounts_access-tokens:
       required:
       - account_id
@@ -499,6 +454,50 @@ components:
           - signature
         creds:
           $ref: '#/components/schemas/_services_service-accounts_CredsStaticToken'
+    _services_req_service-accounts_access-token:
+      required:
+      - account_id
+      - app_id
+      - org_id
+      - auth_type
+      type: object
+      properties:
+        account_id:
+          type: string
+        app_id:
+          type: string
+        org_id:
+          type: string
+        auth_type:
+          type: string
+          enum:
+          - static_token
+          - signature
+        creds:
+          $ref: '#/components/schemas/_services_service-accounts_CredsStaticToken'
+    JWKParamsOKP:
+      type: object
+      description: JSON Web Key OKP parameters
+      properties:
+        crv:
+          type: string
+          description: The curve used with the key
+        x:
+          type: string
+          description: x coordinate of the key - Base64URL encoded
+    JWKParamsEC:
+      type: object
+      description: JSON Web Key EC parameters
+      properties:
+        crv:
+          type: string
+          description: The curve used with the key
+        x:
+          type: string
+          description: x coordinate of the key - Base64URL encoded
+        y:
+          type: string
+          description: y coordinate of the key - Base64URL encoded
     AuthServiceReg:
       required:
       - service_id
@@ -514,19 +513,18 @@ components:
           type: string
         pub_key:
           $ref: '#/components/schemas/PubKey'
-    JWKParamsEC:
+    _services_req_service-accounts_params:
+      required:
+      - auth_type
       type: object
-      description: JSON Web Key EC parameters
       properties:
-        crv:
+        auth_type:
           type: string
-          description: The curve used with the key
-        x:
-          type: string
-          description: x coordinate of the key - Base64URL encoded
-        y:
-          type: string
-          description: y coordinate of the key - Base64URL encoded
+          enum:
+          - static_token
+          - signature
+        creds:
+          $ref: '#/components/schemas/_services_service-accounts_CredsStaticToken'
     PubKey:
       required:
       - key_pem
@@ -536,24 +534,6 @@ components:
         key_pem:
           type: string
         alg:
-          type: string
-    AppOrgPair:
-      required:
-      - app_id
-      - org_id
-      type: object
-      properties:
-        app_id:
-          type: string
-        org_id:
-          type: string
-    _services_service-accounts_CredsStaticToken:
-      required:
-      - token
-      type: object
-      description: Service account token for auth_type="static_token"
-      properties:
-        token:
           type: string
     _shared_res_RokwireToken:
       type: object
@@ -569,6 +549,26 @@ components:
           type: string
           enum:
           - Bearer
+    AppOrgPair:
+      required:
+      - app_id
+      - org_id
+      type: object
+      properties:
+        app_id:
+          type: string
+        org_id:
+          type: string
+    JWKS:
+      required:
+      - keys
+      type: object
+      description: JSON Web Key Set (JWKS)
+      properties:
+        keys:
+          type: array
+          items:
+            $ref: '#/components/schemas/JWK'
   securitySchemes:
     bearerAuth:
       type: http

@@ -73,7 +73,7 @@ tags:
   - OAI-PMH
   - Library
   - Research Computing
-  - Open-Source
+  - Open Source
 tags_raw:
   - University
   - Higher Education
@@ -92,6 +92,7 @@ tags_raw:
   - Library
   - Research Computing
   - Open Source
+  - Open-Source
 created: '2026-06-03'
 modified: '2026-08-19'
 specificationVersion: '0.23'
@@ -157,7 +158,7 @@ apis:
   - Authorization
   - Account
   - Rokwire
-  - Open-Source
+  - Open Source
   tags_raw:
   - Identity
   - Authentication
@@ -165,6 +166,7 @@ apis:
   - Accounts
   - Rokwire
   - Open Source
+  - Open-Source
   properties:
   - type: OpenAPI
     url: openapi/university-of-illinois-urbana-champaign-services-api-openapi.yml
@@ -206,7 +208,7 @@ apis:
   - Integration
   - Buildings
   - Rokwire
-  - Open-Source
+  - Open Source
   tags_raw:
   - Wayfinding
   - Campus
@@ -214,6 +216,7 @@ apis:
   - Buildings
   - Rokwire
   - Open Source
+  - Open-Source
   properties:
   - type: OpenAPI
     url: openapi/university-of-illinois-urbana-champaign-client-api-openapi.yml
