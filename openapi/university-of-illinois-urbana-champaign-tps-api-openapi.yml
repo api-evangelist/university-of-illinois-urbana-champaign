@@ -111,60 +111,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    _tps_req_create-event-location:
-      type: object
-      properties:
-        description:
-          type: string
-        latitude:
-          type: number
-        longitude:
-          type: number
-        floor:
-          type: integer
-        address:
-          type: string
-        building:
-          type: string
-        room:
-          type: string
-    _tps_req_create-event-contact:
-      type: object
-      properties:
-        contact_name:
-          type: string
-        contact_email:
-          type: string
-        contact_phone:
-          type: string
-    Example:
-      type: object
-      required:
-      - id
-      - app_id
-      - org_id
-      - data
-      - date_created
-      properties:
-        id:
-          type: string
-          readOnly: true
-        org_id:
-          type: string
-          readOnly: true
-        app_id:
-          type: string
-          readOnly: true
-        data:
-          type: string
-        date_created:
-          type: string
-          readOnly: true
-        date_updated:
-          type:
-          - string
-          - 'null'
-          readOnly: true
     _tps_req_create-event:
       type: object
       properties:
@@ -220,6 +166,60 @@ components:
             type: string
         location:
           $ref: '#/components/schemas/_tps_req_create-event-location'
+    Example:
+      type: object
+      required:
+      - id
+      - app_id
+      - org_id
+      - data
+      - date_created
+      properties:
+        id:
+          type: string
+          readOnly: true
+        org_id:
+          type: string
+          readOnly: true
+        app_id:
+          type: string
+          readOnly: true
+        data:
+          type: string
+        date_created:
+          type: string
+          readOnly: true
+        date_updated:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+    _tps_req_create-event-contact:
+      type: object
+      properties:
+        contact_name:
+          type: string
+        contact_email:
+          type: string
+        contact_phone:
+          type: string
+    _tps_req_create-event-location:
+      type: object
+      properties:
+        description:
+          type: string
+        latitude:
+          type: number
+        longitude:
+          type: number
+        floor:
+          type: integer
+        address:
+          type: string
+        building:
+          type: string
+        room:
+          type: string
   securitySchemes:
     bearerAuth:
       type: http

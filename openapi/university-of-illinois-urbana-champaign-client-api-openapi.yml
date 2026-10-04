@@ -1024,402 +1024,30 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    LaundryRoom:
+    MachineRequestDetail:
       type: object
       required:
-      - ID
-      - Name
-      - Status
-      properties:
-        ID:
-          type: integer
-          readOnly: true
-        Name:
-          type: string
-          readOnly: true
-        Status:
-          type: string
-          readOnly: true
-        Location:
-          $ref: '#/components/schemas/LaundryDetails'
-    PhoneNumber:
-      type: object
-      required:
-      - AreaCode
-      - Number
-      properties:
-        AreaCode:
-          type: string
-          readOnly: true
-        Number:
-          type: string
-          readOnly: true
-    ServiceRequestResult:
-      type: object
-      required:
+      - MachineID
       - Message
-      - RequestNumber
-      - Status
+      - OpenIssue
+      - ProblemCodes
+      - MachineType
       properties:
+        MachineID:
+          type: string
+          readOnly: true
         Message:
           type: string
           readOnly: true
-        RequestNumber:
-          type: string
-          readOnly: true
-        Status:
-          type: string
-          readOnly: true
-    Entrance:
-      type: object
-      required:
-      - ID
-      - Name
-      - ADACompliant
-      - Available
-      - ImageURL
-      - Latitude
-      - Longitude
-      properties:
-        ID:
-          type: string
-          readOnly: true
-        Name:
-          type: string
-          readOnly: true
-        ADACopmliant:
+        OpenIssue:
           type: boolean
           readOnly: true
-        Available:
-          type: boolean
-        ImageUrl:
-          type: string
-          readOnly: true
-        Latitude:
-          type: number
-          readOnly: true
-        Longitude:
-          type: number
-          readOnly: true
-    FloorPlanMarker:
-      type: object
-      required:
-      - RenderID
-      - Label
-      - Description
-      - Display
-      - Icon
-      properties:
-        RenderID:
-          type: string
-          readOnly: true
-        Label:
-          type: string
-          readOnly: true
-        Description:
-          type: string
-          readOnly: true
-        Display:
-          type: string
-        Icon:
-          type: string
-          readOnly: true
-    LaundryDetails:
-      type: object
-      required:
-      - Latitude
-      - Longitude
-      - Floor
-      properties:
-        Latitude:
-          type: number
-          format: float
-          readOnly: true
-        Longitude:
-          type: number
-          format: float
-          readOnly: true
-        Floor:
-          type: integer
-          readOnly: true
-    SearchBuildingsResponse:
-      type: object
-      additionalProperties:
-        oneOf:
-        - $ref: '#/components/schemas/CompactBuilding'
-        - $ref: '#/components/schemas/Building'
-      description: "A map where keys are building names and values are either CompactBuilding objects (when v=1 or omitted) \nor Building objects (when v=2) \n"
-    Person:
-      type: object
-      required:
-      - uin
-      - FirstName
-      - LastName
-      - PreferredName
-      - MailingAddress
-      - PermAddress
-      - EmergencyContacts
-      properties:
-        uin:
-          type: string
-          readOnly: true
-        FirstName:
-          type: string
-          readOnly: true
-        LastName:
-          type: string
-          readOnly: true
-        PreferredName:
-          type: string
-          readOnly: true
-        MailingAddress:
-          $ref: '#/components/schemas/Address'
-        PermAddress:
-          $ref: '#/components/schemas/Address'
-        EmergencyContacts:
+        ProblemCodes:
           type: array
           items:
-            $ref: '#/components/schemas/EmergencyContact'
+            type: string
           readOnly: true
-    FloorPlan:
-      type: object
-      required:
-      - BuildingNumber
-      - BuildingFloor
-      - SVGEncoding
-      - SVG
-      - Markers
-      - Highlites
-      properties:
-        BuildingNumber:
-          type: string
-          readOnly: true
-        BuildingFloor:
-          type: string
-          readOnly: true
-        SVGEncoding:
-          type: string
-          readOnly: true
-        SVG:
-          type: string
-        Markers:
-          type: array
-          items:
-            $ref: '#/components/schemas/FloorPlanMarker'
-          readOnly: true
-        Features:
-          type: array
-          items:
-            $ref: '#/components/schemas/FloorPlanHighlite'
-          readOnly: true
-    FloorPlanHighlite:
-      type: object
-      required:
-      - RenderID
-      - Label
-      - Color
-      - Display
-      properties:
-        RenderID:
-          type: string
-          readOnly: true
-        Label:
-          type: string
-          readOnly: true
-        Color:
-          type: string
-          readOnly: true
-        Display:
-          type: string
-    Course:
-      type: object
-      required:
-      - coursetitle
-      - courseshortname
-      - coursenumber
-      - instructionmethod
-      - coursesection
-      properties:
-        coursetitle:
-          type: string
-          readOnly: true
-        courseshortname:
-          type: string
-          readOnly: true
-        coursenumber:
-          type: string
-          readOnly: true
-        instructionmethod:
-          type: string
-          readOnly: true
-        coursesection:
-          $ref: '#/components/schemas/CourseSection'
-    CompactBuilding:
-      type: object
-      required:
-      - ID
-      - Number
-      - Name
-      - FullAddress
-      - ImageURL
-      - Latitude
-      - Longitude
-      - ShortName
-      properties:
-        ID:
-          type: string
-          readOnly: true
-        Name:
-          type: string
-          readOnly: true
-        Number:
-          type: string
-          readOnly: true
-        FullAddress:
-          type: string
-          readOnly: true
-        ImageURL:
-          type: string
-          readOnly: true
-        Latitude:
-          type: number
-          readOnly: true
-        Longitude:
-          type: number
-          readOnly: true
-        Features:
-          type: array
-          items:
-            $ref: '#/components/schemas/BuildingFeatureLocation'
-          readOnly: true
-        ShortName:
-          type: string
-          readOnly: true
-    GiesCourse:
-      type: object
-      required:
-      - term
-      - subject
-      - number
-      - section
-      - title
-      - instructor
-      properties:
-        term:
-          type: string
-          readOnly: true
-        subject:
-          type: string
-          readOnly: true
-        number:
-          type: string
-          readOnly: true
-        section:
-          type: string
-          readOnly: true
-        title:
-          type: string
-          readOnly: true
-        instructor:
-          type: string
-          readOnly: true
-    CodeDescType:
-      type: object
-      required:
-      - Code
-      - Name
-      properties:
-        Code:
-          type: string
-          readOnly: true
-        Name:
-          type: string
-          readOnly: true
-    TermSession:
-      type: object
-      required:
-      - term
-      - termid
-      - is_current
-      properties:
-        term:
-          type: string
-          readOnly: true
-        termid:
-          type: string
-          readOnly: true
-        is_current:
-          type: boolean
-          readOnly: true
-    Example:
-      type: object
-      required:
-      - id
-      - app_id
-      - org_id
-      - data
-      - date_created
-      properties:
-        id:
-          type: string
-          readOnly: true
-        org_id:
-          type: string
-          readOnly: true
-        app_id:
-          type: string
-          readOnly: true
-        data:
-          type: string
-        date_created:
-          type: string
-          readOnly: true
-        date_updated:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-    Organization:
-      type: object
-      required:
-      - SchoolName
-      - LaundryRooms
-      properties:
-        SchoolName:
-          type: string
-          readOnly: true
-        LaundryRooms:
-          type: array
-          items:
-            $ref: '#/components/schemas/LaundryRoom'
-          readOnly: true
-    Appliance:
-      type: object
-      required:
-      - ID
-      - Status
-      - ApplianceType
-      - AverageCycleTime
-      - Label
-      properties:
-        ID:
-          type: string
-          readOnly: true
-        Status:
-          type: string
-          readOnly: true
-        ApplianceType:
-          type: string
-          readOnly: true
-        AverageCycleTime:
-          type: integer
-          readOnly: true
-        TimeRemaining:
-          type:
-          - integer
-          - 'null'
-          readOnly: true
-        Label:
+        MachineType:
           type: string
           readOnly: true
     Building:
@@ -1549,6 +1177,195 @@ components:
         course_section:
           type: string
           readOnly: true
+    Organization:
+      type: object
+      required:
+      - SchoolName
+      - LaundryRooms
+      properties:
+        SchoolName:
+          type: string
+          readOnly: true
+        LaundryRooms:
+          type: array
+          items:
+            $ref: '#/components/schemas/LaundryRoom'
+          readOnly: true
+    Example:
+      type: object
+      required:
+      - id
+      - app_id
+      - org_id
+      - data
+      - date_created
+      properties:
+        id:
+          type: string
+          readOnly: true
+        org_id:
+          type: string
+          readOnly: true
+        app_id:
+          type: string
+          readOnly: true
+        data:
+          type: string
+        date_created:
+          type: string
+          readOnly: true
+        date_updated:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+    Appliance:
+      type: object
+      required:
+      - ID
+      - Status
+      - ApplianceType
+      - AverageCycleTime
+      - Label
+      properties:
+        ID:
+          type: string
+          readOnly: true
+        Status:
+          type: string
+          readOnly: true
+        ApplianceType:
+          type: string
+          readOnly: true
+        AverageCycleTime:
+          type: integer
+          readOnly: true
+        TimeRemaining:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        Label:
+          type: string
+          readOnly: true
+    LaundryDetails:
+      type: object
+      required:
+      - Latitude
+      - Longitude
+      - Floor
+      properties:
+        Latitude:
+          type: number
+          format: float
+          readOnly: true
+        Longitude:
+          type: number
+          format: float
+          readOnly: true
+        Floor:
+          type: integer
+          readOnly: true
+    ServiceRequestResult:
+      type: object
+      required:
+      - Message
+      - RequestNumber
+      - Status
+      properties:
+        Message:
+          type: string
+          readOnly: true
+        RequestNumber:
+          type: string
+          readOnly: true
+        Status:
+          type: string
+          readOnly: true
+    Entrance:
+      type: object
+      required:
+      - ID
+      - Name
+      - ADACompliant
+      - Available
+      - ImageURL
+      - Latitude
+      - Longitude
+      properties:
+        ID:
+          type: string
+          readOnly: true
+        Name:
+          type: string
+          readOnly: true
+        ADACopmliant:
+          type: boolean
+          readOnly: true
+        Available:
+          type: boolean
+        ImageUrl:
+          type: string
+          readOnly: true
+        Latitude:
+          type: number
+          readOnly: true
+        Longitude:
+          type: number
+          readOnly: true
+    CodeDescType:
+      type: object
+      required:
+      - Code
+      - Name
+      properties:
+        Code:
+          type: string
+          readOnly: true
+        Name:
+          type: string
+          readOnly: true
+    CompactBuilding:
+      type: object
+      required:
+      - ID
+      - Number
+      - Name
+      - FullAddress
+      - ImageURL
+      - Latitude
+      - Longitude
+      - ShortName
+      properties:
+        ID:
+          type: string
+          readOnly: true
+        Name:
+          type: string
+          readOnly: true
+        Number:
+          type: string
+          readOnly: true
+        FullAddress:
+          type: string
+          readOnly: true
+        ImageURL:
+          type: string
+          readOnly: true
+        Latitude:
+          type: number
+          readOnly: true
+        Longitude:
+          type: number
+          readOnly: true
+        Features:
+          type: array
+          items:
+            $ref: '#/components/schemas/BuildingFeatureLocation'
+          readOnly: true
+        ShortName:
+          type: string
+          readOnly: true
     EmergencyContact:
       type: object
       required:
@@ -1571,6 +1388,248 @@ components:
           readOnly: true
         Address:
           $ref: '#/components/schemas/Address'
+    GiesCourse:
+      type: object
+      required:
+      - term
+      - subject
+      - number
+      - section
+      - title
+      - instructor
+      properties:
+        term:
+          type: string
+          readOnly: true
+        subject:
+          type: string
+          readOnly: true
+        number:
+          type: string
+          readOnly: true
+        section:
+          type: string
+          readOnly: true
+        title:
+          type: string
+          readOnly: true
+        instructor:
+          type: string
+          readOnly: true
+    FeatureMapEntry:
+      type: object
+      required:
+      - Name
+      - Floors
+      properties:
+        Name:
+          type: string
+          readOnly: true
+        Floors:
+          type: array
+          items:
+            type: string
+          readOnly: true
+    PhoneNumber:
+      type: object
+      required:
+      - AreaCode
+      - Number
+      properties:
+        AreaCode:
+          type: string
+          readOnly: true
+        Number:
+          type: string
+          readOnly: true
+    ServiceSubmission:
+      type: object
+      required:
+      - machineid
+      - problemcode
+      - firstname
+      - lastname
+      - email
+      properties:
+        machineid:
+          type: string
+          description: The unique service tag ID of the laundry machine
+        problemcode:
+          type: string
+          description: The problem code describing the issue with the machine
+        comments:
+          type:
+          - string
+          - 'null'
+          description: Additional comments about the problem (optional)
+        firstname:
+          type: string
+          description: First name of the person submitting the request
+        lastname:
+          type: string
+          description: Last name of the person submitting the request
+        phone:
+          type:
+          - string
+          - 'null'
+          description: Phone number of the person submitting the request (optional)
+        email:
+          type: string
+          format: email
+          description: Email address of the person submitting the request
+    TermSession:
+      type: object
+      required:
+      - term
+      - termid
+      - is_current
+      properties:
+        term:
+          type: string
+          readOnly: true
+        termid:
+          type: string
+          readOnly: true
+        is_current:
+          type: boolean
+          readOnly: true
+    RoomDetail:
+      type: object
+      required:
+      - NumWashers
+      - NumDryers
+      - Appliances
+      - RoomName
+      - CampusName
+      properties:
+        NumWashers:
+          type: integer
+          readOnly: true
+        NumDryers:
+          type: integer
+          readOnly: true
+        Appliances:
+          type: array
+          items:
+            $ref: '#/components/schemas/Appliance'
+          readOnly: true
+        RoomName:
+          type: string
+          readOnly: true
+        CampusName:
+          type: string
+          readOnly: true
+        Location:
+          $ref: '#/components/schemas/LaundryDetails'
+    SearchBuildingsResponse:
+      type: object
+      additionalProperties:
+        oneOf:
+        - $ref: '#/components/schemas/CompactBuilding'
+        - $ref: '#/components/schemas/Building'
+      description: "A map where keys are building names and values are either CompactBuilding objects (when v=1 or omitted) \nor Building objects (when v=2) \n"
+    BuildingFeatureLocation:
+      type: object
+      required:
+      - Key
+      - Value
+      properties:
+        Key:
+          type: string
+          readOnly: true
+        Value:
+          $ref: '#/components/schemas/FeatureMapEntry'
+    LaundryRoom:
+      type: object
+      required:
+      - ID
+      - Name
+      - Status
+      properties:
+        ID:
+          type: integer
+          readOnly: true
+        Name:
+          type: string
+          readOnly: true
+        Status:
+          type: string
+          readOnly: true
+        Location:
+          $ref: '#/components/schemas/LaundryDetails'
+    Course:
+      type: object
+      required:
+      - coursetitle
+      - courseshortname
+      - coursenumber
+      - instructionmethod
+      - coursesection
+      properties:
+        coursetitle:
+          type: string
+          readOnly: true
+        courseshortname:
+          type: string
+          readOnly: true
+        coursenumber:
+          type: string
+          readOnly: true
+        instructionmethod:
+          type: string
+          readOnly: true
+        coursesection:
+          $ref: '#/components/schemas/CourseSection'
+    FloorPlan:
+      type: object
+      required:
+      - BuildingNumber
+      - BuildingFloor
+      - SVGEncoding
+      - SVG
+      - Markers
+      - Highlites
+      properties:
+        BuildingNumber:
+          type: string
+          readOnly: true
+        BuildingFloor:
+          type: string
+          readOnly: true
+        SVGEncoding:
+          type: string
+          readOnly: true
+        SVG:
+          type: string
+        Markers:
+          type: array
+          items:
+            $ref: '#/components/schemas/FloorPlanMarker'
+          readOnly: true
+        Features:
+          type: array
+          items:
+            $ref: '#/components/schemas/FloorPlanHighlite'
+          readOnly: true
+    FloorPlanHighlite:
+      type: object
+      required:
+      - RenderID
+      - Label
+      - Color
+      - Display
+      properties:
+        RenderID:
+          type: string
+          readOnly: true
+        Label:
+          type: string
+          readOnly: true
+        Color:
+          type: string
+          readOnly: true
+        Display:
+          type: string
     Address:
       type: object
       required:
@@ -1609,120 +1668,61 @@ components:
           readOnly: true
         Phone:
           $ref: '#/components/schemas/PhoneNumber'
-    FeatureMapEntry:
+    Person:
       type: object
       required:
-      - Name
-      - Floors
+      - uin
+      - FirstName
+      - LastName
+      - PreferredName
+      - MailingAddress
+      - PermAddress
+      - EmergencyContacts
       properties:
-        Name:
+        uin:
           type: string
           readOnly: true
-        Floors:
+        FirstName:
+          type: string
+          readOnly: true
+        LastName:
+          type: string
+          readOnly: true
+        PreferredName:
+          type: string
+          readOnly: true
+        MailingAddress:
+          $ref: '#/components/schemas/Address'
+        PermAddress:
+          $ref: '#/components/schemas/Address'
+        EmergencyContacts:
           type: array
           items:
-            type: string
+            $ref: '#/components/schemas/EmergencyContact'
           readOnly: true
-    RoomDetail:
+    FloorPlanMarker:
       type: object
       required:
-      - NumWashers
-      - NumDryers
-      - Appliances
-      - RoomName
-      - CampusName
+      - RenderID
+      - Label
+      - Description
+      - Display
+      - Icon
       properties:
-        NumWashers:
-          type: integer
-          readOnly: true
-        NumDryers:
-          type: integer
-          readOnly: true
-        Appliances:
-          type: array
-          items:
-            $ref: '#/components/schemas/Appliance'
-          readOnly: true
-        RoomName:
+        RenderID:
           type: string
           readOnly: true
-        CampusName:
+        Label:
           type: string
           readOnly: true
-        Location:
-          $ref: '#/components/schemas/LaundryDetails'
-    MachineRequestDetail:
-      type: object
-      required:
-      - MachineID
-      - Message
-      - OpenIssue
-      - ProblemCodes
-      - MachineType
-      properties:
-        MachineID:
+        Description:
           type: string
           readOnly: true
-        Message:
+        Display:
+          type: string
+        Icon:
           type: string
           readOnly: true
-        OpenIssue:
-          type: boolean
-          readOnly: true
-        ProblemCodes:
-          type: array
-          items:
-            type: string
-          readOnly: true
-        MachineType:
-          type: string
-          readOnly: true
-    ServiceSubmission:
-      type: object
-      required:
-      - machineid
-      - problemcode
-      - firstname
-      - lastname
-      - email
-      properties:
-        machineid:
-          type: string
-          description: The unique service tag ID of the laundry machine
-        problemcode:
-          type: string
-          description: The problem code describing the issue with the machine
-        comments:
-          type:
-          - string
-          - 'null'
-          description: Additional comments about the problem (optional)
-        firstname:
-          type: string
-          description: First name of the person submitting the request
-        lastname:
-          type: string
-          description: Last name of the person submitting the request
-        phone:
-          type:
-          - string
-          - 'null'
-          description: Phone number of the person submitting the request (optional)
-        email:
-          type: string
-          format: email
-          description: Email address of the person submitting the request
-    BuildingFeatureLocation:
-      type: object
-      required:
-      - Key
-      - Value
-      properties:
-        Key:
-          type: string
-          readOnly: true
-        Value:
-          $ref: '#/components/schemas/FeatureMapEntry'
   securitySchemes:
     bearerAuth:
       type: http
