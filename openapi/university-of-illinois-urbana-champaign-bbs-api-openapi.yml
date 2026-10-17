@@ -966,53 +966,6 @@ paths:
     - url: https://api.rokwire.illinois.edu/gateway
 components:
   schemas:
-    AppOrgPair:
-      required:
-      - app_id
-      - org_id
-      type: object
-      properties:
-        app_id:
-          type: string
-        org_id:
-          type: string
-    AuthServiceReg:
-      required:
-      - service_id
-      - host
-      type: object
-      description: Service registration record used for auth
-      properties:
-        service_id:
-          type: string
-        service_account_id:
-          type: string
-        host:
-          type: string
-        pub_key:
-          $ref: '#/components/schemas/PubKey'
-    _services_service-accounts_CredsStaticToken:
-      required:
-      - token
-      type: object
-      description: Service account token for auth_type="static_token"
-      properties:
-        token:
-          type: string
-    _shared_res_RokwireToken:
-      type: object
-      properties:
-        access_token:
-          description: The user's access token to be provided to authorize access to ROKWIRE APIs
-          type: string
-        refresh_token:
-          description: A refresh token that can be used to get a new access token once the one provided expires
-          type: string
-        token_type:
-          description: The type of the provided tokens to be specified when they are sent in the "Authorization" header
-          type: string
-          enum:
-          - Bearer
     _services_req_service-accounts_params:
       required:
       - auth_type
@@ -1025,6 +978,16 @@ components:
           - signature
         creds:
           $ref: '#/components/schemas/_services_service-accounts_CredsStaticToken'
+    AppOrgPair:
+      required:
+      - app_id
+      - org_id
+      type: object
+      properties:
+        app_id:
+          type: string
+        org_id:
+          type: string
     _services_req_service-accounts_access-tokens:
       required:
       - account_id
@@ -1040,17 +1003,6 @@ components:
           - signature
         creds:
           $ref: '#/components/schemas/_services_service-accounts_CredsStaticToken'
-    DeletedAppOrgMembership:
-      allOf:
-      - $ref: '#/components/schemas/AppOrgPair'
-      - required:
-        - memberships
-        type: object
-        properties:
-          memberships:
-            type: array
-            items:
-              $ref: '#/components/schemas/DeletedMembership'
     _services_res_service-accounts_access-tokens:
       required:
       - app_id
@@ -1064,6 +1016,39 @@ components:
           type: string
         token:
           $ref: '#/components/schemas/_shared_res_RokwireToken'
+    _services_service-accounts_CredsStaticToken:
+      required:
+      - token
+      type: object
+      description: Service account token for auth_type="static_token"
+      properties:
+        token:
+          type: string
+    DeletedAppOrgMembership:
+      allOf:
+      - $ref: '#/components/schemas/AppOrgPair'
+      - required:
+        - memberships
+        type: object
+        properties:
+          memberships:
+            type: array
+            items:
+              $ref: '#/components/schemas/DeletedMembership'
+    _shared_res_RokwireToken:
+      type: object
+      properties:
+        access_token:
+          description: The user's access token to be provided to authorize access to ROKWIRE APIs
+          type: string
+        refresh_token:
+          description: A refresh token that can be used to get a new access token once the one provided expires
+          type: string
+        token_type:
+          description: The type of the provided tokens to be specified when they are sent in the "Authorization" header
+          type: string
+          enum:
+          - Bearer
     PubKey:
       required:
       - key_pem
@@ -1074,6 +1059,37 @@ components:
           type: string
         alg:
           type: string
+    DeletedMembership:
+      required:
+      - account_id
+      type: object
+      properties:
+        account_id:
+          readOnly: true
+          type: string
+        external_ids:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+        context:
+          type: object
+    AuthServiceReg:
+      required:
+      - service_id
+      - host
+      type: object
+      description: Service registration record used for auth
+      properties:
+        service_id:
+          type: string
+        service_account_id:
+          type: string
+        host:
+          type: string
+        pub_key:
+          $ref: '#/components/schemas/PubKey'
     _services_req_service-accounts_access-token:
       required:
       - account_id
@@ -1095,63 +1111,25 @@ components:
           - signature
         creds:
           $ref: '#/components/schemas/_services_service-accounts_CredsStaticToken'
-    DeletedMembership:
-      required:
-      - account_id
-      type: object
-      properties:
-        account_id:
-          readOnly: true
-          type: string
-        external_ids:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            type: string
-        context:
-          type: object
-    AppointmentPerson:
+    AppointmentHost:
       type: object
       required:
-      - id
-      - provider_id
-      - unit_id
-      - next_available
-      - name
-      - notes
-      - image_url
+      - first_name
+      - last_name
       properties:
-        id:
+        first_name:
           type: string
           readOnly: true
-        provider_id:
-          type: integer
+        last_name:
+          type: string
           readOnly: true
-        unit_id:
-          type: integer
-          readOnly: true
-        next_available:
-          type: string
-        name:
-          type: string
-        notes:
-          type: string
-        image_url:
-          type: string
-    QuestionAnswer:
+    ExternalUserID:
       type: object
       required:
-      - question_id
-      - values
+      - uin
       properties:
-        question_id:
+        uin:
           type: string
-          readOnly: true
-        values:
-          type: array
-          items:
-            type: string
           readOnly: true
     BuildingBlockAppointment:
       type: object
@@ -1192,76 +1170,6 @@ components:
           readOnly: true
         host:
           $ref: '#/components/schemas/AppointmentHost'
-    Example:
-      type: object
-      required:
-      - id
-      - app_id
-      - org_id
-      - data
-      - date_created
-      properties:
-        id:
-          type: string
-          readOnly: true
-        org_id:
-          type: string
-          readOnly: true
-        app_id:
-          type: string
-          readOnly: true
-        data:
-          type: string
-        date_created:
-          type: string
-          readOnly: true
-        date_updated:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-    Question:
-      type: object
-      required:
-      - id
-      - provider_id
-      - required
-      - type
-      - select_values
-      - question
-      properties:
-        id:
-          type: string
-          readOnly: true
-        provider_id:
-          type: integer
-          readOnly: true
-        required:
-          type: boolean
-          readOnly: true
-        type:
-          type: string
-          readOnly: true
-        select_values:
-          type: array
-          items:
-            type: string
-          readOnly: true
-        question:
-          type: string
-          readOnly: true
-    AppointmentHost:
-      type: object
-      required:
-      - first_name
-      - last_name
-      properties:
-        first_name:
-          type: string
-          readOnly: true
-        last_name:
-          type: string
-          readOnly: true
     AppointmentUnit:
       type: object
       required:
@@ -1293,6 +1201,125 @@ components:
           type: string
         image_url:
           type: string
+    AppointmentPerson:
+      type: object
+      required:
+      - id
+      - provider_id
+      - unit_id
+      - next_available
+      - name
+      - notes
+      - image_url
+      properties:
+        id:
+          type: string
+          readOnly: true
+        provider_id:
+          type: integer
+          readOnly: true
+        unit_id:
+          type: integer
+          readOnly: true
+        next_available:
+          type: string
+        name:
+          type: string
+        notes:
+          type: string
+        image_url:
+          type: string
+    Question:
+      type: object
+      required:
+      - id
+      - provider_id
+      - required
+      - type
+      - select_values
+      - question
+      properties:
+        id:
+          type: string
+          readOnly: true
+        provider_id:
+          type: integer
+          readOnly: true
+        required:
+          type: boolean
+          readOnly: true
+        type:
+          type: string
+          readOnly: true
+        select_values:
+          type: array
+          items:
+            type: string
+          readOnly: true
+        question:
+          type: string
+          readOnly: true
+    AppointmentOptions:
+      type: object
+      required:
+      - time_slots
+      - questions
+      properties:
+        time_slots:
+          type: array
+          items:
+            $ref: '#/components/schemas/TimeSlot'
+          readOnly: true
+        questions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Question'
+          readOnly: true
+    AppointmentPost:
+      type: object
+      required:
+      - provider_id
+      - unit_id
+      - person_id
+      - type
+      - start_time
+      - end_time
+      - user_external_ids
+      - slot_id
+      - answers
+      properties:
+        provider_id:
+          type: string
+          readOnly: true
+        unit_id:
+          type: string
+          readOnly: true
+        person_id:
+          type: string
+          readOnly: true
+        type:
+          type: string
+          readOnly: true
+        start_time:
+          type: string
+          readOnly: true
+        end_time:
+          type: string
+          readOnly: true
+        user_external_ids:
+          $ref: '#/components/schemas/ExternalUserID'
+          readOnly: true
+        slot_id:
+          type: string
+          readOnly: true
+        source_id:
+          type: string
+          readOnly: true
+        answers:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuestionAnswer'
+          readOnly: true
     LegacyEvent:
       type: object
       required:
@@ -1398,13 +1425,19 @@ components:
           type: string
         cost:
           type: string
-    ExternalUserID:
+    QuestionAnswer:
       type: object
       required:
-      - uin
+      - question_id
+      - values
       properties:
-        uin:
+        question_id:
           type: string
+          readOnly: true
+        values:
+          type: array
+          items:
+            type: string
           readOnly: true
     TimeSlot:
       type: object
@@ -1440,66 +1473,33 @@ components:
           type: integer
         details:
           type: object
-    AppointmentOptions:
+    Example:
       type: object
       required:
-      - time_slots
-      - questions
+      - id
+      - app_id
+      - org_id
+      - data
+      - date_created
       properties:
-        time_slots:
-          type: array
-          items:
-            $ref: '#/components/schemas/TimeSlot'
-          readOnly: true
-        questions:
-          type: array
-          items:
-            $ref: '#/components/schemas/Question'
-          readOnly: true
-    AppointmentPost:
-      type: object
-      required:
-      - provider_id
-      - unit_id
-      - person_id
-      - type
-      - start_time
-      - end_time
-      - user_external_ids
-      - slot_id
-      - answers
-      properties:
-        provider_id:
+        id:
           type: string
           readOnly: true
-        unit_id:
+        org_id:
           type: string
           readOnly: true
-        person_id:
+        app_id:
           type: string
           readOnly: true
-        type:
+        data:
+          type: string
+        date_created:
           type: string
           readOnly: true
-        start_time:
-          type: string
-          readOnly: true
-        end_time:
-          type: string
-          readOnly: true
-        user_external_ids:
-          $ref: '#/components/schemas/ExternalUserID'
-          readOnly: true
-        slot_id:
-          type: string
-          readOnly: true
-        source_id:
-          type: string
-          readOnly: true
-        answers:
-          type: array
-          items:
-            $ref: '#/components/schemas/QuestionAnswer'
+        date_updated:
+          type:
+          - string
+          - 'null'
           readOnly: true
   securitySchemes:
     bearerAuth:

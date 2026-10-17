@@ -1492,29 +1492,73 @@ paths:
     - url: https://api.rokwire.illinois.edu/gateway
 components:
   schemas:
-    TSLExpirePolicy:
-      type: object
+    APIKey:
       required:
-      - active
-      - time_since_login_period
+      - app_id
+      - key
+      type: object
+      description: API key record
       properties:
-        active:
-          type: boolean
-        time_since_login_period:
-          type: integer
-    ServiceScope:
+        id:
+          type: string
+        app_id:
+          type: string
+        key:
+          type: string
+    ApplicationType:
       required:
-      - scope
-      - required
+      - id
+      - identifier
       type: object
       properties:
-        scope:
+        id:
+          readOnly: true
           type: string
-        required:
-          type: boolean
-        explanation:
-          description: Explanation displayed to users for why this scope is requested/required
+        identifier:
           type: string
+        name:
+          type: string
+        versions:
+          type: array
+          items:
+            type: string
+    OrganizationConfig:
+      required:
+      - id
+      - domains
+      type: object
+      properties:
+        id:
+          readOnly: true
+          type: string
+          description: organization config id
+        domains:
+          type: array
+          description: organization domains
+          items:
+            type: string
+    Organization:
+      required:
+      - id
+      - name
+      - type
+      type: object
+      properties:
+        id:
+          readOnly: true
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+          - micro
+          - small
+          - medium
+          - large
+          - huge
+        config:
+          $ref: '#/components/schemas/OrganizationConfig'
     IdentityProviderSettings:
       required:
       - identity_provider_id
@@ -1577,28 +1621,36 @@ components:
           type: array
           items:
             type: string
-    Organization:
+    AdminToken:
       required:
-      - id
-      - name
-      - type
+      - token
       type: object
       properties:
-        id:
-          readOnly: true
+        token:
           type: string
-        name:
+    ServiceScope:
+      required:
+      - scope
+      - required
+      type: object
+      properties:
+        scope:
           type: string
-        type:
+        required:
+          type: boolean
+        explanation:
+          description: Explanation displayed to users for why this scope is requested/required
           type: string
-          enum:
-          - micro
-          - small
-          - medium
-          - large
-          - huge
-        config:
-          $ref: '#/components/schemas/OrganizationConfig'
+    InactiveExpirePolicy:
+      type: object
+      required:
+      - active
+      - inactivity_period
+      properties:
+        active:
+          type: boolean
+        inactivity_period:
+          type: integer
     _system_req_update_service-account:
       type: object
       properties:
@@ -1616,6 +1668,108 @@ components:
           - 'null'
           items:
             type: string
+    SupportedAuthTypes:
+      type: object
+      properties:
+        app_type_id:
+          type: string
+        supported_auth_types:
+          type: array
+          items:
+            $ref: '#/components/schemas/SupportedAuthType'
+    TSLExpirePolicy:
+      type: object
+      required:
+      - active
+      - time_since_login_period
+      properties:
+        active:
+          type: boolean
+        time_since_login_period:
+          type: integer
+    ServiceAccountCredential:
+      required:
+      - name
+      - type
+      type: object
+      properties:
+        id:
+          readOnly: true
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+          - static_token
+          - signature
+        params:
+          type:
+          - object
+          - 'null'
+        date_created:
+          readOnly: true
+          type: string
+    LoginSessionSettings:
+      type: object
+      properties:
+        max_concurrent_sessions:
+          type: integer
+        inactivity_expire_policy:
+          $ref: '#/components/schemas/InactiveExpirePolicy'
+        time_since_login_expire_policy:
+          $ref: '#/components/schemas/TSLExpirePolicy'
+        yearly_expire_policy:
+          $ref: '#/components/schemas/YearlyExpirePolicy'
+        refresh_grace_period_policy:
+          $ref: '#/components/schemas/RefreshGracePeriodPolicy'
+    Application:
+      required:
+      - id
+      - name
+      - multi_tenant
+      - admin
+      - code
+      type: object
+      properties:
+        id:
+          readOnly: true
+          type: string
+        name:
+          type: string
+        multi_tenant:
+          type: boolean
+        admin:
+          type: boolean
+        code:
+          type: string
+        types:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApplicationType'
+    Permission:
+      required:
+      - id
+      - name
+      type: object
+      properties:
+        id:
+          readOnly: true
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        service_id:
+          type: string
+        assigners:
+          type: array
+          items:
+            type: string
+        date_created:
+          type: string
+        date_updated:
+          type: string
     AuthType:
       required:
       - id
@@ -1650,138 +1804,6 @@ components:
         params:
           type: object
           additionalProperties: true
-    ServiceReg:
-      required:
-      - service_id
-      - host
-      - name
-      - description
-      - first_party
-      type: object
-      description: Full service registration record
-      properties:
-        service_id:
-          type: string
-        service_account_id:
-          type: string
-        host:
-          type: string
-        pub_key:
-          $ref: '#/components/schemas/PubKey'
-        name:
-          type: string
-        description:
-          type: string
-        info_url:
-          type: string
-        logo_url:
-          type: string
-        scopes:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/ServiceScope'
-        first_party:
-          type: boolean
-    ApplicationType:
-      required:
-      - id
-      - identifier
-      type: object
-      properties:
-        id:
-          readOnly: true
-          type: string
-        identifier:
-          type: string
-        name:
-          type: string
-        versions:
-          type: array
-          items:
-            type: string
-    Permission:
-      required:
-      - id
-      - name
-      type: object
-      properties:
-        id:
-          readOnly: true
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        service_id:
-          type: string
-        assigners:
-          type: array
-          items:
-            type: string
-        date_created:
-          type: string
-        date_updated:
-          type: string
-    OrganizationConfig:
-      required:
-      - id
-      - domains
-      type: object
-      properties:
-        id:
-          readOnly: true
-          type: string
-          description: organization config id
-        domains:
-          type: array
-          description: organization domains
-          items:
-            type: string
-    Application:
-      required:
-      - id
-      - name
-      - multi_tenant
-      - admin
-      - code
-      type: object
-      properties:
-        id:
-          readOnly: true
-          type: string
-        name:
-          type: string
-        multi_tenant:
-          type: boolean
-        admin:
-          type: boolean
-        code:
-          type: string
-        types:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApplicationType'
-    PubKey:
-      required:
-      - key_pem
-      - alg
-      type: object
-      properties:
-        key_pem:
-          type: string
-        alg:
-          type: string
-    SupportedAuthTypes:
-      type: object
-      properties:
-        app_type_id:
-          type: string
-        supported_auth_types:
-          type: array
-          items:
-            $ref: '#/components/schemas/SupportedAuthType'
     RefreshGracePeriodPolicy:
       type: object
       required:
@@ -1792,36 +1814,6 @@ components:
           type: boolean
         grace_period:
           type: integer
-    InactiveExpirePolicy:
-      type: object
-      required:
-      - active
-      - inactivity_period
-      properties:
-        active:
-          type: boolean
-        inactivity_period:
-          type: integer
-    LoginSessionSettings:
-      type: object
-      properties:
-        max_concurrent_sessions:
-          type: integer
-        inactivity_expire_policy:
-          $ref: '#/components/schemas/InactiveExpirePolicy'
-        time_since_login_expire_policy:
-          $ref: '#/components/schemas/TSLExpirePolicy'
-        yearly_expire_policy:
-          $ref: '#/components/schemas/YearlyExpirePolicy'
-        refresh_grace_period_policy:
-          $ref: '#/components/schemas/RefreshGracePeriodPolicy'
-    AdminToken:
-      required:
-      - token
-      type: object
-      properties:
-        token:
-          type: string
     ServiceAccount:
       required:
       - app_id
@@ -1854,42 +1846,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ServiceAccountCredential'
-    ServiceAccountCredential:
-      required:
-      - name
-      - type
-      type: object
-      properties:
-        id:
-          readOnly: true
-          type: string
-        name:
-          type: string
-        type:
-          type: string
-          enum:
-          - static_token
-          - signature
-        params:
-          type:
-          - object
-          - 'null'
-        date_created:
-          readOnly: true
-          type: string
-    APIKey:
-      required:
-      - app_id
-      - key
-      type: object
-      description: API key record
-      properties:
-        id:
-          type: string
-        app_id:
-          type: string
-        key:
-          type: string
     ApplicationOrganization:
       required:
       - id
@@ -1926,6 +1882,16 @@ components:
             $ref: '#/components/schemas/SupportedAuthTypes'
         logins_session_settings:
           $ref: '#/components/schemas/LoginSessionSettings'
+    SupportedAuthType:
+      type: object
+      properties:
+        auth_type_id:
+          type: string
+        params:
+          type:
+          - object
+          - 'null'
+          additionalProperties: true
     YearlyExpirePolicy:
       type: object
       required:
@@ -1945,16 +1911,50 @@ components:
           type: integer
         min:
           type: integer
-    SupportedAuthType:
+    ServiceReg:
+      required:
+      - service_id
+      - host
+      - name
+      - description
+      - first_party
+      type: object
+      description: Full service registration record
+      properties:
+        service_id:
+          type: string
+        service_account_id:
+          type: string
+        host:
+          type: string
+        pub_key:
+          $ref: '#/components/schemas/PubKey'
+        name:
+          type: string
+        description:
+          type: string
+        info_url:
+          type: string
+        logo_url:
+          type: string
+        scopes:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ServiceScope'
+        first_party:
+          type: boolean
+    PubKey:
+      required:
+      - key_pem
+      - alg
       type: object
       properties:
-        auth_type_id:
+        key_pem:
           type: string
-        params:
-          type:
-          - object
-          - 'null'
-          additionalProperties: true
+        alg:
+          type: string
     Example:
       type: object
       required:
