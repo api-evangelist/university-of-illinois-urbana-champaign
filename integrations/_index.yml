@@ -57,3 +57,33 @@
     detected: '2026-10-15'
   status: not-a-workflow
   arazzo: null
+- slug: university-of-illinois-urbana-champaign-iiif-community-implementations-awesome-iiif
+  label: IIIF community implementations (awesome-iiif)
+  partner_name: IIIF community implementations (awesome-iiif)
+  category: IIIF implementation listing
+  type: register
+  channel: standard-directory
+  evidence: https://github.com/IIIF/awesome-iiif/blob/main/implementations.md
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: awesome-iiif community list of IIIF software and implementations (github.com/IIIF/awesome-iiif)
+    standard: IIIF (International Image Interoperability Framework)
+    spec_file: null
+    role: iiif-implementation-listed
+    registered_name: University of Illinois at Urbana-Champaign Library
+    register_id: https://digital.library.illinois.edu/items?fq%5B%5D=primary_media_category%3A0
+    matched_domain: illinois.edu
+    matched_by: domain+verified
+    listed_as:
+    - implementation site
+    listing_lines:
+    - '- [University of Illinois at Urbana-Champaign Library](https://digital.library.illinois.edu/items?fq%5B%5D=primary_media_category%3A0)
+      uses IIIF and UniversalViewer for presenting their image collections on their Digital Collections website.
+      IIIF manifest.json and info.json are provided under the bu'
+    signal_note: 'participation only: a community-curated listing (pull request, no conformance test; the list disclaims
+      endorsement), so NO certified_products; the section is context, never counted'
+    detected_by: sweep-iiif-cultural-heritage.py
+    detected: '2026-10-21'
+  status: not-a-workflow
+  arazzo: null
