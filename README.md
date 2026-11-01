@@ -1,4 +1,4 @@
-# University of Illinois Urbana-Champaign (university-of-illinois-urbana-champaign)
+# University of Illinois Urbana-Champaign
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,68 +64,188 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-The University of Illinois Urbana-Champaign (UIUC) is the public land-grant flagship of the University of Illinois System and a founding Big Ten institution. This repository catalogs UIUC's public developer and API footprint as an [APIs.json](https://apisjson.org) profile.
+The University of Illinois Urbana-Champaign (UIUC) is the public land-grant flagship of the University of Illinois System and a founding Big Ten institution. It is one of the few universities in this cohort that genuinely ENGINEERS a public API estate rather than buying one: the Rokwire platform behind the official Illinois app is UIUC's own open-source work, published under Apache 2.0 in github.com/rokwire and deployed on the institution's own host at api.rokwire.illinois.edu, where nine building blocks answer an unauthenticated /version endpoint and two of them (Core 1.62.0, Gateway 2.21.1) publish OpenAPI 3.0 through Swagger UI. Around it sit four more institution-operated machine-readable surfaces: the Course Information Suite (CISAPI) Course Explorer, which serves class schedule and catalog XML with no authentication; the IDEALS institutional repository's OAI-PMH 2.0 endpoint, running on Illinois Library's own Rails application rather than a vendor platform; the Illinois Data Bank, an in-house research data repository that has minted 1,306 DataCite DOIs under prefix 10.13012 and exposes its catalog as JSON; and the campus Shibboleth identity provider, registered in InCommon as urn:mace:incommon:uiuc.edu. The estate is real but uneven — errors are documented in prose with no schemas, no deprecation policy or Sunset header exists anywhere, seven live Rokwire building blocks ship no contract at all, and illinois.edu answers /llms.txt and /.well-known/security.txt with a soft-404 that returns HTTP 200. Research profiles (Illinois Experts / Elsevier Pure) and library discovery (Ex Libris Primo) are vendor platforms recorded here as tenant relationships: the data is the university's, the contract is not.
 
-UIUC is one of the few universities in this cohort that genuinely **engineers** a public API estate rather than buying one. Every surface below carries an `x-operator` in `apis.yml`: `institution` where UIUC runs the thing the contract describes, `tenant` where the data is UIUC's but the contract belongs to a vendor. No vendor specification is saved under this institution.
+**Areas:** University · Higher Education · Education · Public Research University · United States · Illinois · Big Ten · Land-Grant University · Course Catalog · Research Data · Research Repository · Open Data
 
-- APIs.json: https://raw.githubusercontent.com/api-evangelist/university-of-illinois-urbana-champaign/refs/heads/main/apis.yml
-- Run with Naftiko: https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=university-of-illinois-urbana-champaign-api-evangelist&utm_content=repo
+## University of Illinois Urbana-Champaign on APIs.io
 
-## Type
+Everything profiled for University of Illinois Urbana-Champaign is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/university-of-illinois-urbana-champaign/](https://apis.io/providers/university-of-illinois-urbana-champaign/)** — or go straight to one of the APIs or properties below.
 
-- Index / Consumer / 3rd-Party
+### APIs (8)
 
-## Tags
+- [Rokwire Core Building Block API](https://apis.io/apis/university-of-illinois-urbana-champaign/rokwire-core-building-block/) — The identity, account and authorization service at the centre of UIUC's Rokwire platform — accounts, profiles, applications, organizations, service…
+- [Rokwire Gateway Building Block API](https://apis.io/apis/university-of-illinois-urbana-champaign/rokwire-gateway-building-block/) — The Rokwire service that fronts external and campus systems for the Illinois app — wayfinding and building/floorplan data, campus data streams, and…
+- [Course Explorer (CISAPI)](https://apis.io/apis/university-of-illinois-urbana-champaign/cisapi-course-explorer/) — The Course Information Suite API — RESTful resources over Class Schedule and Course Catalog data, organised as Schedule, Catalog, GenEd, Term and Subjects…
+- [IDEALS OAI-PMH](https://apis.io/apis/university-of-illinois-urbana-champaign/ideals-oai-pmh/) — The OAI-PMH 2.0 data provider for IDEALS, the Illinois Digital Environment for Access to Learning and Scholarship. Identify reports repositoryName "IDEALS @…
+- [Illinois Data Bank Dataset Metadata](https://apis.io/apis/university-of-illinois-urbana-champaign/illinois-data-bank/) — The campus research data repository, built and run in-house by the University Library (github.com/medusa-project/databank, Ruby on Rails) rather than bought…
+- [Illinois Shibboleth Identity Provider (InCommon)](https://apis.io/apis/university-of-illinois-urbana-champaign/incommon-shibboleth-idp/) — The campus SAML identity provider — the one surface a university operates by definition and almost never has catalogued.…
+- [Illinois Experts (Elsevier Pure)](https://apis.io/apis/university-of-illinois-urbana-champaign/illinois-experts/) — TENANT RELATIONSHIP, not a UIUC contract. Illinois Experts is the university's research information and expert-profile portal, and the data in it — people,…
+- [University Library Discovery (Ex Libris Primo)](https://apis.io/apis/university-of-illinois-urbana-champaign/library-discovery/) — TENANT RELATIONSHIP, not a UIUC contract. Library discovery at Illinois runs on Ex Libris Primo — search.library.illinois.edu redirects into…
 
-University, Higher Education, Education, Public Research University, United States, Illinois, Big Ten, Land-Grant University, Course Catalog, Research Data, Research Repository, Open Data, Identity Federation, OAI-PMH, Library, Research Computing, Open Source
+### Published properties
 
-## APIs
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-### Institution-operated (`x-operator: institution`)
+#### Agentic access (1)
 
-- **Rokwire Core Building Block API** — identity, accounts, applications, organizations, service registrations, permissions/roles/scopes. UIUC-written, Apache 2.0, v1.62.0, 105 paths / 151 operations. `https://api.rokwire.illinois.edu/core` · [Swagger UI](https://api.rokwire.illinois.edu/core/doc/ui/) · [source](https://github.com/rokwire/core-building-block)
-- **Rokwire Gateway Building Block API** — wayfinding, buildings/floorplans, campus data streams, third-party integration. v2.21.1, 34 paths / 45 operations. `https://api.rokwire.illinois.edu/gateway` · [Swagger UI](https://api.rokwire.illinois.edu/gateway/doc/ui/) · [source](https://github.com/rokwire/gateway-building-block)
-- **Course Explorer (CISAPI)** — Class Schedule and Course Catalog XML, no authentication. [Docs](https://courses.illinois.edu/cisdocs/api)
-- **IDEALS OAI-PMH** — OAI-PMH 2.0 data provider, four metadata formats (oai_dc, qdc, etdms, native), 100 sets. Runs on Illinois Library's own Rails application, not a vendor repository platform. `https://www.ideals.illinois.edu/oai-pmh`
-- **Illinois Data Bank** — in-house research data repository; `/datasets.json` returns all 1,259 released datasets without authentication. Registered DataCite repository `illinois.databank`, 1,306 DOIs under prefix 10.13012, 1,082 carrying ORCID creator identifiers. `https://databank.illinois.edu`
-- **Shibboleth Identity Provider (InCommon)** — SAML 1.1/2.0 IdP metadata, entityID `urn:mace:incommon:uiuc.edu`, also resolvable through the InCommon metadata query service. `https://shibboleth.illinois.edu/idp/shibboleth`
+Which operations an agent can call, which act, and which need a human in the loop.
 
-### Tenant relationships (`x-operator: tenant` — the data is UIUC's, the contract is the vendor's)
+- [University Of Illinois Urbana Champaign Agentic Access](https://apis.io/agentic-access/university-of-illinois-urbana-champaign/university-of-illinois-urbana-champaign-agentic-access/)
 
-- **Illinois Experts** — Elsevier Pure / Pure Portal. Recorded as a relationship; the Pure API contract belongs in Elsevier's repo.
-- **University Library Discovery** — Ex Libris Primo VE; `search.library.illinois.edu` redirects into `primo.exlibrisgroup.com/discovery`.
+#### JSON Schema (3)
 
-### Live but not yet contracted
+The data models the API reads and writes.
 
-Seven further Rokwire building blocks answer an unauthenticated `/version` on the production host and ship no contract in this repo: calendar 1.98.0, social 1.61.0, notifications 1.28.0, appointments 1.27.2, content 1.14.3, surveys 1.14.1, polls 1.12.1. See [lifecycle/](lifecycle/university-of-illinois-urbana-champaign-lifecycle.yml).
+- [Account](https://apis.io/schemas/university-of-illinois-urbana-champaign/university-of-illinois-urbana-champaign-account/)
+- [Building](https://apis.io/schemas/university-of-illinois-urbana-champaign/university-of-illinois-urbana-champaign-building/)
+- [Organization](https://apis.io/schemas/university-of-illinois-urbana-champaign/university-of-illinois-urbana-champaign-organization/)
 
-### Standards conformance
+#### JSON Structure (2)
 
-Verified against the Kin Score `education` regime: **oai-pmh**, **shibboleth**, **saml**, **datacite** and **orcid** all conform with probed evidence; scim, lti, oneroster, ed-fi, caliper, qti and crossref do not. Full evidence in [conformance/](conformance/university-of-illinois-urbana-champaign-conformance.yml).
+Data models expressed in JSON Structure.
 
-## Plans / Rate Limits / FinOps
+- [University Of Illinois Urbana Champaign Building Structure](https://apis.io/json-structure/university-of-illinois-urbana-champaign/university-of-illinois-urbana-champaign-building-structure/)
+- [University Of Illinois Urbana Champaign Organization Structure](https://apis.io/json-structure/university-of-illinois-urbana-champaign/university-of-illinois-urbana-champaign-organization-structure/)
 
-- Plans: [plans/university-of-illinois-urbana-champaign-plans-pricing.yml](plans/university-of-illinois-urbana-champaign-plans-pricing.yml)
-- Rate Limits: [rate-limits/university-of-illinois-urbana-champaign-rate-limits.yml](rate-limits/university-of-illinois-urbana-champaign-rate-limits.yml)
-- FinOps: [finops/university-of-illinois-urbana-champaign-finops.yml](finops/university-of-illinois-urbana-champaign-finops.yml)
+#### JSON-LD (1)
 
-## Timestamps
+Linked-data contexts for the provider's vocabulary.
 
-- Created: 2026-06-03
-- Modified: 2026-06-03
+- [University Of Illinois Urbana Champaign Context](https://apis.io/jsonld/university-of-illinois-urbana-champaign/university-of-illinois-urbana-champaign-context/)
 
-## Common Properties
+#### Vocabulary (1)
 
-- Website: https://illinois.edu/
-- GitHub (Rokwire platform): https://github.com/rokwire
-- SourceCode (Illinois org): https://github.com/illinois
-- LinkedIn: https://www.linkedin.com/school/university-of-illinois-at-urbana-champaign/
-- Status: https://status.illinois.edu/
+The provider's domain terms, defined.
 
-## Notes
+- [University of Illinois Urbana-Champaign API Vocabulary](https://apis.io/vocabularies/university-of-illinois-urbana-champaign/university-of-illinois-urbana-champaign-vocabulary/)
 
-All cataloged endpoints were verified live on 2026-06-03. The Course Explorer schedule and catalog endpoints return XML with no authentication. The Rokwire Core and Gateway Swagger UIs and the IDEALS OAI-PMH endpoint all responded HTTP 200. The `api.rokwire.illinois.edu/docs/` path referenced in some sources returns 404 and was deliberately not cataloged. The LinkedIn school page returns HTTP 999 due to anti-bot protection but is the canonical URL. No endpoints were fabricated.
+#### Examples (2)
 
-## Maintainers
+Example requests and responses.
 
-- Kin Lane — kin@apievangelist.com
+- [University Of Illinois Urbana Champaign Building Example](https://apis.io/examples/university-of-illinois-urbana-champaign/university-of-illinois-urbana-champaign-building-example/)
+- [University Of Illinois Urbana Champaign Organization Example](https://apis.io/examples/university-of-illinois-urbana-champaign/university-of-illinois-urbana-champaign-organization-example/)
+
+#### Collections (12)
+
+Postman and Open Collection request collections.
+
+- [Rokwire Core Building Block Admin API](https://apis.io/collections/university-of-illinois-urbana-champaign/open-university-of-illinois-urbana-champaign-admin-api/)
+- [Rokwire Core Building Block Admin BBs API](https://apis.io/collections/university-of-illinois-urbana-champaign/open-university-of-illinois-urbana-champaign-bbs-api/)
+- [Rokwire Core Building Block Admin Client API](https://apis.io/collections/university-of-illinois-urbana-champaign/open-university-of-illinois-urbana-champaign-client-api/)
+- [Rokwire Core Building Block Admin Default API](https://apis.io/collections/university-of-illinois-urbana-champaign/open-university-of-illinois-urbana-champaign-default-api/)
+- [Rokwire Core Building Block Admin Enc API](https://apis.io/collections/university-of-illinois-urbana-champaign/open-university-of-illinois-urbana-champaign-enc-api/)
+- [Rokwire Core Building Block Admin Services API](https://apis.io/collections/university-of-illinois-urbana-champaign/open-university-of-illinois-urbana-champaign-services-api/)
+- [Rokwire Core Building Block Admin System API](https://apis.io/collections/university-of-illinois-urbana-champaign/open-university-of-illinois-urbana-champaign-system-api/)
+- [Rokwire Core Building Block Admin Third-Party Services API](https://apis.io/collections/university-of-illinois-urbana-champaign/open-university-of-illinois-urbana-champaign-third-party-services-api/)
+- [Rokwire Core Building Block Admin TPS API](https://apis.io/collections/university-of-illinois-urbana-champaign/open-university-of-illinois-urbana-champaign-tps-api/)
+- [Rokwire Core Building Block Admin UI API](https://apis.io/collections/university-of-illinois-urbana-champaign/open-university-of-illinois-urbana-champaign-ui-api/)
+- [Rokwire Core Building Block Admin Version API](https://apis.io/collections/university-of-illinois-urbana-champaign/open-university-of-illinois-urbana-champaign-version-api/)
+- [Rokwire Core Building Block Admin .well Known API](https://apis.io/collections/university-of-illinois-urbana-champaign/open-university-of-illinois-urbana-champaign-well-known-api/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [University of Illinois Urbana-Champaign — jsonschema rules](https://apis.io/rules/university-of-illinois-urbana-champaign/university-of-illinois-urbana-champaign-jsonschema-spectral-rules/)
+- [University of Illinois Urbana-Champaign API Rules](https://apis.io/rules/university-of-illinois-urbana-champaign/university-of-illinois-urbana-champaign-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [University Of Illinois Urbana Champaign Authentication](https://apis.io/security/university-of-illinois-urbana-champaign/university-of-illinois-urbana-champaign-authentication/)
+- [University Of Illinois Urbana Champaign Domain Security](https://apis.io/security/university-of-illinois-urbana-champaign/university-of-illinois-urbana-champaign-domain-security/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [University Of Illinois Urbana Champaign Scopes](https://apis.io/scopes/university-of-illinois-urbana-champaign/university-of-illinois-urbana-champaign-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [University Of Illinois Urbana Champaign Plans Pricing](https://apis.io/plans/university-of-illinois-urbana-champaign/university-of-illinois-urbana-champaign-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [University Of Illinois Urbana Champaign Rate Limits](https://apis.io/rate-limits/university-of-illinois-urbana-champaign/university-of-illinois-urbana-champaign-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [University Of Illinois Urbana Champaign Finops](https://apis.io/finops/university-of-illinois-urbana-champaign/university-of-illinois-urbana-champaign-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://illinois.edu/)
+- [Documentation](https://api.rokwire.illinois.edu/gateway/doc/ui/)
+- [API reference](https://api.rokwire.illinois.edu/core/doc/ui/)
+- [Support](https://help.uillinois.edu/)
+- [Blog](https://news.illinois.edu/feed/)
+- [Terms of service](https://publish.illinois.edu/experts-help/terms-of-use/)
+- [Privacy policy](https://www.library.illinois.edu/geninfo/policies/p_policy/)
+- [GitHub](https://github.com/rokwire)
+
+## API Evangelist rating
+
+**Kin Score 41.4** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 58.7 |
+| Contract governance | 31.8 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 35.7 |
+| Access clarity | 26.3 |
+
+**Agent readiness 21.7** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | — |
+
+**Regulatory alignment 42.2** — Education & Research
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/university-of-illinois-urbana-champaign/](https://apis.io/providers/university-of-illinois-urbana-champaign/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for University of Illinois Urbana-Champaign: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/university-of-illinois-urbana-champaign/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
